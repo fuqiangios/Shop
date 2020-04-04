@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EvaluateListViewController" customModule="Shoping" customModuleProvider="target">
+            <connections>
+                <outlet property="addCardBtn" destination="IOz-5b-vB3" id="Fff-sw-GRs"/>
+                <outlet property="bugBtn" destination="Hk7-EK-aO1" id="ApZ-gk-o8P"/>
+                <outlet property="floatView" destination="Cbj-wQ-VBL" id="nXv-zA-iVT"/>
+                <outlet property="tableView" destination="Cff-dt-gII" id="fdq-sp-MXe"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="Cff-dt-gII">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="793"/>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cbj-wQ-VBL" userLabel="bottom">
+                    <rect key="frame" x="0.0" y="783" width="414" height="79"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hk7-EK-aO1">
+                            <rect key="frame" x="253" y="21" width="140" height="42"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.85826212170000005" green="0.17443221810000001" blue="0.16723364590000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <state key="normal" title="立即购买">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IOz-5b-vB3">
+                            <rect key="frame" x="83" y="21" width="140" height="42"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                            <state key="normal" title="加入购物车">
+                                <color key="titleColor" red="0.85826212170000005" green="0.17443221810000001" blue="0.16723364590000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87h-b5-5pK">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.89862161870000001" green="0.91464751960000001" blue="0.92219084500000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gWT-7e-hRn">
+                            <rect key="frame" x="18" y="1" width="54" height="79"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <inset key="titleEdgeInsets" minX="-8" minY="27" maxX="8" maxY="0.0"/>
+                            <inset key="imageEdgeInsets" minX="19" minY="0.0" maxX="0.0" maxY="18"/>
+                            <state key="normal" title="收藏" image="ic_shoucang">
+                                <color key="titleColor" red="0.29187817259999999" green="0.29187817259999999" blue="0.29187817259999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="79" id="jlw-0F-tsG"/>
+                        <constraint firstAttribute="height" constant="79" id="s14-uS-4UU"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Cff-dt-gII" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="7fu-2H-RgE"/>
+                <constraint firstItem="Cbj-wQ-VBL" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="C8K-2e-fMw"/>
+                <constraint firstItem="Cff-dt-gII" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="P5l-Tk-D7Z"/>
+                <constraint firstItem="Cff-dt-gII" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="XR5-qv-KXL"/>
+                <constraint firstItem="Cbj-wQ-VBL" firstAttribute="top" secondItem="Cff-dt-gII" secondAttribute="bottom" constant="-10" id="lNI-9Z-mZD"/>
+                <constraint firstItem="Cbj-wQ-VBL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="nkA-lZ-8co"/>
+                <constraint firstItem="Cbj-wQ-VBL" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="yJg-5x-lOw"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="131.8840579710145" y="103.79464285714285"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_shoucang" width="19" height="18"/>
+    </resources>
+</document>

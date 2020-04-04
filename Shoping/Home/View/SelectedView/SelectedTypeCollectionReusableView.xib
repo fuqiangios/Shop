@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="U6b-Vx-4bR" customClass="SelectedTypeCollectionReusableView" customModule="Shoping" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="135"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yNF-Ii-hsU">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="KRv-Ho-2xN"/>
+                    </constraints>
+                    <viewLayoutGuide key="contentLayoutGuide" id="DTu-xH-5IJ"/>
+                    <viewLayoutGuide key="frameLayoutGuide" id="uVr-gq-yUr"/>
+                </scrollView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="品牌自营·荆条优选·正品保证·售后无忧" translatesAutoresizingMaskIntoConstraints="NO" id="Je2-hl-Vgx">
+                    <rect key="frame" x="0.0" y="50" width="320" height="70"/>
+                </imageView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="Je2-hl-Vgx" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" id="68o-eV-OrP"/>
+                <constraint firstItem="Je2-hl-Vgx" firstAttribute="bottom" secondItem="VXr-Tz-HHm" secondAttribute="bottom" constant="-15" id="DFV-eI-vmx"/>
+                <constraint firstItem="Je2-hl-Vgx" firstAttribute="top" secondItem="yNF-Ii-hsU" secondAttribute="bottom" id="VXA-WJ-jXA"/>
+                <constraint firstItem="Je2-hl-Vgx" firstAttribute="trailing" secondItem="VXr-Tz-HHm" secondAttribute="trailing" id="Vbr-Qd-SMC"/>
+                <constraint firstItem="yNF-Ii-hsU" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="fnm-mt-gKd"/>
+                <constraint firstItem="yNF-Ii-hsU" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" id="hW7-VQ-BBo"/>
+                <constraint firstItem="yNF-Ii-hsU" firstAttribute="trailing" secondItem="VXr-Tz-HHm" secondAttribute="trailing" id="qIO-qk-oas"/>
+                <constraint firstItem="Je2-hl-Vgx" firstAttribute="top" secondItem="yNF-Ii-hsU" secondAttribute="bottom" id="ugn-as-I4Q"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
+            <connections>
+                <outlet property="img" destination="Je2-hl-Vgx" id="zG2-0G-KPL"/>
+                <outlet property="typeScrollView" destination="yNF-Ii-hsU" id="evK-QW-mBn"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="177.12053571428569"/>
+        </collectionReusableView>
+    </objects>
+    <resources>
+        <image name="品牌自营·荆条优选·正品保证·售后无忧" width="375" height="100"/>
+    </resources>
+</document>
