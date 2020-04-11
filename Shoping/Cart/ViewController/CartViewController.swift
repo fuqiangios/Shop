@@ -10,6 +10,8 @@ import UIKit
 
 class CartViewController: UIViewController {
 
+    @IBOutlet weak var heig: NSLayoutConstraint!
+    @IBOutlet weak var backView: UIView!
     @IBOutlet weak var selectAll: UIButton!
     @IBOutlet weak var num: UILabel!
     @IBOutlet weak var settlementBtn: UIButton!
@@ -24,6 +26,7 @@ class CartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUp()
+        setShadow(view: backView, sColor: UIColor.init(white: 0.8, alpha: 1), offset: CGSize(width: 0, height: 0), opacity: 1, radius: 5)
         setBotoomInfo()
         settlementBtn.addTarget(self, action: #selector(creatOrder), for: .touchUpInside)
         NotificationCenter.default.addObserver(self, selector: #selector(notificationCreatOrder(nofi:)), name: NSNotification.Name(rawValue:"notificationCreatOrder"), object: nil)
@@ -43,7 +46,7 @@ class CartViewController: UIViewController {
     @objc func creatOrder() {
         var selectData: [Datum] = []
         for index in selectIndex {
-            if let item = data?.data[index] {
+            if let item = data?.data[index - 1] {
                 selectData.append(item)
             }
         }
@@ -63,7 +66,7 @@ class CartViewController: UIViewController {
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(UINib(nibName: "CardListTableViewCell", bundle: nil), forCellReuseIdentifier: "CardListTableViewCell")
-
+        tableView.register(UINib(nibName: "CartHeaderTableViewCell", bundle: nil), forCellReuseIdentifier: "CartHeaderTableViewCell")
         selectAll.imageView?.contentMode = .scaleAspectFit
         selectAll.addTarget(self, action: #selector(selectAllBtn), for: .touchUpInside)
 
@@ -75,7 +78,7 @@ class CartViewController: UIViewController {
         } else {
             selectIndex = []
             for index in 0..<(data?.data.count ?? 0) {
-                selectIndex.append(index)
+                selectIndex.append(index + 1)
             }
         }
         tableView.reloadData()
@@ -87,7 +90,9 @@ class CartViewController: UIViewController {
             switch result {
             case .success(let data):
                 self.data = data
+                self.heig.constant = CGFloat(156*data.data.count) + 50
                 self.tableView.reloadData()
+                self.setShadow(view: self.tableView, sColor: UIColor.init(white: 0.8, alpha: 1), offset: CGSize(width: 0, height: 0), opacity: 1, radius: 5)
             case .failure(let error):
                 self.data = nil
                 self.tableView.reloadData()
@@ -101,7 +106,7 @@ class CartViewController: UIViewController {
 
 extension CartViewController: UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data?.data.count ?? 0
+        return (data?.data.count != nil && data?.data.count ?? 0 > 0) ? (data?.data.count ?? 0) + 1 : 0
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -109,8 +114,13 @@ extension CartViewController: UITableViewDataSource,UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CartHeaderTableViewCell") as! CartHeaderTableViewCell
+            cell.selectionStyle = .none
+            return cell
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "CardListTableViewCell") as! CardListTableViewCell
-        let item = data?.data[indexPath.row]
+        let item = data?.data[indexPath.row - 1]
         cell.img.af_setImage(withURL: URL(string: item!.image)!)
         cell.name.text = item?.name
         cell.detail.text = item?.optionUnionName
@@ -122,8 +132,8 @@ extension CartViewController: UITableViewDataSource,UITableViewDelegate {
                 select = index
             }
         }
-        cell.addBtn.tag = indexPath.row
-        cell.reduceBtn.tag = indexPath.row + 1000
+        cell.addBtn.tag = indexPath.row - 1
+        cell.reduceBtn.tag = indexPath.row - 1 + 1000
         cell.addBtn.addTarget(self, action: #selector(addNum(btn:)), for: .touchUpInside)
         cell.reduceBtn.addTarget(self, action: #selector(jianNum(btn:)), for: .touchUpInside)
         cell.setSelect(select: select == -1 ? false : true)
@@ -132,7 +142,8 @@ extension CartViewController: UITableViewDataSource,UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        if indexPath.row == 0 {return 50}
+        return 156
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -148,7 +159,10 @@ extension CartViewController: UITableViewDataSource,UITableViewDelegate {
             selectIndex.remove(at: select)
         }
         tableView.reloadData()
-        setBotoomInfo()
+        if indexPath.row != 0 {
+            setBotoomInfo()
+        }
+
     }
 
     @objc func addNum(btn: UIButton) {
@@ -185,6 +199,18 @@ extension CartViewController: UITableViewDataSource,UITableViewDelegate {
         }
     }
 
+    func setShadow(view:UIView,sColor:UIColor,offset:CGSize,
+                   opacity:Float,radius:CGFloat) {
+        //设置阴影颜色
+        view.layer.shadowColor = sColor.cgColor
+        //设置透明度
+        view.layer.shadowOpacity = opacity
+        //设置阴影半径
+        view.layer.shadowRadius = radius
+        //设置阴影偏移量
+        view.layer.shadowOffset = offset
+    }
+
     func setBotoomInfo() {
         if selectIndex.count == data?.data.count, data?.data.count != 0 {
             selectAll.setImage(UIImage(named: "ic_gouwu"), for: .normal)
@@ -192,19 +218,19 @@ extension CartViewController: UITableViewDataSource,UITableViewDelegate {
             selectAll.setImage(UIImage(named: "ic_zhifu"), for: .normal)
         }
         if selectIndex.count == 0 {
-            settlementBtn.setTitle("结算", for: .normal)
+            settlementBtn.setTitle("立即购买", for: .normal)
         } else {
-            settlementBtn.setTitle("结算(\(selectIndex.count))", for: .normal)
+            settlementBtn.setTitle("立即购买", for: .normal)
         }
         var numPrice:Double = 0.00
 
             for index in selectIndex {
-                let item = data?.data[index]
+                let item = data?.data[index - 1]
                 let price = Double(item?.price ?? "0")
                 let numCnt = Double(item?.quantity ?? "0")
                 let p = (price ?? 0.00)*(numCnt ?? 0.00)
                 numPrice = numPrice + p
             }
-        num.text = "不含运费 合计:￥\(numPrice)"
+        num.text = "合计:￥\(numPrice)"
     }
 }

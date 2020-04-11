@@ -46,12 +46,12 @@ class GoodsPopUpViewController: UIViewController {
             }
             break
         case .translate(let data):
-            titleText.text = "优惠券"
+            titleText.text = "领取优惠券"
             closeBtn.setTitle("关  闭", for: .normal)
             if data.count > 4 {
-                tableViewHerght.constant = 360
+                tableViewHerght.constant = 440
             } else {
-                tableViewHerght.constant = CGFloat(data.count*90)
+                tableViewHerght.constant = CGFloat(data.count*110)
             }
             break
         }
@@ -97,9 +97,12 @@ extension GoodsPopUpViewController: UITableViewDelegate, UITableViewDataSource {
             cell.price.text = data[indexPath.row].faceValue
             cell.info.text = data[indexPath.row].name
             if data[indexPath.row].hasReceive {
-                cell.bbtn.backgroundColor = UIColor.init(red: 178.0/255.0, green: 169.0/255.0, blue: 168.0/255.0, alpha: 1)
+//                cell.bbtn.backgroundColor = UIColor.init(red: 178.0/255.0, green: 169.0/255.0, blue: 168.0/255.0, alpha: 1)
                 cell.bbtn.setTitle("已领取", for: .normal)
                 cell.bbtn.isUserInteractionEnabled = false
+            } else {
+                cell.bbtn.layer.borderWidth = 1
+                cell.bbtn.layer.borderColor = UIColor.white.cgColor
             }
             cell.bbtn.tag = indexPath.row + 10000
             cell.bbtn.addTarget(self, action: #selector(getCopun(btn:)), for: .touchUpInside)
@@ -132,6 +135,6 @@ extension GoodsPopUpViewController: UITableViewDelegate, UITableViewDataSource {
         if case .brand = popUpType {
             return 54
         }
-        return 90
+        return 110
     }
 }

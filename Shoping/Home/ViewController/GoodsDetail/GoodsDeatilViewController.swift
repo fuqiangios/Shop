@@ -28,7 +28,7 @@ class GoodsDeatilViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setRightItem()
-        setSearBar()
+//        setSearBar()
         setTableView()
         setUp()
         loadData()
@@ -51,11 +51,12 @@ class GoodsDeatilViewController: UIViewController {
         tableView.register(UINib(nibName: "GoodsEvaluateTableViewCell", bundle: nil), forCellReuseIdentifier: "GoodsEvaluateTableViewCell")
         tableView.register(UINib(nibName: "GoodsDetailHeaderTableViewCell", bundle: nil), forCellReuseIdentifier: "GoodsDetailHeaderTableViewCell")
         tableView.register(UINib(nibName: "GoodsDetailTableViewCell", bundle: nil), forCellReuseIdentifier: "GoodsDetailTableViewCell")
+        tableView.register(UINib(nibName: "GoodsTipsTableViewCell", bundle: nil), forCellReuseIdentifier: "GoodsTipsTableViewCell")
 
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 200))
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 300))
         tableView.tableHeaderView = headerView
 
-        fsPagerView = FSPagerView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 200))
+        fsPagerView = FSPagerView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 300))
         fsPagerView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: "bannerCell")
         fsPagerView.delegate = self
         fsPagerView.dataSource = self
@@ -109,13 +110,13 @@ class GoodsDeatilViewController: UIViewController {
     }
 
     func setUp() {
-        bugBtn.layer.cornerRadius = 5
-        bugBtn.layer.masksToBounds = true
-
-        addCartBtn.layer.borderColor = bugBtn.backgroundColor?.cgColor
-        addCartBtn.layer.borderWidth = 1
-        addCartBtn.layer.cornerRadius = 5
-        addCartBtn.layer.masksToBounds = true
+//        bugBtn.layer.cornerRadius = 5
+//        bugBtn.layer.masksToBounds = true
+//
+//        addCartBtn.layer.borderColor = bugBtn.backgroundColor?.cgColor
+//        addCartBtn.layer.borderWidth = 1
+//        addCartBtn.layer.cornerRadius = 5
+//        addCartBtn.layer.masksToBounds = true
         addCartBtn.addTarget(self, action: #selector(addCartAction), for: .touchUpInside)
         bugBtn.addTarget(self, action: #selector(addCartAction), for: .touchUpInside)
 //        floatView.layer.cornerRadius = 5
@@ -130,7 +131,7 @@ class GoodsDeatilViewController: UIViewController {
         }
 
         let type = SelectTypeViewController()
-        type.modalPresentationStyle = .pageSheet
+        type.modalPresentationStyle = .custom
         type.data = data
         type.didToBuy = { (num,optin) in
             let creat = CreatOrderViewController()
@@ -151,85 +152,61 @@ class GoodsDeatilViewController: UIViewController {
 }
 extension GoodsDeatilViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 1 || section == 5 || section == 3 {
+        if section == 5 || section == 3 {
             return 2
-        } else if section == 4 {
+        } else if section == 2 {
             return (data?.data.productEvaluate.count ?? 0) + 1
+        } else if section == 0 {
+            return 2
+        } else if section == 1 {
+            return 3
         }
+
         return 1
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return data == nil ? 0 : 6
+        return data == nil ? 0 : 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "GoodsHeaderTableViewCell") as! GoodsHeaderTableViewCell
-            cell.price_sort.text = "￥\(data?.data.product.mixPrice ?? "0")-\(data?.data.product.maxPrice ?? "0")"
-            cell.price.text = "价格￥\(data?.data.product.oldPrice ?? "0")"
-            cell.name.text = data?.data.product.name
-            cell.zan.setTitle(" \(data?.data.product.zanCnt ?? "0")", for: .normal)
-            cell.selectionStyle = .none
-            return cell
-        } else if indexPath.section == 1 {
-            if indexPath.row == 0 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "GoodsAddressTableViewCell") as! GoodsAddressTableViewCell
-                cell.sale.text = "月销\(data?.data.product.saleCnt ?? "0")"
+            if indexPath.row == 1 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "GoodsTipsTableViewCell") as! GoodsTipsTableViewCell
                 cell.selectionStyle = .none
+                cell.discount.text = data?.data.product.returncontent
+                cell.content.text = data?.data.product.recommendcontent
                 return cell
             }
-            let cell = tableView.dequeueReusableCell(withIdentifier: "GoodsActiveTableViewCell") as! GoodsActiveTableViewCell
-            cell.accessoryType = .disclosureIndicator
+            let cell = tableView.dequeueReusableCell(withIdentifier: "GoodsHeaderTableViewCell") as! GoodsHeaderTableViewCell
+            cell.price_sort.text = "￥\(data?.data.product.maxPrice ?? "0")"
+            cell.name.text = data?.data.product.name
+            cell.shippingContent.text = "  \(data?.data.product.shippingcontent ?? "") "
             cell.selectionStyle = .none
             return cell
-        } else if indexPath.section == 2 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "GoodsTranslateTableViewCell") as! GoodsTranslateTableViewCell
-            cell.selectionStyle = .none
-            return cell
-        } else if indexPath.section == 3 {
-            if indexPath.row == 0 {
+        }else if indexPath.section == 1 {
+            if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "GoodsTypeTableViewCell") as! GoodsTypeTableViewCell
             cell.accessoryType = .disclosureIndicator
             cell.selectionStyle = .none
                 cell.typeName.text = "选择 \(data?.data.getProductOptionGroup()[0].name ?? "")\(data?.data.getProductOptionGroup()[1].name ?? "")"
-                var index = 1
-                var num = 0
-                for option in data?.data.getProductOptionGroup() ?? []{
-                    for item in option.productOption   {
-                        num = num + 1
-                        if !item.image.isEmpty {
-                            switch index {
-                            case 1:
-                                cell.img1.af_setImage(withURL: URL(string: item.image)!)
-                                break
-                            case 2:
-                                cell.img2.af_setImage(withURL: URL(string: item.image)!)
-                                break
-                            case 3:
-                                cell.img3.af_setImage(withURL: URL(string: item.image)!)
-                                break
-                            case 4:
-                                cell.img4.af_setImage(withURL: URL(string: item.image)!)
-                                break
-                            default:
-                                break
-                            }
-                            index = index + 1
-                        }
-                    }
-                }
-                cell.numType.text = "共\(num)种\(data?.data.getProductOptionGroup()[0].name ?? "")\(data?.data.getProductOptionGroup()[1].name ?? "")可选"
             return cell
-            } else {
+            } else if indexPath.row == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "GoodsActiveTableViewCell") as! GoodsActiveTableViewCell
+                cell.accessoryType = .disclosureIndicator
+                cell.selectionStyle = .none
+                return cell
+            }
+            else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "GoodsBrandTableViewCell") as! GoodsBrandTableViewCell
                 cell.accessoryType = .disclosureIndicator
                 cell.selectionStyle = .none
                 return cell
             }
-        } else if indexPath.section == 4 {
+        } else if indexPath.section == 2 {
             if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "GoodsEvaluateHeaderTableViewCell") as! GoodsEvaluateHeaderTableViewCell
+                cell.accessoryType = .disclosureIndicator
                 cell.getMoreBtn.addTarget(self, action: #selector(runEvaluateList), for: .touchUpInside)
                 cell.selectionStyle = .none
             return cell
@@ -241,7 +218,11 @@ extension GoodsDeatilViewController: UITableViewDelegate,UITableViewDataSource {
                 cell.detail.text = info[indexPath.row - 1].content
                 cell.date.text = info[indexPath.row - 1].created
                 if info[indexPath.row-1].evaluateImage.count == 0 {
-                    cell.imgLayout.isActive = false
+
+                    cell.imgLayout.constant = 0
+
+                } else {
+                    cell.imgLayout.constant = 50
                 }
                 for index in 0..<info[indexPath.row-1].evaluateImage.count {
                     let item = info[indexPath.row-1].evaluateImage[index]
@@ -261,7 +242,7 @@ extension GoodsDeatilViewController: UITableViewDelegate,UITableViewDataSource {
                 cell.selectionStyle = .none
                 return cell
             }
-        } else if indexPath.section == 5 {
+        } else if indexPath.section == 3 {
             if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "GoodsDetailHeaderTableViewCell") as! GoodsDetailHeaderTableViewCell
                 cell.selectionStyle = .none
@@ -283,14 +264,33 @@ extension GoodsDeatilViewController: UITableViewDelegate,UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 0
+        } else if section == 2 {
+            return 40
+        } else if section == 3 {
+            return 1
+        }
         return 15
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView()
-        view.backgroundColor = .clear
+        view.backgroundColor = UIColor.tableviewBackgroundColor
+        if section == 2 {
+            let lab = UILabel(frame: CGRect(x: 16, y: 0, width: 300, height: 40))
+            lab.text = "假一罚十·极速退款·退货运费险"
+            lab.font = UIFont.PingFangSCLightFont15
+            lab.textColor = UIColor.lightGray
+            view.addSubview(lab)
+        }
         return view
     }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.1
+    }
+
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 3 {
@@ -309,7 +309,7 @@ extension GoodsDeatilViewController: UITableViewDelegate,UITableViewDataSource {
         }
 
         let type = SelectTypeViewController()
-        type.modalPresentationStyle = .pageSheet
+        type.modalPresentationStyle = .custom
         type.data = data
             type.didToBuy = { (num,optin) in
                 let creat = CreatOrderViewController()
@@ -319,11 +319,23 @@ extension GoodsDeatilViewController: UITableViewDelegate,UITableViewDataSource {
                 self.navigationController?.pushViewController(creat, animated: true)
             }
         self.present(type, animated: true, completion: nil)
-        } else if indexPath.section == 1, indexPath.row == 1 {
+        } else if indexPath.section == 1, indexPath.row == 0 {
             if (data?.data.coupon.count ?? 0) < 1 { return }
             let popUp = GoodsPopUpViewController(popUpType: GoodsPopUpViewController.PopUpType.translate(data: (data?.data.coupon)!))
                 popUp.modalPresentationStyle = .custom
             self.present(popUp, animated: false, completion: nil)
+        } else if indexPath.section == 1, indexPath.row == 1 {
+            let type = SelectTypeViewController()
+            type.modalPresentationStyle = .custom
+            type.data = data
+            type.didToBuy = { (num,optin) in
+                let creat = CreatOrderViewController()
+                creat.product_id = self.data?.data.product.id
+                creat.quantity = num
+                creat.product_option_union_id = optin
+                self.navigationController?.pushViewController(creat, animated: true)
+            }
+            self.present(type, animated: true, completion: nil)
         }
     }
     

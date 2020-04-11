@@ -105,6 +105,7 @@ struct GoodsDataClass: Codable {
     let productModel: [ProductModel]
     let coupon: [Coupon]
 
+
     enum CodingKeys: String, CodingKey {
         case product
         case productImage = "product_image"
@@ -170,12 +171,18 @@ struct GoodsProduct: Codable {
     let image: String
     let mixPrice, maxPrice: String
     let hasCollection: Bool
+    let returncontent: String
+    let shippingcontent: String
+    let recommendcontent: String
 
     enum CodingKeys: String, CodingKey {
         case id, name, code
         case pCategoryID = "p_category_id"
         case categoryID = "category_id"
         case price
+        case recommendcontent = "recommend_content"
+        case shippingcontent = "shipping_content"
+        case returncontent = "return_content"
         case oldPrice = "old_price"
         case productDescription = "description"
         case weight, stock, points
@@ -282,7 +289,7 @@ struct AddCart: Codable {
 // MARK: - DataClass
 struct AddCartDataClass: Codable {
     let id, productID, customerID, productOptionUnionID, optionUnionName: String?
-    let weight, price, quantity: String?
+    let weight, price: String?
 
     enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -290,6 +297,6 @@ struct AddCartDataClass: Codable {
         case customerID = "customer_id"
         case productOptionUnionID = "product_option_union_id"
         case optionUnionName = "option_union_name"
-        case weight, price, quantity
+        case weight, price
     }
 }

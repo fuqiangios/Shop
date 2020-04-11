@@ -14,10 +14,11 @@ class CreatOrderAccountTableViewCell: UITableViewCell {
     @IBOutlet weak var redpackegPrice: UILabel!
     @IBOutlet weak var goodsPrice: UILabel!
     @IBOutlet weak var backView: UIView!
+    @IBOutlet weak var discount: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        setShadow(view: backView, sColor: UIColor.init(white: 0.8, alpha: 1), offset: CGSize(width: 0, height: 0), opacity: 1, radius: 5)
-        backView.layer.cornerRadius = 5
+//        setShadow(view: backView, sColor: UIColor.init(white: 0.8, alpha: 1), offset: CGSize(width: 0, height: 0), opacity: 1, radius: 5)
+//        backView.layer.cornerRadius = 5
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

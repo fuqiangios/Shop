@@ -247,13 +247,16 @@ struct SettleDataClass: Codable {
 }
 
 struct SettlementCoupon: Codable {
-    let categoryIDS, couponType, detail, faceValue: String
+    let categoryIDS, couponType, detail: String
     let id, productIDS, useableValue: String
+    let faceValue: String
+    let end_time: String
 
     enum CodingKeys: String, CodingKey {
         case categoryIDS = "category_ids"
         case couponType = "coupon_type"
         case detail
+        case end_time
         case faceValue = "face_value"
         case id
         case productIDS = "product_ids"

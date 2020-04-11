@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36030F9424380D0E0084759D /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36030F9324380D0E0084759D /* UIColor.swift */; };
+		36030F9624380F2D0084759D /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36030F9524380F2D0084759D /* UIFont.swift */; };
+		36030F9924382E890084759D /* GoodsTipsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36030F9724382E890084759D /* GoodsTipsTableViewCell.swift */; };
+		36030F9A24382E890084759D /* GoodsTipsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36030F9824382E890084759D /* GoodsTipsTableViewCell.xib */; };
+		36030F9D243B4D700084759D /* CartHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36030F9B243B4D700084759D /* CartHeaderTableViewCell.swift */; };
+		36030F9E243B4D700084759D /* CartHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36030F9C243B4D700084759D /* CartHeaderTableViewCell.xib */; };
+		36030FA1243CA5600084759D /* CreatOrderMoreGoodsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36030F9F243CA5600084759D /* CreatOrderMoreGoodsTableViewCell.swift */; };
+		36030FA2243CA5600084759D /* CreatOrderMoreGoodsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36030FA0243CA5600084759D /* CreatOrderMoreGoodsTableViewCell.xib */; };
+		36030FA5243CA7D50084759D /* CreateOrderYuiTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36030FA3243CA7D50084759D /* CreateOrderYuiTableViewCell.swift */; };
+		36030FA6243CA7D50084759D /* CreateOrderYuiTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36030FA4243CA7D50084759D /* CreateOrderYuiTableViewCell.xib */; };
+		36030FA9243CA9D00084759D /* CreatOrderRedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36030FA7243CA9D00084759D /* CreatOrderRedTableViewCell.swift */; };
+		36030FAA243CA9D00084759D /* CreatOrderRedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36030FA8243CA9D00084759D /* CreatOrderRedTableViewCell.xib */; };
 		3608EFC323E3EBEF00148C0F /* CreatOrderSelectPayTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3608EFC123E3EBEF00148C0F /* CreatOrderSelectPayTypeViewController.swift */; };
 		3608EFC423E3EBEF00148C0F /* CreatOrderSelectPayTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3608EFC223E3EBEF00148C0F /* CreatOrderSelectPayTypeViewController.xib */; };
 		3608EFC723E3EEDB00148C0F /* CreatOrderPayTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3608EFC523E3EEDB00148C0F /* CreatOrderPayTypeTableViewCell.swift */; };
@@ -78,6 +90,18 @@
 		3634EADE23FB703000C36A02 /* UserSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3634EADD23FB703000C36A02 /* UserSetting.swift */; };
 		3634EAE023FB80EF00C36A02 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3634EADF23FB80EF00C36A02 /* Cart.swift */; };
 		3634EAE223FBC47000C36A02 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3634EAE123FBC47000C36A02 /* Address.swift */; };
+		364E99E0244046B1007DD24F /* InvoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E99DE244046B1007DD24F /* InvoiceViewController.swift */; };
+		364E99E1244046B1007DD24F /* InvoiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 364E99DF244046B1007DD24F /* InvoiceViewController.xib */; };
+		364E99E4244156FC007DD24F /* InvoiceInputTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E99E2244156FC007DD24F /* InvoiceInputTableViewCell.swift */; };
+		364E99E5244156FC007DD24F /* InvoiceInputTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 364E99E3244156FC007DD24F /* InvoiceInputTableViewCell.xib */; };
+		364E99E8244157DF007DD24F /* InoviceInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E99E6244157DF007DD24F /* InoviceInfoTableViewCell.swift */; };
+		364E99E9244157DF007DD24F /* InoviceInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 364E99E7244157DF007DD24F /* InoviceInfoTableViewCell.xib */; };
+		364E99EC24415CA7007DD24F /* InvoiceTipsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E99EA24415CA7007DD24F /* InvoiceTipsTableViewCell.swift */; };
+		364E99ED24415CA7007DD24F /* InvoiceTipsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 364E99EB24415CA7007DD24F /* InvoiceTipsTableViewCell.xib */; };
+		364E99F024415E53007DD24F /* InvoiceTypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E99EE24415E53007DD24F /* InvoiceTypeTableViewCell.swift */; };
+		364E99F124415E53007DD24F /* InvoiceTypeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 364E99EF24415E53007DD24F /* InvoiceTypeTableViewCell.xib */; };
+		364E99F424418A26007DD24F /* MineRedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 364E99F224418A26007DD24F /* MineRedTableViewCell.swift */; };
+		364E99F524418A26007DD24F /* MineRedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 364E99F324418A26007DD24F /* MineRedTableViewCell.xib */; };
 		365CC4D6240210B200F46A86 /* CreatOrderSelectDiscountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365CC4D4240210B200F46A86 /* CreatOrderSelectDiscountTableViewCell.swift */; };
 		365CC4D7240210B200F46A86 /* CreatOrderSelectDiscountTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 365CC4D5240210B200F46A86 /* CreatOrderSelectDiscountTableViewCell.xib */; };
 		3661469223C4B2D600D42825 /* GoodsHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3661469023C4B2D600D42825 /* GoodsHeaderTableViewCell.swift */; };
@@ -227,6 +251,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		36030F9324380D0E0084759D /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		36030F9524380F2D0084759D /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
+		36030F9724382E890084759D /* GoodsTipsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodsTipsTableViewCell.swift; sourceTree = "<group>"; };
+		36030F9824382E890084759D /* GoodsTipsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoodsTipsTableViewCell.xib; sourceTree = "<group>"; };
+		36030F9B243B4D700084759D /* CartHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		36030F9C243B4D700084759D /* CartHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartHeaderTableViewCell.xib; sourceTree = "<group>"; };
+		36030F9F243CA5600084759D /* CreatOrderMoreGoodsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatOrderMoreGoodsTableViewCell.swift; sourceTree = "<group>"; };
+		36030FA0243CA5600084759D /* CreatOrderMoreGoodsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatOrderMoreGoodsTableViewCell.xib; sourceTree = "<group>"; };
+		36030FA3243CA7D50084759D /* CreateOrderYuiTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrderYuiTableViewCell.swift; sourceTree = "<group>"; };
+		36030FA4243CA7D50084759D /* CreateOrderYuiTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateOrderYuiTableViewCell.xib; sourceTree = "<group>"; };
+		36030FA7243CA9D00084759D /* CreatOrderRedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatOrderRedTableViewCell.swift; sourceTree = "<group>"; };
+		36030FA8243CA9D00084759D /* CreatOrderRedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatOrderRedTableViewCell.xib; sourceTree = "<group>"; };
 		3608EFC123E3EBEF00148C0F /* CreatOrderSelectPayTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatOrderSelectPayTypeViewController.swift; sourceTree = "<group>"; };
 		3608EFC223E3EBEF00148C0F /* CreatOrderSelectPayTypeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatOrderSelectPayTypeViewController.xib; sourceTree = "<group>"; };
 		3608EFC523E3EEDB00148C0F /* CreatOrderPayTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatOrderPayTypeTableViewCell.swift; sourceTree = "<group>"; };
@@ -301,6 +337,18 @@
 		3634EADD23FB703000C36A02 /* UserSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSetting.swift; sourceTree = "<group>"; };
 		3634EADF23FB80EF00C36A02 /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
 		3634EAE123FBC47000C36A02 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
+		364E99DE244046B1007DD24F /* InvoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceViewController.swift; sourceTree = "<group>"; };
+		364E99DF244046B1007DD24F /* InvoiceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvoiceViewController.xib; sourceTree = "<group>"; };
+		364E99E2244156FC007DD24F /* InvoiceInputTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceInputTableViewCell.swift; sourceTree = "<group>"; };
+		364E99E3244156FC007DD24F /* InvoiceInputTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvoiceInputTableViewCell.xib; sourceTree = "<group>"; };
+		364E99E6244157DF007DD24F /* InoviceInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InoviceInfoTableViewCell.swift; sourceTree = "<group>"; };
+		364E99E7244157DF007DD24F /* InoviceInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InoviceInfoTableViewCell.xib; sourceTree = "<group>"; };
+		364E99EA24415CA7007DD24F /* InvoiceTipsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceTipsTableViewCell.swift; sourceTree = "<group>"; };
+		364E99EB24415CA7007DD24F /* InvoiceTipsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvoiceTipsTableViewCell.xib; sourceTree = "<group>"; };
+		364E99EE24415E53007DD24F /* InvoiceTypeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceTypeTableViewCell.swift; sourceTree = "<group>"; };
+		364E99EF24415E53007DD24F /* InvoiceTypeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvoiceTypeTableViewCell.xib; sourceTree = "<group>"; };
+		364E99F224418A26007DD24F /* MineRedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineRedTableViewCell.swift; sourceTree = "<group>"; };
+		364E99F324418A26007DD24F /* MineRedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MineRedTableViewCell.xib; sourceTree = "<group>"; };
 		365CC4D4240210B200F46A86 /* CreatOrderSelectDiscountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatOrderSelectDiscountTableViewCell.swift; sourceTree = "<group>"; };
 		365CC4D5240210B200F46A86 /* CreatOrderSelectDiscountTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatOrderSelectDiscountTableViewCell.xib; sourceTree = "<group>"; };
 		3661469023C4B2D600D42825 /* GoodsHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodsHeaderTableViewCell.swift; sourceTree = "<group>"; };
@@ -517,6 +565,8 @@
 				36E863EB241A76D7005609FB /* AddBackGoodsSubmitTableViewCell.xib */,
 				366565F9241E0E3A008CB81A /* RedPackgeTableViewCell.swift */,
 				366565FA241E0E3A008CB81A /* RedPackgeTableViewCell.xib */,
+				364E99F224418A26007DD24F /* MineRedTableViewCell.swift */,
+				364E99F324418A26007DD24F /* MineRedTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -615,6 +665,8 @@
 				3667A24C23FEBEEE004C6D8E /* GoodsPopUpBrandTableViewCell.xib */,
 				3679BF3923FFC46100689DB8 /* GoodsPopUpTransateTableViewCell.swift */,
 				3679BF3A23FFC46100689DB8 /* GoodsPopUpTransateTableViewCell.xib */,
+				36030F9724382E890084759D /* GoodsTipsTableViewCell.swift */,
+				36030F9824382E890084759D /* GoodsTipsTableViewCell.xib */,
 			);
 			path = GoodsDetail;
 			sourceTree = "<group>";
@@ -622,6 +674,8 @@
 		3675744F23C750BD00B97A80 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				36030F9524380F2D0084759D /* UIFont.swift */,
+				36030F9324380D0E0084759D /* UIColor.swift */,
 				36229FFE2418A740001A9181 /* ProgressHUD */,
 				36229FF424175A44001A9181 /* StarEvaluateView.swift */,
 				36FF35FF240030D5000708C6 /* EWAddressPicker */,
@@ -761,6 +815,8 @@
 				36FF3619240119E6000708C6 /* CreatOrderSelectDiscountViewController.xib */,
 				36BF60F32410DB6400B15FED /* CreatOrderSelectStoreViewController.swift */,
 				36BF60F42410DB6400B15FED /* CreatOrderSelectStoreViewController.xib */,
+				364E99DE244046B1007DD24F /* InvoiceViewController.swift */,
+				364E99DF244046B1007DD24F /* InvoiceViewController.xib */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -873,6 +929,22 @@
 				36BF60F82410DC9F00B15FED /* CreaOrderStoreTableViewCell.xib */,
 				36BF60FB2411237800B15FED /* CreatOrderSubmitTableViewCell.swift */,
 				36BF60FC2411237800B15FED /* CreatOrderSubmitTableViewCell.xib */,
+				36030F9B243B4D700084759D /* CartHeaderTableViewCell.swift */,
+				36030F9C243B4D700084759D /* CartHeaderTableViewCell.xib */,
+				36030F9F243CA5600084759D /* CreatOrderMoreGoodsTableViewCell.swift */,
+				36030FA0243CA5600084759D /* CreatOrderMoreGoodsTableViewCell.xib */,
+				36030FA3243CA7D50084759D /* CreateOrderYuiTableViewCell.swift */,
+				36030FA4243CA7D50084759D /* CreateOrderYuiTableViewCell.xib */,
+				36030FA7243CA9D00084759D /* CreatOrderRedTableViewCell.swift */,
+				36030FA8243CA9D00084759D /* CreatOrderRedTableViewCell.xib */,
+				364E99E2244156FC007DD24F /* InvoiceInputTableViewCell.swift */,
+				364E99E3244156FC007DD24F /* InvoiceInputTableViewCell.xib */,
+				364E99E6244157DF007DD24F /* InoviceInfoTableViewCell.swift */,
+				364E99E7244157DF007DD24F /* InoviceInfoTableViewCell.xib */,
+				364E99EA24415CA7007DD24F /* InvoiceTipsTableViewCell.swift */,
+				364E99EB24415CA7007DD24F /* InvoiceTipsTableViewCell.xib */,
+				364E99EE24415E53007DD24F /* InvoiceTypeTableViewCell.swift */,
+				364E99EF24415E53007DD24F /* InvoiceTypeTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1015,20 +1087,25 @@
 				368D879123CB0E5900934FE9 /* CardListTableViewCell.xib in Resources */,
 				36229FEB24170DDF001A9181 /* OrderFInshTableViewCell.xib in Resources */,
 				366146A323C5E64E00D42825 /* GoodsTypeTableViewCell.xib in Resources */,
+				364E99ED24415CA7007DD24F /* InvoiceTipsTableViewCell.xib in Resources */,
 				36F6BFEC23E2A2190017791C /* CreatOrderAddressTableViewCell.xib in Resources */,
 				36229FF92417B601001A9181 /* AddEvaluateComenntTableViewCell.xib in Resources */,
 				3679BF2C23FF7E0500689DB8 /* MineHeaderTableViewCell.xib in Resources */,
 				3630DEC823C368EC0048FD27 /* TypeTableViewCell.xib in Resources */,
 				36E863E1241A71C4005609FB /* AddBackGoodsTypeTableViewCell.xib in Resources */,
+				36030F9A24382E890084759D /* GoodsTipsTableViewCell.xib in Resources */,
 				36229FEF241727C6001A9181 /* AddEvaluateViewController.xib in Resources */,
 				36715D7A2408CC52003C8D09 /* OrderViewController.xib in Resources */,
 				366565F4241E0514008CB81A /* IntegralViewController.xib in Resources */,
 				3622A0102418A741001A9181 /* success.png in Resources */,
 				3679BF3423FF9D7D00689DB8 /* MineImgTableViewCell.xib in Resources */,
+				364E99E5244156FC007DD24F /* InvoiceInputTableViewCell.xib in Resources */,
 				3661469323C4B2D600D42825 /* GoodsHeaderTableViewCell.xib in Resources */,
 				36715D7E2408CEF7003C8D09 /* OrderTableViewCell.xib in Resources */,
 				36BF60F62410DB6400B15FED /* CreatOrderSelectStoreViewController.xib in Resources */,
+				36030FA6243CA7D50084759D /* CreateOrderYuiTableViewCell.xib in Resources */,
 				3667A24E23FEBEEE004C6D8E /* GoodsPopUpBrandTableViewCell.xib in Resources */,
+				36030FA2243CA5600084759D /* CreatOrderMoreGoodsTableViewCell.xib in Resources */,
 				3630DEA623BED49E0048FD27 /* SelectedTypeCollectionReusableView.xib in Resources */,
 				36715D842408F29C003C8D09 /* OrderBottomTableViewCell.xib in Resources */,
 				36229FFD2417BBC3001A9181 /* AddEvluateCollectionViewCell.xib in Resources */,
@@ -1075,6 +1152,7 @@
 				366146B723C5FD8900D42825 /* GoodsDetailTableViewCell.xib in Resources */,
 				36F6BFF023E2A4B00017791C /* CreatOrderShopSelfMentionTableViewCell.xib in Resources */,
 				36E863D9241A67C4005609FB /* AddBackGoodsViewController.xib in Resources */,
+				364E99F524418A26007DD24F /* MineRedTableViewCell.xib in Resources */,
 				36BF60FA2410DC9F00B15FED /* CreaOrderStoreTableViewCell.xib in Resources */,
 				366146B323C5FC8600D42825 /* GoodsDetailHeaderTableViewCell.xib in Resources */,
 				3622A015241905F2001A9181 /* OrderEvaluateFinshTableViewCell.xib in Resources */,
@@ -1085,19 +1163,24 @@
 				36E863ED241A76D7005609FB /* AddBackGoodsSubmitTableViewCell.xib in Resources */,
 				3630DEB223BEE9F10048FD27 /* SelectedMoreCollectionReusableView.xib in Resources */,
 				3622A00D2418A741001A9181 /* 37x-Checkmark@2x.png in Resources */,
+				364E99E9244157DF007DD24F /* InoviceInfoTableViewCell.xib in Resources */,
 				3630DEC223BF24790048FD27 /* GoodsListTableViewCell.xib in Resources */,
 				36FF360F24010B99000708C6 /* StoreListViewController.xib in Resources */,
 				36656604241E4CD6008CB81A /* DiscountViewController.xib in Resources */,
 				3679BF3C23FFC46100689DB8 /* GoodsPopUpTransateTableViewCell.xib in Resources */,
 				3667A24623FE9DAD004C6D8E /* TypeCollectionViewCell.xib in Resources */,
+				364E99E1244046B1007DD24F /* InvoiceViewController.xib in Resources */,
 				3630DECD23C40F7B0048FD27 /* GoodsDeatilViewController.xib in Resources */,
 				36F6BFE823E29AAB0017791C /* CreatOrderViewController.xib in Resources */,
 				36E863E5241A733F005609FB /* AddBackGoodsNumTableViewCell.xib in Resources */,
 				3608EFCC23E3F59A00148C0F /* AddressListViewController.xib in Resources */,
 				36FF361324010FC7000708C6 /* StoreTableViewCell.xib in Resources */,
+				36030FAA243CA9D00084759D /* CreatOrderRedTableViewCell.xib in Resources */,
 				36F6BFFC23E2BA340017791C /* CreatOrderAccountTableViewCell.xib in Resources */,
 				36DDAD3B23B34B35002B9D39 /* Assets.xcassets in Resources */,
+				36030F9E243B4D700084759D /* CartHeaderTableViewCell.xib in Resources */,
 				3630DEBE23BF21990048FD27 /* GoodsListViewController.xib in Resources */,
+				364E99F124415E53007DD24F /* InvoiceTypeTableViewCell.xib in Resources */,
 				365CC4D7240210B200F46A86 /* CreatOrderSelectDiscountTableViewCell.xib in Resources */,
 				36BF60FE2411237800B15FED /* CreatOrderSubmitTableViewCell.xib in Resources */,
 				3661469B23C4C3A900D42825 /* GoodsActiveTableViewCell.xib in Resources */,
@@ -1158,11 +1241,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				3630DEAD23BEDB180048FD27 /* SelectedHeaderCollectionReusableView.swift in Sources */,
+				36030F9424380D0E0084759D /* UIColor.swift in Sources */,
 				36E863E0241A71C4005609FB /* AddBackGoodsTypeTableViewCell.swift in Sources */,
 				3679BF2F23FF97E100689DB8 /* MineOrderTableViewCell.swift in Sources */,
 				3630DEC723C368EC0048FD27 /* TypeTableViewCell.swift in Sources */,
 				36715D792408CC52003C8D09 /* OrderViewController.swift in Sources */,
+				364E99E8244157DF007DD24F /* InoviceInfoTableViewCell.swift in Sources */,
+				36030FA1243CA5600084759D /* CreatOrderMoreGoodsTableViewCell.swift in Sources */,
 				36FF361224010FC7000708C6 /* StoreTableViewCell.swift in Sources */,
+				36030FA9243CA9D00084759D /* CreatOrderRedTableViewCell.swift in Sources */,
 				3630DECC23C40F7B0048FD27 /* GoodsDeatilViewController.swift in Sources */,
 				360ADAA723F7F8B800CA99B0 /* APIType.swift in Sources */,
 				36229FF2241757B0001A9181 /* AddEvaluateGoodsTableViewCell.swift in Sources */,
@@ -1178,6 +1265,7 @@
 				36E863E4241A733F005609FB /* AddBackGoodsNumTableViewCell.swift in Sources */,
 				3679FA5323B34E4000FA5CB3 /* TypeViewController.swift in Sources */,
 				366146B223C5FC8600D42825 /* GoodsDetailHeaderTableViewCell.swift in Sources */,
+				364E99EC24415CA7007DD24F /* InvoiceTipsTableViewCell.swift in Sources */,
 				3608EFCB23E3F59A00148C0F /* AddressListViewController.swift in Sources */,
 				36BF60F52410DB6400B15FED /* CreatOrderSelectStoreViewController.swift in Sources */,
 				36FF360E24010B99000708C6 /* StoreListViewController.swift in Sources */,
@@ -1215,6 +1303,7 @@
 				3630DEBA23BF0DA80048FD27 /* WaterfallLayoutDelegate.swift in Sources */,
 				36F6BFEF23E2A4B00017791C /* CreatOrderShopSelfMentionTableViewCell.swift in Sources */,
 				360ADA9A23F7EE9500CA99B0 /* FNetWork.swift in Sources */,
+				36030F9624380F2D0084759D /* UIFont.swift in Sources */,
 				36BF60FD2411237800B15FED /* CreatOrderSubmitTableViewCell.swift in Sources */,
 				36E863EC241A76D7005609FB /* AddBackGoodsSubmitTableViewCell.swift in Sources */,
 				360ADAB123F7FA3000CA99B0 /* Home.swift in Sources */,
@@ -1230,6 +1319,7 @@
 				3679FA6123B35D4500FA5CB3 /* RecommendTypeViewController.swift in Sources */,
 				366565F7241E0BDD008CB81A /* RedPackgeViewController.swift in Sources */,
 				366565F3241E0514008CB81A /* IntegralViewController.swift in Sources */,
+				36030F9D243B4D700084759D /* CartHeaderTableViewCell.swift in Sources */,
 				36D41D1123F969BE00143158 /* GoodsDetail.swift in Sources */,
 				3630DEBD23BF21990048FD27 /* GoodsListViewController.swift in Sources */,
 				36F6BFE723E29AAB0017791C /* CreatOrderViewController.swift in Sources */,
@@ -1246,9 +1336,11 @@
 				366146AE23C5F86F00D42825 /* GoodsEvaluateTableViewCell.swift in Sources */,
 				36FF35FD240028F9000708C6 /* AddressDefaultTableViewCell.swift in Sources */,
 				36A8376B240FEFFF00E90D45 /* OrderDetailNumTableViewCell.swift in Sources */,
+				36030FA5243CA7D50084759D /* CreateOrderYuiTableViewCell.swift in Sources */,
 				3630DEC423C022270048FD27 /* NSAttributedString.swift in Sources */,
 				3634EAE223FBC47000C36A02 /* Address.swift in Sources */,
 				36D41D0E23F9567300143158 /* GoodsListCollectionViewCell.swift in Sources */,
+				364E99F424418A26007DD24F /* MineRedTableViewCell.swift in Sources */,
 				36E863E8241A7659005609FB /* AddBackGoodsSelectTableViewCell.swift in Sources */,
 				3622A00A2418A741001A9181 /* MBProgressHUD.m in Sources */,
 				36BF60F92410DC9F00B15FED /* CreaOrderStoreTableViewCell.swift in Sources */,
@@ -1261,7 +1353,9 @@
 				368D878723CAF9E900934FE9 /* EvaluateListViewController.swift in Sources */,
 				3679FA5923B34E6300FA5CB3 /* MineViewController.swift in Sources */,
 				3608EFC723E3EEDB00148C0F /* CreatOrderPayTypeTableViewCell.swift in Sources */,
+				364E99E0244046B1007DD24F /* InvoiceViewController.swift in Sources */,
 				362C5E7E23FADC5D007B3D2B /* RgisterViewController.swift in Sources */,
+				364E99F024415E53007DD24F /* InvoiceTypeTableViewCell.swift in Sources */,
 				36715D8824094A1A003C8D09 /* OcTest.m in Sources */,
 				366565FB241E0E3A008CB81A /* RedPackgeTableViewCell.swift in Sources */,
 				3630DEB823BF0DA80048FD27 /* SectionData.swift in Sources */,
@@ -1272,7 +1366,9 @@
 				36F6BFF723E2B6740017791C /* CreatOrderDiscountTableViewCell.swift in Sources */,
 				3622A014241905F2001A9181 /* OrderEvaluateFinshTableViewCell.swift in Sources */,
 				366146A623C5F5B200D42825 /* GoodsBrandTableViewCell.swift in Sources */,
+				364E99E4244156FC007DD24F /* InvoiceInputTableViewCell.swift in Sources */,
 				3634EADE23FB703000C36A02 /* UserSetting.swift in Sources */,
+				36030F9924382E890084759D /* GoodsTipsTableViewCell.swift in Sources */,
 				3661469E23C5E34700D42825 /* GoodsTranslateTableViewCell.swift in Sources */,
 				36FF3615240110C9000708C6 /* Store.swift in Sources */,
 				368D879023CB0E5900934FE9 /* CardListTableViewCell.swift in Sources */,

@@ -19,6 +19,7 @@ class SelectTypeViewController: UIViewController {
     @IBOutlet weak var goodsImage: UIImageView!
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var detail: UILabel!
+    @IBOutlet weak var close: UIButton!
 
     var data: GoodsDetail? = nil
     var topTagSelectIndex: String? = ""
@@ -36,15 +37,22 @@ class SelectTypeViewController: UIViewController {
         setUp()
         setCommentView()
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        self.view.backgroundColor = UIColor.init(white: 0, alpha: 0.3)
+    }
     
     func setUp() {
-        bugBtn.layer.cornerRadius = 5
-        bugBtn.layer.masksToBounds = true
+//        bugBtn.layer.cornerRadius = 5
+//        bugBtn.layer.masksToBounds = true
 
-        addCardBtn.layer.borderColor = bugBtn.backgroundColor?.cgColor
-        addCardBtn.layer.borderWidth = 1
-        addCardBtn.layer.cornerRadius = 5
-        addCardBtn.layer.masksToBounds = true
+        numText.layer.borderWidth = 1
+        numText.layer.borderColor = UIColor.lightColor.cgColor
+
+//        addCardBtn.layer.borderColor = bugBtn.backgroundColor?.cgColor
+//        addCardBtn.layer.borderWidth = 1
+//        addCardBtn.layer.cornerRadius = 5
+//        addCardBtn.layer.masksToBounds = true
         floatView.layer.cornerRadius = 5
         floatView.layer.masksToBounds = true
 
@@ -58,9 +66,10 @@ class SelectTypeViewController: UIViewController {
 //        topTagListView.shadowOpacity = 0.4
 //        topTagListView.shadowColor = UIColor.black
 //        topTagListView.shadowOffset = CGSize(width: 1, height: 1)
-        topTagListView.tagBackgroundColor = UIColor.init(red: 224.0/255.0, green: 227.0/255.0, blue: 233.0/255.0, alpha: 1)
-        topTagListView.textColor = .black
-        topTagListView.borderColor = UIColor.init(red: 224.0/255.0, green: 227.0/255.0, blue: 233.0/255.0, alpha: 1)
+        topTagListView.tagBackgroundColor = UIColor.white
+        topTagListView.selectedBorderColor = UIColor.lightColor
+        topTagListView.textColor = UIColor.blackTextColor
+        topTagListView.borderColor = UIColor.lightColor
         topTagListView.selectedTextColor = .white
         topTagListView.tagSelectedBackgroundColor = .red
         topTagListView.tag = 909
@@ -76,9 +85,10 @@ class SelectTypeViewController: UIViewController {
 //        bottomTagListView.shadowOpacity = 0.4
 //        bottomTagListView.shadowColor = UIColor.black
 //        bottomTagListView.shadowOffset = CGSize(width: 1, height: 1)
-        bottomTagListView.tagBackgroundColor = UIColor.init(red: 224.0/255.0, green: 227.0/255.0, blue: 233.0/255.0, alpha: 1)
-        bottomTagListView.textColor = .black
-        bottomTagListView.borderColor = UIColor.init(red: 224.0/255.0, green: 227.0/255.0, blue: 233.0/255.0, alpha: 1)
+        bottomTagListView.tagBackgroundColor = UIColor.white
+        bottomTagListView.selectedBorderColor = UIColor.lightColor
+        bottomTagListView.textColor = UIColor.blackTextColor
+        bottomTagListView.borderColor = UIColor.lightColor
         bottomTagListView.selectedTextColor = .white
         bottomTagListView.tagSelectedBackgroundColor = .red
         bottomTagListView.tag = 808
@@ -91,6 +101,11 @@ class SelectTypeViewController: UIViewController {
         numCnt = numCnt + 1
         setNumText()
     }
+
+    @IBAction func close(_ sender: Any) {
+        self.dismiss(animated: false, completion: nil)
+    }
+
     @IBAction func jianAction(_ sender: Any) {
         if numCnt <= 1 {
             setNumText()

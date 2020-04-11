@@ -88,7 +88,7 @@ extension RecommendTypeViewController: UICollectionViewDelegate, UICollectionVie
         let cell:GoodsListCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifier, for: indexPath) as! GoodsListCollectionViewCell
         cell.goodsImg.af_setImage(withURL: URL(string: (data?.data.products[indexPath.item].image)!)!)
         cell.goodsName.text = data?.data.products[indexPath.item].name
-        cell.saleCount.text = (data?.data.products[indexPath.item].saleCnt ?? "0") + "付款"
+
         cell.price.text = "￥" + (data?.data.products[indexPath.item].price ?? "0") + " ￥\(data?.data.products[indexPath.item].oldPrice ?? "0")"
         return cell
     }
@@ -96,7 +96,7 @@ extension RecommendTypeViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
             let width = 175*height
             let heightd = ga_heightForComment(fontSize: 17, width: width, text: data?.data.products[indexPath.item].name ?? "")
-            return CGSize(width: 185*height, height: heightd + 260*height)
+            return CGSize(width: 195*height, height: heightd + 300)
     }
     
     func ga_heightForComment(fontSize: CGFloat, width: CGFloat, text: String) -> CGFloat {
@@ -106,7 +106,7 @@ extension RecommendTypeViewController: UICollectionViewDelegate, UICollectionVie
      }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-            return UIEdgeInsets.init(top: 0, left: 15*height, bottom: 0, right: 15*height)
+            return UIEdgeInsets.init(top: 0, left: 8*height, bottom: 0, right: 8*height)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -114,7 +114,7 @@ extension RecommendTypeViewController: UICollectionViewDelegate, UICollectionVie
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-            return 14*height
+            return 5*height
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {

@@ -34,7 +34,7 @@ class CreatOrderSelectPayTypeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         price.text = priceText
-        submitBtn.addTarget(self, action: #selector(submitAction(_:)), for: .touchUpInside)
+//        submitBtn.addTarget(self, action: #selector(submitAction(_:)), for: .touchUpInside)
         setUp()
     }
 
@@ -57,41 +57,7 @@ class CreatOrderSelectPayTypeViewController: UIViewController {
         tableView.reloadData()
     }
 
-    @objc func submitAction(_ sender: Any) {
-        var all: [String] = []
-        for item in data {
-            all.append(item.id ?? "")
-        }
-        API.createOrder(order_type: order_type, shopping_cart_ids: all, product_id: product_id, quantity: quantity, product_option_union_id: product_option_union_id, red_packet: "\(redpackgePrice ?? 0.00)", customer_coupon_id: couponId, address_id: addressInfo?.id, self_store_id: store != nil ? store?.id : "").request { (result) in
-                switch result {
-                case .success(let data):
-                    print("success")
-                    if self.order_type == "1" {
-                        NotificationCenter.default.post(name: NSNotification.Name("notificationCreatOrder"), object: self, userInfo: [:])
-                    }
-                    self.amountPay(order_id: data.data.order_id)
-                case .failure(let error):
-                    print(error)
-                    print(error.self)
-                    print(error.localizedDescription)
-            }
-        }
-    }
-
-    func amountPay(order_id: String) {
-        API.orderPay(order_id: order_id, payment_pfn: payList?.data.payment[selectIndex].pfn ?? "", payment_method: payList?.data.payment[selectIndex].name ?? "").request { (result) in
-            switch result {
-                case .success:
-                    print("success")
-                    self.didPaySuccess?()
-                    self.dismiss(animated: true, completion: nil)
-                case .failure(let error):
-                    print(error)
-                    print(error.self)
-                    print(error.localizedDescription)
-            }
-        }
-    }
+    
 }
 extension CreatOrderSelectPayTypeViewController: UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

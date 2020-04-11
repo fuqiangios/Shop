@@ -45,23 +45,21 @@ class HomeViewController: UIViewController {
     }
 
     func setSearBar() {
-        let titleView = UIView(frame: CGRect(x: 0, y: 0, width: 250, height: 30))
-        titleView.layer.borderColor = UIColor.black.cgColor
-        titleView.layer.borderWidth = 0.5
-        titleView.layer.masksToBounds = true
+        let titleView = UIView(frame: CGRect(x: 16, y: 10, width: view.frame.width - 32, height: 40))
         titleView.layer.cornerRadius = 10
+        titleView.backgroundColor = UIColor.lightColor
 
-        let seachText = UITextField(frame: CGRect(x: 10, y: 0, width: titleView.frame.size.width, height: 30))
-        seachText.placeholder = "搜索商品"
-        seachText.font = UIFont.systemFont(ofSize: 14)
+        let seachText = UITextField(frame: CGRect(x: 10, y: 0, width: titleView.frame.size.width, height: 40))
+        seachText.placeholder = "搜索产品名称"
+        seachText.font = UIFont.PingFangSCLightFont16
         titleView.addSubview(seachText)
 
-        self.navigationItem.titleView = titleView
+        view.addSubview(titleView)
 
     }
 
     func setTypeSelectView() {
-        let typeSelectView = UIScrollView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 40))
+        let typeSelectView = UIScrollView(frame: CGRect(x: 0, y: 60, width: self.view.frame.width, height: 40))
         let types = data?.data.category ?? []
         for index in 0...types.count{
             if index == 0 {
@@ -70,12 +68,12 @@ class HomeViewController: UIViewController {
                 btn.setTitle("精选", for: .normal)
                 btn.setTitleColor(.black, for: .normal)
                 btn.setTitleColor(.red, for: .selected)
-                btn.titleLabel?.font = UIFont(name: "Helvetica", size: 18)
+                btn.titleLabel?.font = UIFont.PingFangSCLightFont18
                 btn.tag = index + 100
                 btn.addTarget(self, action: #selector(selectType(btn:)), for: .touchUpInside)
                 if index == 0 {
                     btn.isSelected = true
-                    btn.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 20)
+                    btn.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 16)
                 }
                 typeSelectView.addSubview(btn)
             } else {
@@ -84,12 +82,12 @@ class HomeViewController: UIViewController {
             btn.setTitle(types[index - 1].name, for: .normal)
             btn.setTitleColor(.black, for: .normal)
             btn.setTitleColor(.red, for: .selected)
-            btn.titleLabel?.font = UIFont(name: "Helvetica", size: 18)
+            btn.titleLabel?.font = UIFont.PingFangSCLightFont18
             btn.tag = index + 100
             btn.addTarget(self, action: #selector(selectType(btn:)), for: .touchUpInside)
             if index == 0 {
                 btn.isSelected = true
-                btn.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 20)
+                btn.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 17)
             }
             typeSelectView.addSubview(btn)
             }
@@ -112,10 +110,10 @@ class HomeViewController: UIViewController {
         for index in 100..<(101+types.count) {
             let btn = view.viewWithTag(index) as! UIButton
             btn.isSelected = false
-            btn.titleLabel?.font = UIFont(name: "Helvetica", size: 18)
+            btn.titleLabel?.font = UIFont.PingFangSCLightFont18
         }
         button.isSelected = true
-        button.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 20)
+        button.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 17)
     }
 
     func setChildView() {
@@ -130,7 +128,7 @@ class HomeViewController: UIViewController {
                 let selected = SelectedViewController()
                 selected.data = data
                 selected.didSelectCell = { [weak self] indexPath in
-                    if indexPath.section == 6 {
+                    if indexPath.section == 1 {
                         let detail = GoodsDeatilViewController()
                         detail.hidesBottomBarWhenPushed = true
                         detail.product_id = self?.data?.data.labels[index].product[indexPath.item].id ?? ""
@@ -143,8 +141,8 @@ class HomeViewController: UIViewController {
                 self.addChild(selected)
                 let child = UIView(frame: CGRect(x: width * CGFloat(index), y: 0, width: width, height: 710*height))
                 child.addSubview(selected.view)
-                selected.view.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 710*height)
-                selected.setView(ehigth: Float(710*height))
+                selected.view.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 650*height)
+                selected.setView(ehigth: Float(650*height))
                 scrowView.addSubview(child)
             } else {
                 let recommend = RecommendTypeViewController(categoryId: types[index - 1].id)
@@ -158,8 +156,8 @@ class HomeViewController: UIViewController {
                     }
                  let child = UIView(frame: CGRect(x: width * CGFloat(index), y: 0, width: width, height: 710*height))
                  child.addSubview(recommend.view)
-                 recommend.view.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 710*height)
-                 recommend.setView(ehigth: Float(710*height))
+                 recommend.view.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 650*height)
+                 recommend.setView(ehigth: Float(650*height))
                  scrowView.addSubview(child)
             }
         }

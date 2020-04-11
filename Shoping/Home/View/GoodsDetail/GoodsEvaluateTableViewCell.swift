@@ -23,7 +23,8 @@ class GoodsEvaluateTableViewCell: UITableViewCell {
     @IBOutlet weak var imgLayout: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        userImage.layer.cornerRadius = 25
+        userImage.layer.masksToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

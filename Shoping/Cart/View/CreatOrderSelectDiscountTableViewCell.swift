@@ -10,7 +10,9 @@ import UIKit
 
 class CreatOrderSelectDiscountTableViewCell: UITableViewCell {
     @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var price: UILabel!
     
+    @IBOutlet weak var date: UILabel!
     @IBOutlet weak var img: UIImageView!
     @IBOutlet weak var info: UILabel!
     override func awakeFromNib() {

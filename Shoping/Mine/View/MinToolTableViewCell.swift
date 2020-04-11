@@ -9,12 +9,16 @@
 import UIKit
 
 class MinToolTableViewCell: UITableViewCell {
-
+    @IBOutlet weak var btn1: UIButton!
+    
+    @IBOutlet weak var btn4: UIButton!
+    @IBOutlet weak var btn3: UIButton!
+    @IBOutlet weak var btn2: UIButton!
     @IBOutlet weak var backGroundView: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        setShadow(view: backGroundView, sColor: UIColor.init(white: 0.8, alpha: 1), offset: CGSize(width: 0, height: 0), opacity: 1, radius: 5)
-        backGroundView.layer.cornerRadius = 5
+//        setShadow(view: backGroundView, sColor: UIColor.init(white: 0.8, alpha: 1), offset: CGSize(width: 0, height: 0), opacity: 1, radius: 5)
+//        backGroundView.layer.cornerRadius = 5
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

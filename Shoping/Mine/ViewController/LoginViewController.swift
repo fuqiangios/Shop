@@ -11,12 +11,23 @@ import UIKit
 class LoginViewController: UIViewController {
     @IBOutlet weak var backGroupView: UIView!
 
+    @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var phoneNumber: UITextField!
 
     @IBOutlet weak var password: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-        setShadow(view: backGroupView, sColor: UIColor.init(white: 0.8, alpha: 1), offset: CGSize(width: 1, height: 1), opacity: 1, radius: 5)
+//        setShadow(view: backGroupView, sColor: UIColor.init(white: 0.8, alpha: 1), offset: CGSize(width: 1, height: 1), opacity: 1, radius: 5)
+        loginBtn.layer.cornerRadius = 54/2
+        loginBtn.layer.masksToBounds = true
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
     func setShadow(view:UIView,sColor:UIColor,offset:CGSize,

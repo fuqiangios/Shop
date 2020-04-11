@@ -11,14 +11,19 @@ import UIKit
 class MineHeaderTableViewCell: UITableViewCell {
     @IBOutlet weak var lineBackView: UIView!
     
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var img: UIImageView!
     @IBOutlet weak var discountBtn: UIButton!
     @IBOutlet weak var priceBtn: UIButton!
     @IBOutlet weak var redPackgBtn: UIButton!
     @IBOutlet weak var pointBtn: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
-        setShadow(view: lineBackView, sColor: UIColor.init(white: 0.8, alpha: 1), offset: CGSize(width: 1, height: 1), opacity: 1, radius: 5)
-        lineBackView.layer.cornerRadius = 5
+//        setShadow(view: lineBackView, sColor: UIColor.init(white: 0.8, alpha: 1), offset: CGSize(width: 1, height: 1), opacity: 1, radius: 5)
+//        lineBackView.layer.cornerRadius = 5
+        img.layer.borderWidth = 3
+        img.layer.borderColor = UIColor.white.cgColor
+        img.layer.cornerRadius = 35
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

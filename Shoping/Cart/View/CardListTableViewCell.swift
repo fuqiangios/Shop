@@ -23,7 +23,7 @@ class CardListTableViewCell: UITableViewCell {
     @IBOutlet weak var img: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        setShadow(view: backView, sColor: UIColor.init(white: 0.8, alpha: 1), offset: CGSize(width: 0, height: 0), opacity: 1, radius: 5)
+
         addBtn.layer.borderColor = UIColor.init(red: 181.0/255.0, green: 182.0/255.0, blue: 183.0/255.0, alpha: 1).cgColor
         addBtn.layer.borderWidth = 1
         addBtn.layer.cornerRadius = 3

@@ -18,7 +18,18 @@ class TypeViewController: UIViewController, ZLCollectionViewBaseFlowLayoutDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "商品分类"
+        self.navigationController?.navigationBar.isTranslucent = false
+
+        setSearBar()
+//                        if #available(iOS 11.0, *) {
+//        //                    self.navigationController?.navigationBar.prefersLargeTitles = true
+//                            let mySearchController: UISearchController = UISearchController(searchResultsController: nil)
+//                //            mySearchController.searchResultsUpdater = self
+//                            self.navigationItem.searchController = mySearchController
+//                        } else {
+//                            // Fallback on earlier versions
+//                        }
+        title = "分类"
         self.navigationController?.navigationBar.tintColor = .black
         tableView.delegate = self
         tableView.dataSource = self
@@ -37,6 +48,22 @@ class TypeViewController: UIViewController, ZLCollectionViewBaseFlowLayoutDelega
         collectionView?.dataSource = self
         // 注册cell
         collectionView?.register(UINib.init(nibName: "TypeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "typecollection")
+    }
+
+    func setSearBar() {
+        let titleView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 60))
+
+        titleView.backgroundColor = UIColor.white
+
+        let seachText = UITextField(frame: CGRect(x: 20, y: 10, width: titleView.frame.size.width - 40, height: 40))
+        seachText.placeholder = "  搜索产品名称"
+        seachText.layer.cornerRadius = 20
+        seachText.backgroundColor = UIColor.lightColor
+        seachText.font = UIFont.PingFangSCLightFont16
+        titleView.addSubview(seachText)
+
+        view.addSubview(titleView)
+
     }
 
     func loadData() {
@@ -64,11 +91,13 @@ extension TypeViewController: UITableViewDataSource,UITableViewDelegate {
         cell.name.text = data?.data[indexPath.row].name
         cell.selectionStyle = .none
         if indexPath.row == selectIndex {
-            cell.backgroundColor = .white
-            cell.name.textColor = .red
+//            cell.backgroundColor = .white
+//            cell.name.textColor = .red
+            cell.line.isHidden = false
         } else {
-            cell.backgroundColor = .groupTableViewBackground
-            cell.name.textColor = cell.name.tintColor
+//            cell.backgroundColor = .groupTableViewBackground
+//            cell.name.textColor = cell.name.tintColor
+            cell.line.isHidden = true
         }
         return cell
     }
