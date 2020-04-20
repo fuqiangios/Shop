@@ -12,6 +12,7 @@ class CreatOrderAddressTableViewCell: UITableViewCell {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var defaultBg: UIImageView!
     
+    @IBOutlet weak var righy: UIImageView!
     @IBOutlet weak var phone: UILabel!
     @IBOutlet weak var bbba: NSLayoutConstraint!
     @IBOutlet weak var mma: NSLayoutConstraint!
@@ -19,6 +20,7 @@ class CreatOrderAddressTableViewCell: UITableViewCell {
     @IBOutlet weak var defaultText: UILabel!
     @IBOutlet weak var addressInfo: UILabel!
     @IBOutlet weak var backView: UIView!
+    @IBOutlet weak var bottom: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
 //        setShadow(view: backView, sColor: UIColor.init(white: 0.8, alpha: 1), offset: CGSize(width: 0, height: 0), opacity: 1, radius: 5)

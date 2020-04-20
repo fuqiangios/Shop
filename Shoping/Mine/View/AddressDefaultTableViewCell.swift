@@ -9,7 +9,8 @@
 import UIKit
 
 class AddressDefaultTableViewCell: UITableViewCell {
-    @IBOutlet weak var sw: UISwitch!
+
+    @IBOutlet weak var btn: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

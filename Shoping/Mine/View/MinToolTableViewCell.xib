@@ -81,6 +81,7 @@
                 <outlet property="btn2" destination="dW7-UZ-NvW" id="zXZ-V6-WSf"/>
                 <outlet property="btn3" destination="ToU-Gc-lKs" id="Nmz-IH-Kcw"/>
                 <outlet property="btn4" destination="8n7-a1-lfr" id="vvb-Ez-6Yi"/>
+                <outlet property="name" destination="wLk-Lv-hi6" id="u5c-PK-zIA"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="167.07589285714286"/>
         </tableViewCell>

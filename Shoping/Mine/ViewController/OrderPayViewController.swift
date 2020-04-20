@@ -11,11 +11,12 @@ import UIKit
 class OrderPayViewController: UIViewController {
     @IBOutlet weak var price: UILabel!
 
+    @IBOutlet weak var payName: UILabel!
     @IBOutlet weak var tableVIewHeight: NSLayoutConstraint!
     @IBOutlet weak var submitBtn: UIButton!
     @IBOutlet weak var tableVIew: UITableView!
     @IBOutlet weak var metch: UILabel!
-    var selectIndex: Int = -1
+    var selectIndex: Int = 0
     var payList: PayList? = nil
     var order_id: String = ""
 
@@ -26,6 +27,9 @@ class OrderPayViewController: UIViewController {
         loadPayListData()
     }
 
+    @IBAction func backAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
     func setUp() {
         tableVIew.register(UINib(nibName: "OrderPayTableViewCell", bundle: nil), forCellReuseIdentifier: "OrderPayTableViewCell")
         tableVIew.delegate = self
@@ -57,6 +61,7 @@ class OrderPayViewController: UIViewController {
             case .success(let data):
                 self.payList = data
                 self.tableVIew.reloadData()
+                self.payName.text = self.payList?.data.payment[self.selectIndex].name
                 self.tableVIewHeight.constant = CGFloat(82 * data.data.payment.count)
             case .failure(let error):
                 print(error)
@@ -87,6 +92,7 @@ extension OrderPayViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectIndex = indexPath.row
+        self.payName.text = self.payList?.data.payment[self.selectIndex].name
         tableView.reloadData()
     }
 

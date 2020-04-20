@@ -10,9 +10,12 @@ import UIKit
 
 class MineImgTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var btn: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        btn.layer.cornerRadius = 12
+        btn.layer.borderWidth = 1
+        btn.layer.borderColor = UIColor.white.cgColor
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

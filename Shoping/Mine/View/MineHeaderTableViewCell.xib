@@ -60,6 +60,10 @@
                                     <constraint firstAttribute="height" constant="22" id="fnT-1n-lWX"/>
                                 </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zse-6Q-Wf4">
+                                <rect key="frame" x="16" y="60" width="193" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -87,10 +91,11 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="btn" destination="zse-6Q-Wf4" id="QLr-8C-lL1"/>
                 <outlet property="img" destination="vmn-ZN-bge" id="yH3-Vu-PeC"/>
                 <outlet property="name" destination="ilo-fO-QpG" id="LJh-UG-BMI"/>
             </connections>
-            <point key="canvasLocation" x="170.28985507246378" y="165.40178571428569"/>
+            <point key="canvasLocation" x="170.28985507246378" y="164.73214285714286"/>
         </tableViewCell>
     </objects>
     <resources>

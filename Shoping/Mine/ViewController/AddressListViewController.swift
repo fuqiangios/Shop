@@ -10,20 +10,36 @@ import UIKit
 
 class AddressListViewController: UIViewController {
 
+    @IBOutlet weak var btn: UIButton!
     @IBOutlet weak var tableView: UITableView!
     var data: Address? = nil
     var addressInfo: AddressDatum? = AddressDatum(id: nil, customerID: nil, name: nil, telephone: nil, address: nil, detail: nil, isDefault: "1", modified: nil, created: nil)
+    var up = "1"
 
     var didSelectAddress: ((AddressDatum?) -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "地址管理"
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
         setUp()
+        loadData()
+        btn.addTarget(self, action: #selector(addAddress), for: .touchUpInside)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
         loadData()
     }
 
+    @objc func addAddress() {
+        let add = AddAddressViewController()
+        self.navigationController?.pushViewController(add, animated: true)
+    }
+
     func setUp() {
+        btn.layer.cornerRadius = 5
+        btn.layer.masksToBounds = true
+        tableView.backgroundColor = UIColor.tableviewBackgroundColor
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
@@ -64,30 +80,31 @@ class AddressListViewController: UIViewController {
 }
 extension AddressListViewController: UITableViewDataSource, UITableViewDelegate,UITextFieldDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0, indexPath.row == 2 {
+        if up == "10" {return}
+        if indexPath.section == 10, indexPath.row == 2 {
             let addressPicker = EWAddressViewController()
             addressPicker.backLocationStringController = { (address,province,city,area) in
                 self.addressInfo = self.addressInfo?.updateAddress(address: address)
                 tableView.reloadData()
             }
             self.present(addressPicker, animated: true, completion: nil)
-        } else if indexPath.section == 0, indexPath.row == 5 {
+        } else if indexPath.section == 10, indexPath.row == 5 {
             saveAddress()
-        } else if indexPath.section == 1 {
+        } else if indexPath.section == 0 {
             didSelectAddress?(data?.data[indexPath.row])
             self.navigationController?.popViewController(animated: true)
         }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
+        if section == 10 {
             return 6
         }
         return data?.data.count ?? 0
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -95,7 +112,7 @@ extension AddressListViewController: UITableViewDataSource, UITableViewDelegate,
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
+        if indexPath.section == 10 {
         if indexPath.row == 5 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "AddressSaveTableViewCell") as! AddressSaveTableViewCell
             cell.selectionStyle = .none
@@ -104,12 +121,6 @@ extension AddressListViewController: UITableViewDataSource, UITableViewDelegate,
             if indexPath.row == 4 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "AddressDefaultTableViewCell") as! AddressDefaultTableViewCell
                 cell.selectionStyle = .none
-                cell.sw.addTarget(self, action: #selector(switchChange(switcah:)), for: .valueChanged)
-                if (addressInfo?.isDefault ?? "1") == "1" {
-                    cell.sw.isOn = true
-                } else {
-                    cell.sw.isOn = false
-                }
                 return cell
             }
         let cell = tableView.dequeueReusableCell(withIdentifier: "AddressAddInfoTableViewCell") as! AddressAddInfoTableViewCell
@@ -148,24 +159,27 @@ extension AddressListViewController: UITableViewDataSource, UITableViewDelegate,
             let cell = tableView.dequeueReusableCell(withIdentifier: "AddressListTableViewCell") as! AddressListTableViewCell
             cell.selectionStyle = .none
             cell.edit.tag = indexPath.row + 1000
-            cell.delete.tag = indexPath.row + 100000
+//            cell.delete.tag = indexPath.row + 100000
             cell.edit.addTarget(self, action: #selector(editAddress(btn:)), for: .touchUpInside)
-            cell.delete.addTarget(self, action: #selector(deleteAddress(btn:)), for: .touchUpInside)
+//            cell.delete.addTarget(self, action: #selector(deleteAddress(btn:)), for: .touchUpInside)
             let addressInfo = data?.data[indexPath.row]
             cell.name.text = (addressInfo?.name ?? "") + "  " + (addressInfo?.telephone ?? "")
             cell.address.text = (addressInfo?.address ?? "") + (addressInfo?.detail ?? "")
             if addressInfo?.isDefault == "1" {
-                cell.defaultHeight.constant = 14
+                cell.isDefault.isHidden = false
             } else {
-                cell.defaultHeight.constant = 0
+                cell.isDefault.isHidden = true
             }
             return cell
         }
     }
 
     @objc func editAddress(btn:UIButton) {
-        addressInfo = data?.data[btn.tag - 1000]
-        tableView.reloadData()
+        let add = AddAddressViewController()
+        add.addressInfo = data?.data[btn.tag - 1000]
+        self.navigationController?.pushViewController(add, animated: true)
+//        addressInfo = data?.data[btn.tag - 1000]
+//        tableView.reloadData()
     }
 
     @objc func deleteAddress(btn:UIButton) {
@@ -189,15 +203,15 @@ extension AddressListViewController: UITableViewDataSource, UITableViewDelegate,
 
     }
 
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
-        header.backgroundColor = .groupTableViewBackground
-        return header
-    }
-
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10
-    }
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let header = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
+//        header.backgroundColor = .groupTableViewBackground
+//        return header
+//    }
+//
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 10
+//    }
 
     @objc func switchChange(switcah: UISwitch) {
         addressInfo = addressInfo?.updateAddress(isDefault: switcah.isOn ? "1":"0")

@@ -11,6 +11,7 @@ import UIKit
 class AddressAddInfoTableViewCell: UITableViewCell {
     @IBOutlet weak var name: UILabel!
     
+    @IBOutlet weak var he: NSLayoutConstraint!
     @IBOutlet weak var btn: UIButton!
     @IBOutlet weak var inputField: UITextField!
     override func awakeFromNib() {

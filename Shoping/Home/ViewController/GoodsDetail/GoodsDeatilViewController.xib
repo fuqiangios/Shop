@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="addCartBtn" destination="NPO-Ie-oYu" id="Ja5-Hk-KBN"/>
                 <outlet property="bugBtn" destination="7Y6-5w-2US" id="sbb-hc-VDI"/>
+                <outlet property="favorite" destination="5WY-HI-Qc3" id="Pgk-WW-ZFu"/>
                 <outlet property="tableView" destination="ZSU-Rj-cwM" id="cSo-48-4lG"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -22,12 +23,12 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="ZSU-Rj-cwM">
-                    <rect key="frame" x="0.0" y="44" width="414" height="744"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="752"/>
                     <color key="backgroundColor" red="0.9766271710395813" green="0.98030871152877808" blue="0.98430734872817993" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <color key="sectionIndexBackgroundColor" red="0.97662717099999996" green="0.98030871149999999" blue="0.98430734870000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rL6-D2-Lnl" userLabel="bottom">
-                    <rect key="frame" x="0.0" y="789" width="414" height="65"/>
+                    <rect key="frame" x="0.0" y="797" width="414" height="65"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5WY-HI-Qc3">
                             <rect key="frame" x="18" y="0.0" width="54" height="65"/>
@@ -72,7 +73,7 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="rL6-D2-Lnl" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="-8" id="Clu-vD-lZi"/>
+                <constraint firstItem="rL6-D2-Lnl" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="Clu-vD-lZi"/>
                 <constraint firstItem="ZSU-Rj-cwM" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Icg-SU-cp1"/>
                 <constraint firstItem="rL6-D2-Lnl" firstAttribute="top" secondItem="ZSU-Rj-cwM" secondAttribute="bottom" constant="1" id="NKA-g7-Iu1"/>
                 <constraint firstItem="rL6-D2-Lnl" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Yff-vx-Htl"/>

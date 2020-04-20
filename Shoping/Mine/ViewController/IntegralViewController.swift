@@ -11,15 +11,26 @@ import UIKit
 class IntegralViewController: UIViewController {
     var data: Point? = nil
     @IBOutlet weak var pointLable: UILabel!
-
-    @IBOutlet weak var infoBtn: UIButton!
     @IBOutlet weak var toBtn: UIButton!
-    @IBOutlet weak var infoLabble: UITextView!
     @IBOutlet weak var priceLable: UILabel!
-    @IBOutlet weak var backBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        title = "积分"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "查看明细", style: .done, target: self, action: #selector(toDetail))
+        toBtn.layer.borderColor = UIColor.white.cgColor
+        toBtn.layer.borderWidth = 1
+        toBtn.layer.cornerRadius = 25
         loadData()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        loadData()
+    }
+
+    @objc func toDetail() {
+        let detail = IntegraDetailViewController()
+        self.navigationController?.pushViewController(detail, animated: true)
     }
 
     func loadData() {
@@ -28,8 +39,8 @@ class IntegralViewController: UIViewController {
             case .success(let data):
                 self.data = data
                 self.setUp()
-            case .failure:
-                print("error")
+            case .failure(let er):
+                print(er)
             }
         }
     }
@@ -37,16 +48,10 @@ class IntegralViewController: UIViewController {
     func setUp() {
         pointLable.text = "\(data?.data.points ?? 0)"
         priceLable.text = "\(data?.data.pointUnit ?? "0")"
-        infoLabble.text = "\(data?.data.content ?? "")"
+
     }
     @IBAction func toAction(_ sender: Any) {
-
-    }
-
-    @IBAction func innfoAction(_ sender: Any) {
-
-    }
-    @IBAction func backAction(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+        let pay = IntegraPayViewController()
+        self.navigationController?.pushViewController(pay, animated: true)
     }
 }

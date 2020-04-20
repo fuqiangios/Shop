@@ -12,6 +12,7 @@ class CreatOrderGoodsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var backView: UIView!
     
+    @IBOutlet weak var evaluateBtn: UIButton!
     @IBOutlet weak var bottomc: NSLayoutConstraint!
     @IBOutlet weak var topc: NSLayoutConstraint!
 
@@ -22,7 +23,9 @@ class CreatOrderGoodsTableViewCell: UITableViewCell {
     @IBOutlet weak var img: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
-
+        evaluateBtn.layer.borderColor = evaluateBtn.tintColor.cgColor
+        evaluateBtn.layer.borderWidth = 1
+        evaluateBtn.layer.cornerRadius = 3
     }
 
     func shadow() {

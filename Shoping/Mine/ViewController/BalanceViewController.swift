@@ -12,14 +12,40 @@ class BalanceViewController: UIViewController {
 
     @IBOutlet weak var zhanngdan: UIButton!
     @IBOutlet weak var chonngzhi: UIButton!
-    @IBOutlet weak var zhuanch: UIButton!
+
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tixian: UIButton!
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var info: UITextView!
+    var data: AmountList? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        title = "余额"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "查看明细", style: .done, target: self, action: #selector(toDetail))
+        tixian.layer.borderColor = UIColor.white.cgColor
+         tixian.layer.borderWidth = 1
+         tixian.layer.cornerRadius = 25
+        chonngzhi.layer.borderColor = UIColor.white.cgColor
+         chonngzhi.layer.borderWidth = 1
+         chonngzhi.layer.cornerRadius = 25
+        tableView.register(UINib(nibName: "IntegraDetailTableViewCell", bundle: nil), forCellReuseIdentifier: "IntegraDetailTableViewCell")
+
+
+          tableView.estimatedRowHeight = 150
+          tableView.rowHeight = UITableView.automaticDimension
+          tableView.delegate = self
+          tableView.dataSource = self
+          tableView.separatorStyle = .none
+          tableView.backgroundColor = UIColor.tableviewBackgroundColor
         loadData()
+        loadList()
+    }
+
+    @objc func toDetail() {
+        let detail = BalanceListViewController()
+        self.navigationController?.pushViewController(detail, animated: true)
     }
 
     func loadData() {
@@ -33,7 +59,48 @@ class BalanceViewController: UIViewController {
             }
         }
     }
+
+    @IBAction func chongzhiAction(_ sender: Any) {
+        let chong = BalanceChongViewController()
+        self.navigationController?.pushViewController(chong, animated: true)
+    }
+    @IBAction func tixianAction(_ sender: Any) {
+        let tixian = BalancePayViewController()
+        self.navigationController?.pushViewController(tixian, animated: true)
+    }
+    func loadList() {
+        API.amountList(start_date: "", end_date: "", page: "1").request { (result) in
+            switch result {
+            case .success(let data):
+                self.data = data
+                self.tableView.reloadData()
+            case .failure(let er):
+                print(er)
+            }
+        }
+    }
     @IBAction func backAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+    }
+}
+
+extension BalanceViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return data?.data.amountList.count ?? 0
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "IntegraDetailTableViewCell") as! IntegraDetailTableViewCell
+        cell.selectionStyle = .none
+        let item = data?.data.amountList[indexPath.row]
+        cell.name.text = item?.method ?? ""
+        cell.date.text = item?.created ?? ""
+        cell.point.text = item?.value ?? ""
+        if item?.incomeFlag ?? false {
+            cell.point.textColor = .red
+        } else {
+            cell.point.textColor = cell.name.textColor
+        }
+        return cell
     }
 }

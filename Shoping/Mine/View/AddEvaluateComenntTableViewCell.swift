@@ -19,12 +19,10 @@ class AddEvaluateComenntTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        setUp(text: "输入正文内容")
     }
 
-    func updateImg(imgs: [String]) {
-        if imgs.count > 5 { return }
-        self.imgs = imgs
+    func updateImg() {
         if imgs.count > 4 {
             collectionHeight.constant = 180
         } else {
@@ -37,14 +35,12 @@ class AddEvaluateComenntTableViewCell: UITableViewCell {
     }
 
     func setUp(text: String) {
-
+        textInput.setValue(nil, forKey: "_placeholderLabel")
         let plac = UILabel(frame: CGRect(x: 10, y: 10, width: 200, height: 30))
         plac.text = text
         plac.textColor = .lightGray
         textInput.addSubview(plac)
-
         textInput.setValue(plac, forKey: "_placeholderLabel")
-
         let layout = ZLCollectionViewVerticalLayout()
         layout.delegate = self
         collectionView.collectionViewLayout = layout
@@ -82,6 +78,7 @@ extension AddEvaluateComenntTableViewCell: UICollectionViewDelegate, UICollectio
 
     @objc func deleteImg(btn: UIButton) {
         imgs.remove(at: btn.tag - 50)
+        updateImg()
         collectionView.reloadData()
     }
 
@@ -148,6 +145,7 @@ extension AddEvaluateComenntTableViewCell:UIImagePickerControllerDelegate,UINavi
             let dic = result["data"] as! Dictionary<String, Any>
             let image = dic["image"]as!String
             self.imgs.append(urlheadr + image)
+            self.updateImg()
             self.collectionView.reloadData()
             }) { (error) in
                 print(error)

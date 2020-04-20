@@ -158,7 +158,5 @@ extension RecommendTypeViewController: FSPagerViewDataSource,FSPagerViewDelegate
         cell.imageView?.af_setImage(withURL: URL(string: (data?.data.category_banner[index].image)!)!)
         return cell
     }
-
-
 }
 

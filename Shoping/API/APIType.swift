@@ -87,6 +87,7 @@ extension APIType {
         if UserSetting.default.activeUserToken != nil {
             parames?["user_token"] = UserSetting.default.activeUserToken
         }
+        //01ff5de49ffac39fe540ca8cc0708536c8453bcf
         manager.session.configuration.timeoutIntervalForRequest = 30
         manager.request(url, method: method.httpMethod, parameters: parames, encoding: URLEncoding.default, headers: headers).responseData { (response) in
             do {

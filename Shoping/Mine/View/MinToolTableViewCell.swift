@@ -11,6 +11,7 @@ import UIKit
 class MinToolTableViewCell: UITableViewCell {
     @IBOutlet weak var btn1: UIButton!
     
+    @IBOutlet weak var name: UILabel!
     @IBOutlet weak var btn4: UIButton!
     @IBOutlet weak var btn3: UIButton!
     @IBOutlet weak var btn2: UIButton!

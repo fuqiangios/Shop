@@ -13,6 +13,7 @@ import FSPagerView
 class GoodsDeatilViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
+    @IBOutlet weak var favorite: UIButton!
     @IBOutlet weak var bottomTagListView: TagListView!
     @IBOutlet weak var topTagListView: TagListView!
     
@@ -75,6 +76,7 @@ class GoodsDeatilViewController: UIViewController {
             case .success(let data):
                 self.data = data
                 self.tableView.reloadData()
+//                if data.data.product.categoryID
                 self.fsPagerView.reloadData()
             case .failure(let error):
                 print(error)
@@ -119,8 +121,25 @@ class GoodsDeatilViewController: UIViewController {
 //        addCartBtn.layer.masksToBounds = true
         addCartBtn.addTarget(self, action: #selector(addCartAction), for: .touchUpInside)
         bugBtn.addTarget(self, action: #selector(addCartAction), for: .touchUpInside)
+        favorite.addTarget(self, action: #selector(favoriteAction), for: .touchUpInside)
 //        floatView.layer.cornerRadius = 5
 //        floatView.layer.masksToBounds = true
+    }
+
+    @objc func favoriteAction() {
+        API.favorite(product_id: data?.data.product.id ?? "").request { (result) in
+            switch result {
+            case .success(let data):
+                if data.data.hasCollection {
+                    self.favorite.setImage(UIImage(named: "收藏"), for: .normal)
+                } else {
+                    self.favorite.setImage(UIImage(named: "收藏-1"), for: .normal)
+                }
+                print(data)
+            case .failure(let er):
+                print(er)
+            }
+        }
     }
 
     @objc func addCartAction() {

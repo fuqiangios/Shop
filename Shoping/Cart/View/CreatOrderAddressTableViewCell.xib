@@ -103,12 +103,14 @@
                 <outlet property="addressInfo" destination="SUV-yw-ACy" id="vr9-L0-96n"/>
                 <outlet property="backView" destination="GTI-ul-2AD" id="uxs-WT-W1y"/>
                 <outlet property="bbba" destination="K9h-g1-CC6" id="f64-3E-fjY"/>
+                <outlet property="bottom" destination="Ufj-Ip-c42" id="9S3-g2-fUN"/>
                 <outlet property="defaultBg" destination="9p0-of-W7G" id="TOY-mA-g29"/>
                 <outlet property="defaultText" destination="hHh-Fc-v0d" id="bL5-nI-XAe"/>
                 <outlet property="mma" destination="Z0c-Gb-DBQ" id="Yzq-hV-TLz"/>
                 <outlet property="name" destination="glD-Sm-XOL" id="Gek-G9-MIP"/>
                 <outlet property="nna" destination="mLj-pA-jde" id="8bb-mF-ErL"/>
                 <outlet property="phone" destination="HCK-18-Btv" id="5VX-H5-cOk"/>
+                <outlet property="righy" destination="ois-Av-3Hy" id="ytx-rt-4Pd"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="170.75892857142856"/>
         </tableViewCell>

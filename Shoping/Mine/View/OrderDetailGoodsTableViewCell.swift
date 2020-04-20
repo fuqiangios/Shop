@@ -19,10 +19,10 @@ class OrderDetailGoodsTableViewCell: UITableViewCell {
     @IBOutlet weak var returnBtn: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
-        shadowsLeftRight()
-        returnBtn.layer.cornerRadius = 5
-        returnBtn.layer.borderColor = returnBtn.tintColor.cgColor
-        returnBtn.layer.borderWidth = 1
+//        shadowsLeftRight()
+//        returnBtn.layer.cornerRadius = 5
+//        returnBtn.layer.borderColor = returnBtn.tintColor.cgColor
+//        returnBtn.layer.borderWidth = 1
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

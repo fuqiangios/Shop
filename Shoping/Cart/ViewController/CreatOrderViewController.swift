@@ -71,7 +71,7 @@ class CreatOrderViewController: UIViewController {
         for item in data {
             all.append(item.id ?? "")
         }
-        API.createOrder(order_type: order_type, shopping_cart_ids: all, product_id: product_id, quantity: quantity, product_option_union_id: product_option_union_id, red_packet: "\(redPackegPrice)", customer_coupon_id: discountIndex == 0 ? "" : settlement?.data.coupons[discountIndex - 1].id, address_id: addressInfo?.id, self_store_id: store != nil ? store?.id : "").request { (result) in
+        API.createOrder(order_type: order_type, shopping_cart_ids: all, product_id: product_id, quantity: quantity, product_option_union_id: product_option_union_id, red_packet: "\(redPackegPrice)", customer_coupon_id: discountIndex == -1 ? "" : settlement?.data.coupons[discountIndex].id, address_id: addressInfo?.id, self_store_id: store != nil ? store?.id : "").request { (result) in
                 switch result {
                 case .success(let data):
                     print("success")

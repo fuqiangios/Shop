@@ -18,14 +18,22 @@ class RedPackgeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setShadow(view: backView, sColor: UIColor.init(white: 0.8, alpha: 1), offset: CGSize(width: 0, height: 0), opacity: 1, radius: 5)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        title = "红包"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "查看明细", style: .done, target: self, action: #selector(toDetail))
+//        setShadow(view: backView, sColor: UIColor.init(white: 0.8, alpha: 1), offset: CGSize(width: 0, height: 0), opacity: 1, radius: 5)
         tableView.register(UINib(nibName: "RedPackgeTableViewCell", bundle: nil), forCellReuseIdentifier: "RedPackgeTableViewCell")
         tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.separatorStyle = .none
+//        tableView.separatorStyle = .none
         loadData()
+    }
+
+    @objc func toDetail() {
+        let history = RedHistoryViewController()
+        self.navigationController?.pushViewController(history, animated: true)
     }
 
     @IBAction func shouruAction(_ sender: UIButton) {
@@ -95,14 +103,14 @@ extension RedPackgeViewController: UITableViewDelegate, UITableViewDataSource {
         let item = data?.data.redPackageList[indexPath.row]
         cell.price.text = "\(item?.value ?? "")"
         cell.info.text = item?.method ?? ""
-        cell.shiyong.text = "使用时间:\(item?.created ?? "")"
-        cell.youxian.text = "有效日期:\(item?.endDate ?? "")"
+        cell.shiyong.text = "\(item?.created ?? "")"
+        cell.youxian.text = "\(item?.endDate ?? "")"
         cell.selectionStyle = .none
         return cell
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 115
+        return 89
         
     }
 }

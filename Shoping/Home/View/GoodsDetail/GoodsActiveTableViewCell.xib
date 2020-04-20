@@ -27,7 +27,7 @@
                         <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NMN-vl-Gzl">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="选框" translatesAutoresizingMaskIntoConstraints="NO" id="NMN-vl-Gzl">
                         <rect key="frame" x="65" y="0.0" width="98" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                     </imageView>
@@ -35,7 +35,7 @@
                         <rect key="frame" x="65" y="0.0" width="98" height="50"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
-                        <color key="textColor" red="0.82672619820000004" green="0.33012539149999998" blue="0.29008919" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="textColor" red="0.82672619820000004" green="0.33012539149999998" blue="0.29008919" alpha="0.73755886130136983" colorSpace="custom" customColorSpace="displayP3"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="82k-AT-TAl">
@@ -57,4 +57,7 @@
             <point key="canvasLocation" x="137.68115942028987" y="104.46428571428571"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="选框" width="73" height="21"/>
+    </resources>
 </document>

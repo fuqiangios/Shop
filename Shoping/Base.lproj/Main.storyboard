@@ -13,7 +13,7 @@
         <scene sceneID="kND-KC-0Pt">
             <objects>
                 <navigationController id="g66-YG-Kgc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="购物车" image="ic_shop_normal" selectedImage="ic_shop_selected" id="MRc-pm-xKY"/>
+                    <tabBarItem key="tabBarItem" title="购物车" image="购物车_未选" selectedImage="购物车_已选" id="MRc-pm-xKY"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Jye-w8-aIX">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -136,7 +136,7 @@
         <scene sceneID="2Er-5x-aJ4">
             <objects>
                 <navigationController id="yMt-rP-8L5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="我的" image="ic_my_normal" selectedImage="ic_my_selected" id="0f8-BP-cax"/>
+                    <tabBarItem key="tabBarItem" title="我的" image="我的_未选" selectedImage="我的_已选" id="0f8-BP-cax"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XCR-gj-8PJ">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -211,7 +211,7 @@
         <scene sceneID="3eG-zK-TKa">
             <objects>
                 <navigationController id="NND-X5-7AY" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="首页" image="ic_home_normal" selectedImage="ic_home_selected" id="7Jf-8b-Mh4"/>
+                    <tabBarItem key="tabBarItem" title="首页" image="首页_未选" selectedImage="首页_已选" id="7Jf-8b-Mh4"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pdV-eK-Lcy">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -260,7 +260,7 @@
         <scene sceneID="vaJ-Rm-vWM">
             <objects>
                 <navigationController id="HOb-rb-gjR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="社交" image="ic_social_normal" selectedImage="ic_social_selected" id="kmM-Er-mHs"/>
+                    <tabBarItem key="tabBarItem" title="社交" image="社交_未选" selectedImage="社交_已选" id="kmM-Er-mHs"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="37S-Ha-vWN">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -280,20 +280,51 @@
                     <view key="view" contentMode="scaleToFill" id="hSA-hq-ie4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="unR-cc-JUW">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="SbM-zP-tE9">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="9QZ-Zg-M5I">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="9Os-jN-0JM">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="unR-cc-JUW" firstAttribute="bottom" secondItem="6TQ-Co-bWG" secondAttribute="bottom" id="J12-oH-TmF"/>
+                            <constraint firstItem="unR-cc-JUW" firstAttribute="trailing" secondItem="6TQ-Co-bWG" secondAttribute="trailing" id="PEX-IB-1R3"/>
+                            <constraint firstItem="unR-cc-JUW" firstAttribute="leading" secondItem="6TQ-Co-bWG" secondAttribute="leading" id="QLk-lk-6hr"/>
+                            <constraint firstItem="unR-cc-JUW" firstAttribute="top" secondItem="6TQ-Co-bWG" secondAttribute="top" id="gZy-F0-XoD"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6TQ-Co-bWG"/>
                     </view>
                     <navigationItem key="navigationItem" id="yQu-qM-oHZ"/>
+                    <connections>
+                        <outlet property="collectionView" destination="unR-cc-JUW" id="Sy6-Fv-0F1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QoN-i5-yNr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1658" y="348"/>
+            <point key="canvasLocation" x="1657.9710144927537" y="347.54464285714283"/>
         </scene>
         <!--分类-->
         <scene sceneID="qHg-8N-ghq">
             <objects>
                 <navigationController id="5dU-BF-fa2" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="分类" image="ic_classify_normal" selectedImage="ic_classify_selected" id="7Kx-e2-fOU"/>
+                    <tabBarItem key="tabBarItem" title="分类" image="分类_未选" selectedImage="分类__已选" id="7Kx-e2-fOU"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ads-Tl-DZA">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -366,15 +397,15 @@
     </scenes>
     <resources>
         <image name="ic_bill_normal" width="18.5" height="21.5"/>
-        <image name="ic_classify_normal" width="27" height="27"/>
-        <image name="ic_classify_selected" width="27" height="27"/>
-        <image name="ic_home_normal" width="27" height="27"/>
-        <image name="ic_home_selected" width="27" height="27"/>
-        <image name="ic_my_normal" width="27" height="27"/>
-        <image name="ic_my_selected" width="27" height="27"/>
-        <image name="ic_shop_normal" width="27" height="27"/>
-        <image name="ic_shop_selected" width="27" height="27"/>
-        <image name="ic_social_normal" width="27" height="27"/>
-        <image name="ic_social_selected" width="27" height="27"/>
+        <image name="分类__已选" width="28" height="28"/>
+        <image name="分类_未选" width="28" height="28"/>
+        <image name="我的_已选" width="28" height="28"/>
+        <image name="我的_未选" width="28" height="28"/>
+        <image name="社交_已选" width="28" height="28"/>
+        <image name="社交_未选" width="28" height="28"/>
+        <image name="购物车_已选" width="28" height="28"/>
+        <image name="购物车_未选" width="28" height="28"/>
+        <image name="首页_已选" width="28" height="28"/>
+        <image name="首页_未选" width="28" height="28"/>
     </resources>
 </document>

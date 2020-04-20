@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="AddressAddInfoTableViewCell" customModule="Shoping" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="AddressAddInfoTableViewCell" customModule="我家用品" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -18,34 +18,26 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="详细地址" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WWa-2f-jjH">
-                        <rect key="frame" x="16" y="0.0" width="77" height="44"/>
+                        <rect key="frame" x="16" y="0.0" width="130" height="44"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="44" id="lDS-Mt-2p7"/>
-                            <constraint firstAttribute="width" constant="77" id="mCX-sb-5jo"/>
+                            <constraint firstAttribute="width" constant="130" id="mCX-sb-5jo"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nI8-eS-WNh">
-                        <rect key="frame" x="101" y="0.0" width="185.5" height="44"/>
+                        <rect key="frame" x="154" y="0.0" width="132.5" height="44"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FAq-XE-fui">
-                        <rect key="frame" x="16" y="43" width="288" height="1"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v3N-V8-yGj">
                         <rect key="frame" x="289.5" y="0.0" width="14.5" height="44"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="14.5" id="Q4u-a5-0fX"/>
                         </constraints>
-                        <state key="normal" image="ic_contacts_normal"/>
+                        <state key="normal" image="enter"/>
                     </button>
                 </subviews>
                 <constraints>
@@ -64,6 +56,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="btn" destination="v3N-V8-yGj" id="fil-2E-jEp"/>
+                <outlet property="he" destination="mCX-sb-5jo" id="fjW-hU-YKe"/>
                 <outlet property="inputField" destination="nI8-eS-WNh" id="Gju-VZ-nXl"/>
                 <outlet property="name" destination="WWa-2f-jjH" id="KXQ-rX-Qeq"/>
             </connections>
@@ -71,6 +64,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="ic_contacts_normal" width="14.5" height="14.5"/>
+        <image name="enter" width="16" height="16"/>
     </resources>
 </document>

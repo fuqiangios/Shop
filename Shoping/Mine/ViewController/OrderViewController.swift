@@ -11,6 +11,7 @@ import UIKit
 class OrderViewController: UIViewController {
     @IBOutlet weak var topBgView: UIView!
 
+    @IBOutlet weak var line: UILabel!
     @IBOutlet weak var tableView: UITableView!
     var tab_status: String = "1"
     let page = 1
@@ -18,7 +19,7 @@ class OrderViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "订单管理"
+        title = "全部订单"
         self.setUp()
         let btn = view.viewWithTag((Int(tab_status) ?? 1) + 1)as!UIButton
         self.updateBtn(btn: btn)
@@ -39,15 +40,20 @@ class OrderViewController: UIViewController {
     func updateBtn(btn: UIButton) {
         for index in 1...5 {
             let bt = view.viewWithTag(index)as!UIButton
-            bt.setTitleColor(bt.tintColor, for: .selected)
+//            bt.setTitleColor(bt.tintColor, for: .selected)
+            bt.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+            bt.setTitleColor(UIColor.init(red: 60.0/255.0, green: 60.0/255.0, blue: 60.0/255.0, alpha: 1), for: .normal)
             bt.isSelected = false
         }
         btn.isSelected = true
+        btn.titleLabel?.font = UIFont(name: "Bold", size: 15)
+        btn.setTitleColor(UIColor.init(red: 20.0/255.0, green: 20.0/255.0, blue: 20.0/255.0, alpha: 1), for: .normal)
+        line.center = CGPoint(x: btn.center.x, y: btn.center.y + 15)
     }
 
     func setUp() {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
-        tableView.register(UINib(nibName: "OrderTableViewCell", bundle: nil), forCellReuseIdentifier: "OrderTableViewCell")
+        tableView.register(UINib(nibName: "OrderNewGoodsTableViewCell", bundle: nil), forCellReuseIdentifier: "OrderNewGoodsTableViewCell")
         tableView.register(UINib(nibName: "CreatOrderGoodsTableViewCell", bundle: nil), forCellReuseIdentifier: "CreatOrderGoodsTableViewCell")
         tableView.register(UINib(nibName: "OrderBottomTableViewCell", bundle: nil), forCellReuseIdentifier: "OrderBottomTableViewCell")
         tableView.estimatedRowHeight = 150
@@ -55,7 +61,7 @@ class OrderViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
-        setShadow(view: topBgView, sColor: UIColor.init(white: 0.8, alpha: 1), offset: CGSize(width: 0, height: 0), opacity: 1, radius: 5)
+//        setShadow(view: topBgView, sColor: UIColor.init(white: 0.8, alpha: 1), offset: CGSize(width: 0, height: 0), opacity: 1, radius: 5)
     }
 
     func setShadow(view:UIView,sColor:UIColor,offset:CGSize,
@@ -109,44 +115,33 @@ class OrderViewController: UIViewController {
 }
 extension OrderViewController:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (data?.data[section].products.count ?? 0) + 2
-    }
-
-    func numberOfSections(in tableView: UITableView) -> Int {
         return data?.data.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "OrderTableViewCell") as! OrderTableViewCell
-            cell.selectionStyle = .none
-            let item = data?.data[indexPath.section]
-            cell.name.text = item?.statusName
-            return cell
-        } else if indexPath.row < (data?.data[indexPath.section].products.count ?? 0) + 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "CreatOrderGoodsTableViewCell") as! CreatOrderGoodsTableViewCell
-            let item = data?.data[indexPath.section].products[indexPath.row - 1]
-            cell.img.af_setImage(withURL: URL(string: item!.image)!)
-            cell.name.text = item?.name ?? ""
-            cell.price.text = "￥\(item?.price ?? "0")"
-            cell.info.text = item?.optionUnionName ?? ""
-            cell.num.text = "X\(item?.quantity ?? "0")"
-            cell.selectionStyle = .none
-            cell.shadowsLeftRight()
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "OrderBottomTableViewCell") as! OrderBottomTableViewCell
-            cell.selectionStyle = .none
-            let item = data?.data[indexPath.section]
-            cell.price.text = "共\(item?.products.count ?? 0)件商品  合计: ￥\(item?.price ?? "0.00")"
-            cell.setBtn(tag: Int(item?.orderStatus ?? "0") ?? 0)
-            cell.leftBtn.addTarget(self, action: #selector(updateOrder(btn:)), for: .touchUpInside)
-            cell.leftBtn.tag = (indexPath.section * 100) + 1
-            cell.rightBtn.tag = (indexPath.section * 100) + 2
-            cell.rightBtn.addTarget(self, action: #selector(updateOrder(btn:)), for: .touchUpInside)
-
-            return cell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "OrderNewGoodsTableViewCell") as! OrderNewGoodsTableViewCell
+        cell.selectionStyle = .none
+        let item = data?.data[indexPath.row]
+        cell.orderId.text = "订单号: \(item?.orderCode ?? "")"
+        cell.num.text = "共\(item?.products.count ?? 0)件"
+        cell.status.text = item?.statusName
+        if item?.products.count ?? 0 >= 1 {
+            cell.img0.af_setImage(withURL: URL(string: item?.products[0].image ?? "")!)
         }
+        if item?.products.count ?? 0 >= 2 {
+            cell.img1.af_setImage(withURL: URL(string: item?.products[1].image ?? "")!)
+        }
+        if item?.products.count ?? 0 >= 3 {
+            cell.img3.af_setImage(withURL: URL(string: item?.products[2].image ?? "")!)
+        }
+        cell.leftBtn.addTarget(self, action: #selector(updateOrder(btn:)), for: .touchUpInside)
+        cell.leftBtn.tag = (indexPath.row * 100) + 1
+        cell.rightBtn.tag = (indexPath.row * 100) + 2
+        cell.rightBtn.addTarget(self, action: #selector(updateOrder(btn:)), for: .touchUpInside)
+
+        cell.setBtn(tag: Int(item?.orderStatus ?? "0") ?? 0)
+//            cell.name.text = item?.statusName
+        return cell
     }
 
     @objc func updateOrder(btn: UIButton) {
@@ -165,22 +160,12 @@ extension OrderViewController:UITableViewDelegate,UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0 {
-            return 60
-        } else if indexPath.row < (data?.data[indexPath.section].products.count ?? 0) + 1 {
-            return 106
-        } else {
-            let item = data?.data[indexPath.section]
-            if item?.orderStatus == "2" || item?.orderStatus == "3" {
-                return 60
-            }
-            return 86
-        }
+            return 193
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detail = OederDetailViewController()
-        detail.order_id = data?.data[indexPath.section].id ?? ""
+        detail.order_id = data?.data[indexPath.row].id ?? ""
         self.navigationController?.pushViewController(detail, animated: true)
     }
 }

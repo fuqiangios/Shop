@@ -11,6 +11,7 @@ import UIKit
 class MineHeaderTableViewCell: UITableViewCell {
     @IBOutlet weak var lineBackView: UIView!
     
+    @IBOutlet weak var btn: UIButton!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var img: UIImageView!
     @IBOutlet weak var discountBtn: UIButton!
@@ -21,7 +22,7 @@ class MineHeaderTableViewCell: UITableViewCell {
         super.awakeFromNib()
 //        setShadow(view: lineBackView, sColor: UIColor.init(white: 0.8, alpha: 1), offset: CGSize(width: 1, height: 1), opacity: 1, radius: 5)
 //        lineBackView.layer.cornerRadius = 5
-        img.layer.borderWidth = 3
+        img.layer.borderWidth = 2
         img.layer.borderColor = UIColor.white.cgColor
         img.layer.cornerRadius = 35
     }

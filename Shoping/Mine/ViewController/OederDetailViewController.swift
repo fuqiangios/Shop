@@ -19,7 +19,7 @@ class OederDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        title = "订单详情"
         setUp()
 
     }
@@ -34,7 +34,7 @@ class OederDetailViewController: UIViewController {
             switch result {
             case .success(let data):
                 self.data = data
-                self.title = data.data.statusName
+//                self.title = data.data.statusName
                 self.tableView.reloadData()
                 self.setBtn(tag: Int(data.data.orderStatus) ?? 0)
             case .failure(let error):
@@ -51,6 +51,9 @@ class OederDetailViewController: UIViewController {
         tableView.register(UINib(nibName: "CreatOrderGoodsTableViewCell", bundle: nil), forCellReuseIdentifier: "CreatOrderGoodsTableViewCell")
         tableView.register(UINib(nibName: "OrderDetailGoodsTableViewCell", bundle: nil), forCellReuseIdentifier: "OrderDetailGoodsTableViewCell")
         tableView.register(UINib(nibName: "OrderDetailNumTableViewCell", bundle: nil), forCellReuseIdentifier: "OrderDetailNumTableViewCell")
+        tableView.register(UINib(nibName: "OrderDetailStatusTableViewCell", bundle: nil), forCellReuseIdentifier: "OrderDetailStatusTableViewCell")
+        tableView.register(UINib(nibName: "OrderDetailIDTableViewCell", bundle: nil), forCellReuseIdentifier: "OrderDetailIDTableViewCell")
+        tableView.register(UINib(nibName: "OrderDetailMonyTableViewCell", bundle: nil), forCellReuseIdentifier: "OrderDetailMonyTableViewCell")
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
@@ -90,21 +93,21 @@ class OederDetailViewController: UIViewController {
             rightBtn.setTitle("确认收货", for: .normal)
             rightBtn.setTitleColor(rightBtn.tintColor, for: .normal)
         case 4:
-            leftBtn.isHidden = false
-            leftBtn.layer.borderColor = UIColor.black.cgColor
-            leftBtn.layer.borderWidth = 1
-            leftBtn.layer.cornerRadius = 5
-            leftBtn.layer.masksToBounds = true
-            leftBtn.setTitleColor(.black, for: .normal)
-            leftBtn.setTitle("删除", for: .normal)
-
             rightBtn.isHidden = false
-            rightBtn.layer.borderColor = rightBtn.tintColor.cgColor
+            rightBtn.layer.borderColor = UIColor.black.cgColor
             rightBtn.layer.borderWidth = 1
             rightBtn.layer.cornerRadius = 5
             rightBtn.layer.masksToBounds = true
-            rightBtn.setTitle("评论", for: .normal)
-            rightBtn.setTitleColor(rightBtn.tintColor, for: .normal)
+            rightBtn.setTitleColor(.black, for: .normal)
+            rightBtn.setTitle("删除", for: .normal)
+
+            leftBtn.isHidden = false
+//            rightBtn.layer.borderColor = rightBtn.tintColor.cgColor
+//            rightBtn.layer.borderWidth = 1
+//            rightBtn.layer.cornerRadius = 5
+//            rightBtn.layer.masksToBounds = true
+//            rightBtn.setTitle("评论", for: .normal)
+//            rightBtn.setTitleColor(rightBtn.tintColor, for: .normal)
         case 5:
             rightBtn.isHidden = false
             rightBtn.layer.borderColor = UIColor.black.cgColor
@@ -114,6 +117,13 @@ class OederDetailViewController: UIViewController {
             rightBtn.setTitleColor(.black, for: .normal)
             rightBtn.setTitle("删除", for: .normal)
         default:
+            rightBtn.isHidden = false
+            rightBtn.layer.borderColor = UIColor.black.cgColor
+            rightBtn.layer.borderWidth = 1
+            rightBtn.layer.cornerRadius = 5
+            rightBtn.layer.masksToBounds = true
+            rightBtn.setTitleColor(.black, for: .normal)
+            rightBtn.setTitle("删除", for: .normal)
             break
         }
     }
@@ -132,7 +142,7 @@ class OederDetailViewController: UIViewController {
             self.navigationController?.pushViewController(pay, animated: true)
         } else if btn.titleLabel?.text == "确认收货" {
             updateOrderStatus(id: order_id, type: "confirm")
-        } else if btn.titleLabel?.text == "删除订单" {
+        } else if btn.titleLabel?.text == "删除" {
             updateOrderStatus(id: order_id, type: "delete")
         } else if btn.titleLabel?.text == "查看物流" {
 
@@ -144,6 +154,8 @@ extension OederDetailViewController:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 1 {
             return (data?.data.products.count ?? 0) + 1
+        } else if section == 2 {
+            return 3
         }
         return 1
     }
@@ -155,58 +167,98 @@ extension OederDetailViewController:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CreatOrderAddressTableViewCell") as! CreatOrderAddressTableViewCell
+            cell.righy.isHidden = true
+            cell.backgroundColor = .white
             if data?.data.shippingName.isEmpty ?? true {
                 cell.name.text = "门店自提"
                 cell.addressInfo.text = "请前往门店自行提取"
             } else {
-            cell.name.text = (data?.data.shippingName ?? "") + "  " + (data?.data.shippingTelephone ?? "")
-            cell.addressInfo.text = data?.data.shippingAddress
+            cell.addressInfo.text = (data?.data.shippingName ?? "") + "  " + (data?.data.shippingTelephone ?? "")
+            cell.phone.text = data?.data.shippingAddress
+
+                       cell.name.text = ""
+                       cell.defaultBg.isHidden = true
+                       cell.defaultText.isHidden = true
+                       cell.nna.constant = 0
+                       cell.bbba.constant = 20
             }
             cell.selectionStyle = .none
             return cell
         } else if indexPath.section == 1 {
-            if indexPath.row >= data?.data.products.count ?? 0 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "OrderDetailGoodsTableViewCell") as! OrderDetailGoodsTableViewCell
+            if indexPath.row == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "OrderDetailStatusTableViewCell") as! OrderDetailStatusTableViewCell
                 cell.selectionStyle = .none
-                cell.goodPrice.text = "￥\(data?.data.total ?? "0")"
-                cell.discountPrice.text = "-\(data?.data.redPacket ?? "0")"
-                cell.youhuiPrice.text = "-\(data?.data.couponPrice ?? "0")"
-                cell.shipingPrice.text = "+￥\(data?.data.shippingPrice ?? "0")"
-                cell.price.text = "￥\(data?.data.price ?? "0")"
+                cell.name.text = data?.data.statusName ?? ""
                 return cell
             }
            let cell = tableView.dequeueReusableCell(withIdentifier: "CreatOrderGoodsTableViewCell") as! CreatOrderGoodsTableViewCell
-            let item = data?.data.products[indexPath.row]
+            let item = data?.data.products[indexPath.row - 1]
            cell.img.af_setImage(withURL: URL(string: item!.image)!)
            cell.name.text = item?.name ?? ""
            cell.price.text = "￥\(item?.price ?? "0")"
            cell.info.text = item?.optionUnionName ?? ""
            cell.num.text = "X\(item?.quantity ?? "0")"
+            if Int(data?.data.orderStatus ?? "0") ?? 0 == 4 {
+                cell.evaluateBtn.isHidden = false
+            } else {
+                cell.evaluateBtn.isHidden = true
+            }
            cell.selectionStyle = .none
             if indexPath.row == 0 {
-                cell.shadowsLeftRightTop()
+//                cell.shadowsLeftRightTop()
             } else {
-                cell.shadowsLeftRight()
+//                cell.shadowsLeftRight()
             }
            return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "OrderDetailNumTableViewCell") as! OrderDetailNumTableViewCell
+            if indexPath.row == 0 {
+
+                let cell = tableView.dequeueReusableCell(withIdentifier: "OrderDetailIDTableViewCell") as! OrderDetailIDTableViewCell
+                cell.selectionStyle = .none
+                cell.num.text = data?.data.orderCode ?? ""
+                cell.date.text = data?.data.created_time ?? ""
+                return cell
+
+            } else if indexPath.row == 1 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "OrderDetailGoodsTableViewCell") as! OrderDetailGoodsTableViewCell
+                    cell.selectionStyle = .none
+                cell.goodPrice.text = getPayName(str: "\(data?.data.paymentPfn ?? "")")
+                cell.discountPrice.text = "￥\(data?.data.price ?? "")"
+                cell.youhuiPrice.text = "￥\(data?.data.shippingPrice ?? "")"
+                cell.shipingPrice.text = "-￥\(data?.data.redPacket ?? "")"
+                cell.price.text = "-￥\(data?.data.couponPrice ?? "")"
+//                    cell.num.text = data?.data.orderCode ?? ""
+//                    cell.date.text = data?.data.created_time ?? ""
+                    return cell
+            }
+            let cell = tableView.dequeueReusableCell(withIdentifier: "OrderDetailMonyTableViewCell") as! OrderDetailMonyTableViewCell
             cell.selectionStyle = .none
-            cell.orderNum.text = data?.data.orderCode
-            cell.creatDate.text = data?.data.created_time ?? ""
-            cell.payDate.text = data?.data.pay_time ?? ""
-            cell.retuenDate.text = data?.data.shipping_time ?? ""
+            cell.price.text = "￥\(data?.data.amountPrice ?? "")"
             return cell
         }
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 20
+        if section == 0 { return 0.1 }
+        return 15
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let vi = UIView(frame: .zero)
-        vi.backgroundColor = .white
-        return vi
+        let view = UIView()
+        view.backgroundColor = UIColor.tableviewBackgroundColor
+        return view
+    }
+
+    func getPayName(str: String) -> String {
+        switch str {
+        case "Amount":
+            return "余额支付"
+        case "weixin":
+            return "微信支付"
+        case "zhifubao":
+            return "支付宝支付"
+        default:
+            return "未付款"
+        }
     }
 }

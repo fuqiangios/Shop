@@ -10,6 +10,10 @@ import UIKit
 
 class MineRedTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var discount: UIButton!
+    @IBOutlet weak var price: UIButton!
+    @IBOutlet weak var redpackg: UIButton!
+    @IBOutlet weak var point: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

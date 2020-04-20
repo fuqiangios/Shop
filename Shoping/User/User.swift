@@ -82,6 +82,129 @@ extension API {
         }
     }
 
+    struct pointInfoList: Post {
+        typealias Node = PointList
+        var path: String = "customer/my_points_list"
+        let start_date: String
+        let end_date: String
+        let page: String
+        init(start_date: String, end_date: String,page:String ) {
+            self.start_date = start_date
+            self.end_date = end_date
+            self.page = page
+        }
+
+        func parameters() -> [String: Any]? {
+            return [
+                "start_date": start_date,
+                "end_date": end_date,
+                "page": page,
+             ]
+        }
+    }
+
+    struct pointPayPage: Post {
+        typealias Node = PointPayPage
+        var path: String = "customer/my_point_turn_show"
+
+        init() {
+        }
+
+        func parameters() -> [String: Any]? {
+            return [
+                "": "",
+             ]
+        }
+    }
+
+    struct pointPay: Post {
+        typealias Node = CartNumChange
+        var path: String = "customer/my_point_turn_out"
+        let point: String
+        let type: String
+
+        init(point: String, type: String) {
+            self.point = point
+            self.type = type
+        }
+
+        func parameters() -> [String: Any]? {
+            return [
+                "points": point,
+                "type": type
+             ]
+        }
+    }
+
+    struct amountList: Post {
+        typealias Node = AmountList
+        var path: String = "customer/my_amount_list"
+        let start_date: String
+        let end_date: String
+        let page: String
+        init(start_date: String, end_date: String,page:String ) {
+            self.start_date = start_date
+            self.end_date = end_date
+            self.page = page
+        }
+
+        func parameters() -> [String: Any]? {
+            return [
+                "start_date": start_date,
+                "end_date": end_date,
+                "page": page,
+             ]
+        }
+    }
+
+    struct favoriteList: Post {
+        typealias Node = FavoriteList
+        var path: String = "customer/my_collection"
+        let page: String
+        init(page:String) {
+            self.page = page
+        }
+
+        func parameters() -> [String: Any]? {
+            return [
+                "page": page,
+             ]
+        }
+    }
+
+    struct chongzhiPage: Post {
+        typealias Node = ChongzhiPage
+        var path: String = "customer/recharge_show"
+
+        init() {
+        }
+
+        func parameters() -> [String: Any]? {
+            return [
+                "": "",
+             ]
+        }
+    }
+
+    struct chongzhi: Post {
+        typealias Node = Chongzhi
+        var path: String = "customer/recharge"
+        let price: String
+        let payment_pfn: String
+
+        init(price: String, payment_pfn: String) {
+            self.price = price
+            self.payment_pfn = payment_pfn
+        }
+
+        func parameters() -> [String: Any]? {
+            return [
+                "price": price,
+                "payment_pfn": payment_pfn
+             ]
+        }
+    }
+
     struct redpackgeList: Post {
         typealias Node = Redpackge
         var path: String = "customer/my_redpackage"
@@ -94,6 +217,22 @@ extension API {
         func parameters() -> [String: Any]? {
             return [
                 "type": type
+             ]
+        }
+    }
+
+    struct favorite: Post {
+        typealias Node = Favorite
+        var path: String = "product/product_collection"
+
+        let product_id: String
+        init(product_id: String) {
+            self.product_id = product_id
+        }
+
+        func parameters() -> [String: Any]? {
+            return [
+                "product_id": product_id
              ]
         }
     }
@@ -174,7 +313,7 @@ struct Point: Codable {
 
 // MARK: - DataClass
 struct PointDataClass: Codable {
-    let points: Int
+    let points: Float
     let pointUnit, content: String
 
     enum CodingKeys: String, CodingKey {
@@ -230,4 +369,167 @@ struct Amount: Codable {
 struct AmountDataClass: Codable {
     let amount, content: String
 }
+
+struct PointList: Codable {
+    let result: Bool
+    let message: String
+    let status: Int
+    let data: PointListDataClass
+}
+
+// MARK: - DataClass
+struct PointListDataClass: Codable {
+    let pointsList: [PointsList]
+    let income, pay: String
+
+    enum CodingKeys: String, CodingKey {
+        case pointsList = "points_list"
+        case income, pay
+    }
+}
+
+// MARK: - PointsList
+struct PointsList: Codable {
+    let method: String
+    let incomeFlag: Bool
+    let value, created: String
+
+    enum CodingKeys: String, CodingKey {
+        case method
+        case incomeFlag = "income_flag"
+        case value, created
+    }
+}
+
+struct PointPayPage: Codable {
+    let result: Bool
+    let message: String
+    let status: Int
+    let data: PointPayDataClass
+}
+
+// MARK: - DataClass
+struct PointPayDataClass: Codable {
+    let staticPoints, shortPoints, pointUnit, content: String
+
+    enum CodingKeys: String, CodingKey {
+        case staticPoints = "static_points"
+        case shortPoints = "short_points"
+        case pointUnit = "point_unit"
+        case content
+    }
+}
+// MARK: - AmountList
+struct AmountList: Codable {
+    let result: Bool
+    let message: String
+    let status: Int
+    let data: AmountListDataClass
+}
+
+// MARK: - DataClass
+struct AmountListDataClass: Codable {
+    let amountList: [AmountListElement]
+    let income, pay: String
+
+    enum CodingKeys: String, CodingKey {
+        case amountList = "amount_list"
+        case income, pay
+    }
+}
+
+// MARK: - AmountListElement
+struct AmountListElement: Codable {
+    let method: String
+    let incomeFlag: Bool
+    let value, created: String
+
+    enum CodingKeys: String, CodingKey {
+        case method
+        case incomeFlag = "income_flag"
+        case value, created
+    }
+}
+
+// MARK: - ChongzhiPage
+struct ChongzhiPage: Codable {
+    let result: Bool
+    let message: String
+    let status: Int
+    let data: ChongzhiDataClass
+}
+
+// MARK: - DataClass
+struct ChongzhiDataClass: Codable {
+    let payment: [ChongzhiPayment]
+    let amount: String
+}
+
+// MARK: - Payment
+struct ChongzhiPayment: Codable {
+    let id, name, type, pfn: String
+    let status, paymentDescription, sort, created: String
+    let modified: String
+    let icon: String
+
+    enum CodingKeys: String, CodingKey {
+        case id, name, type, pfn, status
+        case paymentDescription = "description"
+        case sort, created, modified, icon
+    }
+}
+
+// MARK: - Chongzhi
+struct Chongzhi: Codable {
+    let result: Bool
+    let message: String
+    let status: Int
+    let data: ChongzhDataClass
+}
+
+// MARK: - DataClass
+struct ChongzhDataClass: Codable {
+    let res: Bool
+    let plugin: String
+}
+
+// MARK: - Favorite
+struct Favorite: Codable {
+    let result: Bool
+    let message: String
+    let status: Int
+    let data: FavoriteDataClass
+}
+
+// MARK: - DataClass
+struct FavoriteDataClass: Codable {
+    let hasCollection: Bool
+
+    enum CodingKeys: String, CodingKey {
+        case hasCollection = "has_collection"
+    }
+}
+// MARK: - FavoriteList
+struct FavoriteList: Codable {
+    let result: Bool
+    let message: String
+    let status: Int
+    let data: [FavoriteListDatum]
+}
+
+// MARK: - Datum
+struct FavoriteListDatum: Codable {
+    let productID, name: String
+    let image: String
+    let price: String
+    let count: Int
+
+    enum CodingKeys: String, CodingKey {
+        case productID = "product_id"
+        case name, image, price, count
+    }
+}
+
+
+
 

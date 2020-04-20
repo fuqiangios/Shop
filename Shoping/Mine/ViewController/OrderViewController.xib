@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OrderViewController" customModule="Shoping" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OrderViewController" customModule="我家用品" customModuleProvider="target">
             <connections>
+                <outlet property="line" destination="AE0-bA-dKf" id="FuN-ep-2Sd"/>
                 <outlet property="tableView" destination="M5P-fu-8uW" id="Xw1-mV-9yD"/>
                 <outlet property="topBgView" destination="KSo-9q-GHP" id="dG3-4u-na1"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -26,10 +27,10 @@
                         <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LDP-r4-yI4">
                             <rect key="frame" x="0.0" y="0.0" width="81" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                             <color key="tintColor" red="0.85826212170000005" green="0.17443221810000001" blue="0.16723364590000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <state key="normal" title="全部">
-                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" title="全部订单">
+                                <color key="titleColor" red="0.23529669642448425" green="0.2352907657623291" blue="0.235291987657547" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
@@ -40,10 +41,10 @@
                         <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NL0-JF-0VG">
                             <rect key="frame" x="81" y="0.0" width="81" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                             <color key="tintColor" red="0.85826212170000005" green="0.17443221810000001" blue="0.16723364590000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <state key="normal" title="待付款">
-                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="titleColor" red="0.23529411764705882" green="0.2352907657623291" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
@@ -54,10 +55,10 @@
                         <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bwg-LB-U7Q">
                             <rect key="frame" x="162" y="0.0" width="82" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                             <color key="tintColor" red="0.85826212170000005" green="0.17443221810000001" blue="0.16723364590000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <state key="normal" title="待发货">
-                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="titleColor" red="0.23529411764705882" green="0.2352907657623291" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
@@ -68,10 +69,10 @@
                         <button opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rbB-XA-vFt">
                             <rect key="frame" x="244" y="0.0" width="81" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                             <color key="tintColor" red="0.85826212170000005" green="0.17443221810000001" blue="0.16723364590000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <state key="normal" title="待收货">
-                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="titleColor" red="0.23529411764705882" green="0.2352907657623291" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
@@ -82,10 +83,10 @@
                         <button opaque="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YrD-Le-cOs">
                             <rect key="frame" x="334" y="0.0" width="81" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                             <color key="tintColor" red="0.85826212170000005" green="0.17443221810000001" blue="0.16723364590000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <state key="normal" title="已完成">
-                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" title="待评价">
+                                <color key="titleColor" red="0.23529411764705882" green="0.2352907657623291" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
@@ -93,6 +94,14 @@
                                 <action selector="typeAction:" destination="-1" eventType="touchUpInside" id="bOU-RV-FmM"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AE0-bA-dKf">
+                            <rect key="frame" x="25" y="38" width="30" height="3"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.82672619820000004" green="0.33012539149999998" blue="0.29008919" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>

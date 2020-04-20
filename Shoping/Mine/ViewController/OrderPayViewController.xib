@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OrderPayViewController" customModule="Shoping" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OrderPayViewController" customModule="我家用品" customModuleProvider="target">
             <connections>
                 <outlet property="metch" destination="YgB-pO-4Kx" id="n8z-nb-HqM"/>
+                <outlet property="payName" destination="YgB-pO-4Kx" id="08F-s5-XGc"/>
                 <outlet property="price" destination="TvW-cq-AVs" id="HdN-ow-jBO"/>
                 <outlet property="submitBtn" destination="9as-uP-mv8" id="sMn-0q-n91"/>
                 <outlet property="tableVIew" destination="1ea-ZJ-Z00" id="3h8-qJ-YfU"/>
@@ -30,7 +31,10 @@
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A5h-6R-ti7">
                     <rect key="frame" x="20" y="48" width="28" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="ic_select_normal"/>
+                    <state key="normal" image="back"/>
+                    <connections>
+                        <action selector="backAction:" destination="-1" eventType="touchUpInside" id="vQ3-if-rza"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="￥12.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TvW-cq-AVs">
                     <rect key="frame" x="124" y="89" width="168" height="39"/>
@@ -61,10 +65,10 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9as-uP-mv8">
-                    <rect key="frame" x="44" y="413" width="327" height="40"/>
+                    <rect key="frame" x="44" y="413" width="327" height="50"/>
                     <color key="backgroundColor" red="0.85826212170000005" green="0.17443221810000001" blue="0.16723364590000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="40" id="NdM-il-PAp"/>
+                        <constraint firstAttribute="height" constant="50" id="NdM-il-PAp"/>
                     </constraints>
                     <state key="normal" title="确认支付">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -85,7 +89,7 @@
         </view>
     </objects>
     <resources>
-        <image name="ic_select_normal" width="10" height="17"/>
+        <image name="back" width="24" height="24"/>
         <image name="底纹" width="375" height="244.5"/>
     </resources>
 </document>

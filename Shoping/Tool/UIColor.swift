@@ -10,6 +10,14 @@ extension UIColor {
         return UIColor.init(red: 249.0/255.0, green: 250.0/255.0, blue: 251.0/255.0, alpha: 1);
     }
 
+    class var lineColor: UIColor {
+        return UIColor.init(red: 240.0/255.0, green: 240.0/255.0, blue: 240.0/255.0, alpha: 1);
+    }
+
+    class var graylineColor: UIColor {
+        return UIColor.init(red: 200.0/255.0, green: 200.0/255.0, blue: 200.0/255.0, alpha: 1);
+    }
+
     class var blackTextColor: UIColor {
         return UIColor.init(red: 79.0/255.0, green: 80.0/255.0, blue: 81.0/255.0, alpha: 1);
     }

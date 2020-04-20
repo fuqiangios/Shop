@@ -67,7 +67,6 @@ class EvaluateListViewController: UIViewController {
             case .success(let data):
                 self.data = data
                 self.tableView.reloadData()
-                break
             case .failure(let error):
                 print(error)
             }
