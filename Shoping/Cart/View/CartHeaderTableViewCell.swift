@@ -10,6 +10,9 @@ import UIKit
 
 class CartHeaderTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var btn: UIButton!
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var img: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

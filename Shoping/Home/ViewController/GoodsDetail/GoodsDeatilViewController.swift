@@ -25,10 +25,12 @@ class GoodsDeatilViewController: UIViewController {
     var data: GoodsDetail? = nil
     var product_id: String = ""
     var fsPagerView: FSPagerView!
+    var webViewHeight = 0.0
+    var addressStr = ""
+    var option = ""
 
     override func viewDidLoad() {
-        super.viewDidLoad()
-        setRightItem()
+//        setRightItem()
 //        setSearBar()
         setTableView()
         setUp()
@@ -76,7 +78,12 @@ class GoodsDeatilViewController: UIViewController {
             case .success(let data):
                 self.data = data
                 self.tableView.reloadData()
-//                if data.data.product.categoryID
+                if data.data.product.hasCollection {
+                    self.favorite.setImage(UIImage(named: "收藏"), for: .normal)
+                } else {
+                    self.favorite.setImage(UIImage(named: "收藏-1"), for: .normal)
+                }
+                self.addressStr = data.data.address.address ?? ""
                 self.fsPagerView.reloadData()
             case .failure(let error):
                 print(error)
@@ -127,7 +134,7 @@ class GoodsDeatilViewController: UIViewController {
     }
 
     @objc func favoriteAction() {
-        API.favorite(product_id: data?.data.product.id ?? "").request { (result) in
+        API.favorite(product_id: data?.data.product.id ?? "", product_option_union_id: option).request { (result) in
             switch result {
             case .success(let data):
                 if data.data.hasCollection {
@@ -152,6 +159,10 @@ class GoodsDeatilViewController: UIViewController {
         let type = SelectTypeViewController()
         type.modalPresentationStyle = .custom
         type.data = data
+        type.didColse = { (option) in
+            self.option = option
+            self.tableView.reloadData()
+        }
         type.didToBuy = { (num,optin) in
             let creat = CreatOrderViewController()
             creat.product_id = self.data?.data.product.id
@@ -201,6 +212,7 @@ extension GoodsDeatilViewController: UITableViewDelegate,UITableViewDataSource {
             cell.price_sort.text = "￥\(data?.data.product.maxPrice ?? "0")"
             cell.name.text = data?.data.product.name
             cell.shippingContent.text = "  \(data?.data.product.shippingcontent ?? "") "
+            cell.xiao.text = data?.data.product.saleCnt ?? ""
             cell.selectionStyle = .none
             return cell
         }else if indexPath.section == 1 {
@@ -208,7 +220,15 @@ extension GoodsDeatilViewController: UITableViewDelegate,UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "GoodsTypeTableViewCell") as! GoodsTypeTableViewCell
             cell.accessoryType = .disclosureIndicator
             cell.selectionStyle = .none
+                if option == "" {
                 cell.typeName.text = "选择 \(data?.data.getProductOptionGroup()[0].name ?? "")\(data?.data.getProductOptionGroup()[1].name ?? "")"
+                } else {
+                    for item in data?.data.union ?? [] {
+                        if item.productUnion == option {
+                            cell.typeName.text = item.productUnionName
+                        }
+                    }
+                }
             return cell
             } else if indexPath.row == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "GoodsActiveTableViewCell") as! GoodsActiveTableViewCell
@@ -220,6 +240,7 @@ extension GoodsDeatilViewController: UITableViewDelegate,UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "GoodsBrandTableViewCell") as! GoodsBrandTableViewCell
                 cell.accessoryType = .disclosureIndicator
                 cell.selectionStyle = .none
+                cell.name.text = "至 \(addressStr)"
                 return cell
             }
         } else if indexPath.section == 2 {
@@ -268,7 +289,9 @@ extension GoodsDeatilViewController: UITableViewDelegate,UITableViewDataSource {
             return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "GoodsDetailTableViewCell") as! GoodsDetailTableViewCell
-                cell.web.loadHTMLString((data?.data.product.productDescription)!, baseURL: URL(string: urlheadr)!)
+                if webViewHeight < 10 { cell.web.loadHTMLString((data?.data.product.productDescription)!, baseURL: URL(string: urlheadr)!)
+                cell.web.delegate = self
+                }
                 cell.selectionStyle = .none
                 return cell
             }
@@ -279,6 +302,9 @@ extension GoodsDeatilViewController: UITableViewDelegate,UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 3, indexPath.row == 1 {
+            return CGFloat(webViewHeight + 30)
+        }
         return UITableView.automaticDimension
     }
 
@@ -312,6 +338,14 @@ extension GoodsDeatilViewController: UITableViewDelegate,UITableViewDataSource {
 
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1, indexPath.row == 2 {
+            let addres = AddressListViewController()
+            addres.didSelectAddress = {(ad) in
+                self.addressStr = ad?.address ?? ""
+                self.tableView.reloadData()
+            }
+            self.navigationController?.pushViewController(addres, animated: true)
+        }
         if indexPath.section == 3 {
             if indexPath.row == 1 {
                 if data?.data.productModel != nil {
@@ -330,6 +364,10 @@ extension GoodsDeatilViewController: UITableViewDelegate,UITableViewDataSource {
         let type = SelectTypeViewController()
         type.modalPresentationStyle = .custom
         type.data = data
+            type.didColse = { (option) in
+                self.option = option
+                self.tableView.reloadData()
+            }
             type.didToBuy = { (num,optin) in
                 let creat = CreatOrderViewController()
                 creat.product_id = self.data?.data.product.id
@@ -347,6 +385,10 @@ extension GoodsDeatilViewController: UITableViewDelegate,UITableViewDataSource {
             let type = SelectTypeViewController()
             type.modalPresentationStyle = .custom
             type.data = data
+            type.didColse = { (option) in
+                self.option = option
+                self.tableView.reloadData()
+            }
             type.didToBuy = { (num,optin) in
                 let creat = CreatOrderViewController()
                 creat.product_id = self.data?.data.product.id
@@ -383,5 +425,10 @@ extension GoodsDeatilViewController: FSPagerViewDelegate,FSPagerViewDataSource {
         cell.imageView?.af_setImage(withURL: URL(string: (data?.data.productImage[index].image)!)!)
         return cell
     }
-
+}
+extension GoodsDeatilViewController: UIWebViewDelegate {
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        webViewHeight = Double(webView.scrollView.contentSize.height)
+        self.tableView.reloadData()
+    }
 }

@@ -112,6 +112,7 @@
                             <constraint firstItem="IdV-BI-C8Z" firstAttribute="trailing" secondItem="rzG-D5-cR9" secondAttribute="trailing" id="9GL-gU-VY9"/>
                             <constraint firstItem="IdV-BI-C8Z" firstAttribute="leading" secondItem="rzG-D5-cR9" secondAttribute="leading" id="HRl-fL-TBg"/>
                             <constraint firstItem="zsf-AF-p9O" firstAttribute="leading" secondItem="rzG-D5-cR9" secondAttribute="leading" constant="20" id="elC-8M-Gjf"/>
+                            <constraint firstItem="IdV-BI-C8Z" firstAttribute="top" relation="greaterThanOrEqual" secondItem="zsf-AF-p9O" secondAttribute="bottom" constant="10" id="ptz-Ub-4ZB"/>
                             <constraint firstItem="zsf-AF-p9O" firstAttribute="top" secondItem="rzG-D5-cR9" secondAttribute="top" constant="20" id="sSc-Yc-VzZ"/>
                             <constraint firstItem="IdV-BI-C8Z" firstAttribute="bottom" secondItem="rzG-D5-cR9" secondAttribute="bottom" id="ymB-Sd-PNU"/>
                             <constraint firstItem="rzG-D5-cR9" firstAttribute="trailing" secondItem="zsf-AF-p9O" secondAttribute="trailing" constant="20" id="ymV-ij-Rdb"/>
@@ -346,11 +347,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="91t-E3-crh">
-                                <rect key="frame" x="0.0" y="148" width="118" height="665"/>
+                                <rect key="frame" x="0.0" y="148" width="103.5" height="665"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dPm-KQ-DTa">
-                                <rect key="frame" x="119" y="148" width="295" height="665"/>
+                                <rect key="frame" x="104.5" y="148" width="309.5" height="665"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hqV-Vb-fI4">
                                     <size key="itemSize" width="50" height="50"/>
@@ -379,7 +380,7 @@
                             <constraint firstItem="dPm-KQ-DTa" firstAttribute="bottom" secondItem="KiS-ax-0Ef" secondAttribute="bottom" id="gey-P3-XSi"/>
                             <constraint firstItem="dPm-KQ-DTa" firstAttribute="top" secondItem="KiS-ax-0Ef" secondAttribute="top" constant="60" id="ia2-OF-XlO"/>
                             <constraint firstItem="91t-E3-crh" firstAttribute="bottom" secondItem="KiS-ax-0Ef" secondAttribute="bottom" id="lnR-Oy-DGe"/>
-                            <constraint firstItem="dPm-KQ-DTa" firstAttribute="width" secondItem="91t-E3-crh" secondAttribute="width" multiplier="2.5" id="mHh-RT-jFI"/>
+                            <constraint firstItem="dPm-KQ-DTa" firstAttribute="width" secondItem="91t-E3-crh" secondAttribute="width" multiplier="3" id="mHh-RT-jFI"/>
                             <constraint firstItem="91t-E3-crh" firstAttribute="leading" secondItem="KiS-ax-0Ef" secondAttribute="leading" id="pXN-xw-bmg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KiS-ax-0Ef"/>

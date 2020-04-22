@@ -104,13 +104,14 @@ struct GoodsDataClass: Codable {
     let productEvaluate: [ProductEvaluate]
     let productModel: [ProductModel]
     let coupon: [Coupon]
+    let address: GoodsAddress
 
 
     enum CodingKeys: String, CodingKey {
         case product
         case productImage = "product_image"
         case productOptionGroup = "product_option_group"
-        case union
+        case union, address
         case productEvaluate = "product_evaluate"
         case productModel = "product_model"
         case coupon = "coupon"
@@ -158,6 +159,21 @@ struct Coupon: Codable {
         case productIDS = "product_ids"
         case created, modified
         case hasReceive = "has_receive"
+    }
+}
+
+// MARK: - Address
+struct GoodsAddress: Codable {
+    let id, customerID, name, telephone: String?
+    let address, detail, isDefault, created: String?
+    let modified: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case customerID = "customer_id"
+        case name, telephone, address, detail
+        case isDefault = "is_default"
+        case created, modified
     }
 }
 

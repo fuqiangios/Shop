@@ -23,7 +23,7 @@
                         <color key="backgroundColor" red="0.82672619819641113" green="0.33012539148330688" blue="0.2900891900062561" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nLt-KV-hNv">
-                        <rect key="frame" x="14" y="9" width="260" height="26"/>
+                        <rect key="frame" x="14" y="9" width="290" height="26"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="tintColor" red="0.35941465736040612" green="0.35941465736040612" blue="0.35941465736040612" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>

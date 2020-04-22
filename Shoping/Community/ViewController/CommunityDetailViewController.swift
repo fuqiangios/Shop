@@ -14,9 +14,13 @@ class CommunityDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "详情"
-        tableView.register(UINib(nibName: "AddNewCommunityInputTableViewCell", bundle: nil), forCellReuseIdentifier: "AddNewCommunityInputTableViewCell")
-        tableView.register(UINib(nibName: "AddNewCommunityImgTableViewCell", bundle: nil), forCellReuseIdentifier: "AddNewCommunityImgTableViewCell")
-        tableView.register(UINib(nibName: "AddNewCommunityTextTableViewCell", bundle: nil), forCellReuseIdentifier: "AddNewCommunityTextTableViewCell")
+        tableView.register(UINib(nibName: "CommunityDetailHeaderTableViewCell", bundle: nil), forCellReuseIdentifier: "CommunityDetailHeaderTableViewCell")
+        tableView.register(UINib(nibName: "CommunityDetailImgTableViewCell", bundle: nil), forCellReuseIdentifier: "CommunityDetailImgTableViewCell")
+        tableView.register(UINib(nibName: "CommunityDetailTextTableViewCell", bundle: nil), forCellReuseIdentifier: "CommunityDetailTextTableViewCell")
+
+        tableView.register(UINib(nibName: "CommunityDetailReadNumTableViewCell", bundle: nil), forCellReuseIdentifier: "CommunityDetailReadNumTableViewCell")
+        tableView.register(UINib(nibName: "CommunityTitleTableViewCell", bundle: nil), forCellReuseIdentifier: "CommunityTitleTableViewCell")
+        tableView.register(UINib(nibName: "CommunityEvaluateTableViewCell", bundle: nil), forCellReuseIdentifier: "CommunityEvaluateTableViewCell")
         tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = 150
@@ -31,10 +35,30 @@ extension CommunityDetailViewController: UITableViewDataSource, UITableViewDeleg
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "AddNewCommunityTextTableViewCell") as! AddNewCommunityTextTableViewCell
+        if indexPath.row == 0 {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CommunityDetailHeaderTableViewCell") as! CommunityDetailHeaderTableViewCell
         cell.selectionStyle = .none
         return cell
+        } else if indexPath.row <= 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CommunityDetailImgTableViewCell") as! CommunityDetailImgTableViewCell
+            cell.selectionStyle = .none
+            return cell
+        } else if indexPath.row == 1 + 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CommunityDetailTextTableViewCell") as! CommunityDetailTextTableViewCell
+            cell.selectionStyle = .none
+            return cell
+        } else if indexPath.row == 1 + 2 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CommunityDetailReadNumTableViewCell") as! CommunityDetailReadNumTableViewCell
+            cell.selectionStyle = .none
+            return cell
+        } else if indexPath.row == 1 + 3 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CommunityTitleTableViewCell") as! CommunityTitleTableViewCell
+            cell.selectionStyle = .none
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CommunityEvaluateTableViewCell") as! CommunityEvaluateTableViewCell
+            cell.selectionStyle = .none
+            return cell
+        }
     }
-
-
 }

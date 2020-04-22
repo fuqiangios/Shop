@@ -10,6 +10,7 @@ import UIKit
 
 class SelectedImageCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var name: UILabel!
     @IBOutlet weak var img: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()

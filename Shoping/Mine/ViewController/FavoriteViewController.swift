@@ -85,7 +85,7 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
         cell.img.af_setImage(withURL: URL(string: item?.image ?? "")!)
         }
         cell.name.text = item?.name
-        cell.info.text = item?.name
+        cell.info.text = item?.union_option_name
         cell.price.text = "￥\(item?.price ?? "")"
         var select = -1
         for index in 0..<selectIndex.count {

@@ -11,6 +11,7 @@ import UIKit
 class StoreTableViewCell: UITableViewCell {
     @IBOutlet weak var name: UILabel!
     
+    @IBOutlet weak var info: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

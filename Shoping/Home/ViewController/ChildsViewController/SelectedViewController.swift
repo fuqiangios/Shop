@@ -9,6 +9,7 @@
 import UIKit
 import ZLCollectionViewFlowLayout
 import AlamofireImage
+import FSPagerView
 
 let ScreenWidth  = UIScreen.main.bounds.width
 let ScreenHeight = UIScreen.main.bounds.height
@@ -61,7 +62,7 @@ class SelectedViewController: UIViewController {
 extension SelectedViewController: UICollectionViewDelegate, UICollectionViewDataSource, ZLCollectionViewBaseFlowLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
-            return 4
+            return data?.data.imageLabels.count ?? 0
         }
         return data?.data.labels[lablesIndex].product.count ?? 0
     }
@@ -75,23 +76,42 @@ extension SelectedViewController: UICollectionViewDelegate, UICollectionViewData
             let cell:GoodsListCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: goods, for: indexPath) as! GoodsListCollectionViewCell
             cell.goodsImg.af_setImage(withURL: URL(string: (data?.data.labels[lablesIndex].product[indexPath.item].image)!)!)
             cell.goodsName.text = data?.data.labels[lablesIndex].product[indexPath.item].name
-
+            cell.info.text = data?.data.labels[lablesIndex].product[indexPath.item].title
             cell.price.text = "￥" + (data?.data.labels[lablesIndex].product[indexPath.item].price ?? "0")
             return cell
         }
         let cell:SelectedImageCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifier, for: indexPath) as! SelectedImageCollectionViewCell
         if indexPath.section == 0 {
-            if indexPath.item == 0 {
-                cell.img.image = UIImage(named: "new")
-            } else if indexPath.item == 1 {
-                cell.img.image = UIImage(named: "Recommend")
-            } else if indexPath.item == 2 {
-                cell.img.image = UIImage(named: "food")
-            } else if indexPath.item == 3 {
-                cell.img.image = UIImage(named: "international")
-            } else {
-                cell.img.image = UIImage(named: "Live")
+            cell.name.text = data?.data.imageLabels[indexPath.item].name ?? ""
+            if data?.data.imageLabels[indexPath.item].image ?? "" != "" {
+            cell.img.af_setImage(withURL: URL(string: data?.data.imageLabels[indexPath.item].image ?? "")!)
             }
+//            if indexPath.item == 0 {
+//                cell.img.image = UIImage(named: "新品上新")
+//                if data?.data.imageLabels.count ?? 0 >= 1 {
+//                    cell.name.text = data?.data.imageLabels[0].name ?? ""
+//                }
+//            } else if indexPath.item == 1 {
+//                cell.img.image = UIImage(named: "Recommend")
+//                if data?.data.imageLabels.count ?? 0 >= 2 {
+//                    cell.name.text = data?.data.imageLabels[1].name ?? ""
+//                }
+//            } else if indexPath.item == 2 {
+//                cell.img.image = UIImage(named: "food")
+//                if data?.data.imageLabels.count ?? 0 >= 3 {
+//                    cell.name.text = data?.data.imageLabels[2].name ?? ""
+//                }
+//            } else if indexPath.item == 3 {
+//                cell.img.image = UIImage(named: "international")
+//                if data?.data.imageLabels.count ?? 0 >= 4 {
+//                    cell.name.text = data?.data.imageLabels[3].name ?? ""
+//                }
+//            } else {
+//                cell.img.image = UIImage(named: "Live")
+//                if data?.data.imageLabels.count ?? 0 >= 5 {
+//                    cell.name.text = data?.data.imageLabels[4].name ?? ""
+//                }
+//            }
         }
         return cell
     }
@@ -184,10 +204,29 @@ extension SelectedViewController: UICollectionViewDelegate, UICollectionViewData
                 if reusableview.typeScrollView.subviews.count < 3 {
                     setTypeScroView(scroView: reusableview.typeScrollView)
                 }
+                let fsPagerView = FSPagerView(frame: CGRect(x: 16, y: 0, width: view.frame.size.width - 32, height: 110))
+                  fsPagerView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: "bannerCell")
+                  fsPagerView.delegate = self
+                  fsPagerView.dataSource = self
+                  fsPagerView.isInfinite = true
+                  fsPagerView.backgroundColor = .white
+//                  fsPagerView.layer.cornerRadius = 10
+//                  fsPagerView.layer.masksToBounds = true
+                fsPagerView.tag = 999
+                  reusableview.addSubview(fsPagerView)
                 return reusableview
             } else if indexPath.section == 0 {
                 var reusableview:UICollectionReusableView!
                     reusableview = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerBannerIdentifier, for: indexPath) as! SelectedBannerCollectionReusableView
+                          let fsPagerView = FSPagerView(frame: CGRect(x: 15, y: 10, width: view.frame.size.width - 30, height: 165))
+                  fsPagerView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: "bannerCell")
+                  fsPagerView.delegate = self
+                  fsPagerView.dataSource = self
+                  fsPagerView.isInfinite = true
+                  fsPagerView.backgroundColor = .white
+                  fsPagerView.layer.cornerRadius = 10
+                  fsPagerView.layer.masksToBounds = true
+                  reusableview.addSubview(fsPagerView)
                 return reusableview
             } else if indexPath.section == 3 || indexPath.section == 4 {
                 var reusableview:SelectedMoreCollectionReusableView!
@@ -254,6 +293,28 @@ extension SelectedViewController: UICollectionViewDelegate, UICollectionViewData
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         didSelectCell?(indexPath)
+    }
+}
+extension SelectedViewController: FSPagerViewDataSource,FSPagerViewDelegate {
+    func numberOfItems(in pagerView: FSPagerView) -> Int {
+        if pagerView.tag == 999 {
+            return data?.data.advertMiddle.count ?? 0
+        }
+        return data?.data.advertTop.count ?? 0
+    }
+
+    func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
+        let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "bannerCell", at: index)
+        cell.backgroundColor = .white
+//        cell.imageView?.backgroundColor = UIColor.green
+//        cell.imageView?.layer.cornerRadius = 10
+//        cell.imageView?.layer.masksToBounds = true
+        if pagerView.tag == 999 {
+            cell.imageView?.af_setImage(withURL: URL(string: (data?.data.advertMiddle[index].image)!)!)
+        } else {
+        cell.imageView?.af_setImage(withURL: URL(string: (data?.data.advertTop[index].image)!)!)
+        }
+        return cell
     }
 }
 

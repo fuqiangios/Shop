@@ -75,6 +75,7 @@
                 <outlet property="backView" destination="haZ-g0-edg" id="qhb-On-4Dc"/>
                 <outlet property="goodsImg" destination="djZ-kB-AEq" id="kMV-QD-KX0"/>
                 <outlet property="goodsName" destination="Q85-FY-1zK" id="Eug-Ql-EbR"/>
+                <outlet property="info" destination="lFX-AG-FHH" id="EV0-uY-fDv"/>
                 <outlet property="price" destination="MNd-fq-FVW" id="cWk-4z-m8I"/>
             </connections>
             <point key="canvasLocation" x="263.768115942029" y="194.19642857142856"/>

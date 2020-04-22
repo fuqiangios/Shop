@@ -29,6 +29,7 @@ class SelectTypeViewController: UIViewController {
     var numCnt: Int = 1
     @IBOutlet weak var jia: UIButton!
     var didToBuy: ((String,String) -> Void)?
+    var didColse: ((String) -> Void)?
 
     @IBOutlet weak var numText: UITextField!
     @IBOutlet weak var jian: UIButton!
@@ -70,8 +71,8 @@ class SelectTypeViewController: UIViewController {
         topTagListView.selectedBorderColor = UIColor.lightColor
         topTagListView.textColor = UIColor.blackTextColor
         topTagListView.borderColor = UIColor.lightColor
-        topTagListView.selectedTextColor = .white
-        topTagListView.tagSelectedBackgroundColor = .red
+        topTagListView.selectedTextColor = .red
+        topTagListView.selectedBorderColor = .red
         topTagListView.tag = 909
 
         for item in data?.data.getProductOptionGroup()[0].productOption ?? [] {
@@ -89,8 +90,9 @@ class SelectTypeViewController: UIViewController {
         bottomTagListView.selectedBorderColor = UIColor.lightColor
         bottomTagListView.textColor = UIColor.blackTextColor
         bottomTagListView.borderColor = UIColor.lightColor
-        bottomTagListView.selectedTextColor = .white
-        bottomTagListView.tagSelectedBackgroundColor = .red
+        bottomTagListView.selectedTextColor = .red
+//        bottomTagListView.tagSelectedBackgroundColor = .red
+        bottomTagListView.selectedBorderColor = .red
         bottomTagListView.tag = 808
         for item in data?.data.getProductOptionGroup()[1].productOption ?? [] {
             bottomTagListView.addTag("\(item.name)")
@@ -103,6 +105,7 @@ class SelectTypeViewController: UIViewController {
     }
 
     @IBAction func close(_ sender: Any) {
+        didColse?("\(topTagSelectIndex ?? ""):\(bottomTagSelectIndex ?? "")")
         self.dismiss(animated: false, completion: nil)
     }
 
@@ -126,6 +129,15 @@ class SelectTypeViewController: UIViewController {
         self.navigationController?.pushViewController(login, animated: true)
             return
         }
+        for item in data?.data.union ?? [] {
+            if item.productUnion == "\(topTagSelectIndex ?? ""):\(bottomTagSelectIndex ?? "")" {
+                if Int(item.stock) ?? 0 <= 0 {
+                    CLProgressHUD.showError(in: view, delegate: self, title: "库存不足", duration: 1)
+                    return
+                }
+            }
+        }
+
         API.addCart(product_id: data?.data.product.id ?? "", quantity: "\(numCnt)", product_option_union_id: "\(topTagSelectIndex ?? ""):\(bottomTagSelectIndex ?? "")").request { (result) in
             switch result {
             case .success:
@@ -141,6 +153,14 @@ class SelectTypeViewController: UIViewController {
 
     
     @IBAction func goToBuy(_ sender: Any) {
+        for item in data?.data.union ?? [] {
+            if item.productUnion == "\(topTagSelectIndex ?? ""):\(bottomTagSelectIndex ?? "")" {
+                if Int(item.stock) ?? 0 <= 0 {
+                    CLProgressHUD.showError(in: view, delegate: self, title: "库存不足", duration: 1)
+                    return
+                }
+            }
+        }
         didToBuy?("\(numCnt)","\(topTagSelectIndex ?? ""):\(bottomTagSelectIndex ?? "")")
         self.dismiss(animated: true, completion: nil)
     }

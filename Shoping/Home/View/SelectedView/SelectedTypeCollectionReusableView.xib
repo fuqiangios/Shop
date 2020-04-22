@@ -22,7 +22,7 @@
                     <viewLayoutGuide key="contentLayoutGuide" id="DTu-xH-5IJ"/>
                     <viewLayoutGuide key="frameLayoutGuide" id="uVr-gq-yUr"/>
                 </scrollView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="品牌自营·荆条优选·正品保证·售后无忧" translatesAutoresizingMaskIntoConstraints="NO" id="Je2-hl-Vgx">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Je2-hl-Vgx">
                     <rect key="frame" x="16" y="0.0" width="288" height="70"/>
                 </imageView>
             </subviews>
@@ -43,7 +43,4 @@
             <point key="canvasLocation" x="137.68115942028987" y="177.12053571428569"/>
         </collectionReusableView>
     </objects>
-    <resources>
-        <image name="品牌自营·荆条优选·正品保证·售后无忧" width="375" height="100"/>
-    </resources>
 </document>

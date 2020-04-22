@@ -226,13 +226,16 @@ extension API {
         var path: String = "product/product_collection"
 
         let product_id: String
-        init(product_id: String) {
+        let product_option_union_id: String
+        init(product_id: String, product_option_union_id: String) {
             self.product_id = product_id
+            self.product_option_union_id = product_option_union_id
         }
 
         func parameters() -> [String: Any]? {
             return [
-                "product_id": product_id
+                "product_id": product_id,
+                "product_option_union_id": product_option_union_id
              ]
         }
     }
@@ -523,10 +526,11 @@ struct FavoriteListDatum: Codable {
     let image: String
     let price: String
     let count: Int
+    let union_option_name: String
 
     enum CodingKeys: String, CodingKey {
         case productID = "product_id"
-        case name, image, price, count
+        case name, image, price, count, union_option_name
     }
 }
 

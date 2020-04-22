@@ -20,7 +20,7 @@ class CreatOrderViewController: UIViewController {
     var order_type: String = ""
     var selectIndex: Int = -1
     var goodsNum: Double = 0.00
-    var data: [Datum] = []
+    var data: [Cart] = []
     var addressInfo:AddressDatum? = nil
     var payList: PayList? = nil
     var quantity: String? = nil
@@ -179,7 +179,7 @@ class CreatOrderViewController: UIViewController {
     func loadData() {
         var all: [String] = []
         for item in data {
-            all.append(item.id ?? "")
+            all.append(item.id)
         }
         API.orderSettlement(shopping_cart_ids: all, product_id: product_id, quantity: quantity, product_option_union_id: product_option_union_id).request { (result) in
             switch result {

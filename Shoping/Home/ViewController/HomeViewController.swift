@@ -9,19 +9,52 @@
 import UIKit
 import SnapKit
 import SwiftyJSON
+import CoreLocation
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var scrowView: UIScrollView!
     var data: Home? = nil
+    var shop = ""
+    var latitudeStr = 0.00
+    var longitudeStr = 0.00
+    var locationManager:CLLocationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.tintColor = .black
+        reLocationAction()
         setSearBar()
         setRightItem()
-        setLeftItem()
+//        setLeftItem()
+    }
+
+    func reLocationAction(){
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest//定位最佳
+        locationManager.distanceFilter = 500.0//更新距离
+        locationManager.requestWhenInUseAuthorization()
+        if (CLLocationManager.locationServicesEnabled()){
+            locationManager.startUpdatingLocation()
+            print("定位开始")
+        }
+    }
+    func locationManager(_ manager: CLLocationManager,
+
+                         didFinishDeferredUpdatesWithError error: Error?) {
+    }
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
+        let thelocations:NSArray = locations as NSArray
+        let location = thelocations.lastObject as! CLLocation
+        let latitude = location.coordinate.latitude
+        let longitude = location.coordinate.longitude
+        latitudeStr = latitude
+        longitudeStr = longitude
+        print(latitudeStr)
+        print(longitudeStr)
         loadData()
+        locationManager.stopUpdatingLocation()
     }
 
     func setRightItem() {
@@ -33,15 +66,26 @@ class HomeViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBtn)
     }
 
-    func setLeftItem() {
+    func setLeftItem(str: String) {
         let leftBtn = UIButton(type: .custom)
         leftBtn.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        leftBtn.setTitle("高新区门店高", for: .normal)
-        leftBtn.setImage(UIImage(named: "map-marker"), for: .normal)
+        leftBtn.setTitle(str, for: .normal)
+        leftBtn.setImage(UIImage(named: "定位"), for: .normal)
         leftBtn.setTitleColor(.black, for: .normal)
-        leftBtn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-
+        leftBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        leftBtn.addTarget(self, action: #selector(toShopList), for: .touchUpInside)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftBtn)
+    }
+
+    @objc func toShopList() {
+        let shoqp = StoreListViewController()
+        shoqp.hidesBottomBarWhenPushed = true
+        shoqp.shiop = shop
+        shoqp.didSelectAddress = { (shop) in
+            self.shop = shop
+            self.setLeftItem(str: shop)
+        }
+        self.navigationController?.pushViewController(shoqp, animated: true)
     }
 
     func setSearBar() {
@@ -165,10 +209,13 @@ class HomeViewController: UIViewController {
     }
 
     func loadData() {
-        API.homeData().request{ (result) in
+        API.homeData(longitude: "\(longitudeStr)", latitude: "\(latitudeStr)").request{ (result) in
             switch result {
             case .success(let home):
                 self.data = home
+
+                self.shop = "\(self.data?.data.shop.cityName ?? "") \(self.data?.data.shop.name ?? "")"
+                self.setLeftItem(str: self.shop)
                 self.setTypeSelectView()
             case .failure(let error):
                 self.setTypeSelectView()

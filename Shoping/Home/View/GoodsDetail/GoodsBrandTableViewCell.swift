@@ -9,7 +9,9 @@
 import UIKit
 
 class GoodsBrandTableViewCell: UITableViewCell {
-
+    @IBOutlet weak var info: UILabel!
+    
+    @IBOutlet weak var name: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

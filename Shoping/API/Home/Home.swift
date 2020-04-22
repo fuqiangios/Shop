@@ -12,8 +12,17 @@ extension API {
     struct homeData: Post {
         typealias Node = Home
         var path: String = "front/home"
-
-        init() {
+        let longitude: String
+        let latitude: String
+        init(longitude: String, latitude: String) {
+            self.latitude = latitude
+            self.longitude = longitude
+        }
+        func parameters() -> [String: Any]? {
+            return [
+                "latitude": latitude,
+                "longitude": longitude
+            ]
         }
     }
     struct homeCategoryData: Post {
@@ -62,6 +71,7 @@ struct DataClass: Codable {
     let advertTop, advertMiddle: [Advert]
     let imageLabels: [ImageLabel]
     let labels: [Label]
+    let shop: Shop
 
     enum CodingKeys: String, CodingKey {
         case category = "category"
@@ -69,6 +79,30 @@ struct DataClass: Codable {
         case advertMiddle = "advert_middle"
         case imageLabels = "image_labels"
         case labels = "labels"
+        case shop = "shop"
+    }
+}
+
+// MARK: - Shop
+struct Shop: Codable {
+    let id, name, code, regionID: String
+    let cityID, detail, telephone, openTime: String
+    let longitude, latitude, status, adminID: String
+    let created, modified, image: String
+    let distance: Int
+    let regionName, cityName: String
+
+    enum CodingKeys: String, CodingKey {
+        case id, name, code
+        case regionID = "region_id"
+        case cityID = "city_id"
+        case detail, telephone
+        case openTime = "open_time"
+        case longitude, latitude, status
+        case adminID = "admin_id"
+        case created, modified, image, distance
+        case regionName = "region_name"
+        case cityName = "city_name"
     }
 }
 
@@ -161,10 +195,10 @@ struct Label: Codable {
 struct Product: Codable {
     let id, name, price, oldPrice: String
     let image: String
-    let saleCnt, created: String
+    let saleCnt, created, title: String
 
     enum CodingKeys: String, CodingKey {
-        case id, name, price
+        case id, name, price, title
         case oldPrice = "old_price"
         case image
         case saleCnt = "sale_cnt"

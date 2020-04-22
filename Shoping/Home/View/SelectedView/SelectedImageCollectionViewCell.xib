@@ -17,14 +17,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="4d647f38c5a202bf1626b370694bb2c" translatesAutoresizingMaskIntoConstraints="NO" id="r36-lQ-CLb">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r36-lQ-CLb">
                         <rect key="frame" x="17" y="0.0" width="57" height="60"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6bh-0r-CRx">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6bh-0r-CRx">
                         <rect key="frame" x="0.0" y="63" width="90" height="21"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -34,11 +34,9 @@
             <size key="customSize" width="238" height="214"/>
             <connections>
                 <outlet property="img" destination="r36-lQ-CLb" id="sz4-LI-fSR"/>
+                <outlet property="name" destination="6bh-0r-CRx" id="1zP-gb-5UZ"/>
             </connections>
             <point key="canvasLocation" x="273.91304347826087" y="199.55357142857142"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="4d647f38c5a202bf1626b370694bb2c" width="375" height="185"/>
-    </resources>
 </document>

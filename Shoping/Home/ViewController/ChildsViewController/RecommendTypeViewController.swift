@@ -88,7 +88,7 @@ extension RecommendTypeViewController: UICollectionViewDelegate, UICollectionVie
         let cell:GoodsListCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifier, for: indexPath) as! GoodsListCollectionViewCell
         cell.goodsImg.af_setImage(withURL: URL(string: (data?.data.products[indexPath.item].image)!)!)
         cell.goodsName.text = data?.data.products[indexPath.item].name
-
+        cell.info.text = data?.data.products[indexPath.item].title
         cell.price.text = "￥" + (data?.data.products[indexPath.item].price ?? "0") + " ￥\(data?.data.products[indexPath.item].oldPrice ?? "0")"
         return cell
     }

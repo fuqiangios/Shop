@@ -21,10 +21,11 @@ class CartViewController: UIViewController {
     var product_id: String? = ""
     var quantity: String? = ""
     var product_option_union_id: String? = ""
-    
+    var status: Stats? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.isTranslucent = false
         setUp()
         setShadow(view: backView, sColor: UIColor.init(white: 0.8, alpha: 1), offset: CGSize(width: 0, height: 0), opacity: 1, radius: 5)
         setBotoomInfo()
@@ -44,9 +45,9 @@ class CartViewController: UIViewController {
 
 
     @objc func creatOrder() {
-        var selectData: [Datum] = []
+        var selectData: [Cart] = []
         for index in selectIndex {
-            if let item = data?.data[index - 1] {
+            if let item = data?.data.cart[index - 1] {
                 selectData.append(item)
             }
         }
@@ -73,16 +74,43 @@ class CartViewController: UIViewController {
     }
 
     @objc func selectAllBtn() {
-        if selectIndex.count == data?.data.count {
+        if selectIndex.count == data?.data.cart.count {
             selectIndex = []
+            var selectData: [String] = []
+            for item in data?.data.cart ?? [] {
+//                if let item = data?.data.cart[index - 1] {
+                    selectData.append(item.id)
+//                }
+            }
+            statusCart(str: "c", ids: selectData)
         } else {
             selectIndex = []
-            for index in 0..<(data?.data.count ?? 0) {
+            for index in 0..<(data?.data.cart.count ?? 0) {
                 selectIndex.append(index + 1)
             }
+            var selectData: [String] = []
+            for index in selectIndex {
+                if let item = data?.data.cart[index - 1] {
+                    selectData.append(item.id)
+                }
+            }
+            statusCart(str: "s", ids: selectData)
         }
         tableView.reloadData()
         setBotoomInfo()
+    }
+
+    func statusCart(str: String, ids: [String]) {
+        API.cartStatsChange(status: str, ids: ids).request { (result) in
+            switch result {
+            case .success(let data):
+                self.status = data.data.stats
+                self.tableView.reloadData()
+                self.setBotoomInfo()
+            case .failure(let er):
+                print(er)
+            }
+        }
     }
 
     func loadData() {
@@ -90,8 +118,31 @@ class CartViewController: UIViewController {
             switch result {
             case .success(let data):
                 self.data = data
-                self.heig.constant = CGFloat(156*data.data.count) + 50
+                self.status = data.data.stats
+                if data.data.cart.count == 0 {
+                    self.heig.constant = 0
+                    self.tableView.isHidden = true
+                } else {
+                    self.heig.constant = CGFloat(156*data.data.cart.count) + 50
+                    self.tableView.isHidden = false
+                }
                 self.tableView.reloadData()
+//                self.selectAllBtn()
+//                if self.selectIndex.count == 0 {
+//                    self.selectAllBtn()
+//                }
+
+                self.selectIndex = []
+                for index in 0..<(data.data.cart.count) {
+                    if data.data.cart[index].checkedFlag == "1" {
+                    self.selectIndex.append(index + 1)
+                    }
+                }
+//                if self.selectIndex.count == data.data.cart.count {
+                    self.setBotoomInfo()
+//                }
+
+
                 self.setShadow(view: self.tableView, sColor: UIColor.init(white: 0.8, alpha: 1), offset: CGSize(width: 0, height: 0), opacity: 1, radius: 5)
             case .failure(let error):
                 self.data = nil
@@ -106,7 +157,7 @@ class CartViewController: UIViewController {
 
 extension CartViewController: UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (data?.data.count != nil && data?.data.count ?? 0 > 0) ? (data?.data.count ?? 0) + 1 : 0
+        return (data?.data.cart.count != nil && data?.data.cart.count ?? 0 > 0) ? (data?.data.cart.count ?? 0) + 1 : 0
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -117,10 +168,22 @@ extension CartViewController: UITableViewDataSource,UITableViewDelegate {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CartHeaderTableViewCell") as! CartHeaderTableViewCell
             cell.selectionStyle = .none
+            if selectIndex.count == data?.data.cart.count {
+                cell.img.setImage(UIImage(named: "ic_gouwu"), for: .normal)
+            } else {
+                cell.img.setImage(UIImage(named: "ic_zhifu"), for: .normal)
+            }
+            cell.name.text = status?.feeMsgContent ?? ""
+            if status?.feeMsgContent ?? "" == "" {
+                cell.btn.isHidden = true
+            } else {
+                cell.btn.isHidden = false
+            }
+            cell.btn.addTarget(self, action: #selector(toCollectBills), for: .touchUpInside)
             return cell
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "CardListTableViewCell") as! CardListTableViewCell
-        let item = data?.data[indexPath.row - 1]
+        let item = data?.data.cart[indexPath.row - 1]
         cell.img.af_setImage(withURL: URL(string: item!.image)!)
         cell.name.text = item?.name
         cell.detail.text = item?.optionUnionName
@@ -147,6 +210,10 @@ extension CartViewController: UITableViewDataSource,UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            selectAllBtn()
+            return
+        }
         var select = -1
         for index in 0..<selectIndex.count {
             if indexPath.row == selectIndex[index] {
@@ -155,8 +222,10 @@ extension CartViewController: UITableViewDataSource,UITableViewDelegate {
         }
         if select < 0 {
             selectIndex.append(indexPath.row)
+            statusCart(str: "s", ids: [(data?.data.cart[indexPath.row - 1].id ?? "")])
         } else {
             selectIndex.remove(at: select)
+            statusCart(str: "c", ids: [data?.data.cart[indexPath.row - 1].id ?? ""])
         }
         tableView.reloadData()
         if indexPath.row != 0 {
@@ -166,8 +235,8 @@ extension CartViewController: UITableViewDataSource,UITableViewDelegate {
     }
 
     @objc func addNum(btn: UIButton) {
-        let id = data?.data[btn.tag].id ?? ""
-        let num = (Int(data?.data[btn.tag].quantity ?? "0") ?? 0) + 1
+        let id = data?.data.cart[btn.tag].id ?? ""
+        let num = (Int(data?.data.cart[btn.tag].quantity ?? "0") ?? 0) + 1
 
         API.cartNumChange(quantity: "\(num)", id: id).request { (result) in
             switch result {
@@ -182,8 +251,8 @@ extension CartViewController: UITableViewDataSource,UITableViewDelegate {
     }
 
     @objc func jianNum(btn: UIButton) {
-        let id = data?.data[btn.tag - 1000].id ?? ""
-        let num = (Int(data?.data[btn.tag].quantity ?? "0") ?? 0) - 1
+        let id = data?.data.cart[btn.tag - 1000].id ?? ""
+        let num = (Int(data?.data.cart[btn.tag - 1000].quantity ?? "0") ?? 0) - 1
         if num < 1 {
             return
         }
@@ -212,7 +281,7 @@ extension CartViewController: UITableViewDataSource,UITableViewDelegate {
     }
 
     func setBotoomInfo() {
-        if selectIndex.count == data?.data.count, data?.data.count != 0 {
+        if selectIndex.count == data?.data.cart.count, data?.data.cart.count != 0 {
             selectAll.setImage(UIImage(named: "ic_gouwu"), for: .normal)
         } else {
             selectAll.setImage(UIImage(named: "ic_zhifu"), for: .normal)
@@ -225,12 +294,18 @@ extension CartViewController: UITableViewDataSource,UITableViewDelegate {
         var numPrice:Double = 0.00
 
             for index in selectIndex {
-                let item = data?.data[index - 1]
+                let item = data?.data.cart[index - 1]
                 let price = Double(item?.price ?? "0")
                 let numCnt = Double(item?.quantity ?? "0")
                 let p = (price ?? 0.00)*(numCnt ?? 0.00)
                 numPrice = numPrice + p
             }
-        num.text = "合计:￥\(numPrice)"
+        num.text = "合计:￥\(status?.total ?? 0)"
+    }
+
+    @objc func toCollectBills() {
+        let collect = CartCollectBillsViewController()
+        collect.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(collect, animated: true)
     }
 }

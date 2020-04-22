@@ -34,6 +34,22 @@ extension API {
         }
     }
 
+    struct cartStatsChange: Post {
+        typealias Node = ChangeCart
+        var path: String = "product/change_cart"
+
+        let status: String
+        let ids: [String]
+        init(status: String, ids: [String]) {
+            self.status = status
+            self.ids = ids
+        }
+
+        func parameters() -> [String : Any]? {
+            return ["status": status, "ids": ids]
+        }
+    }
+
     struct payList: Post {
         typealias Node = PayList
         var path: String = "order/payment_list"
@@ -141,7 +157,46 @@ struct CartList: Codable {
     let result: Bool
     let message: String
     let status: Int
-    let data: [Datum]
+    let data: CartListDataClass
+}
+
+// MARK: - DataClass
+struct CartListDataClass: Codable {
+    let cart: [Cart]
+    let stats: Stats
+}
+
+// MARK: - Cart
+struct Cart: Codable {
+    let id, pCategoryID, categoryID, name: String
+    let image: String
+    let productID, productOptionUnionID, optionUnionName, weight: String
+    let price, quantity, shippingType, checkedFlag: String
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case pCategoryID = "p_category_id"
+        case categoryID = "category_id"
+        case name, image
+        case productID = "product_id"
+        case productOptionUnionID = "product_option_union_id"
+        case optionUnionName = "option_union_name"
+        case weight, price, quantity
+        case shippingType = "shipping_type"
+        case checkedFlag = "checked_flag"
+    }
+}
+
+// MARK: - Stats
+struct Stats: Codable {
+    let total, quantity: Int
+    let feeMsg, feeMsgContent: String
+
+    enum CodingKeys: String, CodingKey {
+        case total, quantity
+        case feeMsg = "fee_msg"
+        case feeMsgContent = "fee_msg_content"
+    }
 }
 
 struct CreatOrder: Codable {
@@ -219,7 +274,6 @@ struct Payment: Codable {
     }
 }
 
-
 // MARK: - OrderSettlement
 struct OrderSettlement: Codable {
     let result: Bool
@@ -235,14 +289,14 @@ struct SettleDataClass: Codable {
     let address: AddressDatum
     let shippingFee: String
     let coupons: [SettlementCoupon]
-    let stores: [Store]
+//    let stores: [Store]
 
     enum CodingKeys: String, CodingKey {
         case products
         case redPackage = "red_package"
         case address
         case shippingFee = "shipping_fee"
-        case coupons, stores
+        case coupons
     }
 }
 
@@ -284,3 +338,15 @@ struct Store: Codable {
     }
 }
 
+// MARK: - ChangeCart
+struct ChangeCart: Codable {
+    let result: Bool
+    let message: String
+    let status: Int
+    let data: ChangeCartDataClass
+}
+
+// MARK: - DataClass
+struct ChangeCartDataClass: Codable {
+    let stats: Stats
+}

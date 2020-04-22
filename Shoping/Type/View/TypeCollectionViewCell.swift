@@ -16,7 +16,7 @@ class TypeCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.contentView.backgroundColor = .white
-        setShadow(view: backGroundView, sColor: UIColor.init(white: 0.8, alpha: 1), offset: CGSize(width: 1, height: 1), opacity: 1, radius: 5)
+//        setShadow(view: backGroundView, sColor: UIColor.init(white: 0.8, alpha: 1), offset: CGSize(width: 1, height: 1), opacity: 1, radius: 5)
 
     }
     func setShadow(view:UIView,sColor:UIColor,offset:CGSize,
