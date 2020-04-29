@@ -11,6 +11,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FavoriteViewController" customModule="我家用品" customModuleProvider="target">
             <connections>
                 <outlet property="bottom" destination="KFO-r8-86y" id="Z1g-Qk-xME"/>
+                <outlet property="deleteBtn" destination="E0h-bc-Cj0" id="E8W-oF-j6v"/>
+                <outlet property="selectAllBtn" destination="aPe-xu-8yT" id="4nJ-CS-VA0"/>
                 <outlet property="tableView" destination="NFB-Qt-wKq" id="E6Z-y5-cxO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -36,7 +38,7 @@
                     <color key="backgroundColor" red="0.50694003809999999" green="0.50694003809999999" blue="0.50694003809999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <state key="normal" title="删除"/>
                     <connections>
-                        <action selector="delete:" destination="-1" eventType="touchUpInside" id="ZRo-5h-BJV"/>
+                        <action selector="deleteActionn:" destination="-1" eventType="touchUpInside" id="FoZ-An-ZcD"/>
                     </connections>
                 </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NFB-Qt-wKq">

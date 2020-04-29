@@ -9,7 +9,7 @@
 import UIKit
 import ZLCollectionViewFlowLayout
 
-class TypeViewController: UIViewController, ZLCollectionViewBaseFlowLayoutDelegate {
+class TypeViewController: UIViewController, ZLCollectionViewBaseFlowLayoutDelegate, UITextFieldDelegate {
     @IBOutlet weak var tableView: UITableView!
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -19,6 +19,8 @@ class TypeViewController: UIViewController, ZLCollectionViewBaseFlowLayoutDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isTranslucent = false
+        let itme = UIBarButtonItem.init(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = itme
 
         setSearBar()
 //                        if #available(iOS 11.0, *) {
@@ -50,6 +52,13 @@ class TypeViewController: UIViewController, ZLCollectionViewBaseFlowLayoutDelega
         collectionView?.register(UINib.init(nibName: "TypeCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "typecollection")
     }
 
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        let sera = GoodsSearViewController()
+        sera.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(sera, animated: true)
+        return textField.resignFirstResponder()
+    }
+
     func setSearBar() {
         let titleView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 60))
 
@@ -57,6 +66,7 @@ class TypeViewController: UIViewController, ZLCollectionViewBaseFlowLayoutDelega
 
         let seachText = UITextField(frame: CGRect(x: 20, y: 10, width: titleView.frame.size.width - 40, height: 40))
         seachText.placeholder = "  搜索产品名称"
+        seachText.delegate = self
         seachText.layer.cornerRadius = 20
         seachText.backgroundColor = UIColor.lightColor
         seachText.font = UIFont.PingFangSCLightFont16
@@ -143,6 +153,8 @@ extension TypeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let list = GoodsListViewController()
+        list.hidesBottomBarWhenPushed = true
+        list.title = data?.data[selectIndex].category[indexPath.row].name ?? ""
         list.category_id = data?.data[selectIndex].category[indexPath.row].id ?? ""
         self.navigationController?.pushViewController(list, animated: true)
     }

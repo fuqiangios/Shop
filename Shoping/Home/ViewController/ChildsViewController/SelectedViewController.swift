@@ -31,7 +31,7 @@ class SelectedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
 
     func setView(ehigth: Float)  {
@@ -301,6 +301,38 @@ extension SelectedViewController: FSPagerViewDataSource,FSPagerViewDelegate {
             return data?.data.advertMiddle.count ?? 0
         }
         return data?.data.advertTop.count ?? 0
+    }
+
+    func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
+        if pagerView.tag == 999 {
+            if data?.data.advertMiddle[index].type == "1" {
+                let web = WebViewController()
+                web.hidesBottomBarWhenPushed = true
+                web.title = data?.data.advertMiddle[index].name ?? ""
+                web.uri = data?.data.advertMiddle[index].content ?? "https://www.necesstore.com"
+                self.navigationController?.viewControllers.last?.navigationController?.pushViewController(web, animated: true)
+            } else {
+                    let list = GoodsListViewController()
+                    list.hidesBottomBarWhenPushed = true
+                list.title = data?.data.advertMiddle[index].name ?? ""
+                list.product_ids = data?.data.advertMiddle[index].productIDS ?? ""
+                self.navigationController?.viewControllers.last?.navigationController?.pushViewController(list, animated: true)
+            }
+        } else {
+        if data?.data.advertTop[index].type == "1" {
+            let web = WebViewController()
+            web.hidesBottomBarWhenPushed = true
+            web.title = data?.data.advertTop[index].name ?? ""
+            web.uri = data?.data.advertTop[index].content ?? "https://www.necesstore.com"
+            self.navigationController?.viewControllers.last?.navigationController?.pushViewController(web, animated: true)
+        } else {
+                let list = GoodsListViewController()
+                list.hidesBottomBarWhenPushed = true
+            list.title = data?.data.advertTop[index].name ?? ""
+            list.product_ids = data?.data.advertTop[index].productIDS ?? ""
+            self.navigationController?.viewControllers.last?.navigationController?.pushViewController(list, animated: true)
+        }
+        }
     }
 
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {

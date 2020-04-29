@@ -9,17 +9,48 @@
 import UIKit
 
 class MineViewController: UIViewController {
+    var data: MineInfo? = nil
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationController?.navigationBar.isTranslucent = false
+        let itme = UIBarButtonItem.init(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = itme
         setUp()
+        loadData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        loadData()
+    }
+
+    @objc func toMessage() {
+        let message = MessageViewController()
+        message.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(message, animated: true)
+    }
+
+    @objc func toBarCode() {
+        let pay = BarCodeViewController()
+        pay.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(pay, animated: true)
+    }
+
+    func loadData()  {
+        API.mineData().request { (result) in
+            switch result {
+            case .success(let data):
+                self.data = data
+                self.tableView.reloadData()
+            case .failure(let er):
+                self.data = nil
+                self.tableView.reloadData()
+                print(er)
+            }
+        }
     }
 
 
@@ -45,6 +76,12 @@ class MineViewController: UIViewController {
     }
 
     @objc func myprice(btn: UIButton) {
+        if UserSetting.default.activeUserToken == nil {
+        let login = LoginViewController()
+            login.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(login, animated: true)
+            return
+        }
         if btn.tag == 666 {
             let inte = IntegralViewController()
             inte.hidesBottomBarWhenPushed = true
@@ -65,6 +102,12 @@ class MineViewController: UIViewController {
     }
 
     @objc func toolAction(btn: UIButton) {
+        if UserSetting.default.activeUserToken == nil {
+        let login = LoginViewController()
+            login.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(login, animated: true)
+            return
+        }
         if btn.tag == 401 {
             let chong = BalanceChongViewController()
             chong.hidesBottomBarWhenPushed = true
@@ -99,7 +142,11 @@ class MineViewController: UIViewController {
             share.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(share, animated: true)
         } else if btn.tag == 602 {
-
+            let web = WebViewController()
+            web.uri = "https://app.necesstore.com/web/help"
+            web.title = "帮助中心"
+            web.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(web, animated: true)
         } else if btn.tag == 603 {
 
         } else if btn.tag == 604 {
@@ -123,10 +170,12 @@ extension MineViewController: UITableViewDataSource,UITableViewDelegate {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MineHeaderTableViewCell") as! MineHeaderTableViewCell
             cell.btn.addTarget(self, action: #selector(toAccount), for: .touchUpInside)
-//            cell.pointBtn.addTarget(self, action: #selector(myprice(btn:)), for: .touchUpInside)
-//            cell.redPackgBtn.addTarget(self, action: #selector(myprice(btn:)), for: .touchUpInside)
-//            cell.priceBtn.addTarget(self, action: #selector(myprice(btn:)), for: .touchUpInside)
-//            cell.discountBtn.addTarget(self, action: #selector(myprice(btn:)), for: .touchUpInside)
+            cell.name.text = data?.data.name ?? "点击登录"
+            if !(data?.data.image.isEmpty ?? true) {
+            cell.img.af_setImage(withURL: URL(string: data?.data.image ?? "")!)
+            }
+            cell.message.addTarget(self, action: #selector(toMessage), for: .touchUpInside)
+            cell.barCode.addTarget(self, action: #selector(toBarCode), for: .touchUpInside)
             cell.selectionStyle = .none
             return cell
         } else if indexPath.section == 1 {
@@ -150,6 +199,10 @@ extension MineViewController: UITableViewDataSource,UITableViewDelegate {
         } else if indexPath.section == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MineRedTableViewCell") as! MineRedTableViewCell
             cell.selectionStyle = .none
+            cell.point.setTitle(data?.data.shortPoints ?? "", for: .normal)
+            cell.redpackg.setTitle(data?.data.redPackage ?? "", for: .normal)
+            cell.price.setTitle(data?.data.amount ?? "", for: .normal)
+            cell.discount.setTitle("\(data?.data.couponCount ?? 0)", for: .normal)
                         cell.point.addTarget(self, action: #selector(myprice(btn:)), for: .touchUpInside)
                         cell.redpackg.addTarget(self, action: #selector(myprice(btn:)), for: .touchUpInside)
                         cell.price.addTarget(self, action: #selector(myprice(btn:)), for: .touchUpInside)
@@ -217,12 +270,24 @@ extension MineViewController: UITableViewDataSource,UITableViewDelegate {
     }
 
     @objc func toAccount() {
+        if UserSetting.default.activeUserToken?.isEmpty ?? true {
+            let login = LoginViewController()
+            login.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(login, animated: true)
+            return
+        }
         let account = AccountInfoViewController()
         account.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(account, animated: true)
     }
 
     @objc func runOrderVc(btn: UIButton) {
+        if UserSetting.default.activeUserToken == nil {
+        let login = LoginViewController()
+            login.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(login, animated: true)
+            return
+        }
 //        if btn.tag == 5 {
 //            let eva = EvaluateManagerViewController()
 //            eva.hidesBottomBarWhenPushed = true

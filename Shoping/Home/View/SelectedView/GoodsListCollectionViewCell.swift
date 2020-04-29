@@ -11,6 +11,7 @@ import UIKit
 class GoodsListCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var goodsImg: UIImageView!
     
+    @IBOutlet weak var addCart: UIButton!
     @IBOutlet weak var info: UILabel!
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var saleCount: UILabel!

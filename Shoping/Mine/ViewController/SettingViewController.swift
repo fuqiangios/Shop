@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class SettingViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
+    var size = 0.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         title = "设置"
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         tableView.register(UINib(nibName: "SettingTableViewCell", bundle: nil), forCellReuseIdentifier: "SettingTableViewCell")
@@ -23,6 +26,14 @@ class SettingViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
 //        tableView.backgroundColor = UIColor.tableviewBackgroundColor
         tableView.separatorStyle = .none
+        getCache()
+    }
+
+    func getCache() {
+        floderSizeAtPath { (size) in
+            self.size = Double(size)
+            self.tableView.reloadData()
+        }
     }
 }
 extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
@@ -43,7 +54,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
             cell.info.text = "去设置"
         } else if indexPath.row == 1 {
             cell.title.text = "清楚缓存"
-            cell.info.text = "290M"
+            cell.info.text =  String(format: "%.2fM", size)
         } else {
             cell.title.text = "关于我家用品"
             cell.info.text = ""
@@ -60,5 +71,93 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            let urlObj = URL(string:UIApplication.openSettingsURLString)
+             if #available(iOS 10.0, *) {
+                   UIApplication.shared.open(urlObj! as URL, options: [ : ], completionHandler: { Success in
 
+            })} else {
+                   UIApplication.shared.openURL(urlObj!)
+             }
+        } else if indexPath.row == 1 {
+            clearCache {
+                self.getCache()
+            }
+        } else if indexPath.row == 2 {
+
+        } else if indexPath.row == 3 {
+            UserSetting.default.activeUserToken = nil
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+    }
+    func  floderSizeAtPath(completion:@escaping (( _ fileSize:CGFloat)->Void)){
+        DispatchQueue.global().async {
+            var fileSize = CGFloat(0)
+            if let floderPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first {
+                let fineManager = FileManager.default
+                if fineManager.isExecutableFile(atPath: floderPath) {
+                    if let child = fineManager.subpaths(atPath: floderPath) {
+                        var size = CGFloat(0)
+                        for path in child {
+                            let subStr = "\(floderPath)/\(path)"
+                            let aSize =  self.fileSizeAtPath(filePath: subStr)
+                            size = size + aSize
+                        }
+                        let allSize = size/(1024 * 1024)
+                        fileSize = allSize
+                    }else{
+                        fileSize = CGFloat(0)
+                    }
+                }else {
+                    fileSize = CGFloat(0)
+                }
+            }else{
+                fileSize = CGFloat(0)
+            }
+            DispatchQueue.main.async {
+                completion(fileSize)
+            }
+        }
+    }
+    func fileSizeAtPath(filePath:String) -> CGFloat{
+        let manager = FileManager.default
+        if manager.isExecutableFile(atPath: filePath) {
+            return CGFloat(0)
+        }
+        if let dic:[FileAttributeKey : Any] = try? manager.attributesOfItem(atPath: filePath) as  [FileAttributeKey : Any] {
+            if let size =  dic[FileAttributeKey.size] as? Double {
+                return CGFloat(size)
+            }
+        }
+        return CGFloat(0)
+    }
+    func clearCache(completion:@escaping (()->Void)){
+        DispatchQueue.global().async {
+            if let floderPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first {
+                let fineManager = FileManager.default
+                if fineManager.isExecutableFile(atPath: floderPath) {
+                    if  let subpaths  =  try?fineManager.contentsOfDirectory(atPath:floderPath) {
+                        for subPath in subpaths {
+                            let filePath = "\(floderPath)/\(subPath)"
+                            try?fineManager.removeItem(atPath: filePath)
+                        }
+                    }
+                }
+            }
+            DispatchQueue.main.async {
+                completion()
+            }
+        }
+        let storage = HTTPCookieStorage.shared
+        if let cookies =  storage.cookies {
+            for cookie  in cookies {
+                storage.deleteCookie(cookie)
+            }
+        }
+        let urlCache = URLCache.shared
+        urlCache.removeAllCachedResponses()
+        urlCache.diskCapacity = 0
+        urlCache.memoryCapacity  = 0
+    }
 }

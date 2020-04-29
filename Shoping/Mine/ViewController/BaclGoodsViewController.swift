@@ -21,8 +21,13 @@ class BaclGoodsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         setUp()
         loadAftersale()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
     func setUp() {
@@ -135,6 +140,14 @@ extension BaclGoodsViewController: UITableViewDataSource,UITableViewDelegate {
         let add = AddBackGoodsViewController()
         add.order_id = data?.data[btn.tag-100].orderProductID ?? ""
         self.navigationController?.pushViewController(add, animated: true)
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if type == "2" {
+            let detail = BaclGoodsDetailViewController()
+            detail.id = data?.data[indexPath.row].aftersale_id ?? ""
+            self.navigationController?.pushViewController(detail, animated: true)
+        }
     }
 
 }

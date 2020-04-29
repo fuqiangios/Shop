@@ -25,7 +25,7 @@ class OrderFInshTableViewCell: UITableViewCell {
 
      func shadow() {
             bottomc.constant = 6
-            setShadow(view: backView, sColor: UIColor.init(white: 0.8, alpha: 1), offset: CGSize(width: 0, height: 0), opacity: 1, radius: 5)
+//            setShadow(view: backView, sColor: UIColor.init(white: 0.8, alpha: 1), offset: CGSize(width: 0, height: 0), opacity: 1, radius: 5)
             backView.layer.cornerRadius = 5
     }
 

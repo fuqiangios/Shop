@@ -83,7 +83,7 @@ class OederDetailViewController: UIViewController {
             leftBtn.layer.cornerRadius = 5
             leftBtn.layer.masksToBounds = true
             leftBtn.setTitleColor(.black, for: .normal)
-            leftBtn.setTitle("查看物流", for: .normal)
+            leftBtn.setTitle("", for: .normal)
 
             rightBtn.isHidden = false
             rightBtn.layer.borderColor = rightBtn.tintColor.cgColor
@@ -101,13 +101,13 @@ class OederDetailViewController: UIViewController {
             rightBtn.setTitleColor(.black, for: .normal)
             rightBtn.setTitle("删除", for: .normal)
 
-            leftBtn.isHidden = false
-//            rightBtn.layer.borderColor = rightBtn.tintColor.cgColor
-//            rightBtn.layer.borderWidth = 1
-//            rightBtn.layer.cornerRadius = 5
-//            rightBtn.layer.masksToBounds = true
-//            rightBtn.setTitle("评论", for: .normal)
-//            rightBtn.setTitleColor(rightBtn.tintColor, for: .normal)
+            leftBtn.isHidden = true
+//            leftBtn.layer.borderColor = rightBtn.tintColor.cgColor
+//            leftBtn.layer.borderWidth = 1
+//            leftBtn.layer.cornerRadius = 5
+//            leftBtn.layer.masksToBounds = true
+//            leftBtn.setTitle("评论", for: .normal)
+//            leftBtn.setTitleColor(rightBtn.tintColor, for: .normal)
         case 5:
             rightBtn.isHidden = false
             rightBtn.layer.borderColor = UIColor.black.cgColor
@@ -116,6 +116,13 @@ class OederDetailViewController: UIViewController {
             rightBtn.layer.masksToBounds = true
             rightBtn.setTitleColor(.black, for: .normal)
             rightBtn.setTitle("删除", for: .normal)
+                        leftBtn.isHidden = false
+            leftBtn.layer.borderColor = UIColor.black.cgColor
+                        leftBtn.layer.borderWidth = 1
+                        leftBtn.layer.cornerRadius = 5
+                        leftBtn.layer.masksToBounds = true
+                        leftBtn.setTitle("评论", for: .normal)
+            leftBtn.setTitleColor(.black, for: .normal)
         default:
             rightBtn.isHidden = false
             rightBtn.layer.borderColor = UIColor.black.cgColor
@@ -146,6 +153,9 @@ class OederDetailViewController: UIViewController {
             updateOrderStatus(id: order_id, type: "delete")
         } else if btn.titleLabel?.text == "查看物流" {
 
+        } else if btn.titleLabel?.text == "评论" {
+            let addeva = EvaluateManagerViewController()
+            self.navigationController?.pushViewController(addeva, animated: true)
         }
     }
 
@@ -162,6 +172,14 @@ extension OederDetailViewController:UITableViewDelegate,UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return data == nil ? 0 : 3
+    }
+
+    @objc func toeva(btn: UIButton) {
+        let tag = btn.tag - 9999 - 1
+        let addeva = AddEvaluateViewController()
+        let item = data?.data.products[tag]
+        addeva.eva = EvaluateDatum(productID: item?.productID ?? "", orderID: order_id, name: item?.name ?? "", image: item?.image ?? "", price: item?.price ?? "", quantity: item?.quantity ?? "", optionUnionName: item?.optionUnionName ?? "", user_name: "", user_image: "", created: "", content: "", product_evaluate_id: "", star: "", evaluate_image:[])
+        self.navigationController?.pushViewController(addeva, animated: true)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -209,6 +227,9 @@ extension OederDetailViewController:UITableViewDelegate,UITableViewDataSource {
             } else {
 //                cell.shadowsLeftRight()
             }
+            cell.evaluateBtn.isHidden = false
+            cell.evaluateBtn.tag = indexPath.row + 9999
+            cell.evaluateBtn.addTarget(self, action: #selector(toeva(btn:)), for: .touchUpInside)
            return cell
         } else {
             if indexPath.row == 0 {

@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GoodsListViewController" customModule="Shoping" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GoodsListViewController" customModule="我家用品" customModuleProvider="target">
             <connections>
-                <outlet property="tableView" destination="JEP-ZW-zyo" id="OAx-5D-pIr"/>
+                <outlet property="collectionView" destination="W6F-xf-uZg" id="lNb-83-kBF"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,68 +19,98 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JEP-ZW-zyo">
-                    <rect key="frame" x="0.0" y="50" width="414" height="812"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                </tableView>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KRw-7s-bSe">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KRw-7s-bSe" userLabel="top">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NHO-Qz-jRH">
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NHO-Qz-jRH">
                             <rect key="frame" x="0.0" y="0.0" width="103" height="50"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="tintColor" red="0.82672619820000004" green="0.33012539149999998" blue="0.29008919" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <state key="normal" title="综合">
-                                <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="titleColor" red="0.82672619820000004" green="0.33012539149999998" blue="0.29008919" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </state>
+                            <connections>
+                                <action selector="typeAction:" destination="-1" eventType="touchUpInside" id="mFv-cF-I7w"/>
+                            </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZJY-ID-Loh">
+                        <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZJY-ID-Loh">
                             <rect key="frame" x="103" y="1" width="103" height="49"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <color key="tintColor" red="0.82672619820000004" green="0.33012539149999998" blue="0.29008919" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <inset key="titleEdgeInsets" minX="-14" minY="0.0" maxX="18" maxY="0.0"/>
                             <inset key="imageEdgeInsets" minX="67" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="销量" image="ic_edit_disabled">
+                            <state key="normal" title="销量">
                                 <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                             </state>
+                            <connections>
+                                <action selector="typeAction:" destination="-1" eventType="touchUpInside" id="zAn-XK-A39"/>
+                            </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vg4-HH-XOg">
+                        <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vg4-HH-XOg">
                             <rect key="frame" x="206" y="1" width="103" height="49"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <color key="tintColor" red="0.82672619820000004" green="0.33012539149999998" blue="0.29008919" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <inset key="titleEdgeInsets" minX="-14" minY="0.0" maxX="18" maxY="0.0"/>
                             <inset key="imageEdgeInsets" minX="67" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="价格" image="ic_edit_disabled">
+                            <state key="normal" title="价格" image="价格升降序">
                                 <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                             </state>
+                            <connections>
+                                <action selector="typeAction:" destination="-1" eventType="touchUpInside" id="bHK-h6-roy"/>
+                            </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ml8-oO-0kC">
+                        <button opaque="NO" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ml8-oO-0kC">
                             <rect key="frame" x="309" y="0.0" width="105" height="50"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <color key="tintColor" red="0.82672619820000004" green="0.33012539149999998" blue="0.29008919" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <inset key="titleEdgeInsets" minX="-14" minY="0.0" maxX="18" maxY="0.0"/>
                             <inset key="imageEdgeInsets" minX="67" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="上新" image="ic_edit_disabled">
+                            <state key="normal" title="上新">
                                 <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                             </state>
+                            <connections>
+                                <action selector="typeAction:" destination="-1" eventType="touchUpInside" id="jYa-nU-NvA"/>
+                            </connections>
                         </button>
                     </subviews>
+                    <color key="backgroundColor" red="0.98040133714675903" green="0.98038023710250854" blue="0.98038440942764282" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="Z1s-JR-RXl"/>
+                    </constraints>
                 </view>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="W6F-xf-uZg">
+                    <rect key="frame" x="0.0" y="50" width="414" height="846"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6Vc-k0-VNX">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="JEP-ZW-zyo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="50" id="2CW-GB-38D"/>
-                <constraint firstItem="JEP-ZW-zyo" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="PN5-os-keI"/>
-                <constraint firstItem="JEP-ZW-zyo" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="ZhF-fP-wnI"/>
-                <constraint firstItem="JEP-ZW-zyo" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="wp1-0z-GRd"/>
+                <constraint firstItem="KRw-7s-bSe" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="3u4-w9-gWa"/>
+                <constraint firstItem="KRw-7s-bSe" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="7U1-dc-Sgf"/>
+                <constraint firstItem="W6F-xf-uZg" firstAttribute="top" secondItem="KRw-7s-bSe" secondAttribute="bottom" id="NqT-vy-CEX"/>
+                <constraint firstItem="KRw-7s-bSe" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="R0q-Jh-F5o"/>
+                <constraint firstItem="W6F-xf-uZg" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="p8p-24-Xt7"/>
+                <constraint firstItem="W6F-xf-uZg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ssf-m9-uxZ"/>
+                <constraint firstAttribute="bottom" secondItem="W6F-xf-uZg" secondAttribute="bottom" id="tQv-aX-PZg"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="137.68115942028987" y="150.66964285714286"/>
         </view>
     </objects>
     <resources>
-        <image name="ic_edit_disabled" width="13.5" height="13"/>
+        <image name="价格升降序" width="15" height="15"/>
     </resources>
 </document>

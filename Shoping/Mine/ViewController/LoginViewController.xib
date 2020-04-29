@@ -11,9 +11,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="我家用品" customModuleProvider="target">
             <connections>
                 <outlet property="backGroupView" destination="6Nc-sp-mBb" id="QgU-nl-8qf"/>
+                <outlet property="getCodeBtn" destination="Ue8-Z7-FNV" id="GAg-px-tKe"/>
                 <outlet property="loginBtn" destination="oEP-5w-6Ye" id="pgy-je-b74"/>
                 <outlet property="password" destination="MHu-b0-2Xo" id="yHS-zc-U6r"/>
                 <outlet property="phoneNumber" destination="9nh-5V-TfZ" id="QJt-NQ-7Bu"/>
+                <outlet property="typeBtn" destination="XFw-fw-eqe" id="gbA-R5-8QL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -29,8 +31,8 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="欢迎来到我家用品， 立即注册" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MoS-a9-TdP">
-                    <rect key="frame" x="20" y="179" width="312" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="欢迎来到我家用品， 立即" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MoS-a9-TdP">
+                    <rect key="frame" x="20" y="179" width="199" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
@@ -47,7 +49,7 @@
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MHu-b0-2Xo">
-                            <rect key="frame" x="0.0" y="145" width="374" height="40"/>
+                            <rect key="frame" x="0.0" y="145" width="244" height="40"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
                             <textInputTraits key="textInputTraits"/>
@@ -70,7 +72,7 @@
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oEP-5w-6Ye">
                             <rect key="frame" x="251" y="231" width="123" height="54"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.85826212170000005" green="0.17443221810000001" blue="0.16723364590000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                             <state key="normal" title="登录">
@@ -82,22 +84,55 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XFw-fw-eqe">
                             <rect key="frame" x="0.0" y="239" width="144" height="36"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                             <state key="normal" title="验证码登录">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
-                                <action selector="signUpAction:" destination="-1" eventType="touchUpInside" id="JiQ-CB-EXR"/>
+                                <action selector="typeAction:" destination="-1" eventType="touchUpInside" id="fEu-YF-Pw7"/>
+                            </connections>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ue8-Z7-FNV">
+                            <rect key="frame" x="276" y="150" width="90" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <state key="normal" title="获取验证码">
+                                <color key="titleColor" red="0.83832293749999998" green="0.32614514230000002" blue="0.29008656739999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </state>
+                            <connections>
+                                <action selector="getCodeAction:" destination="-1" eventType="touchUpInside" id="xcu-JF-AEa"/>
                             </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.9766271710395813" green="0.98030871152877808" blue="0.98430734872817993" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XfR-0U-6Ip">
+                    <rect key="frame" x="216" y="172" width="35" height="33"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="注册">
+                        <color key="titleColor" red="0.88491803410000003" green="0.3458198905" blue="0.305765599" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </state>
+                    <connections>
+                        <action selector="signUpAction:" destination="-1" eventType="touchUpInside" id="7Q7-f6-6TM"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UtL-sc-GWd">
+                    <rect key="frame" x="20" y="44" width="24" height="24"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="back"/>
+                    <connections>
+                        <action selector="backAction:" destination="-1" eventType="touchUpInside" id="1Tz-sc-Oq9"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.9766271710395813" green="0.98030871152877808" blue="0.98430734872817993" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="136.23188405797103" y="115.84821428571428"/>
         </view>
     </objects>
+    <resources>
+        <image name="back" width="24" height="24"/>
+    </resources>
 </document>

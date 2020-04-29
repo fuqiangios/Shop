@@ -11,15 +11,26 @@ import UIKit
 class LoginViewController: UIViewController {
     @IBOutlet weak var backGroupView: UIView!
 
+    @IBOutlet weak var getCodeBtn: UIButton!
+    @IBOutlet weak var typeBtn: UIButton!
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var phoneNumber: UITextField!
 
     @IBOutlet weak var password: UITextField!
+    var type = "1"
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setShadow(view: backGroupView, sColor: UIColor.init(white: 0.8, alpha: 1), offset: CGSize(width: 1, height: 1), opacity: 1, radius: 5)
         loginBtn.layer.cornerRadius = 54/2
         loginBtn.layer.masksToBounds = true
+        if type == "2" {
+        setUpUI()
+        }
+    }
+
+    func setUpUI() {
+        getCodeBtn.isHidden = false
+        password.placeholder = "请输入验证码"
+        typeBtn.setTitle("密码登录", for: .normal)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -30,6 +41,63 @@ class LoginViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
+    @IBAction func typeAction(_ sender: Any) {
+        if type == "2" {
+            self.navigationController?.popViewController(animated: true)
+            return
+        }
+        let login = LoginViewController()
+        login.type = "2"
+        self.navigationController?.pushViewController(login, animated: true)
+    }
+
+    @IBAction func getCodeAction(_ sender: UIButton) {
+        if phoneNumber.text?.count == 11 {
+            API.getCode(telephone: phoneNumber.text ?? "").request { (result) in
+                switch result {
+                case .success:
+                    print("success")
+                    self.timeChange(btn: sender)
+                case .failure(let error):
+                    print(error)
+                    print(error.self)
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+
+    func timeChange(btn: UIButton) {
+
+            var time = 120
+            let codeTimer = DispatchSource.makeTimerSource(flags: .init(rawValue: 0), queue: DispatchQueue.global())
+            codeTimer.schedule(deadline: .now(), repeating: .milliseconds(1000))  //此处方法与Swift 3.0 不同
+            codeTimer.setEventHandler {
+
+                time = time - 1
+
+                DispatchQueue.main.async {
+                    btn.isEnabled = false
+                }
+
+                if time < 0 {
+                    codeTimer.cancel()
+                    DispatchQueue.main.async {
+                        btn.isEnabled = true
+                        btn.setTitle("重新发送", for: .normal)
+                    }
+                    return
+                }
+
+                DispatchQueue.main.async {
+                    btn.setTitle("\(time)", for: .normal)
+                }
+
+            }
+
+            codeTimer.activate()
+
+    }
     func setShadow(view:UIView,sColor:UIColor,offset:CGSize,
                    opacity:Float,radius:CGFloat) {
         //设置阴影颜色
@@ -47,16 +115,20 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginAction(_ sender: Any) {
-        API.login(telephone: phoneNumber.text, login_type: "1", email: nil, password: password.text, wx_openid: nil, name: nil, image: nil).request { (result) in
+        API.login(telephone: phoneNumber.text, login_type: type, email: nil, password: password.text, wx_openid: password.text ?? "", name: nil, image: nil).request { (result) in
             switch result {
             case .success(let token):
                 UserSetting.default.activeUserToken = token.data.user_token
-                self.navigationController?.popViewController(animated: true)
+                self.navigationController?.popToRootViewController(animated: true)
             case .failure(let error):
                 print(error)
                 print(error.self)
                 print(error.localizedDescription)
             }
         }
+    }
+
+    @IBAction func backAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
 }

@@ -190,12 +190,14 @@ struct GoodsProduct: Codable {
     let returncontent: String
     let shippingcontent: String
     let recommendcontent: String
+    let evaluate_good_per: String?
+    let evaluate_count: Int?
 
     enum CodingKeys: String, CodingKey {
         case id, name, code
         case pCategoryID = "p_category_id"
         case categoryID = "category_id"
-        case price
+        case price, evaluate_good_per, evaluate_count
         case recommendcontent = "recommend_content"
         case shippingcontent = "shipping_content"
         case returncontent = "return_content"
@@ -306,6 +308,7 @@ struct AddCart: Codable {
 struct AddCartDataClass: Codable {
     let id, productID, customerID, productOptionUnionID, optionUnionName: String?
     let weight, price: String?
+    let stats: CollectStats
 
     enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -313,6 +316,6 @@ struct AddCartDataClass: Codable {
         case customerID = "customer_id"
         case productOptionUnionID = "product_option_union_id"
         case optionUnionName = "option_union_name"
-        case weight, price
+        case weight, price, stats
     }
 }

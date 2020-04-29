@@ -11,22 +11,38 @@ import SnapKit
 import SwiftyJSON
 import CoreLocation
 
-class HomeViewController: UIViewController, CLLocationManagerDelegate {
+class HomeViewController: UIViewController,UITextFieldDelegate, CLLocationManagerDelegate {
     @IBOutlet weak var scrowView: UIScrollView!
     var data: Home? = nil
     var shop = ""
     var latitudeStr = 0.00
     var longitudeStr = 0.00
+    var isload = false
     var locationManager:CLLocationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.tintColor = .black
+//        title = ""
+        navigationItem.title = ""
+        let itme = UIBarButtonItem.init(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = itme
         reLocationAction()
         setSearBar()
         setRightItem()
 //        setLeftItem()
+    }
+
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+
+
+    }
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        let sera = GoodsSearViewController()
+        sera.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(sera, animated: true)
+        return textField.resignFirstResponder()
     }
 
     func reLocationAction(){
@@ -53,6 +69,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
         longitudeStr = longitude
         print(latitudeStr)
         print(longitudeStr)
+        locationManager.stopUpdatingLocation()
         loadData()
         locationManager.stopUpdatingLocation()
     }
@@ -60,10 +77,17 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     func setRightItem() {
         let rightBtn = UIButton(type: .custom)
         rightBtn.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        rightBtn.setImage(UIImage(named: "Oval_normal"), for: .normal)
+        rightBtn.setImage(UIImage(named: "消息"), for: .normal)
         rightBtn.contentHorizontalAlignment = .right
+        rightBtn.addTarget(self, action: #selector(toMessage), for: .touchUpInside)
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBtn)
+    }
+
+    @objc func toMessage() {
+        let message = MessageViewController()
+        message.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(message, animated: true)
     }
 
     func setLeftItem(str: String) {
@@ -90,12 +114,13 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
 
     func setSearBar() {
         let titleView = UIView(frame: CGRect(x: 16, y: 10, width: view.frame.width - 32, height: 40))
-        titleView.layer.cornerRadius = 10
+        titleView.layer.cornerRadius = 20
         titleView.backgroundColor = UIColor.lightColor
 
         let seachText = UITextField(frame: CGRect(x: 10, y: 0, width: titleView.frame.size.width, height: 40))
         seachText.placeholder = "搜索产品名称"
         seachText.font = UIFont.PingFangSCLightFont16
+        seachText.delegate = self
         titleView.addSubview(seachText)
 
         view.addSubview(titleView)
@@ -103,6 +128,8 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
     }
 
     func setTypeSelectView() {
+        if isload {return}
+        isload = true
         let typeSelectView = UIScrollView(frame: CGRect(x: 0, y: 60, width: self.view.frame.width, height: 40))
         let types = data?.data.category ?? []
         for index in 0...types.count{
@@ -180,6 +207,9 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate {
                         return
                     }
                     let goodsList = GoodsListViewController()
+                    goodsList.hidesBottomBarWhenPushed = true
+                    goodsList.title = self?.data?.data.imageLabels[indexPath.item].name ?? ""
+                    goodsList.label_code = self?.data?.data.imageLabels[indexPath.item].code ?? ""
                     self?.navigationController?.pushViewController(goodsList, animated: true)
                 }
                 self.addChild(selected)

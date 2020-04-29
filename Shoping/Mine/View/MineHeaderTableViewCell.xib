@@ -20,17 +20,18 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fzr-bL-EQn">
                         <rect key="frame" x="0.0" y="0.0" width="365" height="150"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="优惠券底色" translatesAutoresizingMaskIntoConstraints="NO" id="8wL-pH-IuB">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="8wL-pH-IuB">
                                 <rect key="frame" x="0.0" y="0.0" width="365" height="151"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4d647f38c5a202bf1626b370694bb2c" translatesAutoresizingMaskIntoConstraints="NO" id="vmn-ZN-bge">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="vmn-ZN-bge">
                                 <rect key="frame" x="16" y="65" width="70" height="70"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="70" id="62E-k4-YGK"/>
                                     <constraint firstAttribute="height" constant="70" id="cAp-Do-tr8"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="用户昵称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ilo-fO-QpG">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="点击登录" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ilo-fO-QpG">
                                 <rect key="frame" x="94" y="90" width="244" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="jCp-ey-67M"/>
@@ -39,20 +40,16 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="aO9-oR-AhG">
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="aO9-oR-AhG">
                                 <rect key="frame" x="264" y="56" width="84.5" height="22"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LY7-5S-zSn">
-                                        <rect key="frame" x="0.0" y="0.0" width="17" height="22"/>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LY7-5S-zSn">
+                                        <rect key="frame" x="0.0" y="0.0" width="58.5" height="22"/>
                                         <state key="normal" image="ic_code_normal"/>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Md-Pq-T34">
-                                        <rect key="frame" x="34" y="0.0" width="18.5" height="22"/>
-                                        <state key="normal" image="ic_tool_normal"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k8K-k4-eX0">
-                                        <rect key="frame" x="69.5" y="0.0" width="15" height="22"/>
-                                        <state key="normal" image="通知@3x"/>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k8K-k4-eX0">
+                                        <rect key="frame" x="60.5" y="0.0" width="24" height="22"/>
+                                        <state key="normal" image="消息-1"/>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -91,18 +88,19 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="barCode" destination="LY7-5S-zSn" id="UHs-i2-24F"/>
                 <outlet property="btn" destination="zse-6Q-Wf4" id="QLr-8C-lL1"/>
                 <outlet property="img" destination="vmn-ZN-bge" id="yH3-Vu-PeC"/>
+                <outlet property="message" destination="k8K-k4-eX0" id="DB5-xD-RGR"/>
                 <outlet property="name" destination="ilo-fO-QpG" id="LJh-UG-BMI"/>
             </connections>
             <point key="canvasLocation" x="170.28985507246378" y="164.73214285714286"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="4d647f38c5a202bf1626b370694bb2c" width="375" height="185"/>
+        <image name="bg" width="375" height="152.5"/>
         <image name="ic_code_normal" width="17" height="14"/>
-        <image name="ic_tool_normal" width="18.5" height="18.5"/>
-        <image name="优惠券底色" width="351" height="94"/>
-        <image name="通知@3x" width="15" height="18"/>
+        <image name="logo" width="180" height="91.5"/>
+        <image name="消息-1" width="24" height="24"/>
     </resources>
 </document>

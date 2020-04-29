@@ -22,7 +22,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dOE-Qe-haf">
-                    <rect key="frame" x="20" y="282" width="374" height="103"/>
+                    <rect key="frame" x="20" y="297" width="374" height="103"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="充值金额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kix-ev-Kry">
                             <rect key="frame" x="13" y="8" width="70" height="21"/>
@@ -42,7 +42,7 @@
                             <rect key="frame" x="39" y="49" width="164" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="33"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                         </textField>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -51,7 +51,7 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="充值" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BZN-DV-Re0">
-                    <rect key="frame" x="20" y="99" width="35" height="21"/>
+                    <rect key="frame" x="20" y="114" width="35" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="7ea-vY-Jtg"/>
                     </constraints>
@@ -60,14 +60,14 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UNu-hP-ajd">
-                    <rect key="frame" x="20" y="139" width="374" height="120"/>
+                    <rect key="frame" x="20" y="154" width="374" height="120"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="120" id="k3O-On-xel"/>
                     </constraints>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M9Y-zY-L7x">
-                    <rect key="frame" x="20" y="435" width="374" height="50"/>
+                    <rect key="frame" x="20" y="450" width="374" height="50"/>
                     <color key="backgroundColor" red="0.82672619820000004" green="0.33012539149999998" blue="0.29008919" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="WDy-eQ-SAk"/>
@@ -80,7 +80,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d4z-Uv-tV0">
-                    <rect key="frame" x="20" y="128" width="0.0" height="21"/>
+                    <rect key="frame" x="20" y="143" width="0.0" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="s3m-R7-fm6"/>
                     </constraints>
@@ -89,7 +89,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBG-2G-J8h">
-                    <rect key="frame" x="20" y="44" width="35" height="28"/>
+                    <rect key="frame" x="20" y="59" width="35" height="28"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="35" id="CEf-Rc-Nq3"/>
                         <constraint firstAttribute="height" constant="28" id="WAn-3w-XxH"/>
@@ -102,7 +102,7 @@
             </subviews>
             <color key="backgroundColor" red="0.95295017957687378" green="0.95292967557907104" blue="0.95293372869491577" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
-                <constraint firstItem="YBG-2G-J8h" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="7af-DQ-l1n"/>
+                <constraint firstItem="YBG-2G-J8h" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="15" id="7af-DQ-l1n"/>
                 <constraint firstItem="dOE-Qe-haf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="CEW-bn-F4l"/>
                 <constraint firstItem="YBG-2G-J8h" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="IUP-4l-Q67"/>
                 <constraint firstItem="BZN-DV-Re0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="NAC-6q-GNp"/>

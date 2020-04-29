@@ -40,7 +40,7 @@
                                         <rect key="frame" x="95" y="66" width="185" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" red="0.82672619820000004" green="0.33012539149999998" blue="0.29008919" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -68,7 +68,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="分属归类" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnb-au-Sor">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="上架时间" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnb-au-Sor">
                                 <rect key="frame" x="10" y="134" width="62" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
@@ -101,6 +101,13 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="category" destination="6qB-Ii-ohB" id="uzM-GC-I8I"/>
+                <outlet property="date" destination="TCZ-Hq-Xt0" id="F6r-gD-yEO"/>
+                <outlet property="img" destination="SHl-cw-lmg" id="3bF-9a-C4b"/>
+                <outlet property="info" destination="xLw-Yb-Ucb" id="CEC-av-xfK"/>
+                <outlet property="name" destination="D07-gl-HC1" id="pCf-Ff-YQZ"/>
+            </connections>
             <point key="canvasLocation" x="137.68115942028987" y="173.10267857142856"/>
         </tableViewCell>
     </objects>

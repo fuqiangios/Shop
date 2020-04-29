@@ -12,6 +12,8 @@ class AddEvaluateGoodsTableViewCell: UITableViewCell {
     @IBOutlet weak var img: UIImageView!
     @IBOutlet weak var name: UILabel!
     
+    @IBOutlet weak var info: UILabel!
+    @IBOutlet weak var price: UILabel!
     @IBOutlet weak var star: StarEvaluateView!
     override func awakeFromNib() {
         super.awakeFromNib()

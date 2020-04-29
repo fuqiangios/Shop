@@ -22,14 +22,11 @@ class OrderPayViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        title = "待支付"
         setUp()
         loadPayListData()
     }
 
-    @IBAction func backAction(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
-    }
     func setUp() {
         tableVIew.register(UINib(nibName: "OrderPayTableViewCell", bundle: nil), forCellReuseIdentifier: "OrderPayTableViewCell")
         tableVIew.delegate = self
@@ -42,17 +39,49 @@ class OrderPayViewController: UIViewController {
     }
 
     @objc func amountPay() {
-        API.orderPay(order_id: order_id, payment_pfn: payList?.data.payment[selectIndex].pfn ?? "", payment_method: payList?.data.payment[selectIndex].name ?? "").request { (result) in
+        API.getOrderPay(order_id: order_id, payment_pfn: payList?.data.payment[selectIndex].pfn ?? "").request { (result) in
             switch result {
-                case .success:
-                    print("success")
+            case .success(let data):
+                if self.payList?.data.payment[self.selectIndex].pfn ?? "" == "Amount" {
                     self.navigationController?.popViewController(animated: true)
-                case .failure(let error):
-                    print(error)
-                    print(error.self)
-                    print(error.localizedDescription)
+                } else if self.payList?.data.payment[self.selectIndex].pfn ?? "" == "WeChatPay" {
+
+                } else {
+                    self.aliPay(str: data.data.plugin)
+                }
+                print(data)
+            case .failure(let er):
+                print(er)
             }
         }
+    }
+
+    func wechatPay() {
+        let req = PayReq()
+        req.nonceStr = ""
+        req.partnerId = ""
+        req.prepayId = ""
+        req.timeStamp =  200000
+        req.package = ""
+        req.sign = ""
+        WXApi.send(req) { (item) in
+            print(item)
+            if item {
+                CLProgressHUD.showSuccess(in: self.view, delegate: self, title: "充值成功", duration: 2)
+            } else {
+                CLProgressHUD.showError(in: self.view, delegate: self, title: "充值失败，请重试", duration: 2)
+            }
+        }
+    }
+
+    func aliPay(str: String) {
+        AlipaySDK.defaultService()?.payOrder(str, fromScheme: "wojiayoupin", callback: { (reslt) in
+            if reslt!["resultStatus"]as! String == "9000" {
+                self.navigationController?.popViewController(animated: true)
+            } else {
+                CLProgressHUD.showError(in: self.view, delegate: self, title: "支付失败，请重试", duration: 2)
+            }
+        })
     }
 
     func loadPayListData() {
@@ -86,6 +115,7 @@ extension OrderPayViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             cell.selectImg.image = UIImage(named: "ic_ellipse")
         }
+        cell.contentView.backgroundColor = .white
         cell.selectionStyle = .none
         return cell
     }

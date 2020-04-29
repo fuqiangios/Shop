@@ -134,6 +134,11 @@ class GoodsDeatilViewController: UIViewController {
     }
 
     @objc func favoriteAction() {
+        if UserSetting.default.activeUserToken == nil {
+        let login = LoginViewController()
+        self.navigationController?.pushViewController(login, animated: true)
+            return
+        }
         API.favorite(product_id: data?.data.product.id ?? "", product_option_union_id: option).request { (result) in
             switch result {
             case .success(let data):
@@ -155,7 +160,6 @@ class GoodsDeatilViewController: UIViewController {
         self.navigationController?.pushViewController(login, animated: true)
             return
         }
-
         let type = SelectTypeViewController()
         type.modalPresentationStyle = .custom
         type.data = data
@@ -213,6 +217,7 @@ extension GoodsDeatilViewController: UITableViewDelegate,UITableViewDataSource {
             cell.name.text = data?.data.product.name
             cell.shippingContent.text = "  \(data?.data.product.shippingcontent ?? "") "
             cell.xiao.text = data?.data.product.saleCnt ?? ""
+            cell.hao.text = "\(data?.data.product.evaluate_good_per ?? "")"
             cell.selectionStyle = .none
             return cell
         }else if indexPath.section == 1 {
@@ -248,6 +253,8 @@ extension GoodsDeatilViewController: UITableViewDelegate,UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "GoodsEvaluateHeaderTableViewCell") as! GoodsEvaluateHeaderTableViewCell
                 cell.accessoryType = .disclosureIndicator
                 cell.getMoreBtn.addTarget(self, action: #selector(runEvaluateList), for: .touchUpInside)
+                cell.lv.text = "\(data?.data.product.evaluate_good_per ?? "")"
+                cell.count.text = "用户评价(\(data?.data.product.evaluate_count ?? 0))"
                 cell.selectionStyle = .none
             return cell
             } else {

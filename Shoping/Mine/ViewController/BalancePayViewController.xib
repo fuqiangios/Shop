@@ -10,6 +10,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BalancePayViewController" customModule="我家用品" customModuleProvider="target">
             <connections>
+                <outlet property="btn" destination="raG-TA-j4c" id="RaP-rM-HUw"/>
+                <outlet property="hei" destination="evz-3K-4n7" id="eM4-71-7Gf"/>
+                <outlet property="input" destination="imz-0d-3CE" id="oDj-A9-stT"/>
+                <outlet property="point" destination="Nco-vK-R3h" id="zeC-RB-DkI"/>
+                <outlet property="pointUnt" destination="MVU-1a-iXU" id="bZI-bh-WPX"/>
+                <outlet property="selectAll" destination="0Za-nO-rsQ" id="XpW-u5-i4K"/>
+                <outlet property="tableView" destination="7k4-JS-qxF" id="Sef-QM-IHB"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -33,7 +40,7 @@
                     </constraints>
                     <state key="normal" image="back"/>
                     <connections>
-                        <action selector="baxk:" destination="-1" eventType="touchUpInside" id="I7t-IV-jcv"/>
+                        <action selector="bbackAction:" destination="-1" eventType="touchUpInside" id="3X2-n6-1Lo"/>
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今日已提现 0 元" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MVU-1a-iXU">
@@ -63,6 +70,9 @@
                     <state key="normal" title="立即提现">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
+                    <connections>
+                        <action selector="payAction:" destination="-1" eventType="touchUpInside" id="rnW-Qz-ZP9"/>
+                    </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RWw-sa-Bm4">
                     <rect key="frame" x="20" y="304" width="374" height="142"/>
@@ -85,7 +95,7 @@
                             <rect key="frame" x="39" y="49" width="164" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="33"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                         </textField>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ow-xk-sZW">
                             <rect key="frame" x="8" y="91" width="358" height="1"/>
@@ -103,7 +113,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nco-vK-R3h">
-                            <rect key="frame" x="104" y="109" width="78" height="21"/>
+                            <rect key="frame" x="104" y="109" width="141" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.82672619820000004" green="0.33012539149999998" blue="0.29008919" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -111,10 +121,13 @@
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Za-nO-rsQ">
                             <rect key="frame" x="299" y="100" width="62" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="全部提现">
                                 <color key="titleColor" red="0.82672619820000004" green="0.33012539149999998" blue="0.29008919" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </state>
+                            <connections>
+                                <action selector="allAction:" destination="-1" eventType="touchUpInside" id="9Je-hv-qyM"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -123,11 +136,11 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="提现" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LXw-IT-KSF">
-                    <rect key="frame" x="20" y="107" width="35" height="21"/>
+                    <rect key="frame" x="20" y="107" width="49" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="neM-R0-lF3"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>

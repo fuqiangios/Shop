@@ -9,7 +9,12 @@
 import UIKit
 
 class RetrospecStoreTableViewCell: UITableViewCell {
-
+    @IBOutlet weak var name: UILabel!
+    
+    @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var inPName: UILabel!
+    @IBOutlet weak var inNum: UILabel!
+    @IBOutlet weak var inName: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

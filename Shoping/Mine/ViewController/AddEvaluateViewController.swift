@@ -22,10 +22,11 @@ class AddEvaluateViewController: UIViewController {
     }
 
     func setUp() {
-        title = "评价晒单"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "发布", style: .done, target: self, action: #selector(submit))
+        title = "评价"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "提交", style: .done, target: self, action: #selector(submit))
         tableView.register(UINib(nibName: "AddEvaluateGoodsTableViewCell", bundle: nil), forCellReuseIdentifier: "AddEvaluateGoodsTableViewCell")
         tableView.register(UINib(nibName: "AddEvaluateComenntTableViewCell", bundle: nil), forCellReuseIdentifier: "AddEvaluateComenntTableViewCell")
+        tableView.register(UINib(nibName: "AddEvaluateStarsTableViewCell", bundle: nil), forCellReuseIdentifier: "AddEvaluateStarsTableViewCell")
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableView.automaticDimension
         tableView.delegate = self
@@ -49,6 +50,9 @@ class AddEvaluateViewController: UIViewController {
 
 extension AddEvaluateViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 1 {
+            return 2
+        }
         return 1
     }
 
@@ -58,8 +62,18 @@ extension AddEvaluateViewController: UITableViewDelegate,UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 1 {
+            if indexPath.row == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "AddEvaluateStarsTableViewCell") as! AddEvaluateStarsTableViewCell
+                cell.stars.successBlock = { (inndx, halfIndex, percent) in
+                    print(inndx)
+                    self.star = "\(inndx + 1)"
+                }
+                cell.selectionStyle = .none
+                return cell
+            }
             let cell = tableView.dequeueReusableCell(withIdentifier: "AddEvaluateComenntTableViewCell") as! AddEvaluateComenntTableViewCell
-            cell.setUp(text: "请您根据商品及我们的服务请客给予评价")
+//            cell.setUp(text: "请您根据商品及我们的服务请客给予评价")
+            cell.textInput.backgroundColor = .white
             coment = cell
             cell.selectionStyle = .none
             return cell
@@ -67,21 +81,19 @@ extension AddEvaluateViewController: UITableViewDelegate,UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AddEvaluateGoodsTableViewCell") as! AddEvaluateGoodsTableViewCell
         cell.img.af_setImage(withURL: URL(string: eva!.image)!)
         cell.name.text = eva?.name ?? ""
-        cell.star.successBlock = { (inndx, halfIndex, percent) in
-            print(inndx)
-            self.star = "\(inndx + 1)"
-        }
+        cell.price.text = "￥\(eva?.price ?? "0")"
+        cell.info.text = "\(eva?.optionUnionName ?? "")  数量\(eva?.quantity ?? "0")"
         cell.selectionStyle = .none
         return cell
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 10
+        return 15
     }
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let vi = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 10))
-        vi.backgroundColor = UIColor.groupTableViewBackground
+        vi.backgroundColor = UIColor.clear
         return vi
     }
 

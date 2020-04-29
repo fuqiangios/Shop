@@ -39,7 +39,7 @@
     MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:view];
     [view addSubview:HUD];
     // Make the customViews 37 by 37 pixels for best results (those are the bounds of the build-in progress indicators)
-    HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"error"]];
+    HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@""]];
     
     // Set custom view mode
     HUD.mode = MBProgressHUDModeCustomView;
@@ -63,7 +63,7 @@
     MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:view];
     [view addSubview:HUD];
     // Make the customViews 37 by 37 pixels for best results (those are the bounds of the build-in progress indicators)
-    HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"success"]];
+    HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@""]];
     
     // Set custom view mode
     HUD.mode = MBProgressHUDModeCustomView;

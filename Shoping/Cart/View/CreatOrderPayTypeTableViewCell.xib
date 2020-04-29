@@ -43,6 +43,13 @@
                                 <rect key="frame" x="12" y="20" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ulH-CD-m3g">
+                                <rect key="frame" x="251" y="15" width="38" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="绑定">
+                                    <color key="titleColor" red="0.50694003809999999" green="0.50694003809999999" blue="0.50694003809999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -60,6 +67,7 @@
             <color key="backgroundColor" red="0.97647058819999999" green="0.98039215690000003" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="bindBtn" destination="ulH-CD-m3g" id="3dM-1s-OkE"/>
                 <outlet property="img" destination="zzd-Af-H9C" id="fEk-jl-h4V"/>
                 <outlet property="name" destination="NNP-1g-DLg" id="CYA-tZ-40Z"/>
                 <outlet property="selectImg" destination="XU0-gO-h98" id="cj2-x5-x3Z"/>

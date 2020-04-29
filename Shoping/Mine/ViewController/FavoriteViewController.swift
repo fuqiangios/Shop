@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import MJRefresh
 
 class FavoriteViewController: UIViewController {
 
+    @IBOutlet weak var selectAllBtn: UIButton!
+    @IBOutlet weak var deleteBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
     var page = 1
     var data:FavoriteList? = nil
@@ -29,7 +32,14 @@ class FavoriteViewController: UIViewController {
         tableView.backgroundColor = UIColor.tableviewBackgroundColor
         tableView.separatorStyle = .none
         bottom.constant = 0
-        
+        tableView.mj_footer = MJRefreshAutoNormalFooter.init(refreshingBlock: {
+            self.page = self.page + 1
+            self.loadDataMore()
+        })
+        tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
+            self.page = 1
+            self.loadData()
+        })
         loadData()
     }
 
@@ -47,6 +57,7 @@ class FavoriteViewController: UIViewController {
 
     func loadData() {
         API.favoriteList(page: "\(page)").request { (result) in
+            self.tableView.mj_header?.endRefreshing()
             switch result {
             case .success(let data):
                 self.data = data
@@ -57,19 +68,66 @@ class FavoriteViewController: UIViewController {
         }
     }
 
-//    @IBAction func delete(_ sender: Any) {
-//
-//    }
-    @IBAction func all(_ sender: Any) {
+    func loadDataMore() {
+        API.favoriteList(page: "\(page)").request { (result) in
+            self.tableView.mj_footer?.endRefreshing()
+            switch result {
+            case .success(let data):
+                var ar = self.data?.data ?? []
+                ar = ar + data.data
+                self.data = FavoriteList(result: true, message: "", status: 200, data: ar)
+                self.tableView.reloadData()
+            case .failure(let er):
+                print(er)
+            }
+        }
+    }
+
+    @IBAction func deleteActionn(_ sender: Any) {
+        var selectData: [String] = []
+        for index in selectIndex {
+            if let item = data?.data[index] {
+                selectData.append(item.id)
+            }
+        }
+        if selectData.count < 1 { return }
+        API.deleteFavorite(ids: selectData).request { (result) in
+            switch result {
+            case .success(_):
+                CLProgressHUD.showSuccess(in: self.view, delegate: self, title: "删除成功", duration: 1)
+            case .failure(let er):
+                CLProgressHUD.showError(in: self.view, delegate: self, title: "删除失败", duration: 1)
+                print(er)
+            }
+        }
+    }
+    @IBAction func all(_ sender: UIButton) {
         if selectIndex.count == data?.data.count {
                    selectIndex = []
+            selectAllBtn.setImage(UIImage(named: "未选择"), for: .normal)
                } else {
                    selectIndex = []
                    for index in 0..<(data?.data.count ?? 0) {
                        selectIndex.append(index)
                    }
+            selectAllBtn.setImage(UIImage(named: "选中"), for: .normal)
                }
                tableView.reloadData()
+    }
+
+    @objc func addCart(btn: UIButton) {
+        API.addCart(product_id: data?.data[btn.tag - 100].productID
+            ?? "", quantity: "1", product_option_union_id: data?.data[btn.tag - 100].product_option_union_id
+            ?? "").request { (result) in
+            switch result {
+            case .success:
+                NotificationCenter.default.post(name: NSNotification.Name("notificationCreatOrder"), object: self, userInfo: [:])
+                CLProgressHUD.showSuccess(in: self.view, delegate: self, title: "加入购物车成功", duration: 1)
+            case .failure(let error):
+                CLProgressHUD.showError(in: self.view, delegate: self, title: "加入购物车失败", duration: 1)
+                print(error)
+            }
+        }
     }
 }
 extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
@@ -93,7 +151,7 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
                 select = index
             }
         }
-        if -1 != select {
+        if -1 == select {
             cell.select.image = UIImage(named: "未选择")
         } else {
             cell.select.image = UIImage(named: "选中")
@@ -109,6 +167,8 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
             cell.width.constant = 25
             cell.right.constant = 0
         }
+        cell.addCart.tag = indexPath.row + 100
+        cell.addCart.addTarget(self, action: #selector(addCart(btn:)), for: .touchUpInside)
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -122,6 +182,11 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
             selectIndex.append(indexPath.row)
         } else {
             selectIndex.remove(at: select)
+        }
+        if selectIndex.count == data?.data.count ?? 0 {
+            selectAllBtn.setImage(UIImage(named: "选中"), for: .normal)
+        } else {
+            selectAllBtn.setImage(UIImage(named: "未选择"), for: .normal)
         }
         tableView.reloadData()
     }

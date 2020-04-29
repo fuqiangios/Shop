@@ -9,9 +9,11 @@
 import UIKit
 import ZLCollectionViewFlowLayout
 import FSPagerView
+import MJRefresh
 
 class RecommendTypeViewController: UIViewController {
     var collectionView : UICollectionView?
+    var page = 1
 //    @IBOutlet weak var collectionView: UICollectionView!
 
     let Identifier       = "GoodsListCollectionViewCell"
@@ -38,10 +40,29 @@ class RecommendTypeViewController: UIViewController {
     }
 
     func loadData() {
-        API.homeCategoryData(p_category_id: categoryId, category_id: nil).request { (response) in
+        page = 1
+        API.homeCategoryData(p_category_id: categoryId, category_id: nil, page: "\(page)").request { (response) in
+            self.collectionView?.mj_header?.endRefreshing()
             switch response {
             case .success(let list):
                 self.data = list
+                self.collectionView?.reloadData()
+            case .failure(let error):
+                print(error)
+                print(error.self)
+                print(error.localizedDescription)
+            }
+        }
+    }
+
+    func loadDataMore() {
+        API.homeCategoryData(p_category_id: categoryId, category_id: nil, page: "\(page)").request { (response) in
+            self.collectionView?.mj_footer?.endRefreshing()
+            switch response {
+            case .success(let list):
+                var ar = self.data?.data.products ?? []
+                ar = ar + list.data.products
+                self.data = CategoryList(result: true, message: "", status: 200, data: CategoryClass(products: ar, category_banner: self.data?.data.category_banner ?? []))
                 self.collectionView?.reloadData()
             case .failure(let error):
                 print(error)
@@ -72,6 +93,15 @@ class RecommendTypeViewController: UIViewController {
         collectionView?.register(UINib.init(nibName: "SelectedFooterCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: "UICollectionElementKindSectionFooter", withReuseIdentifier: "footer")
         collectionView?.register(UINib.init(nibName: "SelectedHeaderCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: "UICollectionElementKindSectionHeader", withReuseIdentifier: "header")
         collectionView?.register(UINib.init(nibName: "SelectedMoreCollectionReusableView", bundle: nil), forSupplementaryViewOfKind: "UICollectionElementKindSectionHeader", withReuseIdentifier: "headerMore")
+        collectionView?.mj_footer = MJRefreshAutoNormalFooter.init(refreshingBlock: {
+            self.page = self.page + 1
+            self.loadDataMore()
+        })
+        collectionView?.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
+            self.page = 1
+            self.loadData()
+        })
+        
     }
 }
 
@@ -89,7 +119,7 @@ extension RecommendTypeViewController: UICollectionViewDelegate, UICollectionVie
         cell.goodsImg.af_setImage(withURL: URL(string: (data?.data.products[indexPath.item].image)!)!)
         cell.goodsName.text = data?.data.products[indexPath.item].name
         cell.info.text = data?.data.products[indexPath.item].title
-        cell.price.text = "￥" + (data?.data.products[indexPath.item].price ?? "0") + " ￥\(data?.data.products[indexPath.item].oldPrice ?? "0")"
+        cell.price.text = "￥" + (data?.data.products[indexPath.item].price ?? "0")
         return cell
     }
 
@@ -151,6 +181,22 @@ extension RecommendTypeViewController: UICollectionViewDelegate, UICollectionVie
 extension RecommendTypeViewController: FSPagerViewDataSource,FSPagerViewDelegate {
     func numberOfItems(in pagerView: FSPagerView) -> Int {
         return data?.data.category_banner.count ?? 0
+    }
+
+    func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
+        if data?.data.category_banner[index].type == "1" {
+            let web = WebViewController()
+            web.hidesBottomBarWhenPushed = true
+            web.title =  ""
+            web.uri = data?.data.category_banner[index].content ?? "https://www.necesstore.com"
+            self.navigationController?.viewControllers.last?.navigationController?.pushViewController(web, animated: true)
+        } else {
+                let list = GoodsListViewController()
+                list.hidesBottomBarWhenPushed = true
+            list.title = ""
+            list.product_ids = data?.data.category_banner[index].productIDS ?? ""
+            self.navigationController?.viewControllers.last?.navigationController?.pushViewController(list, animated: true)
+        }
     }
 
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {

@@ -21,6 +21,8 @@ class CommunityViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let itme = UIBarButtonItem.init(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = itme
         title = "社交"
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "相机"), style: .done, target: self, action: #selector(addNewCommunity))
         let layout = ZLCollectionViewVerticalLayout()

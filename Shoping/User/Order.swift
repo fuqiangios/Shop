@@ -304,12 +304,14 @@ struct AftersaleDatum: Codable {
     let image: String
     let price, quantity, optionUnionName, total: String
     let orderCode, orderStatus, statusName, created: String
-
+    let aftersale_id: String?
+    
     enum CodingKeys: String, CodingKey {
         case orderProductID = "order_product_id"
         case name, image, price, quantity
         case optionUnionName = "option_union_name"
         case total
+        case aftersale_id
         case orderCode = "order_code"
         case orderStatus = "order_status"
         case statusName = "status_name"

@@ -18,11 +18,11 @@ class CreatOrderViewController: UIViewController {
     var storeSelect: Bool = false
 
     var order_type: String = ""
-    var selectIndex: Int = -1
+    var selectIndex: Int = 0
     var goodsNum: Double = 0.00
     var data: [Cart] = []
     var addressInfo:AddressDatum? = nil
-    var payList: PayList? = nil
+    var payList: [SettlePayment] = []
     var quantity: String? = nil
     var product_id: String? = nil
     var product_option_union_id: String? = nil
@@ -34,6 +34,7 @@ class CreatOrderViewController: UIViewController {
     var price: String? = nil
     var useRedpackg: Bool = false
     var usepiao: Bool = false
+    var invoice_id = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,16 +70,27 @@ class CreatOrderViewController: UIViewController {
         }
         var all: [String] = []
         for item in data {
-            all.append(item.id ?? "")
+            all.append(item.id)
         }
-        API.createOrder(order_type: order_type, shopping_cart_ids: all, product_id: product_id, quantity: quantity, product_option_union_id: product_option_union_id, red_packet: "\(redPackegPrice)", customer_coupon_id: discountIndex == -1 ? "" : settlement?.data.coupons[discountIndex].id, address_id: addressInfo?.id, self_store_id: store != nil ? store?.id : "").request { (result) in
+        API.createOrder(order_type: order_type, shopping_cart_ids: all, product_id: product_id, quantity: quantity, product_option_union_id: product_option_union_id, red_packet: "\(redPackegPrice)", customer_coupon_id: discountIndex == -1 ? "" : settlement?.data.coupons[discountIndex].id, address_id: addressInfo?.id, self_store_id: store != nil ? store?.id : "", store_id: settlement?.data.store_id ?? "", payment_pfn: payList[selectIndex].pfn , payment_method: payList[selectIndex].pfn , invoice_id: usepiao ? invoice_id : "").request { (result) in
                 switch result {
                 case .success(let data):
                     print("success")
+                    if self.payList[self.selectIndex].pfn == "Amount" {
+                        self.navigationController?.pushViewController(CreatOrderSuccessViewController(), animated: true)
+                    } else if self.payList[self.selectIndex].pfn == "WeChatPay" {
+
+                    } else {
+                        if data.data.res == true {
+                            self.navigationController?.pushViewController(CreatOrderSuccessViewController(), animated: true)
+                        } else {
+                        self.aliPay(str: data.data.plugin)
+                        }
+                    }
                     if self.order_type == "1" {
                         NotificationCenter.default.post(name: NSNotification.Name("notificationCreatOrder"), object: self, userInfo: [:])
                     }
-                    self.amountPay(order_id: data.data.order_id)
+
                 case .failure(let error):
                     print(error)
                     print(error.self)
@@ -87,8 +99,37 @@ class CreatOrderViewController: UIViewController {
         }
     }
 
+
+    func wechatPay() {
+        let req = PayReq()
+        req.nonceStr = ""
+        req.partnerId = ""
+        req.prepayId = ""
+        req.timeStamp =  200000
+        req.package = ""
+        req.sign = ""
+        WXApi.send(req) { (item) in
+            print(item)
+            if item {
+                self.navigationController?.pushViewController(CreatOrderSuccessViewController(), animated: true)
+            } else {
+                CLProgressHUD.showError(in: self.view, delegate: self, title: "充值失败，请重试", duration: 2)
+            }
+        }
+    }
+
+    func aliPay(str: String) {
+        AlipaySDK.defaultService()?.payOrder(str, fromScheme: "wojiayoupin", callback: { (reslt) in
+            if reslt!["resultStatus"]as! String == "9000" {
+                self.navigationController?.pushViewController(CreatOrderSuccessViewController(), animated: true)
+            } else {
+                CLProgressHUD.showError(in: self.view, delegate: self, title: "支付失败，请重试", duration: 2)
+            }
+        })
+    }
+
     func amountPay(order_id: String) {
-        API.orderPay(order_id: order_id, payment_pfn: payList?.data.payment[selectIndex].pfn ?? "", payment_method: payList?.data.payment[selectIndex].name ?? "").request { (result) in
+        API.orderPay(order_id: order_id, payment_pfn: payList[selectIndex].pfn ?? "", payment_method: payList[selectIndex].pfn ?? "").request { (result) in
             switch result {
                 case .success:
                     print("success")
@@ -105,7 +146,7 @@ class CreatOrderViewController: UIViewController {
         API.payList(order_id: nil).request { (result) in
             switch result {
             case .success(let data):
-                self.payList = data
+//                self.payList = data
                 self.tableView.reloadData()
             case .failure(let error):
                 print(error)
@@ -185,8 +226,10 @@ class CreatOrderViewController: UIViewController {
             switch result {
             case .success(let data):
                 self.settlement = data
+                self.payList = data.data.payment
                 self.self.addressInfo = data.data.address
                 self.getPrice()
+                self.invoice_id = data.data.invoice.id ?? ""
                 self.tableView.reloadData()
             case .failure(let error):
                 print(error)
@@ -200,7 +243,7 @@ extension CreatOrderViewController: UITableViewDelegate, UITableViewDataSource {
             return settlement?.data.products.count ?? 0
         }
         if section == 1 {
-            return payList?.data.payment.count ?? 0
+            return payList.count ?? 0
         }
         if section == 3 {
             return 3
@@ -255,8 +298,8 @@ extension CreatOrderViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
         } else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CreatOrderPayTypeTableViewCell") as! CreatOrderPayTypeTableViewCell
-            cell.name.text = payList?.data.payment[indexPath.row].name ?? ""
-            cell.img.af_setImage(withURL: URL(string: (payList?.data.payment[indexPath.row].getIcon())!)!)
+            cell.name.text = payList[indexPath.row].name
+            cell.img.af_setImage(withURL: URL(string: (payList[indexPath.row].getIcon()))!)
             if indexPath.row == selectIndex {
                 cell.selectImg.image = UIImage(named: "选中")
             } else {
@@ -399,6 +442,7 @@ extension CreatOrderViewController: UITableViewDelegate, UITableViewDataSource {
                 selectDiscount()
             } else if indexPath.row == 2 {
                 let invoice = InvoiceViewController()
+                invoice.price = "\(goodsNum)"
                 self.navigationController?.pushViewController(invoice, animated: true)
             }
 

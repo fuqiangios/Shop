@@ -16,7 +16,7 @@ class DiscountViewController: UIViewController {
     @IBOutlet weak var guoqi: UIButton!
     @IBOutlet weak var noUse: UIButton!
     var type = "1"
-    var data: Redpackge? = nil
+    var data: CouponList? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,14 +60,15 @@ class DiscountViewController: UIViewController {
     }
 
     func loadData() {
-        API.redpackgeList(type: type).request { (result) in
+        API.couponData(type: type).request { (result) in
             switch result{
             case .success(let data):
                 self.data = data
 //                self.price.text = data.data.redPackage
                 self.tableView.reloadData()
-            case .failure:
-                print("error")
+            case .failure(let er):
+                print(er)
+                self.tableView.reloadData()
             }
         }
     }
@@ -78,24 +79,24 @@ class DiscountViewController: UIViewController {
 }
 extension DiscountViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data?.data.redPackageList.count ?? 0
+        return data?.data.couponList.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
            let cell = tableView.dequeueReusableCell(withIdentifier: "GoodsPopUpTransateTableViewCell") as! GoodsPopUpTransateTableViewCell
-            cell.selectionStyle = .none
-            cell.price.text = data?.data.redPackageList[indexPath.row].value
-        cell.info.text = data?.data.redPackageList[indexPath.row].method
-        cell.date.text = "有限期至\(data?.data.redPackageList[indexPath.row].endDate ?? "")"
-//            if data[indexPath.row].hasReceive {
-//                cell.bbtn.backgroundColor = UIColor.init(red: 178.0/255.0, green: 169.0/255.0, blue: 168.0/255.0, alpha: 1)
-//                cell.bbtn.setTitle("已领取", for: .normal)
-//                cell.bbtn.ixsUserInteractionEnabled = false
-//            }
+                       cell.selectionStyle = .none
+        if type == "1" {
+            cell.backImg.image = UIImage(named: "优惠券底色")
+        } else {
+            cell.backImg.image = UIImage(named: "")
+        }
+        cell.price.text = "\(data?.data.couponList[indexPath.row].faceValue ?? "")  \(data?.data.couponList[indexPath.row].unit ?? "")"
+                       cell.info.text = data?.data.couponList[indexPath.row].name
+        cell.tips.text = data?.data.couponList[indexPath.row].detail
+        cell.date.text = "\(data?.data.couponList[indexPath.row].startTime ?? "") 至\(data?.data.couponList[indexPath.row].endTime ?? "")"
         cell.bbtn.isHidden = true
-//            cell.bbtn.tag = indexPath.row + 10000
-//            cell.bbtn.addTarget(self, action: #selector(getCopun(btn:)), for: .touchUpInside)
-            return cell
+
+                       return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 110

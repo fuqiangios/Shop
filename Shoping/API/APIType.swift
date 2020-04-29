@@ -85,7 +85,9 @@ extension APIType {
 
         var parames = parameters()
         if UserSetting.default.activeUserToken != nil {
-            parames?["user_token"] = UserSetting.default.activeUserToken
+            if parames?["user_token"] == nil {
+                parames?["user_token"] = UserSetting.default.activeUserToken
+            }
         }
         //01ff5de49ffac39fe540ca8cc0708536c8453bcf
         manager.session.configuration.timeoutIntervalForRequest = 30

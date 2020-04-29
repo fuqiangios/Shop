@@ -4,3 +4,6 @@
 
 #import "UIView+shadowPath.h"
 #import "CLProgressHUD.h"
+#import "WSDatePickerView.h"
+#import <WXApi.h>
+#import <AlipaySDK/AlipaySDK.h>

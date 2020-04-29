@@ -11,10 +11,12 @@ import UIKit
 class RedPackgeViewController: UIViewController {
     @IBOutlet weak var price: UILabel!
 
+    @IBOutlet weak var income: UILabel!
+    @IBOutlet weak var pay: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var backView: UIView!
     var type = "1"
-    var data: Redpackge? = nil
+    var data: RedPackeg? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,11 +67,13 @@ class RedPackgeViewController: UIViewController {
     }
 
     func loadData() {
-        API.redpackgeList(type: type).request { (result) in
+        API.redpackgData().request { (result) in
             switch result{
             case .success(let data):
                 self.data = data
                 self.price.text = data.data.redPackage
+                self.pay.text = data.data.pay
+                self.income.text = data.data.income
                 self.tableView.reloadData()
             case .failure:
                 print("error")

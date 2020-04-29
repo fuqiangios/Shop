@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="出生日期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nir-mX-jPD">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="性别" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nir-mX-jPD">
                         <rect key="frame" x="16" y="0.0" width="82" height="60"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
@@ -25,7 +25,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3tC-fM-Pzv">
-                        <rect key="frame" x="193" y="0.0" width="67" height="59"/>
+                        <rect key="frame" x="183" y="0.0" width="67" height="59"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <state key="normal" title="  男" image="未选择">

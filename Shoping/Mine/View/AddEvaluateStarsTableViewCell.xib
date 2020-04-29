@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="53" id="KGk-i7-Jjw" customClass="AddEvaluateStarsTableViewCell" customModule="我家用品" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="53"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="53"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="评分" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PIa-CA-EWU">
+                        <rect key="frame" x="16" y="0.0" width="63" height="53"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Snp-FV-cqC" customClass="StarEvaluateView" customModule="我家用品" customModuleProvider="target">
+                        <rect key="frame" x="71" y="14" width="149" height="24"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="Uvi-fU-MO0"/>
+                            <constraint firstAttribute="width" constant="149" id="uJ3-21-VYv"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="设置默认图片" value="ic_stars_normal"/>
+                            <userDefinedRuntimeAttribute type="string" keyPath="设置选中图片" value="ic_stars_selected"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="设置星级">
+                                <integer key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="设置间隙">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="是否半星展示" value="NO"/>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="Snp-FV-cqC" secondAttribute="bottom" constant="15" id="3eF-bc-Ehs"/>
+                    <constraint firstItem="Snp-FV-cqC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="71" id="V9m-VB-NiU"/>
+                    <constraint firstItem="Snp-FV-cqC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="tm4-U1-EaL"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="stars" destination="Snp-FV-cqC" id="jcY-87-oPH"/>
+            </connections>
+            <point key="canvasLocation" x="131.8840579710145" y="114.84375"/>
+        </tableViewCell>
+    </objects>
+</document>

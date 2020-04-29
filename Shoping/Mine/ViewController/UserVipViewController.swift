@@ -8,9 +8,10 @@
 
 import UIKit
 
-class UserVipViewController: UIViewController {
+class UserVipViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var fensi: UILabel!
     @IBOutlet weak var UserView: UIView!
+    var data: FansData? = nil
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var phoneView: UIView!
@@ -26,6 +27,7 @@ class UserVipViewController: UIViewController {
     @IBOutlet weak var phoneInput: UITextField!
     @IBOutlet weak var nameInput: UITextField!
     @IBOutlet weak var xinzeng: UILabel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "会员信息"
@@ -42,12 +44,45 @@ class UserVipViewController: UIViewController {
         UserView.layer.borderWidth = 1
         UserView.layer.borderColor = UIColor.groupTableViewBackground.cgColor
         UserView.layer.masksToBounds = true
+        nameInput.delegate = self
+        nameInput.tag = 100
+        phoneInput.delegate = self
+        phoneInput.tag = 200
+        loadData()
     }
 
     @IBAction func checkAction(_ sender: Any) {
+        loadData()
     }
     @IBAction func orderAction(_ sender: Any) {
         let detail = UserVipDetailViewController()
+        detail.token = data?.data.inviteList.first?.user_token ?? ""
         self.navigationController?.pushViewController(detail, animated: true)
+    }
+
+    func loadData() {
+        API.fansInfo(name: nameInput.text ?? "", telephone: phoneInput.text ?? "").request { (result) in
+            switch result {
+            case .success(let data):
+                self.data = data
+                self.fensi.text = data.data.inviteCount
+                self.xinzeng.text = data.data.todayInviteCount
+                if data.data.inviteList.count == 0 {
+                    self.UserView.isHidden = true
+                } else {
+                    self.UserView.isHidden = false
+
+                    let item = data.data.inviteList.first
+                    self.name.text = item?.name
+                    self.date.text = item?.created ?? ""
+                    self.userFensi.text = item?.inviteCount ?? ""
+                    self.hongbao.text = item?.redPackage ?? ""
+                    self.jifen.text = item?.points ?? ""
+                    self.yue.text = item?.amount ?? ""
+                }
+            case .failure(let er):
+                print(er)
+            }
+        }
     }
 }

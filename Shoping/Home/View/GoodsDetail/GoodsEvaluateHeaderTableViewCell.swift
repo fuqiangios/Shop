@@ -10,7 +10,9 @@ import UIKit
 
 class GoodsEvaluateHeaderTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var count: UILabel!
     @IBOutlet weak var getMoreBtn: UIButton!
+    @IBOutlet weak var lv: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -15,16 +15,42 @@ class InvoiceViewController: UIViewController {
     var shui = ""
     var phone = ""
     var email = ""
+    var info: InvoiceInfo? = nil
+    var price = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "添加发票信息"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "保存", style: .done, target: self, action: #selector(save))
         setUp()
+        loadData()
+    }
+
+    func loadData() {
+        API.invoiceInfo().request { (result) in
+            switch result {
+            case .success(let data):
+                self.info = data
+                self.name = data.data.company.name
+                self.shui = data.data.company.taxNum
+                self.phone = data.data.company.telephone
+                self.email = data.data.company.email
+                self.tableView.reloadData()
+            case .failure(let er):
+                print(er)
+            }
+        }
     }
 
     @objc func save() {
-        
+        API.addInvoice(type: type, name: name, telephone: phone, email: email, tax_num: type == "1" ? shui : "").request { (result) in
+            switch result {
+            case .success(let data):
+                print(data)
+            case .failure(let er):
+                print(er)
+            }
+        }
     }
     func setUp() {
         tableView.delegate = self
@@ -71,13 +97,18 @@ extension InvoiceViewController: UITableViewDelegate, UITableViewDataSource {
 
     @objc func qiAction() {
         type = "1"
-        name = ""
+        self.name = info?.data.company.name ?? ""
+        self.phone = info?.data.company.telephone ?? ""
+        self.email = info?.data.company.email ?? ""
+        self.shui = info?.data.company.taxNum ?? ""
         tableView.reloadData()
     }
 
     @objc func geAction() {
         type = "2"
-        name = ""
+        self.name = info?.data.person.name ?? ""
+        self.phone = info?.data.person.telephone ?? ""
+        self.email = info?.data.person.email ?? ""
         tableView.reloadData()
     }
 
@@ -131,7 +162,7 @@ extension InvoiceViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.input.isEnabled = false
             } else if indexPath.row == 4 {
                 cell.nname.text = "发票金额"
-                cell.input.text = "$209.0"
+                cell.input.text = "￥\(price)"
                 cell.input.isEnabled = false
             }
             } else {

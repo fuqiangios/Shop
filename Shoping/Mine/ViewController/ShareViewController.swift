@@ -10,21 +10,39 @@ import UIKit
 
 class ShareViewController: UIViewController {
 
+    @IBOutlet weak var code: UILabel!
+    @IBOutlet weak var info: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "邀请推荐"
         self.navigationController?.setNavigationBarHidden(false, animated: false)
+        loadData()
     }
 
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func loadData() {
+        API.getShare().request { (result) in
+            switch result {
+            case .success(let data):
+                self.info.text = data.data.signUpGift
+                self.code.text = data.data.inviteCode
+            case .failure(let er):
+                print(er)
+            }
+        }
     }
-    */
 
+    @IBAction func shareAction(_ sender: Any) {
+        let req = SendMessageToWXReq()
+        req.text = "分享"
+        req.scene = Int32(WXSceneSession.rawValue)
+        WXApi.send(req) { (item) in
+            print(item)
+        }
+    }
+    
+    @IBAction func copyAction(_ sender: Any) {
+        let pastboard = UIPasteboard.general
+        pastboard.string = code.text ?? ""
+        CLProgressHUD.showSuccess(in: self.view, delegate: self, title: "复制成功", duration: 1)
+    }
 }

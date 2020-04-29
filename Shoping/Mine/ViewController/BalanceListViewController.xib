@@ -28,7 +28,7 @@
                             <rect key="frame" x="0.0" y="9" width="207" height="45"/>
                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
-                            <state key="normal" title="提现">
+                            <state key="normal" title="支出">
                                 <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>

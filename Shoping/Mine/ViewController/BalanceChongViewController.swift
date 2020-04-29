@@ -39,11 +39,45 @@ class BalanceChongViewController: UIViewController {
             switch result {
             case .success(let data):
                 print(data)
+                if self.data?.data.payment[self.selectIndex].pfn == "WeChatPay" {
+                    self.wechatPay()
+                } else {
+                    self.aliPay(str: data.data.plugin)
+                }
             case .failure(let er):
                 print(er)
             }
         }
     }
+
+    func wechatPay() {
+        let req = PayReq()
+        req.nonceStr = ""
+        req.partnerId = ""
+        req.prepayId = ""
+        req.timeStamp =  200000
+        req.package = ""
+        req.sign = ""
+        WXApi.send(req) { (item) in
+            print(item)
+            if item {
+                CLProgressHUD.showSuccess(in: self.view, delegate: self, title: "充值成功", duration: 2)
+            } else {
+                CLProgressHUD.showError(in: self.view, delegate: self, title: "充值失败，请重试", duration: 2)
+            }
+        }
+    }
+
+    func aliPay(str: String) {
+        AlipaySDK.defaultService()?.payOrder(str, fromScheme: "wojiayoupin", callback: { (reslt) in
+            if reslt!["resultStatus"]as! String == "9000" {
+                CLProgressHUD.showSuccess(in: self.view, delegate: self, title: "充值成功", duration: 2)
+            } else {
+                CLProgressHUD.showError(in: self.view, delegate: self, title: "充值失败，请重试", duration: 2)
+            }
+        })
+    }
+
     func loadData() {
         API.chongzhiPage().request { (result) in
             switch result {

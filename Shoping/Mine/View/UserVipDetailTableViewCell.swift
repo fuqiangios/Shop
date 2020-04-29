@@ -9,7 +9,12 @@
 import UIKit
 
 class UserVipDetailTableViewCell: UITableViewCell {
-
+    @IBOutlet weak var date: UILabel!
+    
+    @IBOutlet weak var yongjin: UILabel!
+    @IBOutlet weak var redPackge: UILabel!
+    @IBOutlet weak var point: UILabel!
+    @IBOutlet weak var price: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

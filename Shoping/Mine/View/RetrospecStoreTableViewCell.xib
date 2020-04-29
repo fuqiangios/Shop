@@ -45,11 +45,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="南极人椅子南极人椅子" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rVe-FZ-q40">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1" verticalHuggingPriority="1" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" text="南极人椅子南极人椅子" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rVe-FZ-q40">
                                 <rect key="frame" x="142" y="57.5" width="143" height="17"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="143" id="kqM-9p-aep"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -85,7 +82,6 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="rVe-FZ-q40" firstAttribute="leading" secondItem="KVc-XF-ZxC" secondAttribute="trailing" constant="2" id="01I-Zt-FDC"/>
-                            <constraint firstAttribute="trailing" secondItem="sX0-b3-hR9" secondAttribute="trailing" constant="23" id="2JD-AV-QIL"/>
                             <constraint firstItem="Gzb-wW-xbH" firstAttribute="leading" secondItem="wgj-4w-4U8" secondAttribute="leading" constant="8" id="5PV-7V-Pvc"/>
                             <constraint firstItem="fff-GO-6Z2" firstAttribute="leading" secondItem="wgj-4w-4U8" secondAttribute="leading" constant="8" id="6VB-L9-TB6"/>
                             <constraint firstItem="KVc-XF-ZxC" firstAttribute="leading" secondItem="326-Gr-ZiD" secondAttribute="trailing" constant="4" id="7ce-Wr-kE6"/>
@@ -100,6 +96,7 @@
                             <constraint firstItem="rVe-FZ-q40" firstAttribute="centerY" secondItem="EzA-Qc-EWX" secondAttribute="centerY" id="bg2-gI-w1i"/>
                             <constraint firstItem="Gzb-wW-xbH" firstAttribute="top" secondItem="326-Gr-ZiD" secondAttribute="bottom" constant="12" id="co1-bl-K0L"/>
                             <constraint firstItem="KHf-ku-bhn" firstAttribute="top" secondItem="wgj-4w-4U8" secondAttribute="top" constant="12" id="fxL-Cx-xeW"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="sX0-b3-hR9" secondAttribute="trailing" constant="23" id="hIK-Ov-YsX"/>
                             <constraint firstItem="sX0-b3-hR9" firstAttribute="centerY" secondItem="EzA-Qc-EWX" secondAttribute="centerY" id="hzo-kE-qFf"/>
                             <constraint firstItem="sX0-b3-hR9" firstAttribute="leading" secondItem="rVe-FZ-q40" secondAttribute="trailing" constant="1" id="mSX-PQ-BJ5"/>
                             <constraint firstItem="EzA-Qc-EWX" firstAttribute="top" secondItem="fff-GO-6Z2" secondAttribute="bottom" constant="12" id="mYS-66-gOo"/>
@@ -116,6 +113,13 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="date" destination="Gzb-wW-xbH" id="jhV-AF-WM8"/>
+                <outlet property="inName" destination="EzA-Qc-EWX" id="Suk-TE-ENF"/>
+                <outlet property="inNum" destination="326-Gr-ZiD" id="4jm-iI-uPH"/>
+                <outlet property="inPName" destination="rVe-FZ-q40" id="HNK-FT-UYP"/>
+                <outlet property="name" destination="KHf-ku-bhn" id="NQ0-bQ-XgL"/>
+            </connections>
             <point key="canvasLocation" x="136.95652173913044" y="151.67410714285714"/>
         </tableViewCell>
     </objects>

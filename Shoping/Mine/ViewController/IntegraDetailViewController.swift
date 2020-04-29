@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MJRefresh
 
 class IntegraDetailViewController: UIViewController {
     var data: PointList? = nil
@@ -14,10 +15,16 @@ class IntegraDetailViewController: UIViewController {
     var start = ""
     @IBOutlet weak var table: UITableView!
     var end = ""
+    var type = "1"
     
     @IBOutlet weak var bbtn: UIButton!
     @IBOutlet weak var income: UILabel!
     @IBOutlet weak var pay: UILabel!
+    
+    @IBOutlet weak var incomeBtn: UIButton!
+    @IBOutlet weak var payBtn: UIButton!
+    
+    @IBOutlet weak var linne: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         start = dateConvertString(date: startOfCurrentMonth())
@@ -34,14 +41,40 @@ class IntegraDetailViewController: UIViewController {
         table.dataSource = self
         table.separatorStyle = .none
         table.backgroundColor = UIColor.tableviewBackgroundColor
+        table.mj_footer = MJRefreshAutoNormalFooter.init(refreshingBlock: {
+            self.page = self.page + 1
+            self.loadDataMore()
+        })
+        table.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
+            self.page = 1
+            self.loadData()
+        })
         loadData()
     }
 
     func loadData() {
-        API.pointInfoList(start_date: start, end_date: end, page: "\(page)").request { (result) in
+        API.pointInfoList(start_date: start, end_date: end, page: "\(page)", type: type).request { (result) in
+            self.table.mj_header?.endRefreshing()
             switch result {
             case .success(let data):
                 self.data = data
+                self.pay.text = "支出：-\(data.data.pay)"
+                self.income.text = "收入：+\(data.data.income)"
+                self.table.reloadData()
+            case .failure(let er):
+                print(er)
+            }
+        }
+    }
+
+    func loadDataMore() {
+        API.pointInfoList(start_date: start, end_date: end, page: "\(page)", type: type).request { (result) in
+            self.table.mj_footer?.endRefreshing()
+            switch result {
+            case .success(let data):
+                var ar = self.data?.data.pointsList
+                ar = (ar ?? []) + data.data.pointsList
+                self.data = PointList(result: data.result, message: data.message, status: data.status, data: PointListDataClass(pointsList: ar ?? [], income: data.data.income, pay: data.data.pay))
                 self.pay.text = "支出：-\(data.data.pay)"
                 self.income.text = "收入：+\(data.data.income)"
                 self.table.reloadData()
@@ -83,29 +116,22 @@ class IntegraDetailViewController: UIViewController {
         return Int(dateConvertString(date: startOfMonth, dateFormat: "yyyy")) ?? 2020
     }
 
-    @IBAction func selectDate(_ sender: Any) {
-        let dat = [1,2,3,4,5,6,7,8,9,10,11,12]
-        let alertController = UIAlertController(title: "申请原因", message: "", preferredStyle: UIAlertController.Style.actionSheet)
+    @IBAction func selectDate(_ sender: UIButton) {
 
-        for item in dat {
-            alertController.addAction(UIAlertAction(title: "\(item)月", style: UIAlertAction.Style.default, handler:{ (l) in
-                self.start = self.dateConvertString(date: self.startOfMonth(year: self.startOfCurrentYear(), month: item))
-                self.end = self.dateConvertString(date: self.endOfMonth(year: self.startOfCurrentYear(), month: item))
-                self.loadData()
-                }))
+        let datepicker = WSDatePickerView(dateStyle: DateStyleShowYearMonth) { (dat) in
+//            self.date = self.dateConvertString(date: dat ?? Date.init())
+            self.start = self.dateConvertString(date: dat ?? Date.init())
+            self.end = self.dateConvertString(date: dat ?? Date.init())
+            self.loadData()
+            sender.setTitle(self.dateConvertString(date: dat ?? Date.init()), for: .normal)
         }
-        alertController.addAction(UIAlertAction(title: "取消", style: UIAlertAction.Style.cancel, handler: nil))
-
-        self.present(alertController, animated: true, completion: nil)
+        datepicker?.show()
     }
-    func dateConvertString(date:Date, dateFormat:String="yyyy-MM-dd") -> String {
-            let timeZone = TimeZone.init(identifier: "UTC")
+    func dateConvertString(date:Date, dateFormat:String="yyyy-MM") -> String {
             let formatter = DateFormatter()
-            formatter.timeZone = timeZone
-            formatter.locale = Locale.init(identifier: "zh_CN")
             formatter.dateFormat = dateFormat
             let date = formatter.string(from: date)
-            return date.components(separatedBy: " ").first!
+            return date
         }
 
     func startOfMonth(year: Int, month: Int) -> Date {
@@ -132,6 +158,20 @@ class IntegraDetailViewController: UIViewController {
         let endOfYear = calendar.date(byAdding: components,
                                       to: startOfMonth(year: year, month:month))!
         return endOfYear
+    }
+
+    @IBAction func payAction(_ sender: UIButton) {
+        type = "1"
+        page = 1
+        loadData()
+        linne.center = CGPoint(x: sender.center.x, y: sender.center.y + 24)
+    }
+    
+    @IBAction func incomeAction(_ sender: UIButton) {
+        type = "2"
+        page = 1
+        loadData()
+        linne.center = CGPoint(x: sender.center.x, y: sender.center.y + 24)
     }
 }
 extension IntegraDetailViewController: UITableViewDelegate, UITableViewDataSource {

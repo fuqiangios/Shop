@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BaclGoodsDetailViewController" customModule="我家用品" customModuleProvider="target">
+            <connections>
+                <outlet property="tableView" destination="caO-y5-it8" id="kQg-ko-Y6I"/>
+                <outlet property="typeLabel" destination="24W-rp-Iek" id="SSl-8r-NLG"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="退换售后_详情bg" translatesAutoresizingMaskIntoConstraints="NO" id="ePQ-1v-haS">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="155"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="155" id="Kuy-s2-72K"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ge5-kY-8Ng">
+                    <rect key="frame" x="19" y="48" width="49" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="ic_back_normal"/>
+                    <connections>
+                        <action selector="backAction:" destination="-1" eventType="touchUpInside" id="DBX-Ou-HrU"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="服务单详情" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kGE-6e-479">
+                    <rect key="frame" x="160" y="48" width="97" height="23"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="finsh" translatesAutoresizingMaskIntoConstraints="NO" id="1SP-os-0Kc">
+                    <rect key="frame" x="173" y="77" width="66" height="41"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="完成" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="24W-rp-Iek">
+                    <rect key="frame" x="20" y="121" width="374" height="21"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="caO-y5-it8">
+                    <rect key="frame" x="0.0" y="148" width="414" height="748"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="ePQ-1v-haS" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="5RA-Qn-kqZ"/>
+                <constraint firstAttribute="bottom" secondItem="caO-y5-it8" secondAttribute="bottom" id="7ag-he-yfO"/>
+                <constraint firstItem="caO-y5-it8" firstAttribute="top" secondItem="ePQ-1v-haS" secondAttribute="bottom" constant="-7" id="D1d-6p-vuq"/>
+                <constraint firstItem="ePQ-1v-haS" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Qph-OI-MXG"/>
+                <constraint firstItem="caO-y5-it8" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="b47-Bg-RWC"/>
+                <constraint firstItem="ePQ-1v-haS" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="bP7-J1-uPk"/>
+                <constraint firstItem="caO-y5-it8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="se8-uN-iI5"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="131.8840579710145" y="105.80357142857143"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="finsh" width="40" height="40"/>
+        <image name="ic_back_normal" width="10.5" height="17.5"/>
+        <image name="退换售后_详情bg" width="375" height="140"/>
+    </resources>
+</document>

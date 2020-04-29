@@ -25,6 +25,28 @@ extension API {
             ]
         }
     }
+
+    struct getVipData: Get {
+        typealias Node = VIPData
+        var path: String = "vip/index"
+
+        init() {
+        }
+    }
+
+    struct submitProduct: Post {
+        typealias Node = ProductData
+        var path: String = "vip/project_enter"
+        let id: String
+        init(id: String) {
+            self.id = id
+        }
+        func parameters() -> [String: Any]? {
+            return [
+                "id": id
+            ]
+        }
+    }
 }
 
 // MARK: - StoreList
@@ -66,5 +88,74 @@ struct ShopInfo: Codable {
         case longitude, latitude, status
         case adminID = "admin_id"
         case created, modified, image, distance
+    }
+}
+
+// MARK: - VIPData
+struct VIPData: Codable {
+    let result: Bool
+    let message: String
+    let status: Int
+    let data: VIPDataDataClass
+}
+
+// MARK: - DataClass
+struct VIPDataDataClass: Codable {
+    let member, shareholder: [Member]
+    let crowdfunding: [Crowdfunding]
+    let project: [Project]
+}
+
+// MARK: - Crowdfunding
+struct Crowdfunding: Codable {
+    let id, name, value, title: String
+    let content, sort, created, modified: String
+}
+
+// MARK: - Member
+struct Member: Codable {
+    let name, memo: String
+}
+
+// MARK: - Project
+struct Project: Codable {
+    let id, name, content, image: String
+    let initiatorID, initiatorName, initiatorImage, target: String
+    let support, raise, reach, showFlag, intro: String
+    let created, modified: String
+
+    enum CodingKeys: String, CodingKey {
+        case id, name, content, image
+        case initiatorID = "initiator_id"
+        case initiatorName = "initiator_name"
+        case initiatorImage = "initiator_image"
+        case target, support, raise, reach
+        case showFlag = "show_flag"
+        case created, modified, intro
+    }
+}
+
+// MARK: - VIPData
+struct VIPProductData: Codable {
+    let result: Bool
+    let message: String
+    let status: Int
+    let data: Project
+}
+
+// MARK: - VIPData
+struct ProductData: Codable {
+    let result: Bool
+    let message: String
+    let status: Int
+}
+
+// MARK: - DataClass
+struct ProductDataClass: Codable {
+    let customerID, projectID: String
+
+    enum CodingKeys: String, CodingKey {
+        case customerID = "customer_id"
+        case projectID = "project_id"
     }
 }

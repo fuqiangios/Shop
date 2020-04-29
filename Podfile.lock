@@ -2,29 +2,35 @@ PODS:
   - Alamofire (4.7.3)
   - AlamofireImage (3.4.1):
     - Alamofire (~> 4.7)
+  - AlipaySDK-iOS (15.7.4)
   - FSPagerView (0.8.3)
   - IQKeyboardManager (6.4.2)
+  - MJRefresh (3.4.1)
   - netfox (1.15.0)
   - SnapKit (4.2.0)
   - SwiftyJSON (5.0.0)
   - TableKit (2.9.0)
   - TagListView (1.4.0)
+  - WechatOpenSDK (1.8.6.2)
   - ZLCollectionViewFlowLayout (1.1.6)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7.3)
   - AlamofireImage (~> 3.4.1)
+  - AlipaySDK-iOS
   - FSPagerView
   - IQKeyboardManager (~> 6.4.0)
+  - MJRefresh
   - netfox (= 1.15.0)
   - SnapKit (~> 4.2)
   - SwiftyJSON (~> 5.0.0)
   - TableKit (~> 2.9.0)
   - TagListView (~> 1.0)
+  - WechatOpenSDK
   - ZLCollectionViewFlowLayout
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - AlamofireImage
     - FSPagerView
@@ -35,19 +41,26 @@ SPEC REPOS:
     - TableKit
     - TagListView
     - ZLCollectionViewFlowLayout
+  trunk:
+    - AlipaySDK-iOS
+    - MJRefresh
+    - WechatOpenSDK
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   AlamofireImage: 78d67ccbb763d87ba44b21583d2153500a195630
+  AlipaySDK-iOS: 8659cdb4403de7e5f26ad8b699864a9cbe53384c
   FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
   IQKeyboardManager: b41e0a4943fbac4c11a239d31a688667675f962e
+  MJRefresh: 3153c59a363159092c08b2177ec3a7d09f90bfaf
   netfox: 6ddcca687ad0a58550054fea481cb487461b5e0c
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   TableKit: 2271557382915c5d8f25883044047a8568ab6400
   TagListView: 987b0bdbb16cd9d9e7c0e2ec32aff37ecba8b173
+  WechatOpenSDK: 8b3ba4239193d1112205c139c94e21934e8f369a
   ZLCollectionViewFlowLayout: 105020fbab88e3dc66ceebc307b36f2c363a8c1f
 
-PODFILE CHECKSUM: 4e0b7a94f77f7e0520f021a9116bd48bccac1db7
+PODFILE CHECKSUM: 28b6b14e8bb31438f5e619bfee4d85faf55f73e6
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.4

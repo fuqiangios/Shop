@@ -30,7 +30,7 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nI2-eO-xuX">
                             <rect key="frame" x="313" y="1" width="101" height="51"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.87720441818237305" green="0.34973940253257751" blue="0.30969130992889404" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <state key="normal" title="提交订单">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

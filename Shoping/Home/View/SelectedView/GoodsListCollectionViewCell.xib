@@ -20,6 +20,13 @@
                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="haZ-g0-edg">
                         <rect key="frame" x="5" y="5" width="214" height="310"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jEd-j2-YLg">
+                                <rect key="frame" x="178" y="276" width="28" height="28"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                <state key="normal" image="购买底色"/>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="4d647f38c5a202bf1626b370694bb2c" translatesAutoresizingMaskIntoConstraints="NO" id="djZ-kB-AEq">
@@ -72,6 +79,7 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="224" height="320"/>
             <connections>
+                <outlet property="addCart" destination="jEd-j2-YLg" id="d24-pF-AIc"/>
                 <outlet property="backView" destination="haZ-g0-edg" id="qhb-On-4Dc"/>
                 <outlet property="goodsImg" destination="djZ-kB-AEq" id="kMV-QD-KX0"/>
                 <outlet property="goodsName" destination="Q85-FY-1zK" id="Eug-Ql-EbR"/>
@@ -83,5 +91,6 @@
     </objects>
     <resources>
         <image name="4d647f38c5a202bf1626b370694bb2c" width="375" height="185"/>
+        <image name="购买底色" width="28" height="28"/>
     </resources>
 </document>

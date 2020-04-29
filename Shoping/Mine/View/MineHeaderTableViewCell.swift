@@ -10,6 +10,10 @@ import UIKit
 
 class MineHeaderTableViewCell: UITableViewCell {
     @IBOutlet weak var lineBackView: UIView!
+
+    @IBOutlet weak var barCode: UIButton!
+    
+    @IBOutlet weak var message: UIButton!
     
     @IBOutlet weak var btn: UIButton!
     @IBOutlet weak var name: UILabel!

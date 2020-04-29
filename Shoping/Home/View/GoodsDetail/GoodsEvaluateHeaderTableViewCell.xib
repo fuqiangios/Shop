@@ -57,7 +57,9 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="count" destination="4Gs-ef-Wdo" id="Qyh-1G-YUn"/>
                 <outlet property="getMoreBtn" destination="Bkj-CM-skn" id="krC-Ug-GoJ"/>
+                <outlet property="lv" destination="0gL-rd-mvJ" id="eb3-ww-tBx"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="105.80357142857143"/>
         </tableViewCell>

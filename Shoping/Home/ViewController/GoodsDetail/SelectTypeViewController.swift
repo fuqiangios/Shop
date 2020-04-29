@@ -142,8 +142,10 @@ class SelectTypeViewController: UIViewController {
             switch result {
             case .success:
                 NotificationCenter.default.post(name: NSNotification.Name("notificationCreatOrder"), object: self, userInfo: [:])
+                CLProgressHUD.showSuccess(in: self.view, delegate: self, title: "加入购物车成功", duration: 1)
                 self.dismiss(animated: true, completion: nil)
             case .failure(let error):
+                CLProgressHUD.showError(in: self.view, delegate: self, title: "加入购物车失败", duration: 1)
                 print(error)
                 print(error.self)
                 print(error.localizedDescription)
@@ -153,6 +155,11 @@ class SelectTypeViewController: UIViewController {
 
     
     @IBAction func goToBuy(_ sender: Any) {
+        if UserSetting.default.activeUserToken == nil {
+        let login = LoginViewController()
+        self.navigationController?.pushViewController(login, animated: true)
+            return
+        }
         for item in data?.data.union ?? [] {
             if item.productUnion == "\(topTagSelectIndex ?? ""):\(bottomTagSelectIndex ?? "")" {
                 if Int(item.stock) ?? 0 <= 0 {

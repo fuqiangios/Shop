@@ -26,7 +26,7 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -71,18 +71,18 @@
                         <constraint firstItem="Cp6-8W-dbc" firstAttribute="leading" secondItem="E1S-44-YBn" secondAttribute="trailing" id="x8g-DF-Gqo"/>
                     </constraints>
                 </view>
-                <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZSU-Rj-cwM">
+                <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZSU-Rj-cwM">
                     <rect key="frame" x="0.0" y="89" width="414" height="694"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="694" id="Mgs-dC-sZI"/>
                     </constraints>
                 </tableView>
-                <view hidden="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pTe-3J-1b1">
+                <view hidden="YES" alpha="0.0" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pTe-3J-1b1">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="783"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gCX-Vn-WXA" userLabel="float">
+                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gCX-Vn-WXA" userLabel="float">
                     <rect key="frame" x="0.0" y="356" width="414" height="431"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fP3-lD-Aw8">
@@ -270,8 +270,8 @@
                         <constraint firstAttribute="trailing" secondItem="8LM-1h-Dpj" secondAttribute="trailing" constant="16" id="zHd-5Y-OQo"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rL6-D2-Lnl" userLabel="bottom">
-                    <rect key="frame" x="0.0" y="783" width="414" height="79"/>
+                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rL6-D2-Lnl" userLabel="bottom">
+                    <rect key="frame" x="0.0" y="783" width="414" height="65"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Y6-5w-2US">
                             <rect key="frame" x="294" y="0.0" width="120" height="65"/>
@@ -308,10 +308,10 @@
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="79" id="ShM-8q-j07"/>
+                        <constraint firstAttribute="height" constant="65" id="ShM-8q-j07"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qM4-A4-iCk">
+                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qM4-A4-iCk">
                     <rect key="frame" x="0.0" y="862" width="414" height="34"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                 </view>

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MJRefresh
 
 class BalanceListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
@@ -14,6 +15,7 @@ class BalanceListViewController: UIViewController {
     @IBOutlet weak var line: UILabel!
     var data: AmountList? = nil
     var type = "1"
+    var page = 1
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "余额明细"
@@ -22,25 +24,51 @@ class BalanceListViewController: UIViewController {
         tableView.dataSource = self
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.mj_footer = MJRefreshAutoNormalFooter.init(refreshingBlock: {
+            self.page = self.page + 1
+            self.loadDataMore()
+        })
+        tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
+            self.page = 1
+            self.loadData()
+        })
         loadData()
     }
     @IBAction func tixian(_ sender: UIButton) {
         type = "1"
-        line.center = CGPoint(x: sender.center.x, y: sender.center.y + 15)
+        page = 1
+        line.center = CGPoint(x: sender.center.x, y: sender.center.y + 17)
         loadData()
     }
     
     @IBAction func chongzhi(_ sender: UIButton) {
         type = "2"
-        line.center = CGPoint(x: sender.center.x, y: sender.center.y + 15)
+        page = 1
+        line.center = CGPoint(x: sender.center.x, y: sender.center.y + 17)
         loadData()
     }
 
     func loadData() {
-        API.amountList(start_date: "", end_date: "", page: "1").request { (result) in
+        API.amountList(type: type, page: "\(page)").request { (result) in
+            self.tableView.mj_header?.endRefreshing()
             switch result {
             case .success(let data):
                 self.data = data
+                self.tableView.reloadData()
+            case .failure(let er):
+                print(er)
+            }
+        }
+    }
+
+    func loadDataMore() {
+        API.amountList(type: type, page: "\(page)").request { (result) in
+            self.tableView.mj_footer?.endRefreshing()
+            switch result {
+            case .success(let data):
+                var ar = self.data?.data.amountList ?? []
+                ar = ar + data.data.amountList
+                self.data = AmountList(result: true, message: "", status: 200, data: AmountListDataClass(amountList: ar))
                 self.tableView.reloadData()
             case .failure(let er):
                 print(er)

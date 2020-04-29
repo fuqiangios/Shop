@@ -12,7 +12,7 @@ class RedHistoryViewController: UIViewController {
     @IBOutlet weak var line: UILabel!
     @IBOutlet weak var tableView: UITableView!
     var type = "1"
-    var data: Redpackge? = nil
+    var data: RedPackegList? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,17 +38,17 @@ class RedHistoryViewController: UIViewController {
     }
     @IBAction func shouru(_ sender: UIButton) {
         type = "1"
-        line.center = CGPoint(x: sender.center.x, y: sender.center.y + 15)
+        line.center = CGPoint(x: sender.center.x, y: sender.center.y + 18)
         loadData()
     }
     @IBAction func zhichu(_ sender: UIButton) {
         type = "2"
-        line.center = CGPoint(x: sender.center.x, y: sender.center.y + 15)
+        line.center = CGPoint(x: sender.center.x, y: sender.center.y + 18)
         loadData()
     }
     @IBAction func guoqi(_ sender: UIButton) {
         type = "3"
-        line.center = CGPoint(x: sender.center.x, y: sender.center.y + 15)
+        line.center = CGPoint(x: sender.center.x, y: sender.center.y + 18)
         loadData()
     }
     

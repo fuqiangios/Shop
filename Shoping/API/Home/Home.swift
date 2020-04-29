@@ -25,21 +25,53 @@ extension API {
             ]
         }
     }
+
+    struct searchData: Post {
+        typealias Node = Search
+        var path: String = "front/hot_search"
+
+        init() {
+        }
+        func parameters() -> [String: Any]? {
+            return [
+                "": "",
+            ]
+        }
+    }
+
     struct homeCategoryData: Post {
         typealias Node = CategoryList
         var path: String = "front/product_list"
 
         let p_category_id: String?
         let category_id: String?
-        init(p_category_id: String?, category_id: String?) {
+        let order: String?
+        let key_word: String?
+        let product_ids: String?
+        let page: String?
+        let label_code: String?
+        let label_id: String?
+        init(p_category_id: String?, category_id: String?, order: String? = nil, key_word: String? = nil,product_ids: String? = nil, page: String? = nil, label_code: String? = nil, label_id: String? = nil) {
             self.p_category_id = p_category_id
             self.category_id = category_id
+            self.order = order
+            self.key_word = key_word
+            self.product_ids = product_ids
+            self.page = page
+            self.label_code = label_code
+            self.label_id = label_id
         }
 
         func parameters() -> [String: Any]? {
             return [
                 "p_category_id": p_category_id ?? "",
-                "category_id": category_id ?? ""
+                "category_id": category_id ?? "",
+                "order": order ?? "",
+                "key_word": key_word ?? "",
+                "product_ids": product_ids ?? "",
+                "page": page ?? "",
+                "label_code": label_code ?? "",
+                "label_id": label_id ?? ""
             ]
         }
     }
@@ -219,5 +251,14 @@ struct CategoryBanner: Codable {
         case showFlag = "show_flag"
         case created, modified, image
     }
+}
+
+
+// MARK: - Search
+struct Search: Codable {
+    let result: Bool
+    let message: String
+    let status: Int
+    let data: [String]
 }
 

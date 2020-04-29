@@ -22,9 +22,13 @@ class CartViewController: UIViewController {
     var quantity: String? = ""
     var product_option_union_id: String? = ""
     var status: Stats? = nil
+    var edit = false
+    var deleteIndex: [Int] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let itme = UIBarButtonItem.init(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = itme
         self.navigationController?.navigationBar.isTranslucent = false
         setUp()
         setShadow(view: backView, sColor: UIColor.init(white: 0.8, alpha: 1), offset: CGSize(width: 0, height: 0), opacity: 1, radius: 5)
@@ -45,6 +49,24 @@ class CartViewController: UIViewController {
 
 
     @objc func creatOrder() {
+        if edit {
+            var selectData: [String] = []
+            for index in deleteIndex {
+                if let item = data?.data.cart[index - 1] {
+                    selectData.append(item.id)
+                }
+            }
+            if selectData.count < 1 { return }
+            API.deleteCart(id: selectData).request { (result) in
+                switch result {
+                case .success( _):
+                    self.loadData()
+                case .failure(let er):
+                    print(er)
+                }
+            }
+            return
+        }
         var selectData: [Cart] = []
         for index in selectIndex {
             if let item = data?.data.cart[index - 1] {
@@ -70,10 +92,41 @@ class CartViewController: UIViewController {
         tableView.register(UINib(nibName: "CartHeaderTableViewCell", bundle: nil), forCellReuseIdentifier: "CartHeaderTableViewCell")
         selectAll.imageView?.contentMode = .scaleAspectFit
         selectAll.addTarget(self, action: #selector(selectAllBtn), for: .touchUpInside)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "编辑", style: .done, target: self, action: #selector(editAction))
 
     }
 
+    @objc func editAction() {
+        edit = !edit
+        if edit {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "完成", style: .done, target: self, action: #selector(editAction))
+            settlementBtn.backgroundColor = UIColor.gray
+            settlementBtn.setTitle("删除", for: .normal)
+            num.text = ""
+            deleteIndex = []
+            tableView.reloadData()
+            setBotoomInfo()
+        } else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "编辑", style: .done, target: self, action: #selector(editAction))
+            settlementBtn.backgroundColor = settlementBtn.tintColor
+            setBotoomInfo()
+            tableView.reloadData()
+        }
+    }
+
     @objc func selectAllBtn() {
+        if edit {
+            if deleteIndex.count == data?.data.cart.count {
+                        deleteIndex = []
+                    } else {
+                        deleteIndex = []
+                        for index in 0..<(data?.data.cart.count ?? 0) {
+                            deleteIndex.append(index + 1)
+                        }
+                    }
+                    tableView.reloadData()
+            setBotoomInfo()
+        } else {
         if selectIndex.count == data?.data.cart.count {
             selectIndex = []
             var selectData: [String] = []
@@ -98,6 +151,7 @@ class CartViewController: UIViewController {
         }
         tableView.reloadData()
         setBotoomInfo()
+        }
     }
 
     func statusCart(str: String, ids: [String]) {
@@ -179,6 +233,9 @@ extension CartViewController: UITableViewDataSource,UITableViewDelegate {
             } else {
                 cell.btn.isHidden = false
             }
+            if edit {
+                cell.img.setImage(UIImage(named: "ic_zhifu"), for: .normal)
+            }
             cell.btn.addTarget(self, action: #selector(toCollectBills), for: .touchUpInside)
             return cell
         }
@@ -190,10 +247,18 @@ extension CartViewController: UITableViewDataSource,UITableViewDelegate {
         cell.textField.text = item?.quantity
         cell.price.text = "￥\(item?.price ?? "0")"
         var select = -1
+        if edit {
+            for index in 0..<deleteIndex.count {
+                if indexPath.row == deleteIndex[index] {
+                    select = index
+                }
+            }
+        } else {
         for index in 0..<selectIndex.count {
             if indexPath.row == selectIndex[index] {
                 select = index
             }
+        }
         }
         cell.addBtn.tag = indexPath.row - 1
         cell.reduceBtn.tag = indexPath.row - 1 + 1000
@@ -210,6 +275,22 @@ extension CartViewController: UITableViewDataSource,UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if edit {
+            var select = -1
+            for index in 0..<deleteIndex.count {
+                if indexPath.row == deleteIndex[index] {
+                    select = index
+                }
+            }
+            if select < 0 {
+                deleteIndex.append(indexPath.row)
+            } else {
+                deleteIndex.remove(at: select)
+            }
+            tableView.reloadData()
+            setBotoomInfo()
+            return
+        }
         if indexPath.row == 0 {
             selectAllBtn()
             return
@@ -281,6 +362,13 @@ extension CartViewController: UITableViewDataSource,UITableViewDelegate {
     }
 
     func setBotoomInfo() {
+        if edit {
+            if deleteIndex.count == data?.data.cart.count, data?.data.cart.count != 0 {
+                selectAll.setImage(UIImage(named: "ic_gouwu"), for: .normal)
+            } else {
+                selectAll.setImage(UIImage(named: "ic_zhifu"), for: .normal)
+            }
+        } else {
         if selectIndex.count == data?.data.cart.count, data?.data.cart.count != 0 {
             selectAll.setImage(UIImage(named: "ic_gouwu"), for: .normal)
         } else {
@@ -301,6 +389,7 @@ extension CartViewController: UITableViewDataSource,UITableViewDelegate {
                 numPrice = numPrice + p
             }
         num.text = "合计:￥\(status?.total ?? 0)"
+        }
     }
 
     @objc func toCollectBills() {

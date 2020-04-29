@@ -17,7 +17,7 @@ class BalanceViewController: UIViewController {
     @IBOutlet weak var tixian: UIButton!
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var info: UITextView!
-    var data: AmountList? = nil
+    var data: Amount? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +40,11 @@ class BalanceViewController: UIViewController {
           tableView.separatorStyle = .none
           tableView.backgroundColor = UIColor.tableviewBackgroundColor
         loadData()
-        loadList()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        loadData()
     }
 
     @objc func toDetail() {
@@ -53,7 +57,8 @@ class BalanceViewController: UIViewController {
             switch result{
             case .success(let data):
                 self.price.text = data.data.amount
-                self.info.text = data.data.content
+                self.data = data
+                self.tableView.reloadData()
             case .failure:
                 print("error")
             }
@@ -68,17 +73,17 @@ class BalanceViewController: UIViewController {
         let tixian = BalancePayViewController()
         self.navigationController?.pushViewController(tixian, animated: true)
     }
-    func loadList() {
-        API.amountList(start_date: "", end_date: "", page: "1").request { (result) in
-            switch result {
-            case .success(let data):
-                self.data = data
-                self.tableView.reloadData()
-            case .failure(let er):
-                print(er)
-            }
-        }
-    }
+//    func loadList() {
+//        API.amountList(start_date: "", end_date: "", page: "1").request { (result) in
+//            switch result {
+//            case .success(let data):
+//                self.data = data
+//                self.tableView.reloadData()
+//            case .failure(let er):
+//                print(er)
+//            }
+//        }
+//    }
     @IBAction func backAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }

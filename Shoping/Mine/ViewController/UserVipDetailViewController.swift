@@ -7,12 +7,16 @@
 //
 
 import UIKit
+import MJRefresh
 
 class UserVipDetailViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var page = 1
     var start = ""
     var end = ""
+    var token = ""
+    var date = "2020-04"
+    var data: FansList? = nil
     @IBOutlet weak var bbtn: UIButton!
     
     override func viewDidLoad() {
@@ -28,23 +32,64 @@ class UserVipDetailViewController: UIViewController {
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableView.automaticDimension
         tableView.backgroundColor = UIColor.tableviewBackgroundColor
+        loadData()
 //        tableView.separatorStyle = .none
+        tableView.mj_footer = MJRefreshAutoNormalFooter.init(refreshingBlock: {
+            self.page = self.page + 1
+            self.loadDataMore()
+        })
+        tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
+            self.page = 1
+            self.loadData()
+        })
     }
 
-    @IBAction func selectAction(_ sender: Any) {
-        let dat = [1,2,3,4,5,6,7,8,9,10,11,12]
-        let alertController = UIAlertController(title: "申请原因", message: "", preferredStyle: UIAlertController.Style.actionSheet)
-
-        for item in dat {
-            alertController.addAction(UIAlertAction(title: "\(item)月", style: UIAlertAction.Style.default, handler:{ (l) in
-                self.start = self.dateConvertString(date: self.startOfMonth(year: self.startOfCurrentYear(), month: item))
-                self.end = self.dateConvertString(date: self.endOfMonth(year: self.startOfCurrentYear(), month: item))
-//                self.loadData()
-                }))
+    func loadData() {
+        API.fansListData(user_token: token, month: date, page: "\(page)").request { (result) in
+            self.tableView.mj_header?.endRefreshing()
+            switch result {
+            case .success(let data):
+                self.data = data
+                self.tableView.reloadData()
+            case .failure(let er):
+                print(er)
+            }
         }
-        alertController.addAction(UIAlertAction(title: "取消", style: UIAlertAction.Style.cancel, handler: nil))
+    }
 
-        self.present(alertController, animated: true, completion: nil)
+    func loadDataMore() {
+        API.fansListData(user_token: token, month: date, page: "\(page)").request { (result) in
+            self.tableView.mj_footer?.endRefreshing()
+            switch result {
+            case .success(let data):
+                var ar = self.data?.data.orderList
+                ar = (ar ?? []) + data.data.orderList
+                self.data = FansList(result: true, message: "", status: 200, data: FansListDataClass(orderList: ar ?? []))
+                self.tableView.reloadData()
+            case .failure(let er):
+                print(er)
+            }
+        }
+    }
+
+    @IBAction func selectAction(_ sender: UIButton) {
+       //年-月
+//       WSDatePickerView *datepicker = [[WSDatePickerView alloc] initWithDateStyle:DateStyleShowYearMonth CompleteBlock:^(NSDate *selectDate) {
+//
+//           NSString *dateString = [selectDate stringWithFormat:@"yyyy-MM"];
+//           NSLog(@"选择的日期：%@",dateString);
+//           [btn setTitle:dateString forState:UIControlStateNormal];
+//       }];
+//       datepicker.dateLabelColor = randomColor;//年-月-日-时-分 颜色
+//       datepicker.datePickerColor = randomColor;//滚轮日期颜色
+//       datepicker.doneButtonColor = randomColor;//确定按钮的颜色
+//       [datepicker show];
+        let datepicker = WSDatePickerView(dateStyle: DateStyleShowYearMonth) { (dat) in
+            self.date = self.dateConvertString(date: dat ?? Date.init())
+            self.loadData()
+            sender.setTitle(self.dateConvertString(date: dat ?? Date.init()), for: .normal)
+        }
+        datepicker?.show()
     }
 
     func startOfCurrentMonth() -> Date {
@@ -79,11 +124,8 @@ class UserVipDetailViewController: UIViewController {
         return Int(dateConvertString(date: startOfMonth, dateFormat: "yyyy")) ?? 2020
     }
 
-    func dateConvertString(date:Date, dateFormat:String="yyyy-MM-dd") -> String {
-            let timeZone = TimeZone.init(identifier: "UTC")
+    func dateConvertString(date:Date, dateFormat:String="yyyy-MM") -> String {
             let formatter = DateFormatter()
-            formatter.timeZone = timeZone
-            formatter.locale = Locale.init(identifier: "zh_CN")
             formatter.dateFormat = dateFormat
             let date = formatter.string(from: date)
             return date.components(separatedBy: " ").first!
@@ -117,12 +159,18 @@ class UserVipDetailViewController: UIViewController {
 }
 extension UserVipDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return data?.data.orderList.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserVipDetailTableViewCell") as! UserVipDetailTableViewCell
         cell.selectionStyle = .none
+        let item = data?.data.orderList[indexPath.row]
+        cell.date.text = item?.created
+        cell.price.text = "￥\(item?.price ?? "")"
+        cell.point.text = item?.pointSave
+        cell.redPackge.text = item?.redpackageSave
+        cell.yongjin.text = item?.commissionSave
         return cell
     }
 

@@ -50,6 +50,18 @@ extension API {
         }
     }
 
+    struct invoiceInfo: Post {
+        typealias Node = InvoiceInfo
+        var path: String = "product/invoice_list"
+
+        init() {
+        }
+
+        func parameters() -> [String : Any]? {
+            return ["": ""]
+        }
+    }
+
     struct payList: Post {
         typealias Node = PayList
         var path: String = "order/payment_list"
@@ -86,6 +98,70 @@ extension API {
         }
     }
 
+    struct cartCollect: Post {
+        typealias Node = ChangeCollectList
+        var path: String = "product/collect"
+
+        let order: String
+        let page: String
+        init(order: String, page: String) {
+            self.order = order
+            self.page = page
+        }
+
+        func parameters() -> [String : Any]? {
+            return [
+                "order": order,
+                "page": page,
+            ]
+        }
+    }
+
+    struct deleteCart: Post {
+        typealias Node = CartNumChange
+        var path: String = "product/remove_cart"
+
+        let id: [String]
+        init(id: [String]) {
+            self.id = id
+        }
+
+        func parameters() -> [String : Any]? {
+            return [
+                "id": id
+            ]
+        }
+    }
+
+    struct addInvoice: Post {
+        typealias Node = AddInvoice
+        var path: String = "product/invoice_add"
+
+        let type: String
+        let name: String
+        let telephone: String
+        let email: String
+        let tax_num: String
+        init(type: String, name: String, telephone: String, email: String, tax_num: String) {
+            self.type = type
+            self.name = name
+            self.telephone = telephone
+            self.email = email
+            self.tax_num = tax_num
+        }
+
+        func parameters() -> [String : Any]? {
+            return [
+                "type": "1",
+                "head_type": type,
+                "name": name,
+                "telephone": telephone,
+                "email": email,
+                "tax_num": tax_num
+            ]
+        }
+    }
+
     struct orderSettlement: Post {
 
         typealias Node = OrderSettlement
@@ -113,7 +189,7 @@ extension API {
     }
 
     struct createOrder: Post {
-        typealias Node = CreatOrder
+        typealias Node = Chongzhi
         var path: String = "order/confirm"
 
         let order_type: String
@@ -125,7 +201,11 @@ extension API {
         let customer_coupon_id: String?
         let address_id: String?
         let self_store_id: String?
-        init(order_type: String, shopping_cart_ids: [String]?, product_id: String?, quantity: String?, product_option_union_id: String?, red_packet: String?, customer_coupon_id: String?, address_id: String?, self_store_id: String?) {
+        let store_id: String
+        let payment_pfn: String
+        let payment_method: String
+        let invoice_id: String
+        init(order_type: String, shopping_cart_ids: [String]?, product_id: String?, quantity: String?, product_option_union_id: String?, red_packet: String?, customer_coupon_id: String?, address_id: String?, self_store_id: String?, store_id: String, payment_pfn: String, payment_method: String, invoice_id: String) {
             self.order_type = order_type
             self.shopping_cart_ids = shopping_cart_ids
             self.product_id = product_id
@@ -135,6 +215,10 @@ extension API {
             self.customer_coupon_id = customer_coupon_id
             self.address_id = address_id
             self.self_store_id = self_store_id
+            self.store_id = store_id
+            self.payment_pfn = payment_pfn
+            self.payment_method = payment_method
+            self.invoice_id = invoice_id
         }
 
         func parameters() -> [String : Any]? {
@@ -147,7 +231,11 @@ extension API {
                 "red_packet": red_packet ?? "",
                 "customer_coupon_id": customer_coupon_id ?? "",
                 "address_id": address_id ?? "",
-                "self_store_id": self_store_id ?? ""
+                "self_store_id": self_store_id ?? "",
+                "store_id": store_id,
+                "payment_pfn": payment_pfn,
+                "payment_method": payment_method,
+                "invoice_id": invoice_id
             ]
         }
     }
@@ -252,17 +340,39 @@ struct PayDataClass: Codable {
     }
 }
 
+struct TixianPay: Codable {
+    let name: String
+    let pfn: String
+    let icon: String
+    let binding_flag: Bool
+}
+
 // MARK: - Payment
 struct Payment: Codable {
-    let id, name, type, pfn: String
-    let status, paymentDescription, sort, created: String
-    let modified: String
+    let name, pfn: String
     let icon: String
 
     enum CodingKeys: String, CodingKey {
-        case id, name, type, pfn, status
-        case paymentDescription = "description"
-        case sort, created, modified, icon
+        case name, pfn
+        case icon
+    }
+
+    func getIcon() -> String {
+        if icon.isEmpty {
+            return "https://app.necesstore.com/upload/advert/o_10530652.jpg"
+        } else {
+            return icon
+        }
+    }
+}
+
+struct SettlePayment: Codable {
+    let name, pfn: String
+    let icon: String
+
+    enum CodingKeys: String, CodingKey {
+        case name, pfn
+        case icon
     }
 
     func getIcon() -> String {
@@ -289,14 +399,30 @@ struct SettleDataClass: Codable {
     let address: AddressDatum
     let shippingFee: String
     let coupons: [SettlementCoupon]
+    let store_id: String
+    let invoice: Invoice
+    let payment: [SettlePayment]
 //    let stores: [Store]
 
     enum CodingKeys: String, CodingKey {
         case products
         case redPackage = "red_package"
-        case address
+        case address, payment
         case shippingFee = "shipping_fee"
-        case coupons
+        case coupons, store_id, invoice
+    }
+}
+
+// MARK: - Invoice
+struct Invoice: Codable {
+    let type, name, telephone, email: String?
+    let taxNum, isDefault, id: String?
+
+    enum CodingKeys: String, CodingKey {
+        case type, name, telephone, email
+        case taxNum = "tax_num"
+        case isDefault = "is_default"
+        case id
     }
 }
 
@@ -349,4 +475,121 @@ struct ChangeCart: Codable {
 // MARK: - DataClass
 struct ChangeCartDataClass: Codable {
     let stats: Stats
+}
+
+// MARK: - ChangeCollectList
+struct ChangeCollectList: Codable {
+    let result: Bool
+    let message: String
+    let status: Int
+    let data: CollectDataClass
+}
+
+// MARK: - DataClass
+struct CollectDataClass: Codable {
+    let products: [CollectProduct]
+    let stats: CollectStats
+}
+
+// MARK: - Product
+struct CollectProduct: Codable {
+    let id, name, title, price: String
+    let oldPrice: String
+    let image: String
+    let saleCnt, created, productOptionUnionID: String
+
+    enum CodingKeys: String, CodingKey {
+        case id, name, title, price
+        case oldPrice = "old_price"
+        case image
+        case saleCnt = "sale_cnt"
+        case created
+        case productOptionUnionID = "product_option_union_id"
+    }
+}
+
+// MARK: - Stats
+struct CollectStats: Codable {
+    let total, quantity: Int
+    let feeMsg, feeMsgContent: String
+    let diffPrice: Int
+
+    enum CodingKeys: String, CodingKey {
+        case total, quantity
+        case feeMsg = "fee_msg"
+        case feeMsgContent = "fee_msg_content"
+        case diffPrice = "diff_price"
+    }
+}
+
+// MARK: - AddInvoice
+struct AddInvoice: Codable {
+    let result: Bool
+    let message: String
+    let status: Int
+    let data: InvoiceDataClass
+}
+
+// MARK: - DataClass
+struct InvoiceDataClass: Codable {
+    let invoice: Invoice
+}
+
+// MARK: - InvoiceInfo
+struct InvoiceInfo: Codable {
+    let result: Bool
+    let message: String
+    let status: Int
+    let data: InvoiceInfoDataClass
+}
+
+// MARK: - DataClass
+struct InvoiceInfoDataClass: Codable {
+    let company, person: Company
+    let headType: String
+    let headTypes: HeadTypes
+    let types: Types
+
+    enum CodingKeys: String, CodingKey {
+        case company, person
+        case headType = "head_type"
+        case headTypes = "head_types"
+        case types
+    }
+}
+
+// MARK: - Company
+struct Company: Codable {
+    let id, type, headType, name: String
+    let telephone, email, taxNum, customerID: String
+    let isDefault, created, modified: String
+
+    enum CodingKeys: String, CodingKey {
+        case id, type
+        case headType = "head_type"
+        case name, telephone, email
+        case taxNum = "tax_num"
+        case customerID = "customer_id"
+        case isDefault = "is_default"
+        case created, modified
+    }
+}
+
+// MARK: - HeadTypes
+struct HeadTypes: Codable {
+    let the1, the2: String
+
+    enum CodingKeys: String, CodingKey {
+        case the1 = "1"
+        case the2 = "2"
+    }
+}
+
+// MARK: - Types
+struct Types: Codable {
+    let the1: String
+
+    enum CodingKeys: String, CodingKey {
+        case the1 = "1"
+    }
 }

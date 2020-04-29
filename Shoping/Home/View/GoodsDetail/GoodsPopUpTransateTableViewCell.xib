@@ -20,23 +20,24 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="优惠券底色" translatesAutoresizingMaskIntoConstraints="NO" id="aUG-bH-dXO">
                         <rect key="frame" x="10" y="9" width="345" height="90"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="0.57965004280821919" colorSpace="custom" customColorSpace="sRGB"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="￥10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCv-ZP-o3l">
-                        <rect key="frame" x="22" y="23" width="49" height="30"/>
+                        <rect key="frame" x="22" y="23" width="63" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="满100元可使用" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="muT-Aw-6UE">
-                        <rect key="frame" x="74" y="17" width="177" height="21"/>
+                        <rect key="frame" x="93" y="16" width="177" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="有效期至2020年2月1日" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1a-x0-UvD">
-                        <rect key="frame" x="74" y="38" width="177" height="21"/>
+                        <rect key="frame" x="93" y="37" width="177" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -69,10 +70,12 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="backImg" destination="aUG-bH-dXO" id="Oqv-re-ndH"/>
                 <outlet property="bbtn" destination="9CZ-IK-SQe" id="PJ6-w4-ELq"/>
                 <outlet property="date" destination="j1a-x0-UvD" id="Ygt-i2-Xsz"/>
                 <outlet property="info" destination="muT-Aw-6UE" id="71g-es-rhD"/>
                 <outlet property="price" destination="yCv-ZP-o3l" id="Ijb-oY-NaU"/>
+                <outlet property="tips" destination="yEf-qH-QEa" id="pFS-4p-kCl"/>
             </connections>
             <point key="canvasLocation" x="169.56521739130437" y="113.16964285714285"/>
         </tableViewCell>

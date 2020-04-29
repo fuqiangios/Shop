@@ -8,14 +8,27 @@
 
 import UIKit
 import ZLCollectionViewFlowLayout
+import MJRefresh
 
 class CartCollectBillsViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     let height = ScreenWidth/414.0
+    var order = ""
+    var page = 1
+    var data: ChangeCollectList? = nil
+    var state: CollectStats? = nil
+    var mony = "price_down" //price_up
 
+    @IBOutlet weak var line: UILabel!
+    @IBOutlet weak var goBack: UIButton!
+    @IBOutlet weak var needPrice: UILabel!
+    @IBOutlet weak var price: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "凑单"
+        goBack.layer.cornerRadius = 8
+        goBack.layer.masksToBounds = true
+        goBack.addTarget(self, action: #selector(bacl), for: .touchUpInside)
         let layout = ZLCollectionViewVerticalLayout()
         layout.delegate = self
 
@@ -25,13 +38,100 @@ class CartCollectBillsViewController: UIViewController {
                       self.view.addSubview(collectionView!)
                       // 注册cell
         collectionView?.register(UINib.init(nibName: "GoodsListCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "GoodsListCollectionViewCell")
+        collectionView?.mj_footer = MJRefreshAutoNormalFooter.init(refreshingBlock: {
+            self.page = self.page + 1
+            self.loadDataMore()
+        })
+        collectionView?.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
+            self.page = 1
+            self.loadData()
+        })
+        loadData()
 
     }
 
+    @objc func bacl() {
+        self.navigationController?.popViewController(animated: true)
+    }
+
+    @objc func addCartl(btn: UIButton) {
+        let item = data?.data.products[btn.tag - 100]
+        API.addCart(product_id: item?.id ?? "", quantity: "1", product_option_union_id: item?.productOptionUnionID ?? "").request { (result) in
+            switch result {
+            case .success(let data):
+                self.state = data.data.stats
+                self.setBottom()
+            case .failure(let error):
+                print(error)
+                print(error.self)
+                print(error.localizedDescription)
+            }
+        }
+    }
+
+    @IBAction func type(_ sender: UIButton) {
+        if sender.tag == 2 {
+            if order == "" {
+                order = "price_down"
+                sender.setImage(UIImage(named: "价格降序"), for: .normal)
+            } else if order == "price_down" {
+                order = "price_up"
+                sender.setImage(UIImage(named: "价格升序"), for: .normal)
+            } else {
+                order = "price_down"
+                sender.setImage(UIImage(named: "价格降序"), for: .normal)
+            }
+        } else {
+            order = ""
+        }
+        line.center = CGPoint(x: sender.center.x, y: sender.center.y + 18)
+        loadData()
+    }
+    func loadData() {
+        page = 1
+        API.cartCollect(order: order, page: "\(page)").request { (result) in
+            self.collectionView.mj_header?.endRefreshing()
+            switch result {
+            case .success(let data):
+                self.data = data
+                self.state = data.data.stats
+                self.collectionView.reloadData()
+                self.setBottom()
+            case .failure(let er):
+                print(er)
+            }
+        }
+    }
+
+    func loadDataMore() {
+        API.cartCollect(order: order, page: "\(page)").request { (result) in
+            self.collectionView.mj_footer?.endRefreshing()
+            switch result {
+            case .success(let data):
+                var ar = self.data?.data.products ?? []
+                ar = ar + data.data.products
+                self.data = ChangeCollectList(result: true, message: "", status: 200, data: CollectDataClass(products: ar, stats: data.data.stats))
+                self.state = data.data.stats
+                self.collectionView.reloadData()
+                self.setBottom()
+            case .failure(let er):
+                print(er)
+            }
+        }
+    }
+
+    func setBottom() {
+        price.text = "合计: ￥\(state?.total ?? 0)"
+        if state?.diffPrice ?? 0 > 0 {
+            needPrice.text = "再购￥\(state?.diffPrice ?? 0)元免邮"
+        } else {
+            needPrice.text = "已免邮费"
+        }
+    }
 }
 extension CartCollectBillsViewController: UICollectionViewDelegate, UICollectionViewDataSource, ZLCollectionViewBaseFlowLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return   10
+        return data?.data.products.count ?? 0
     }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -40,10 +140,13 @@ extension CartCollectBillsViewController: UICollectionViewDelegate, UICollection
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell:GoodsListCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "GoodsListCollectionViewCell", for: indexPath) as! GoodsListCollectionViewCell
-//        cell.goodsImg.af_setImage(withURL: URL(string: (data?.data.products[indexPath.item].image)!)!)
-//        cell.goodsName.text = data?.data.products[indexPath.item].name
-//        cell.info.text = data?.data.products[indexPath.item].title
-//        cell.price.text = "￥" + (data?.data.products[indexPath.item].price ?? "0") + " ￥\(data?.data.products[indexPath.item].oldPrice ?? "0")"
+        cell.goodsImg.af_setImage(withURL: URL(string: (data?.data.products[indexPath.item].image)!)!)
+        cell.goodsName.text = data?.data.products[indexPath.item].name
+        cell.info.text = data?.data.products[indexPath.item].title
+        cell.price.text = "￥" + (data?.data.products[indexPath.item].price ?? "0")
+        cell.addCart.isHidden = false
+        cell.addCart.tag = indexPath.item + 100
+        cell.addCart.addTarget(self, action: #selector(addCartl(btn:)), for: .touchUpInside)
         return cell
     }
 

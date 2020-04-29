@@ -10,6 +10,8 @@ import UIKit
 
 class GoodsPopUpTransateTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var backImg: UIImageView!
+    @IBOutlet weak var tips: UILabel!
     @IBOutlet weak var bbtn: UIButton!
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var info: UILabel!

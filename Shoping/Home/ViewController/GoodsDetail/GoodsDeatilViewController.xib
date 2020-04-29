@@ -41,7 +41,7 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Y6-5w-2US">
                             <rect key="frame" x="294" y="0.0" width="120" height="65"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.85826212170000005" green="0.17443221810000001" blue="0.16723364590000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                             <state key="normal" title="立即购买">
@@ -50,7 +50,7 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NPO-Ie-oYu">
                             <rect key="frame" x="174" y="0.0" width="120" height="65"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.94492989778518677" green="0.66754406690597534" blue="0.2349412739276886" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <state key="normal" title="加入购物车">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

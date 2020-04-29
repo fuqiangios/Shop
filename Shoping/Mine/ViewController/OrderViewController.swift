@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MJRefresh
 
 class OrderViewController: UIViewController {
     @IBOutlet weak var topBgView: UIView!
@@ -14,16 +15,28 @@ class OrderViewController: UIViewController {
     @IBOutlet weak var line: UILabel!
     @IBOutlet weak var tableView: UITableView!
     var tab_status: String = "1"
-    let page = 1
+    var page = 1
     var data: Order? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "全部订单"
         self.setUp()
-        let btn = view.viewWithTag((Int(tab_status) ?? 1) + 1)as!UIButton
-        self.updateBtn(btn: btn)
+        tableView.mj_footer = MJRefreshAutoNormalFooter.init(refreshingBlock: {
+            self.page = self.page + 1
+            self.loadDataMore()
+        })
+        tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
+            self.page = 1
+            self.loadData()
+        })
 
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        let btn = view.viewWithTag((Int(tab_status) ?? 1) + 1)as!UIButton
+
+        self.updateBtn(btn: btn)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -77,13 +90,30 @@ class OrderViewController: UIViewController {
     }
 
     func loadData() {
+        page = 1
         API.orderList(tab_status: tab_status, page: "\(page)").request { (result) in
+            self.tableView.mj_header?.endRefreshing()
             switch result {
             case .success(let data):
                 self.data = data
                 self.tableView.reloadData()
             case .failure:
                 self.data = nil
+                self.tableView.reloadData()
+            }
+        }
+    }
+
+    func loadDataMore() {
+        API.orderList(tab_status: tab_status, page: "\(page)").request { (result) in
+            self.tableView.mj_footer?.endRefreshing()
+            switch result {
+            case .success(let data):
+                var ar = self.data?.data ?? []
+                ar = ar + data.data
+                self.data = Order(result: true, message: "", status: 200, data: ar)
+                self.tableView.reloadData()
+            case .failure:
                 self.tableView.reloadData()
             }
         }
@@ -109,6 +139,7 @@ class OrderViewController: UIViewController {
 
     func updateOrderStatus(id: String, type: String) {
         API.orderUpdateStatus(orderId: id, button_type: type).request { (result) in
+            self.page = 1
             self.loadData()
         }
     }
@@ -127,12 +158,20 @@ extension OrderViewController:UITableViewDelegate,UITableViewDataSource {
         cell.status.text = item?.statusName
         if item?.products.count ?? 0 >= 1 {
             cell.img0.af_setImage(withURL: URL(string: item?.products[0].image ?? "")!)
+            cell.img3.image = UIImage(named: "")
+            cell.img1.image = UIImage(named: "")
         }
         if item?.products.count ?? 0 >= 2 {
             cell.img1.af_setImage(withURL: URL(string: item?.products[1].image ?? "")!)
+            cell.img3.image = UIImage(named: "")
         }
         if item?.products.count ?? 0 >= 3 {
             cell.img3.af_setImage(withURL: URL(string: item?.products[2].image ?? "")!)
+        }
+        if item?.products.count ?? 0 == 0 {
+            cell.img3.image = UIImage(named: "")
+            cell.img0.image = UIImage(named: "")
+            cell.img1.image = UIImage(named: "")
         }
         cell.leftBtn.addTarget(self, action: #selector(updateOrder(btn:)), for: .touchUpInside)
         cell.leftBtn.tag = (indexPath.row * 100) + 1
@@ -152,10 +191,13 @@ extension OrderViewController:UITableViewDelegate,UITableViewDataSource {
             self.navigationController?.pushViewController(pay, animated: true)
         } else if btn.titleLabel?.text == "确认收货" {
             updateOrderStatus(id: data?.data[tag].id ?? "", type: "confirm")
-        } else if btn.titleLabel?.text == "删除订单" {
+        } else if btn.titleLabel?.text == "删除" {
             updateOrderStatus(id: data?.data[tag].id ?? "", type: "delete")
         } else if btn.titleLabel?.text == "查看物流" {
 
+        } else if btn.titleLabel?.text == "评论" {
+            let addeva = EvaluateManagerViewController()
+            self.navigationController?.pushViewController(addeva, animated: true)
         }
     }
 

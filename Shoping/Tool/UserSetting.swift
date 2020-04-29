@@ -12,9 +12,9 @@ private struct UserSettingKes {
     static fileprivate let activeUser: String = "ACTIVE_USER"
     static fileprivate let activeToken: String = "ACTIVE_TOKEN"
     static fileprivate let Notifications: String = "ACTIVE_Notifi"
-
+    static fileprivate let searHistory: String = "SEAR_HISTORY"
     static func allKeys() -> [String] {
-        return [activeUser,activeToken]
+        return [activeUser,activeToken,searHistory]
     }
 }
 
@@ -65,7 +65,7 @@ class UserSetting {
                 if let token = newValue {
                     standard.setValue(token, forKey: UserSettingKes.activeToken)
                 } else {
-                    standard.setValue(nil, forKey: UserSettingKes.activeUser)
+                    standard.setValue(nil, forKey: UserSettingKes.activeToken)
                 }
                 standard.synchronize()
             } catch {
@@ -78,6 +78,34 @@ class UserSetting {
                 return nil
             }
             
+            do {
+                return token
+            } catch {
+                print(error.localizedDescription)
+                return nil
+            }
+        }
+    }
+
+    var searchHistory: [String]? {
+        set {
+            do {
+                if let token = newValue {
+                    standard.setValue(token, forKey: UserSettingKes.searHistory)
+                } else {
+                    standard.setValue(nil, forKey: UserSettingKes.searHistory)
+                }
+                standard.synchronize()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+
+        get {
+            guard let token = standard.value(forKey: UserSettingKes.searHistory) as? [String] else {
+                return nil
+            }
+
             do {
                 return token
             } catch {

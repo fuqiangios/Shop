@@ -10,8 +10,22 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AchievementViewController" customModule="我家用品" customModuleProvider="target">
             <connections>
+                <outlet property="bennnianyeji" destination="KZZ-Le-CfL" id="1mq-rO-aol"/>
+                <outlet property="benyueyeji" destination="z94-RW-FRc" id="2N7-iq-4CF"/>
+                <outlet property="checkBtn" destination="8gx-S5-Tlc" id="mrd-Sn-7Sy"/>
+                <outlet property="cityLabel" destination="xsy-Zj-hgv" id="Ivm-nM-2tl"/>
+                <outlet property="detail" destination="fUH-CE-6Qv" id="fZe-Dy-IhH"/>
+                <outlet property="friendNum" destination="2Aa-vv-AWl" id="squ-Vy-Yid"/>
+                <outlet property="myFriend" destination="5v0-lh-efj" id="0IZ-Jm-3ne"/>
+                <outlet property="name" destination="VNX-CW-74M" id="W7V-q9-tYB"/>
+                <outlet property="newFriedn" destination="uvG-gM-aVs" id="zki-VR-bAw"/>
+                <outlet property="regionLabel" destination="AFA-cc-OZf" id="O0w-tE-o4n"/>
                 <outlet property="scrollView" destination="TO7-IS-Vnk" id="5PC-sg-Wba"/>
+                <outlet property="shangjiyeji" destination="BUf-pO-rLZ" id="XTd-eg-qiE"/>
+                <outlet property="shangyueyeji" destination="Rk8-cn-yqQ" id="XwW-zH-OC8"/>
+                <outlet property="storeLabel" destination="xfX-ab-FrA" id="Q0v-AY-pXz"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="zuoriyeji" destination="3Nc-8A-muP" id="Fjg-Sp-uy7"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -22,7 +36,7 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TO7-IS-Vnk">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="我的粉丝" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uGR-b6-WZK">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="全球会员" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uGR-b6-WZK">
                             <rect key="frame" x="0.0" y="158" width="414" height="21"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
@@ -50,7 +64,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="0.92156862750000001" green="0.9215573668" blue="0.92156130079999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </view>
-                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入会员姓名" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AFA-cc-OZf">
+                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请选择大区" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AFA-cc-OZf">
                                     <rect key="frame" x="41" y="22" width="148" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -69,7 +83,7 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
-                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入会员电话" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xsy-Zj-hgv">
+                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请选择城市" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xsy-Zj-hgv">
                                     <rect key="frame" x="241" y="22" width="150" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -81,21 +95,33 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="0.82672619820000004" green="0.33012539149999998" blue="0.29008919" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <state key="normal" title="查询"/>
+                                    <connections>
+                                        <action selector="checkAction:" destination="-1" eventType="touchUpInside" id="ftW-eS-lOq"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pqF-aS-Zyn">
                                     <rect key="frame" x="23" y="22" width="151" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <state key="normal" image="下拉_色块"/>
+                                    <connections>
+                                        <action selector="regionAction:" destination="-1" eventType="touchUpInside" id="Sgx-qn-lcC"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Le-hR-oMY">
                                     <rect key="frame" x="225" y="22" width="151" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <state key="normal" image="下拉_色块"/>
+                                    <connections>
+                                        <action selector="cityAction:" destination="-1" eventType="touchUpInside" id="AEY-5f-FCv"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1L-gN-UzS">
                                     <rect key="frame" x="23" y="102" width="353" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <state key="normal" image="下拉_色块"/>
+                                    <connections>
+                                        <action selector="storeAction:" destination="-1" eventType="touchUpInside" id="xgO-Qu-yrg"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -104,7 +130,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="414" height="275"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="今日新增" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ds-hU-q1D">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="今日业绩" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ds-hU-q1D">
                             <rect key="frame" x="0.0" y="211" width="414" height="21"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
@@ -129,7 +155,7 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="本店会员新增数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kSO-bu-U4w">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="本店会员数量" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kSO-bu-U4w">
                                     <rect key="frame" x="20" y="56" width="128" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
@@ -143,7 +169,7 @@
                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="本店会员新增数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Qe-2f-YSy">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="昨日业绩" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Qe-2f-YSy">
                                     <rect key="frame" x="20" y="89" width="128" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
@@ -157,7 +183,7 @@
                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="本店会员新增数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9f2-b7-Cva">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="本月业绩" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9f2-b7-Cva">
                                     <rect key="frame" x="20" y="123" width="128" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
@@ -171,7 +197,7 @@
                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="本店会员新增数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c3V-Xc-ydQ">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="上月业绩" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c3V-Xc-ydQ">
                                     <rect key="frame" x="20" y="157" width="128" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
@@ -185,7 +211,7 @@
                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="本店会员新增数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcl-QS-05g">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="上级业绩" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcl-QS-05g">
                                     <rect key="frame" x="20" y="191" width="128" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
@@ -199,7 +225,7 @@
                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="本店会员新增数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7iR-rm-6K0">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="本年业绩" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7iR-rm-6K0">
                                     <rect key="frame" x="20" y="226" width="128" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>

@@ -55,6 +55,7 @@
                                             <constraint firstAttribute="height" constant="60" id="sIG-XU-XfZ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
+                                        <color key="tintColor" red="0.95686274509803915" green="0.34901960784313724" blue="0.30980392156862746" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <inset key="contentEdgeInsets" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                                         <state key="normal" title="结算(30)">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -93,17 +94,17 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zsf-AF-p9O">
-                                <rect key="frame" x="20" y="108" width="374" height="200"/>
+                                <rect key="frame" x="20" y="108" width="374" height="0.0"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="koh-yq-zpM">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="200"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="0.0"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="B0y-eo-moO"/>
+                                    <constraint firstAttribute="height" id="B0y-eo-moO"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -257,17 +258,17 @@
             </objects>
             <point key="canvasLocation" x="1673.913043478261" y="-1002.4553571428571"/>
         </scene>
-        <!--社交-->
+        <!--VIP-->
         <scene sceneID="vaJ-Rm-vWM">
             <objects>
                 <navigationController id="HOb-rb-gjR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="社交" image="社交_未选" selectedImage="社交_已选" id="kmM-Er-mHs"/>
+                    <tabBarItem key="tabBarItem" title="VIP" image="社交_未选" selectedImage="社交_已选" id="kmM-Er-mHs"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="37S-Ha-vWN">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="Plw-oG-65u" kind="relationship" relationship="rootViewController" id="Csh-ci-i7r"/>
+                        <segue destination="7qS-Hw-V3P" kind="relationship" relationship="rootViewController" id="nKm-cx-PbE"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XDC-iQ-8DF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -283,7 +284,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="unR-cc-JUW">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="SbM-zP-tE9">
                                     <size key="itemSize" width="50" height="50"/>
@@ -320,6 +321,37 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QoN-i5-yNr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1657.9710144927537" y="347.54464285714283"/>
+        </scene>
+        <!--New Vip View Controller-->
+        <scene sceneID="OU3-79-6O4">
+            <objects>
+                <viewController id="7qS-Hw-V3P" customClass="NewVipViewController" customModule="我家用品" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ggw-sq-uU3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="ZGb-AD-pDc">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ZGb-AD-pDc" firstAttribute="top" secondItem="RU9-Ci-XIu" secondAttribute="top" id="Ftn-U8-9Uk"/>
+                            <constraint firstItem="ZGb-AD-pDc" firstAttribute="leading" secondItem="RU9-Ci-XIu" secondAttribute="leading" id="PfJ-NA-Gmt"/>
+                            <constraint firstItem="ZGb-AD-pDc" firstAttribute="trailing" secondItem="RU9-Ci-XIu" secondAttribute="trailing" id="cVA-aq-fJq"/>
+                            <constraint firstItem="ZGb-AD-pDc" firstAttribute="bottom" secondItem="RU9-Ci-XIu" secondAttribute="bottom" id="gFQ-Qh-x49"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="RU9-Ci-XIu"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Ifi-nL-bSF"/>
+                    <connections>
+                        <outlet property="tableView" destination="ZGb-AD-pDc" id="6mx-kp-Xk3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gWf-zV-f62" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1563.768115942029" y="669.64285714285711"/>
         </scene>
         <!--分类-->
         <scene sceneID="qHg-8N-ghq">

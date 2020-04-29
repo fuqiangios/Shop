@@ -11,6 +11,7 @@ import UIKit
 class CreatOrderPayTypeTableViewCell: UITableViewCell {
     @IBOutlet weak var img: UIImageView!
     
+    @IBOutlet weak var bindBtn: UIButton!
     @IBOutlet weak var selectImg: UIImageView!
     @IBOutlet weak var name: UILabel!
     override func awakeFromNib() {

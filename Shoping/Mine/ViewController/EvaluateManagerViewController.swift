@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MJRefresh
 
 class EvaluateManagerViewController: UIViewController {
     @IBOutlet weak var backView: UIView!
@@ -16,6 +17,7 @@ class EvaluateManagerViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var data: Evaluate? = nil
     var type: String = "0"
+    var page = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +38,14 @@ class EvaluateManagerViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
+        tableView.mj_footer = MJRefreshAutoNormalFooter.init(refreshingBlock: {
+            self.page = self.page + 1
+            self.loadEvaMore()
+        })
+        tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
+            self.page = 1
+            self.loadEva()
+        })
         setShadow(view: backView, sColor: UIColor.init(white: 0.8, alpha: 1), offset: CGSize(width: 0, height: 0), opacity: 1, radius: 5)
     }
 
@@ -64,7 +74,9 @@ class EvaluateManagerViewController: UIViewController {
         loadEva()
     }
     func loadEva() {
+        page = 1
         API.evaluateManager(type: type, page: "1").request { (result) in
+            self.tableView.mj_header?.endRefreshing()
             switch result {
             case .success(let data):
                 self.data = data
@@ -75,10 +87,26 @@ class EvaluateManagerViewController: UIViewController {
         }
     }
 
+    func loadEvaMore() {
+        API.evaluateManager(type: type, page: "\(page)").request { (result) in
+            self.tableView.mj_footer?.endRefreshing()
+            switch result {
+            case .success(let data):
+                var ar = self.data?.data ?? []
+                ar = ar + data.data
+                self.data = Evaluate(result: true, message: "", status: 200, data: ar)
+                self.tableView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+
     @objc func deleteEvaluate(btn: UIButton) {
         API.evaluateDelete(product_evaluate_id: data?.data[btn.tag - 1000].product_evaluate_id ?? "").request { (result) in
             switch result {
-            case .success(_):
+            case .success(let r):
+                print(r)
                 self.loadEva()
             case .failure(let error):
                 print(error)
@@ -110,12 +138,22 @@ extension EvaluateManagerViewController: UITableViewDataSource,UITableViewDelega
                     let item = item?.evaluate_image?[index] ?? ""
                     if index == 0 {
                         cell.img1.af_setImage(withURL: URL(string: item)!)
+                        cell.img2.image = UIImage(named: "")
+                        cell.img3.image = UIImage(named: "")
+                        cell.img4.image = UIImage(named: "")
+                        cell.img5.image = UIImage(named: "")
                     } else if index == 1 {
                         cell.img2.af_setImage(withURL: URL(string: item)!)
+                        cell.img3.image = UIImage(named: "")
+                        cell.img4.image = UIImage(named: "")
+                        cell.img5.image = UIImage(named: "")
                     } else if index == 2 {
                         cell.img3.af_setImage(withURL: URL(string: item)!)
+                        cell.img4.image = UIImage(named: "")
+                        cell.img5.image = UIImage(named: "")
                     } else if index == 3 {
                         cell.img4.af_setImage(withURL: URL(string: item)!)
+                        cell.img5.image = UIImage(named: "")
                     } else if index == 4 {
                         cell.img5.af_setImage(withURL: URL(string: item)!)
                     }
@@ -126,7 +164,7 @@ extension EvaluateManagerViewController: UITableViewDataSource,UITableViewDelega
             cell.goodsImg.af_setImage(withURL: URL(string: item!.image)!)
             cell.goodsName.text = item?.name ?? ""
             cell.price.text = "￥\(item?.price ?? "0")"
-            cell.star.text = "已好评"
+            cell.star.text = ""
             cell.deleteBtn.tag = indexPath.row + 1000
             cell.deleteBtn.addTarget(self, action: #selector(deleteEvaluate(btn:)), for: .touchUpInside)
             cell.selectionStyle = .none

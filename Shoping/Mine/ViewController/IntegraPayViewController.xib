@@ -12,7 +12,7 @@
             <connections>
                 <outlet property="allBtn" destination="Ouf-zU-GBS" id="6nu-SJ-Adj"/>
                 <outlet property="btn" destination="4pp-53-Qdy" id="kh1-QS-4LC"/>
-                <outlet property="hei" destination="9x1-de-GMc" id="OnK-xy-ukc"/>
+                <outlet property="hei" destination="9x1-de-GMc" id="bgb-EF-YYx"/>
                 <outlet property="input" destination="Ef4-LC-XET" id="D0f-dw-RLk"/>
                 <outlet property="point" destination="N2U-ab-zXB" id="YGd-e8-ta9"/>
                 <outlet property="pointUnt" destination="h4T-Sr-awt" id="KYs-vj-gtx"/>
@@ -26,11 +26,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="转出" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q5T-oE-548">
-                    <rect key="frame" x="20" y="114" width="35" height="21"/>
+                    <rect key="frame" x="20" y="114" width="47" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="jO9-l8-VlW"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="23"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -80,7 +80,7 @@
                             <rect key="frame" x="56" y="49" width="147" height="34"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="33"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                         </textField>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H17-DH-OYm">
                             <rect key="frame" x="8" y="91" width="358" height="1"/>
@@ -106,7 +106,7 @@
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ouf-zU-GBS">
                             <rect key="frame" x="299" y="100" width="62" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="全部转出">
                                 <color key="titleColor" red="0.82672619820000004" green="0.33012539149999998" blue="0.29008919" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </state>

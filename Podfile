@@ -11,6 +11,9 @@ target ‘Shoping’ do
     pod 'ZLCollectionViewFlowLayout'
     pod 'TagListView', '~> 1.0'
     pod 'FSPagerView'
+    pod 'MJRefresh'
+    pod 'WechatOpenSDK'
+    pod 'AlipaySDK-iOS'
     use_frameworks!
 end
 

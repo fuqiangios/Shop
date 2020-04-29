@@ -15,6 +15,7 @@ class LogOutTableViewCell: UITableViewCell {
         super.awakeFromNib()
         btn.layer.cornerRadius = 5
         btn.layer.masksToBounds = true
+        btn.isUserInteractionEnabled = false
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

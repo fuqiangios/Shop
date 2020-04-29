@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MJRefresh
 
 class EvaluateListViewController: UIViewController {
 
@@ -27,17 +28,17 @@ class EvaluateListViewController: UIViewController {
 
     func setUp() {
         title = "评价"
-        bugBtn.layer.cornerRadius = 5
-        bugBtn.layer.masksToBounds = true
-
-        addCardBtn.layer.borderColor = bugBtn.backgroundColor?.cgColor
-        addCardBtn.layer.borderWidth = 1
-        addCardBtn.layer.cornerRadius = 5
-        addCardBtn.layer.masksToBounds = true
-        addCardBtn.addTarget(self, action: #selector(addCartAction), for: .touchUpInside)
-        bugBtn.addTarget(self, action: #selector(addCartAction), for: .touchUpInside)
-        floatView.layer.cornerRadius = 5
-        floatView.layer.masksToBounds = true
+//        bugBtn.layer.cornerRadius = 5
+//        bugBtn.layer.masksToBounds = true
+//
+//        addCardBtn.layer.borderColor = bugBtn.backgroundColor?.cgColor
+//        addCardBtn.layer.borderWidth = 1
+//        addCardBtn.layer.cornerRadius = 5
+//        addCardBtn.layer.masksToBounds = true
+//        addCardBtn.addTarget(self, action: #selector(addCartAction), for: .touchUpInside)
+//        bugBtn.addTarget(self, action: #selector(addCartAction), for: .touchUpInside)
+//        floatView.layer.cornerRadius = 5
+//        floatView.layer.masksToBounds = true
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -46,6 +47,14 @@ class EvaluateListViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(UINib(nibName: "GoodsEvaluateTableViewCell", bundle: nil), forCellReuseIdentifier: "GoodsEvaluateTableViewCell")
         tableView.register(UINib(nibName: "EvaluateReplyTableViewCell", bundle: nil), forCellReuseIdentifier: "EvaluateReplyTableViewCell")
+        tableView.mj_footer = MJRefreshAutoNormalFooter.init(refreshingBlock: {
+            self.page = self.page + 1
+            self.loadDataMore()
+        })
+        tableView.mj_header = MJRefreshNormalHeader.init(refreshingBlock: {
+            self.page = 1
+            self.loadData()
+        })
     }
 
     @objc func addCartAction() {
@@ -62,10 +71,27 @@ class EvaluateListViewController: UIViewController {
     }
 
     func loadData() {
+        page = 1
         API.evaluateList(product_id: product_id, page: "\(page)").request { (result) in
+            self.tableView.mj_header?.endRefreshing()
             switch result {
             case .success(let data):
                 self.data = data
+                self.tableView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+
+    func loadDataMore() {
+        API.evaluateList(product_id: product_id, page: "\(page)").request { (result) in
+            self.tableView.mj_footer?.endRefreshing()
+            switch result {
+            case .success(let data):
+                var ar = self.data?.data ?? []
+                ar = ar + data.data
+                self.data = GoodsEvaluateList(result: true, message: "", status: 200, data: ar)
                 self.tableView.reloadData()
             case .failure(let error):
                 print(error)
@@ -125,9 +151,9 @@ extension EvaluateListViewController: UITableViewDelegate,UITableViewDataSource 
         return UITableView.automaticDimension
     }
 
-    func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
-        return 1
-    }
+//    func tableView(_ tableView: UITableView, estimatedHeightForFooterInSection section: Int) -> CGFloat {
+//        return 1
+//    }
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
                 let view = UIView()
@@ -137,5 +163,9 @@ extension EvaluateListViewController: UITableViewDelegate,UITableViewDataSource 
             view.backgroundColor = .groupTableViewBackground
         }
         return view
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 10
     }
 }

@@ -13,6 +13,8 @@ class IntegralViewController: UIViewController {
     @IBOutlet weak var pointLable: UILabel!
     @IBOutlet weak var toBtn: UIButton!
     @IBOutlet weak var priceLable: UILabel!
+
+    @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(false, animated: false)
@@ -21,10 +23,20 @@ class IntegralViewController: UIViewController {
         toBtn.layer.borderColor = UIColor.white.cgColor
         toBtn.layer.borderWidth = 1
         toBtn.layer.cornerRadius = 25
+        tableView.register(UINib(nibName: "IntegraDetailTableViewCell", bundle: nil), forCellReuseIdentifier: "IntegraDetailTableViewCell")
+
+
+        tableView.estimatedRowHeight = 150
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = UIColor.white
         loadData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         loadData()
     }
 
@@ -39,6 +51,7 @@ class IntegralViewController: UIViewController {
             case .success(let data):
                 self.data = data
                 self.setUp()
+                self.tableView.reloadData()
             case .failure(let er):
                 print(er)
             }
@@ -54,4 +67,26 @@ class IntegralViewController: UIViewController {
         let pay = IntegraPayViewController()
         self.navigationController?.pushViewController(pay, animated: true)
     }
+}
+extension IntegralViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return data?.data.points_list.count ?? 0
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "IntegraDetailTableViewCell") as! IntegraDetailTableViewCell
+        cell.selectionStyle = .none
+        let item = data?.data.points_list[indexPath.row]
+        cell.name.text = item?.method ?? ""
+        cell.date.text = item?.created ?? ""
+        cell.point.text = item?.value ?? ""
+        if item?.incomeFlag ?? false {
+            cell.point.textColor = .red
+        } else {
+            cell.point.textColor = cell.name.textColor
+        }
+        return cell
+    }
+
+
 }
