@@ -26,7 +26,7 @@ class CartCollectBillsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "凑单"
-        goBack.layer.cornerRadius = 8
+        goBack.layer.cornerRadius = 45/2
         goBack.layer.masksToBounds = true
         goBack.addTarget(self, action: #selector(bacl), for: .touchUpInside)
         let layout = ZLCollectionViewVerticalLayout()

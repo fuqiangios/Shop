@@ -13,6 +13,8 @@ import FSPagerView
 class GoodsDeatilViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var back: UIButton!
     @IBOutlet weak var favorite: UIButton!
     @IBOutlet weak var bottomTagListView: TagListView!
     @IBOutlet weak var topTagListView: TagListView!
@@ -32,9 +34,23 @@ class GoodsDeatilViewController: UIViewController {
     override func viewDidLoad() {
 //        setRightItem()
 //        setSearBar()
+        topView.backgroundColor = .clear
+        back.addTarget(self, action: #selector(backAction), for: .touchUpInside)
         setTableView()
         setUp()
         loadData()
+    }
+
+    @objc func backAction() {
+        self.navigationController?.popViewController(animated: true)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
     func setTableView() {
@@ -43,7 +59,7 @@ class GoodsDeatilViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.backgroundColor = UIColor.groupTableViewBackground
+        tableView.backgroundColor = UIColor.white
         tableView.register(UINib(nibName: "GoodsHeaderTableViewCell", bundle: nil), forCellReuseIdentifier: "GoodsHeaderTableViewCell")
         tableView.register(UINib(nibName: "GoodsAddressTableViewCell", bundle: nil), forCellReuseIdentifier: "GoodsAddressTableViewCell")
         tableView.register(UINib(nibName: "GoodsActiveTableViewCell", bundle: nil), forCellReuseIdentifier: "GoodsActiveTableViewCell")
@@ -182,6 +198,11 @@ class GoodsDeatilViewController: UIViewController {
         evaluate.product_id = data?.data.product.id ?? ""
         evaluate.goodsData = data
         self.navigationController?.pushViewController(evaluate, animated: true)
+    }
+
+    @IBAction func cart(_ sender: Any) {
+//        self.navigationController?.popViewController(animated: true)
+        self.tabBarController?.selectedIndex = 3
     }
 }
 extension GoodsDeatilViewController: UITableViewDelegate,UITableViewDataSource {
@@ -404,6 +425,14 @@ extension GoodsDeatilViewController: UITableViewDelegate,UITableViewDataSource {
                 self.navigationController?.pushViewController(creat, animated: true)
             }
             self.present(type, animated: true, completion: nil)
+        }
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y > 64 {
+            topView.backgroundColor = .white
+        } else {
+            topView.backgroundColor = .clear
         }
     }
     

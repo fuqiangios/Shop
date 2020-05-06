@@ -29,15 +29,25 @@ class VipProductDetailViewController: UIViewController {
         title = data?.name
         let footer = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 100))
         let btn = UIButton(type: .custom)
-        btn.frame = CGRect(x: 0, y: 0, width: 150, height: 50)
-        btn.setBackgroundImage(UIImage(named: "立刻分享"), for: .normal)
+        btn.frame = CGRect(x: 0, y: 40, width: 150, height: 50)
+        btn.backgroundColor = tableView.tintColor
+//        btn.setBackgroundImage(UIImage(named: "默认底色"), for: .normal)
+        btn.layer.cornerRadius = 25
+        btn.layer.masksToBounds = true
+        btn.setTitle("立即参与", for: .normal)
+        btn.setTitleColor(.white, for: .normal)
         footer.addSubview(btn)
-        btn.center = CGPoint(x: view.center.x, y: 20)
+        btn.center = CGPoint(x: view.center.x, y: 50)
         btn.addTarget(self, action: #selector(loadData), for: .touchUpInside)
         tableView.tableFooterView = footer
     }
 
     @objc func loadData() {
+        if UserSetting.default.activeUserToken == nil {
+        let login = LoginViewController()
+        self.navigationController?.pushViewController(login, animated: true)
+            return
+        }
         API.submitProduct(id: data?.id ?? "").request { (result) in
             switch result {
             case .success(let data):

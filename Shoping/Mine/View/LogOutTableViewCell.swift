@@ -13,7 +13,7 @@ class LogOutTableViewCell: UITableViewCell {
     @IBOutlet weak var btn: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
-        btn.layer.cornerRadius = 5
+        btn.layer.cornerRadius = 10
         btn.layer.masksToBounds = true
         btn.isUserInteractionEnabled = false
     }

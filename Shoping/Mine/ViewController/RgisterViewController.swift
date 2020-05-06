@@ -63,11 +63,14 @@ class RgisterViewController: UIViewController {
                     print("success")
                     self.timeChange(btn: sender)
                 case .failure(let error):
+                    CLProgressHUD.showSuccess(in: self.view, delegate: self, title: "获取验证码失败，请重试", duration: 1)
                     print(error)
                     print(error.self)
                     print(error.localizedDescription)
                 }
             }
+        } else {
+            CLProgressHUD.showSuccess(in: self.view, delegate: self, title: "请输入手机号", duration: 1)
         }
     }
 
@@ -164,11 +167,14 @@ class RgisterViewController: UIViewController {
                         UserSetting.default.activeUserToken = data.data.user_token
                         self.navigationController?.popToRootViewController(animated: true)
                     case .failure(let error):
+                        CLProgressHUD.showSuccess(in: self.view, delegate: self, title: "注册失败，请重试", duration: 1)
                         print(error)
                         print(error.self)
                         print(error.localizedDescription)
                     }
                 }
+            } else {
+                CLProgressHUD.showSuccess(in: self.view, delegate: self, title: "请输入注册信息", duration: 1)
             }
         } else {
             if !(phoneNumber.text?.isEmpty ?? true), sureBtn.isSelected, !(code.text?.isEmpty ?? true),
@@ -180,11 +186,14 @@ class RgisterViewController: UIViewController {
                         UserSetting.default.activeUserToken = data.data.user_token
                         self.navigationController?.popToRootViewController(animated: true)
                     case .failure(let error):
+                        CLProgressHUD.showSuccess(in: self.view, delegate: self, title: "注册失败，请重试", duration: 1)
                         print(error)
                         print(error.self)
                         print(error.localizedDescription)
                     }
                 }
+            } else {
+                CLProgressHUD.showSuccess(in: self.view, delegate: self, title: "请输入注册信息", duration: 1)
             }
         }
     }

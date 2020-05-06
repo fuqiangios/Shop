@@ -24,6 +24,9 @@ class BalanceChongViewController: UIViewController {
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableView.automaticDimension
 
+        btn.layer.cornerRadius = 10
+        btn.layer.masksToBounds = true
+
         tableView.register(UINib(nibName: "CreatOrderPayTypeTableViewCell", bundle: nil), forCellReuseIdentifier: "CreatOrderPayTypeTableViewCell")
 //        hei.constant = 120
         loadData()
@@ -105,6 +108,7 @@ extension BalanceChongViewController: UITableViewDelegate, UITableViewDataSource
             } else {
                 cell.selectImg.image = UIImage(named: "未选择")
             }
+            cell.contentView.backgroundColor = .white
             cell.selectionStyle = .none
             return cell
         }

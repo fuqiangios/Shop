@@ -98,7 +98,7 @@ extension APIType {
                     let value = try JSONDecoder().decode(Node.self, from: data)
                     completionHandle(.success(value))
                 case .failure(let error):
-//                    CLProgressHUD.showError(in: UIApplication.shared.keyWindow?.rootViewController?.view, delegate: self, title: error.localizedDescription, duration: 1)
+                    CLProgressHUD.showError(in: UIApplication.shared.keyWindow?.rootViewController?.view, delegate: self, title: error.localizedDescription, duration: 1)
                     completionHandle(.failure(error))
                 }
             } catch let decodingError as DecodingError {
@@ -111,14 +111,14 @@ extension APIType {
 
 //                    CLProgressHUD.showError(in: UIApplication.shared.keyWindow?.rootViewController?.view, delegate: self, title: dic["message"]as!String, duration: 1)
                     }else{
-//                       CLProgressHUD.showError(in: UIApplication.shared.keyWindow?.rootViewController?.view, delegate: self, title: "操作失败", duration: 1)
+                       CLProgressHUD.showError(in: UIApplication.shared.keyWindow?.rootViewController?.view, delegate: self, title: "操作失败", duration: 1)
                     }
                 }
 
 
                 completionHandle(.failure(decodingError))
             } catch {
-//                CLProgressHUD.showError(in: UIApplication.shared.keyWindow?.rootViewController?.view, delegate: self, title: error.localizedDescription, duration: 1)
+                CLProgressHUD.showError(in: UIApplication.shared.keyWindow?.rootViewController?.view, delegate: self, title: error.localizedDescription, duration: 1)
                 completionHandle(.failure(error))
             }
 

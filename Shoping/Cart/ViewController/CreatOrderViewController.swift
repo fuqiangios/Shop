@@ -77,14 +77,17 @@ class CreatOrderViewController: UIViewController {
                 case .success(let data):
                     print("success")
                     if self.payList[self.selectIndex].pfn == "Amount" {
-                        self.navigationController?.pushViewController(CreatOrderSuccessViewController(), animated: true)
+                                       let detail = OederDetailViewController()
+                        detail.order_id = data.data.order_id
+                        detail.backType = "cart"
+                         self.navigationController?.pushViewController(detail, animated: true)
                     } else if self.payList[self.selectIndex].pfn == "WeChatPay" {
 
                     } else {
-                        if data.data.res == true {
+                        if data.data.plugin == "" {
                             self.navigationController?.pushViewController(CreatOrderSuccessViewController(), animated: true)
                         } else {
-                        self.aliPay(str: data.data.plugin)
+                            self.aliPay(str: data.data.plugin,id: data.data.order_id)
                         }
                     }
                     if self.order_type == "1" {
@@ -118,10 +121,13 @@ class CreatOrderViewController: UIViewController {
         }
     }
 
-    func aliPay(str: String) {
+    func aliPay(str: String, id: String) {
         AlipaySDK.defaultService()?.payOrder(str, fromScheme: "wojiayoupin", callback: { (reslt) in
             if reslt!["resultStatus"]as! String == "9000" {
-                self.navigationController?.pushViewController(CreatOrderSuccessViewController(), animated: true)
+               let detail = OederDetailViewController()
+                detail.order_id = id
+                detail.backType = "cart"
+                self.navigationController?.pushViewController(detail, animated: true)
             } else {
                 CLProgressHUD.showError(in: self.view, delegate: self, title: "支付失败，请重试", duration: 2)
             }
@@ -243,7 +249,7 @@ extension CreatOrderViewController: UITableViewDelegate, UITableViewDataSource {
             return settlement?.data.products.count ?? 0
         }
         if section == 1 {
-            return payList.count ?? 0
+            return payList.count
         }
         if section == 3 {
             return 3
@@ -328,6 +334,14 @@ extension CreatOrderViewController: UITableViewDelegate, UITableViewDataSource {
             if settlement?.data.products.count ?? 0 > 1 {
                 let item1 = settlement?.data.products[1]
                 cell.img2.af_setImage(withURL: URL(string: item1!.image)!)
+            }
+            if settlement?.data.products.count ?? 0 > 2 {
+                let item1 = settlement?.data.products[2]
+                cell.img3.af_setImage(withURL: URL(string: item1!.image)!)
+            }
+            if settlement?.data.products.count ?? 0 > 3 {
+                let item1 = settlement?.data.products[3]
+                cell.img4.af_setImage(withURL: URL(string: item1!.image)!)
             }
             cell.num.setTitle("共\(settlement?.data.products.count ?? 0)件", for: .normal)
             cell.selectionStyle = .none

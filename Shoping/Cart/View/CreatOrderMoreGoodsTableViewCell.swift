@@ -13,6 +13,9 @@ class CreatOrderMoreGoodsTableViewCell: UITableViewCell {
     @IBOutlet weak var img2: UIImageView!
     @IBOutlet weak var num: UIButton!
     @IBOutlet weak var img1: UIImageView!
+    
+    @IBOutlet weak var img4: UIImageView!
+    @IBOutlet weak var img3: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

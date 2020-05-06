@@ -11,6 +11,8 @@ import TagListView
 
 class SelectTypeViewController: UIViewController {
 
+    @IBOutlet weak var bottoName: UILabel!
+    @IBOutlet weak var topName: UILabel!
     @IBOutlet weak var floatView: UIView!
     @IBOutlet weak var bottomTagListView: TagListView!
     @IBOutlet weak var topTagListView: TagListView!
@@ -79,6 +81,12 @@ class SelectTypeViewController: UIViewController {
             topTagListView.addTag("\(item.name)")
         }
 
+        if (data?.data.getProductOptionGroup()[0].productOption ?? []).count == 0 {
+            topName.text = ""
+        } else {
+            topName.text = data?.data.getProductOptionGroup()[0].name ?? ""
+        }
+
 
         bottomTagListView.delegate = self
         bottomTagListView.textFont = .systemFont(ofSize: 15)
@@ -96,6 +104,11 @@ class SelectTypeViewController: UIViewController {
         bottomTagListView.tag = 808
         for item in data?.data.getProductOptionGroup()[1].productOption ?? [] {
             bottomTagListView.addTag("\(item.name)")
+        }
+        if (data?.data.getProductOptionGroup()[1].productOption ?? []).count == 0 {
+            bottoName.text = ""
+        } else {
+            bottoName.text = data?.data.getProductOptionGroup()[1].name ?? ""
         }
     }
     
@@ -129,6 +142,28 @@ class SelectTypeViewController: UIViewController {
         self.navigationController?.pushViewController(login, animated: true)
             return
         }
+        var bi = false
+        if (data?.data.productOptionGroup ?? []).count == 0 {
+            bi = true
+        } else if (data?.data.productOptionGroup ?? []).count == 1 {
+            if topTagSelectIndex == "" {
+                bi = false
+            } else {
+            bi = true
+            }
+        } else if  (data?.data.productOptionGroup ?? []).count == 2 {
+                   if topTagSelectIndex == "" {
+                       bi = false
+                   }else if bottomTagSelectIndex == "" {
+                    bi = false
+                   }else {
+                   bi = true
+                   }
+        }
+        if !bi {
+            CLProgressHUD.showError(in: view, delegate: self, title: "请选择商品类型", duration: 1)
+            return
+        }
         for item in data?.data.union ?? [] {
             if item.productUnion == "\(topTagSelectIndex ?? ""):\(bottomTagSelectIndex ?? "")" {
                 if Int(item.stock) ?? 0 <= 0 {
@@ -137,8 +172,20 @@ class SelectTypeViewController: UIViewController {
                 }
             }
         }
+        var tr = ""
+        for item in data?.data.union ?? []{
+            if (data?.data.productOptionGroup ?? []).count == 2 {
+            if item.productUnion == "\(topTagSelectIndex ?? ""):\(bottomTagSelectIndex ?? "")" {
+                tr = item.id
+            }
+            } else {
+                if item.productUnion == "\(topTagSelectIndex ?? "")" {
+                     tr = item.id
+                 }
+            }
+        }
 
-        API.addCart(product_id: data?.data.product.id ?? "", quantity: "\(numCnt)", product_option_union_id: "\(topTagSelectIndex ?? ""):\(bottomTagSelectIndex ?? "")").request { (result) in
+        API.addCart(product_id: data?.data.product.id ?? "", quantity: "\(numCnt)", product_option_union_id: tr).request { (result) in
             switch result {
             case .success:
                 NotificationCenter.default.post(name: NSNotification.Name("notificationCreatOrder"), object: self, userInfo: [:])
@@ -158,6 +205,28 @@ class SelectTypeViewController: UIViewController {
         if UserSetting.default.activeUserToken == nil {
         let login = LoginViewController()
         self.navigationController?.pushViewController(login, animated: true)
+            return
+        }
+        var bi = false
+        if (data?.data.productOptionGroup ?? []).count == 0 {
+            bi = true
+        } else if (data?.data.productOptionGroup ?? []).count == 1 {
+            if topTagSelectIndex == "" {
+                bi = false
+            } else {
+            bi = true
+            }
+        } else if  (data?.data.productOptionGroup ?? []).count == 2 {
+                   if topTagSelectIndex == "" {
+                       bi = false
+                   }else if bottomTagSelectIndex == "" {
+                    bi = false
+                   }else {
+                   bi = true
+                   }
+               }
+        if !bi {
+            CLProgressHUD.showError(in: view, delegate: self, title: "请选择商品类型", duration: 1)
             return
         }
         for item in data?.data.union ?? [] {

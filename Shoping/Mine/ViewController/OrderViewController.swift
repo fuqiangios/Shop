@@ -156,20 +156,38 @@ extension OrderViewController:UITableViewDelegate,UITableViewDataSource {
         cell.orderId.text = "订单号: \(item?.orderCode ?? "")"
         cell.num.text = "共\(item?.products.count ?? 0)件"
         cell.status.text = item?.statusName
+        let co = UIColor(red: 241.0/255.0, green: 241.0/255.0, blue: 241.0/255.0, alpha: 1)
+        if item?.statusName == "交易成功" {
+            cell.status.textColor = UIColor(red: 164.0/255.0, green: 214.0/255.0, blue: 78.0/255.0, alpha: 1)
+        } else {
+            cell.status.textColor = .black
+        }
         if item?.products.count ?? 0 >= 1 {
             cell.img0.af_setImage(withURL: URL(string: item?.products[0].image ?? "")!)
+            cell.img0.layer.borderWidth = 1
+            cell.img0.layer.borderColor = co.cgColor
             cell.img3.image = UIImage(named: "")
             cell.img1.image = UIImage(named: "")
         }
         if item?.products.count ?? 0 >= 2 {
             cell.img1.af_setImage(withURL: URL(string: item?.products[1].image ?? "")!)
+            cell.img1.layer.borderWidth = 1
+            cell.img1.layer.borderColor = co.cgColor
             cell.img3.image = UIImage(named: "")
         }
         if item?.products.count ?? 0 >= 3 {
+            cell.img3.layer.borderWidth = 1
+            cell.img3.layer.borderColor = co.cgColor
             cell.img3.af_setImage(withURL: URL(string: item?.products[2].image ?? "")!)
         }
         if item?.products.count ?? 0 == 0 {
             cell.img3.image = UIImage(named: "")
+            cell.img0.layer.borderWidth = 0
+            cell.img0.layer.borderColor = co.cgColor
+            cell.img1.layer.borderWidth = 0
+            cell.img3.layer.borderWidth = 0
+            cell.img3.layer.borderColor = co.cgColor
+            cell.img1.layer.borderColor = co.cgColor
             cell.img0.image = UIImage(named: "")
             cell.img1.image = UIImage(named: "")
         }

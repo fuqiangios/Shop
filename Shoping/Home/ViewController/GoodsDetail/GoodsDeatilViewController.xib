@@ -11,9 +11,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GoodsDeatilViewController" customModule="我家用品" customModuleProvider="target">
             <connections>
                 <outlet property="addCartBtn" destination="NPO-Ie-oYu" id="Ja5-Hk-KBN"/>
+                <outlet property="back" destination="kep-2d-G9b" id="uzX-F2-n1f"/>
                 <outlet property="bugBtn" destination="7Y6-5w-2US" id="sbb-hc-VDI"/>
                 <outlet property="favorite" destination="5WY-HI-Qc3" id="Pgk-WW-ZFu"/>
                 <outlet property="tableView" destination="ZSU-Rj-cwM" id="cSo-48-4lG"/>
+                <outlet property="topView" destination="yBK-1i-w0k" id="uBf-Gn-UV0"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -63,6 +65,9 @@
                             <state key="normal" image="购物车_未选">
                                 <color key="titleColor" red="0.29187817258883253" green="0.29187817258883253" blue="0.29187817258883253" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </state>
+                            <connections>
+                                <action selector="cart:" destination="-1" eventType="touchUpInside" id="sha-8p-S6C"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -70,16 +75,33 @@
                         <constraint firstAttribute="height" constant="65" id="ShM-8q-j07"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yBK-1i-w0k">
+                    <rect key="frame" x="0.0" y="44" width="414" height="40"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kep-2d-G9b">
+                            <rect key="frame" x="8" y="0.0" width="46" height="28"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="back"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="08d-GB-w01"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="yBK-1i-w0k" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="A4R-vk-hRI"/>
+                <constraint firstItem="yBK-1i-w0k" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="CUo-Dr-9G8"/>
                 <constraint firstItem="rL6-D2-Lnl" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="Clu-vD-lZi"/>
-                <constraint firstItem="ZSU-Rj-cwM" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Icg-SU-cp1"/>
                 <constraint firstItem="rL6-D2-Lnl" firstAttribute="top" secondItem="ZSU-Rj-cwM" secondAttribute="bottom" constant="1" id="NKA-g7-Iu1"/>
                 <constraint firstItem="rL6-D2-Lnl" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Yff-vx-Htl"/>
                 <constraint firstItem="ZSU-Rj-cwM" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="c93-1D-Xgw"/>
                 <constraint firstItem="rL6-D2-Lnl" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="cx8-Wr-fRB"/>
                 <constraint firstItem="rL6-D2-Lnl" firstAttribute="top" secondItem="ZSU-Rj-cwM" secondAttribute="bottom" constant="1" id="eNe-bJ-IfM"/>
+                <constraint firstItem="yBK-1i-w0k" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="hnV-PV-14s"/>
+                <constraint firstItem="ZSU-Rj-cwM" firstAttribute="top" secondItem="yBK-1i-w0k" secondAttribute="top" id="lhl-vi-S96"/>
                 <constraint firstItem="ZSU-Rj-cwM" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="uxu-Hr-1aZ"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
@@ -87,6 +109,7 @@
         </view>
     </objects>
     <resources>
+        <image name="back" width="24" height="24"/>
         <image name="收藏-1" width="24" height="24"/>
         <image name="购物车_未选" width="28" height="28"/>
     </resources>

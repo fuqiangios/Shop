@@ -16,12 +16,20 @@ class OederDetailViewController: UIViewController {
     var addressInfo:AddressDatum? = nil
     var data: OrderDetail? = nil
     var order_id = ""
+    var backType = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "订单详情"
+        if backType == "cart" {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "back"), style: .done, target: self, action: #selector(back))
+        }
         setUp()
 
+    }
+
+    @objc func back() {
+        self.navigationController?.popToRootViewController(animated: true)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -216,7 +224,7 @@ extension OederDetailViewController:UITableViewDelegate,UITableViewDataSource {
            cell.price.text = "￥\(item?.price ?? "0")"
            cell.info.text = item?.optionUnionName ?? ""
            cell.num.text = "X\(item?.quantity ?? "0")"
-            if Int(data?.data.orderStatus ?? "0") ?? 0 == 4 {
+            if (Int(data?.data.orderStatus ?? "0") ?? 0) == 4 {
                 cell.evaluateBtn.isHidden = false
             } else {
                 cell.evaluateBtn.isHidden = true
@@ -227,7 +235,6 @@ extension OederDetailViewController:UITableViewDelegate,UITableViewDataSource {
             } else {
 //                cell.shadowsLeftRight()
             }
-            cell.evaluateBtn.isHidden = false
             cell.evaluateBtn.tag = indexPath.row + 9999
             cell.evaluateBtn.addTarget(self, action: #selector(toeva(btn:)), for: .touchUpInside)
            return cell

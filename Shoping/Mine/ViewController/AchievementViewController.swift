@@ -60,6 +60,9 @@ class AchievementViewController: UIViewController {
     }
 
     @IBAction func checkAction(_ sender: Any) {
+        if storeId == "" {
+            CLProgressHUD.showSuccess(in: self.view, delegate: self, title: "请选择门店信息", duration: 1)
+        }
         API.achievementInfo(store_id: storeId).request { (result) in
             switch result {
             case .success(let data):

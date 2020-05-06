@@ -874,6 +874,21 @@ struct ChongzhDataClass: Codable {
     let plugin: String
 }
 
+// MARK: - DataClass
+struct PayOrderDataClass: Codable {
+    let res: Bool
+    let plugin: String
+    let order_id: String
+}
+
+// MARK: - Chongzhi
+struct PayOrder: Codable {
+    let result: Bool
+    let message: String
+    let status: Int
+    let data: PayOrderDataClass
+}
+
 // MARK: - Favorite
 struct Favorite: Codable {
     let result: Bool

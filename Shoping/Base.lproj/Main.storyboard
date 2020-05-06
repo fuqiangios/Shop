@@ -325,7 +325,7 @@
         <!--New Vip View Controller-->
         <scene sceneID="OU3-79-6O4">
             <objects>
-                <viewController id="7qS-Hw-V3P" customClass="NewVipViewController" customModule="我家用品" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewVipViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7qS-Hw-V3P" customClass="NewVipViewController" customModule="我家用品" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ggw-sq-uU3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

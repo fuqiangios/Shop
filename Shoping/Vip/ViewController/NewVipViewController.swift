@@ -14,6 +14,7 @@ class NewVipViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
         title = "VIP"
         let itme = UIBarButtonItem.init(title: "", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = itme
@@ -28,9 +29,12 @@ class NewVipViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
                 tableView.backgroundColor = UIColor.tableviewBackgroundColor
         tableView.separatorStyle = .none
-        let headerImg = UIImageView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 100))
-        
-        tableView.tableHeaderView = headerImg
+        let vi = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 100))
+        let headerImg = UIImageView(frame: CGRect(x: 50, y: 0, width: self.view.frame.width-100, height: 100))
+        headerImg.image = UIImage(named: "会员权益与奖励")
+        headerImg.contentMode = .scaleAspectFit
+        vi.addSubview(headerImg)
+        tableView.tableHeaderView = vi
         loadData()
     }
 
@@ -79,19 +83,22 @@ extension NewVipViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             let header = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 80))
             header.backgroundColor = .clear
-            let ti = UILabel(frame: CGRect(x: 20, y: 10, width: view.frame.width - 40, height: 70))
-            ti.textAlignment = .center
+            let ti = UIImageView(frame: CGRect(x: 50, y: 0, width: self.view.frame.width - 100, height: 80))
             if section == 2 {
-                ti.text = "众筹"
-            } else {
-                ti.text = "项目"
+                ti.image = UIImage(named: "__众筹 _")
+            } else if section == 3 {
+                ti.image = UIImage(named: "__项目 _")
             }
+            ti.contentMode = .scaleAspectFit
             header.addSubview(ti)
             return header
         }
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section > 1 {
+            return 80
+        }
         return 50
     }
 

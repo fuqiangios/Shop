@@ -90,6 +90,7 @@ class OrderPayViewController: UIViewController {
             case .success(let data):
                 self.payList = data
                 self.tableVIew.reloadData()
+                self.price.text = data.data.price
                 self.payName.text = self.payList?.data.payment[self.selectIndex].name
                 self.tableVIewHeight.constant = CGFloat(82 * data.data.payment.count)
             case .failure(let error):

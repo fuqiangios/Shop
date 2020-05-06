@@ -189,7 +189,7 @@ extension API {
     }
 
     struct createOrder: Post {
-        typealias Node = Chongzhi
+        typealias Node = PayOrder
         var path: String = "order/confirm"
 
         let order_type: String

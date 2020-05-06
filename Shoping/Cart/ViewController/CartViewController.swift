@@ -56,7 +56,11 @@ class CartViewController: UIViewController {
                     selectData.append(item.id)
                 }
             }
-            if selectData.count < 1 { return }
+            if selectData.count < 1 {
+                CLProgressHUD.showError(in: view, delegate: self, title: "请选择商品", duration: 1)
+                return
+
+            }
             API.deleteCart(id: selectData).request { (result) in
                 switch result {
                 case .success( _):
@@ -73,7 +77,10 @@ class CartViewController: UIViewController {
                 selectData.append(item)
             }
         }
-        if selectData.count < 1 { return }
+        if selectData.count < 1 {
+            CLProgressHUD.showError(in: view, delegate: self, title: "请选择商品", duration: 1)
+            return
+        }
         let creat = CreatOrderViewController()
         creat.data = selectData
         creat.order_type = "1"
@@ -200,6 +207,7 @@ class CartViewController: UIViewController {
                 self.setShadow(view: self.tableView, sColor: UIColor.init(white: 0.8, alpha: 1), offset: CGSize(width: 0, height: 0), opacity: 1, radius: 5)
             case .failure(let error):
                 self.data = nil
+                self.heig.constant = 0
                 self.tableView.reloadData()
                 print(error)
                 print(error.self)

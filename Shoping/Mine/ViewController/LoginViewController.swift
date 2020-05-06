@@ -59,6 +59,7 @@ class LoginViewController: UIViewController {
                     print("success")
                     self.timeChange(btn: sender)
                 case .failure(let error):
+                    CLProgressHUD.showSuccess(in: self.view, delegate: self, title: "登录失败，请重试", duration: 1)
                     print(error)
                     print(error.self)
                     print(error.localizedDescription)

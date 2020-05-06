@@ -172,7 +172,7 @@ extension AccountInfoViewController: UITableViewDelegate, UITableViewDataSource 
         if section == 0 {
             return 20
         }
-        return 0
+        return 1
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

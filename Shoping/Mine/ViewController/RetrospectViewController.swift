@@ -29,10 +29,11 @@ class RetrospectViewController: UIViewController, UITextFieldDelegate {
         search.backgroundColor = UIColor.lightColor
 //        textField.leftViewMode = UITextFieldViewModeAlways;
         search.leftViewMode = .always
-        let vi = UIImageView(frame: CGRect(x: 20, y: 0, width: 20, height: 40))
+        let g = UIView(frame: CGRect(x: 20, y: 0, width: 40, height: 40))
+        let vi = UIImageView(frame: CGRect(x: 20, y: 10, width: 20, height: 20))
         vi.image = UIImage(named: "search")
-        search.leftView = vi
-
+        g.addSubview(vi)
+        search.leftView = g
 //        titleView.addSubview(seachText)
 
 //        view.addSubview(titleView)
@@ -118,6 +119,7 @@ extension RetrospectViewController: UITableViewDataSource, UITableViewDelegate, 
             cell.name.text = data?.data.product.name
             cell.info.text = "￥\(data?.data.product.price ?? "0")"
             cell.category.text = "\(data?.data.product.categoryName ?? "")>\(data?.data.product.pCategoryName ?? "")"
+            cell.date.text = data?.data.product.created
             return cell
         } else if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "RetrospecTitleTableViewCell") as! RetrospecTitleTableViewCell

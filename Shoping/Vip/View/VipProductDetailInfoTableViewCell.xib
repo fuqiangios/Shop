@@ -23,7 +23,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N8V-oE-Yk5">
                                 <rect key="frame" x="8" y="41" width="272" height="8"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="button" translatesAutoresizingMaskIntoConstraints="NO" id="sN0-fh-KDf">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="矩形" translatesAutoresizingMaskIntoConstraints="NO" id="sN0-fh-KDf">
                                         <rect key="frame" x="1" y="1" width="270" height="6"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
@@ -112,6 +112,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="button" width="351" height="40"/>
+        <image name="矩形" width="211" height="7"/>
     </resources>
 </document>

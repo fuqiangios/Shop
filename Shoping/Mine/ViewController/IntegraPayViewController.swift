@@ -71,7 +71,9 @@ class IntegraPayViewController: UIViewController, UITextFieldDelegate {
             switch result{
             case .success(let data):
                print(data)
-               self.navigationController?.popViewController(animated: true)
+               CLProgressHUD.showError(in: self.view, delegate: self, title: data.message, duration: 1)
+               self.loadData()
+//               self.navigationController?.popViewController(animated: true)
             case .failure(let er):
                 print(er)
             }

@@ -125,7 +125,16 @@ class MineViewController: UIViewController {
             let eva = EvaluateManagerViewController()
             eva.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(eva, animated: true)
-        } else if btn.tag == 502 {
+        } else if btn.tag == 501 {
+            let sb=UIStoryboard.init(name: "Main", bundle: nil)
+
+//            let infovc = sb.instantiateViewController(identifier: "NewVipViewController")as! NewVipViewController
+            let infovc = sb.instantiateViewController(withIdentifier: "NewVipViewController") as! NewVipViewController
+            infovc.hidesBottomBarWhenPushed = true
+
+            self.navigationController?.pushViewController(infovc, animated: true)
+        }
+        else if btn.tag == 502 {
             let user = UserVipViewController()
             user.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(user, animated: true)
@@ -173,6 +182,8 @@ extension MineViewController: UITableViewDataSource,UITableViewDelegate {
             cell.name.text = data?.data.name ?? "点击登录"
             if !(data?.data.image.isEmpty ?? true) {
             cell.img.af_setImage(withURL: URL(string: data?.data.image ?? "")!)
+            } else {
+                cell.img.image = UIImage(named: "logo")
             }
             cell.message.addTarget(self, action: #selector(toMessage), for: .touchUpInside)
             cell.barCode.addTarget(self, action: #selector(toBarCode), for: .touchUpInside)
@@ -199,9 +210,9 @@ extension MineViewController: UITableViewDataSource,UITableViewDelegate {
         } else if indexPath.section == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MineRedTableViewCell") as! MineRedTableViewCell
             cell.selectionStyle = .none
-            cell.point.setTitle(data?.data.shortPoints ?? "", for: .normal)
-            cell.redpackg.setTitle(data?.data.redPackage ?? "", for: .normal)
-            cell.price.setTitle(data?.data.amount ?? "", for: .normal)
+            cell.point.setTitle(data?.data.shortPoints ?? "0", for: .normal)
+            cell.redpackg.setTitle(data?.data.redPackage ?? "0", for: .normal)
+            cell.price.setTitle(data?.data.amount ?? "0", for: .normal)
             cell.discount.setTitle("\(data?.data.couponCount ?? 0)", for: .normal)
                         cell.point.addTarget(self, action: #selector(myprice(btn:)), for: .touchUpInside)
                         cell.redpackg.addTarget(self, action: #selector(myprice(btn:)), for: .touchUpInside)

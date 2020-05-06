@@ -37,7 +37,7 @@ class AddressListViewController: UIViewController {
     }
 
     func setUp() {
-        btn.layer.cornerRadius = 5
+        btn.layer.cornerRadius = 10
         btn.layer.masksToBounds = true
         tableView.backgroundColor = UIColor.tableviewBackgroundColor
         tableView.delegate = self

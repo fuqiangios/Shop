@@ -53,7 +53,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5sD-pS-rup">
                         <rect key="frame" x="76" y="18.5" width="228" height="8"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="button" translatesAutoresizingMaskIntoConstraints="NO" id="dqb-72-nog">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="矩形" translatesAutoresizingMaskIntoConstraints="NO" id="dqb-72-nog">
                                 <rect key="frame" x="0.0" y="0.0" width="192" height="8"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.94118529558181763" green="0.94116508960723877" blue="0.94116908311843872" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -97,6 +97,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="button" width="351" height="40"/>
+        <image name="矩形" width="211" height="7"/>
     </resources>
 </document>

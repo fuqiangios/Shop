@@ -52,6 +52,11 @@ class UserVipViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func checkAction(_ sender: Any) {
+        if nameInput.text?.isEmpty ??
+
+            true , phoneInput.text?.isEmpty ?? true {
+            CLProgressHUD.showSuccess(in: self.view, delegate: self, title: "请输入查询信息", duration: 1)
+        }
         loadData()
     }
     @IBAction func orderAction(_ sender: Any) {
