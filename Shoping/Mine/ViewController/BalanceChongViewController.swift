@@ -15,6 +15,8 @@ class BalanceChongViewController: UIViewController {
     @IBOutlet weak var input: UITextField!
     var data: ChongzhiPage? = nil
     var selectIndex = 0
+    
+    @IBOutlet weak var hei: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -86,7 +88,7 @@ class BalanceChongViewController: UIViewController {
             switch result {
             case .success(let data):
                 self.data = data
-                print(data)
+                self.hei.constant = CGFloat(60*data.data.payment.count)
                 self.tableView.reloadData()
             case .failure(let er):
                 print(er)

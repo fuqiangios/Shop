@@ -37,6 +37,7 @@ class SelectTypeViewController: UIViewController {
     @IBOutlet weak var jian: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        getGoodsInfo()
         setUp()
         setCommentView()
     }
@@ -145,6 +146,10 @@ class SelectTypeViewController: UIViewController {
         var bi = false
         if (data?.data.productOptionGroup ?? []).count == 0 {
             bi = true
+            if data?.data.product.stock == "0" {
+                CLProgressHUD.showError(in: view, delegate: self, title: "库存不足", duration: 1)
+                return
+            }
         } else if (data?.data.productOptionGroup ?? []).count == 1 {
             if topTagSelectIndex == "" {
                 bi = false
@@ -209,6 +214,10 @@ class SelectTypeViewController: UIViewController {
         }
         var bi = false
         if (data?.data.productOptionGroup ?? []).count == 0 {
+            if data?.data.product.stock == "0" {
+                CLProgressHUD.showError(in: view, delegate: self, title: "库存不足", duration: 1)
+                return
+            }
             bi = true
         } else if (data?.data.productOptionGroup ?? []).count == 1 {
             if topTagSelectIndex == "" {
@@ -281,6 +290,10 @@ extension SelectTypeViewController: TagListViewDelegate{
     }
 
     func getGoodsInfo() {
+        if data?.data.union.count == 0 {
+            price.text = "￥\(data?.data.product.price ?? "")"
+            detail.text = data?.data.product.name
+        }
         for item in data?.data.union ?? []{
             if item.productUnion == "\(topTagSelectIndex ?? ""):\(bottomTagSelectIndex ?? "")" {
                 price.text = "￥\(item.price)"

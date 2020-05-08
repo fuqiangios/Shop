@@ -198,11 +198,11 @@ class HomeViewController: UIViewController,UITextFieldDelegate, CLLocationManage
             if index == 0 {
                 let selected = SelectedViewController()
                 selected.data = data
-                selected.didSelectCell = { [weak self] indexPath in
+                selected.didSelectCell = { [weak self] lablesIndex, indexPath in
                     if indexPath.section == 1 {
                         let detail = GoodsDeatilViewController()
                         detail.hidesBottomBarWhenPushed = true
-                        detail.product_id = self?.data?.data.labels[index].product[indexPath.item].id ?? ""
+                        detail.product_id = self?.data?.data.labels[lablesIndex].product[indexPath.item].id ?? ""
                         self?.navigationController?.pushViewController(detail, animated: true)
                         return
                     }

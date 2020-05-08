@@ -396,7 +396,7 @@ extension CartViewController: UITableViewDataSource,UITableViewDelegate {
                 let p = (price ?? 0.00)*(numCnt ?? 0.00)
                 numPrice = numPrice + p
             }
-        num.text = "合计:￥\(status?.total ?? 0)"
+        num.text = "合计:￥\(status?.total ?? "0")"
         }
     }
 

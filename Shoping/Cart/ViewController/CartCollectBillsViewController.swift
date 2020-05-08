@@ -121,7 +121,7 @@ class CartCollectBillsViewController: UIViewController {
     }
 
     func setBottom() {
-        price.text = "合计: ￥\(state?.total ?? 0)"
+        price.text = "合计: ￥\(state?.total ?? "0")"
         if state?.diffPrice ?? 0 > 0 {
             needPrice.text = "再购￥\(state?.diffPrice ?? 0)元免邮"
         } else {

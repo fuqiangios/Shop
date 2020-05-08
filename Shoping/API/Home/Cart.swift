@@ -277,8 +277,8 @@ struct Cart: Codable {
 
 // MARK: - Stats
 struct Stats: Codable {
-    let total, quantity: Int
-    let feeMsg, feeMsgContent: String
+    let quantity: Int
+    let feeMsg, feeMsgContent, total: String
 
     enum CodingKeys: String, CodingKey {
         case total, quantity
@@ -510,8 +510,8 @@ struct CollectProduct: Codable {
 
 // MARK: - Stats
 struct CollectStats: Codable {
-    let total, quantity: Int
-    let feeMsg, feeMsgContent: String
+    let quantity: Int
+    let feeMsg, feeMsgContent, total: String
     let diffPrice: Int
 
     enum CodingKeys: String, CodingKey {

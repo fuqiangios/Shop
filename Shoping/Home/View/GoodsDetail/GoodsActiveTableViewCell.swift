@@ -9,7 +9,9 @@
 import UIKit
 
 class GoodsActiveTableViewCell: UITableViewCell {
-
+    @IBOutlet weak var bg: UIImageView!
+    
+    @IBOutlet weak var info: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

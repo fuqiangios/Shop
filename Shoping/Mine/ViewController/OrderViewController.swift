@@ -195,10 +195,16 @@ extension OrderViewController:UITableViewDelegate,UITableViewDataSource {
         cell.leftBtn.tag = (indexPath.row * 100) + 1
         cell.rightBtn.tag = (indexPath.row * 100) + 2
         cell.rightBtn.addTarget(self, action: #selector(updateOrder(btn:)), for: .touchUpInside)
-
+        cell.deleteBtn.tag = indexPath.row + 999999
+        cell.deleteBtn.addTarget(self, action: #selector(deletea(btn:)), for: .touchUpInside)
         cell.setBtn(tag: Int(item?.orderStatus ?? "0") ?? 0)
 //            cell.name.text = item?.statusName
         return cell
+    }
+
+    @objc func deletea(btn: UIButton) {
+        let tag = btn.tag - 999999
+        updateOrderStatus(id: data?.data[tag].id ?? "", type: "delete")
     }
 
     @objc func updateOrder(btn: UIButton) {

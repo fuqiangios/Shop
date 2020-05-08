@@ -32,10 +32,10 @@ class GoodsDeatilViewController: UIViewController {
     var option = ""
 
     override func viewDidLoad() {
-//        setRightItem()
-//        setSearBar()
         topView.backgroundColor = .clear
         back.addTarget(self, action: #selector(backAction), for: .touchUpInside)
+        back.layer.cornerRadius = 15
+        back.layer.masksToBounds = true
         setTableView()
         setUp()
         loadData()
@@ -260,6 +260,13 @@ extension GoodsDeatilViewController: UITableViewDelegate,UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "GoodsActiveTableViewCell") as! GoodsActiveTableViewCell
                 cell.accessoryType = .disclosureIndicator
                 cell.selectionStyle = .none
+                if data?.data.coupon.count == 0 {
+                    cell.bg.isHidden = true
+                    cell.info.text = "暂无优惠券"
+                } else {
+                    cell.bg.isHidden = false
+                    cell.info.text = data?.data.coupon.first?.detail ?? ""
+                }
                 return cell
             }
             else {

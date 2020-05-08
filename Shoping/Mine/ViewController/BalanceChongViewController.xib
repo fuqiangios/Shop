@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BalanceChongViewController" customModule="我家用品" customModuleProvider="target">
             <connections>
                 <outlet property="btn" destination="M9Y-zY-L7x" id="u6y-Gf-R1j"/>
+                <outlet property="hei" destination="k3O-On-xel" id="6Lx-US-myq"/>
                 <outlet property="input" destination="A7I-b6-Kf2" id="VDy-iW-xkJ"/>
                 <outlet property="tableView" destination="UNu-hP-ajd" id="nsW-NM-OZd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

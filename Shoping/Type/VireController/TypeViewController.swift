@@ -44,7 +44,7 @@ class TypeViewController: UIViewController, ZLCollectionViewBaseFlowLayoutDelega
     func setCollectionView()  {
         let layout = ZLCollectionViewVerticalLayout()
         layout.delegate = self
-
+        collectionView.collectionViewLayout = layout
         collectionView?.backgroundColor = UIColor.white
         collectionView?.delegate = self
         collectionView?.dataSource = self

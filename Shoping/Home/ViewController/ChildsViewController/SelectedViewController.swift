@@ -26,7 +26,7 @@ class SelectedViewController: UIViewController {
     var data: Home? = nil
     var lablesIndex = 0
 
-    var didSelectCell: ((IndexPath) -> Void)?
+    var didSelectCell: ((Int, IndexPath) -> Void)?
     
 
     override func viewDidLoad() {
@@ -292,7 +292,7 @@ extension SelectedViewController: UICollectionViewDelegate, UICollectionViewData
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        didSelectCell?(indexPath)
+        didSelectCell?(lablesIndex, indexPath)
     }
 }
 extension SelectedViewController: FSPagerViewDataSource,FSPagerViewDelegate {

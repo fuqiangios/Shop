@@ -2235,7 +2235,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.guotai.necesstore;
 				PRODUCT_NAME = "我家用品";
-				PROVISIONING_PROFILE_SPECIFIER = ad;
+				PROVISIONING_PROFILE_SPECIFIER = ad1;
 				SWIFT_OBJC_BRIDGING_HEADER = "Shoping/Tool/Shoping-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = Shoping.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2262,7 +2262,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.guotai.necesstore;
 				PRODUCT_NAME = "我家用品";
-				PROVISIONING_PROFILE_SPECIFIER = ad;
+				PROVISIONING_PROFILE_SPECIFIER = ad1;
 				SWIFT_OBJC_BRIDGING_HEADER = "Shoping/Tool/Shoping-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = Shoping.h;
 				SWIFT_VERSION = 5.0;
