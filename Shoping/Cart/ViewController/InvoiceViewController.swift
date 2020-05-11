@@ -178,7 +178,7 @@ extension InvoiceViewController: UITableViewDelegate, UITableViewDataSource {
                     cell.input.isEnabled = false
                 } else if indexPath.row == 3 {
                     cell.nname.text = "发票金额"
-                    cell.input.text = "$209.0"
+                    cell.input.text = "￥\(price)"
                     cell.input.isEnabled = false
                 }
             }

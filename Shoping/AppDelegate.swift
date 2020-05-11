@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        WXApi.registerApp("wxb4ba3c02aa476ea1", universalLink: "")
+        WXApi.registerApp("wx55d4b9901badc2be", universalLink: "https://")
         window = UIWindow(frame: UIScreen.main.bounds)
         let story =  UIStoryboard.init(name: "Main", bundle: nil)
         self.window?.rootViewController = story.instantiateInitialViewController()

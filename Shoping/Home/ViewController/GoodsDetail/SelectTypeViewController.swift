@@ -246,7 +246,19 @@ class SelectTypeViewController: UIViewController {
                 }
             }
         }
-        didToBuy?("\(numCnt)","\(topTagSelectIndex ?? ""):\(bottomTagSelectIndex ?? "")")
+        var tr = ""
+        for item in data?.data.union ?? []{
+            if (data?.data.productOptionGroup ?? []).count == 2 {
+            if item.productUnion == "\(topTagSelectIndex ?? ""):\(bottomTagSelectIndex ?? "")" {
+                tr = item.id
+            }
+            } else {
+                if item.productUnion == "\(topTagSelectIndex ?? "")" {
+                     tr = item.id
+                 }
+            }
+        }
+        didToBuy?("\(numCnt)","\(tr)")
         self.dismiss(animated: true, completion: nil)
     }
 }

@@ -62,6 +62,7 @@ class CartCollectBillsViewController: UIViewController {
                 self.state = data.data.stats
                 self.setBottom()
             case .failure(let error):
+                CLProgressHUD.showError(in: self.view, delegate: self, title: "库存不足", duration: 1)
                 print(error)
                 print(error.self)
                 print(error.localizedDescription)

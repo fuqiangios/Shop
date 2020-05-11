@@ -72,7 +72,11 @@ class CreatOrderViewController: UIViewController {
         for item in data {
             all.append(item.id)
         }
-        API.createOrder(order_type: order_type, shopping_cart_ids: all, product_id: product_id, quantity: quantity, product_option_union_id: product_option_union_id, red_packet: "\(redPackegPrice)", customer_coupon_id: discountIndex == -1 ? "" : settlement?.data.coupons[discountIndex].id, address_id: addressInfo?.id, self_store_id: store != nil ? store?.id : "", store_id: settlement?.data.store_id ?? "", payment_pfn: payList[selectIndex].pfn , payment_method: payList[selectIndex].pfn , invoice_id: usepiao ? invoice_id : "").request { (result) in
+        if addressInfo?.id?.isEmpty ?? true {
+            CLProgressHUD.showError(in: view, delegate: self, title: "请选择收货地址", duration: 1)
+            return
+        }
+        API.createOrder(order_type: order_type, shopping_cart_ids: all, product_id: product_id, quantity: quantity, product_option_union_id: product_option_union_id, red_packet: "\(redPackegPrice)", customer_coupon_id: discountIndex == -1 ? "" : settlement?.data.coupons[discountIndex].id, address_id: addressInfo?.id, self_store_id: store != nil ? store?.id : "", store_id: settlement?.data.store_id ?? "", payment_pfn: payList[selectIndex].pfn , payment_method: payList[selectIndex].name , invoice_id: usepiao ? invoice_id : "").request { (result) in
                 switch result {
                 case .success(let data):
                     print("success")
@@ -85,7 +89,10 @@ class CreatOrderViewController: UIViewController {
 
                     } else {
                         if data.data.plugin == "" {
-                            self.navigationController?.pushViewController(CreatOrderSuccessViewController(), animated: true)
+                            let detail = OederDetailViewController()
+                            detail.order_id = data.data.order_id
+                            detail.backType = "cart"
+                             self.navigationController?.pushViewController(detail, animated: true)
                         } else {
                             self.aliPay(str: data.data.plugin,id: data.data.order_id)
                         }
@@ -233,7 +240,7 @@ class CreatOrderViewController: UIViewController {
             case .success(let data):
                 self.settlement = data
                 self.payList = data.data.payment
-                self.self.addressInfo = data.data.address
+                self.addressInfo = data.data.address
                 self.getPrice()
                 self.invoice_id = data.data.invoice.id ?? ""
                 self.tableView.reloadData()
@@ -282,7 +289,7 @@ extension CreatOrderViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CreatOrderAddressTableViewCell") as! CreatOrderAddressTableViewCell
-            if addressInfo != nil {
+            if !(addressInfo?.telephone?.isEmpty ?? true) {
                 if addressInfo?.isDefault == "1" {
                     cell.name.text = addressInfo?.address ?? ""
                     cell.defaultBg.isHidden = false

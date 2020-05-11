@@ -139,8 +139,16 @@ class OrderViewController: UIViewController {
 
     func updateOrderStatus(id: String, type: String) {
         API.orderUpdateStatus(orderId: id, button_type: type).request { (result) in
-            self.page = 1
-            self.loadData()
+            switch result {
+            case .success(let data):
+                CLProgressHUD.showError(in: self.view, delegate: self, title: data.message, duration: 1)
+
+                self.page = 1
+                self.loadData()
+            case .failure:
+                CLProgressHUD.showError(in: self.view, delegate: self, title: "订单状态无法删除", duration: 1)
+            }
+
         }
     }
 }
@@ -168,12 +176,15 @@ extension OrderViewController:UITableViewDelegate,UITableViewDataSource {
             cell.img0.layer.borderColor = co.cgColor
             cell.img3.image = UIImage(named: "")
             cell.img1.image = UIImage(named: "")
+            cell.img1.layer.borderWidth = 0
+            cell.img3.layer.borderWidth = 0
         }
         if item?.products.count ?? 0 >= 2 {
             cell.img1.af_setImage(withURL: URL(string: item?.products[1].image ?? "")!)
             cell.img1.layer.borderWidth = 1
             cell.img1.layer.borderColor = co.cgColor
             cell.img3.image = UIImage(named: "")
+            cell.img3.layer.borderWidth = 0
         }
         if item?.products.count ?? 0 >= 3 {
             cell.img3.layer.borderWidth = 1

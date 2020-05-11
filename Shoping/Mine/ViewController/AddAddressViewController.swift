@@ -11,11 +11,15 @@ import UIKit
 class AddAddressViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var addressInfo: AddressDatum? = AddressDatum(id: nil, customerID: nil, name: nil, telephone: nil, address: nil, detail: nil, isDefault: "0", modified: nil, created: nil)
+    var edit = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        if edit == 1 {
+            title = "编辑地址"
+        } else {
         title = "添加地址"
+        }
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "保存", style: .done, target: self, action: #selector(save))
         tableView.backgroundColor = UIColor.tableviewBackgroundColor
         tableView.delegate = self
@@ -44,8 +48,20 @@ class AddAddressViewController: UIViewController {
 }
 extension AddAddressViewController: UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 1 {
+            return 1
+        }
         return 5
     }
+
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if edit == 1 {
+            return 2
+        }
+        return 1
+    }
+
+
 
     @objc func isDefault() {
         addressInfo = addressInfo?.updateAddress(isDefault: addressInfo?.isDefault == "0" ? "1":"0")
@@ -53,6 +69,18 @@ extension AddAddressViewController: UITableViewDelegate, UITableViewDataSource, 
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "AddressAddInfoTableViewCell") as! AddressAddInfoTableViewCell
+            cell.selectionStyle = .none
+            cell.name.textColor = .red
+                            cell.name.text = "删除地址"
+                            cell.inputField.placeholder = ""
+            cell.btn.isHidden = true
+                            cell.btn.isHidden = false
+                            cell.inputField.isEnabled = false
+                            cell.inputField.text = ""
+            return cell
+        }
         if indexPath.row == 4 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "AddressDefaultTableViewCell") as! AddressDefaultTableViewCell
                 cell.selectionStyle = .none
@@ -113,16 +141,26 @@ extension AddAddressViewController: UITableViewDelegate, UITableViewDataSource, 
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let vi = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 10))
-        vi.backgroundColor = .white
+        vi.backgroundColor = .clear
         return vi
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 1
+        return 15
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            API.addressDelete(id: addressInfo?.id ?? "").request { (result) in
+                switch result {
+                case .success:
+                    self.navigationController?.popViewController(animated: true)
+                case .failure:
+                    CLProgressHUD.showError(in: self.view, delegate: self, title: "删除地址失败", duration: 1)
+                }
+            }
+        }
         if indexPath.row == 2 {
             let addressPicker = EWAddressViewController()
             addressPicker.backLocationStringController = { (address,province,city,area) in

@@ -250,7 +250,7 @@ extension OederDetailViewController:UITableViewDelegate,UITableViewDataSource {
             } else if indexPath.row == 1 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "OrderDetailGoodsTableViewCell") as! OrderDetailGoodsTableViewCell
                     cell.selectionStyle = .none
-                cell.goodPrice.text = getPayName(str: "\(data?.data.paymentPfn ?? "")")
+                cell.goodPrice.text = "\(data?.data.paymentMethod ?? "")"
                 cell.discountPrice.text = "￥\(data?.data.price ?? "")"
                 cell.youhuiPrice.text = "￥\(data?.data.shippingPrice ?? "")"
                 cell.shipingPrice.text = "-￥\(data?.data.redPacket ?? "")"
@@ -281,7 +281,7 @@ extension OederDetailViewController:UITableViewDelegate,UITableViewDataSource {
         switch str {
         case "Amount":
             return "余额支付"
-        case "weixin":
+        case "WeChatPay":
             return "微信支付"
         case "zhifubao":
             return "支付宝支付"

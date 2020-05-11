@@ -236,8 +236,6 @@
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ETf-ZC-PBJ">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
-                                <viewLayoutGuide key="contentLayoutGuide" id="zdw-Ou-t5n"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="S1Z-pB-kEn"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

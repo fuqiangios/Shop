@@ -177,6 +177,7 @@ extension AddressListViewController: UITableViewDataSource, UITableViewDelegate,
     @objc func editAddress(btn:UIButton) {
         let add = AddAddressViewController()
         add.addressInfo = data?.data[btn.tag - 1000]
+        add.edit = 1
         self.navigationController?.pushViewController(add, animated: true)
 //        addressInfo = data?.data[btn.tag - 1000]
 //        tableView.reloadData()

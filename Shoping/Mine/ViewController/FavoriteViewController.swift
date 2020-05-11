@@ -124,7 +124,7 @@ class FavoriteViewController: UIViewController {
                 NotificationCenter.default.post(name: NSNotification.Name("notificationCreatOrder"), object: self, userInfo: [:])
                 CLProgressHUD.showSuccess(in: self.view, delegate: self, title: "加入购物车成功", duration: 1)
             case .failure(let error):
-                CLProgressHUD.showError(in: self.view, delegate: self, title: "加入购物车失败", duration: 1)
+                CLProgressHUD.showError(in: self.view, delegate: self, title: "库存不足", duration: 1)
                 print(error)
             }
         }

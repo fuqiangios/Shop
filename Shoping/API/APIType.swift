@@ -109,10 +109,10 @@ extension APIType {
                       let dic = json as! Dictionary<String,Any>
 
                     if dic["message"] != nil {
-                            let al = UIAlertView(title: "错误信息", message: "\(decodingError)", delegate: self, cancelButtonTitle: "关闭")
-                            al.show()
-                        let aal = UIAlertView(title: "错误信息", message: "\(dic)", delegate: self, cancelButtonTitle: "关闭")
-                        aal.show()
+//                            let al = UIAlertView(title: "错误信息", message: "\(decodingError)", delegate: self, cancelButtonTitle: "关闭")
+//                            al.show()
+//                        let aal = UIAlertView(title: "错误信息", message: "\(dic)", delegate: self, cancelButtonTitle: "关闭")
+//                        aal.show()
 
 //                    CLProgressHUD.showError(in: UIApplication.shared.keyWindow?.rootViewController?.view, delegate: self, title: dic["message"]as!String, duration: 1)
                     }else{

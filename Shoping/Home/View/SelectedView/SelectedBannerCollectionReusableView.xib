@@ -18,8 +18,6 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="121"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <viewLayoutGuide key="contentLayoutGuide" id="aZx-Em-lsh"/>
-                    <viewLayoutGuide key="frameLayoutGuide" id="PNc-jO-Oc7"/>
                 </scrollView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
