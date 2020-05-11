@@ -19,6 +19,7 @@ class BalanceChongViewController: UIViewController {
     @IBOutlet weak var hei: NSLayoutConstraint!
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(notificationAction(noti:)), name: NSNotification.Name(rawValue: "weixinpaymethod"), object: nil)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         tableView.delegate = self
         tableView.dataSource = self
@@ -34,6 +35,21 @@ class BalanceChongViewController: UIViewController {
         loadData()
     }
 
+    deinit {
+           NotificationCenter.default.removeObserver(self)
+       }
+       @objc private func notificationAction(noti: Notification) {
+           let isRet = noti.object as! String
+
+           if isRet == "1" {
+               //支付成功
+              CLProgressHUD.showSuccess(in: self.view, delegate: self, title: "充值成功", duration: 2)
+           } else {
+               //支付失败
+               CLProgressHUD.showError(in: self.view, delegate: self, title: "充值失败，请重试", duration: 2)
+           }
+       }
+
     @IBAction func back(_ sender: Any) {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         self.navigationController?.popViewController(animated: true)
@@ -45,7 +61,7 @@ class BalanceChongViewController: UIViewController {
             case .success(let data):
                 print(data)
                 if self.data?.data.payment[self.selectIndex].pfn == "WeChatPay" {
-                    self.wechatPay()
+                    self.wechatPay(data: data)
                 } else {
                     self.aliPay(str: data.data.plugin)
                 }
@@ -55,23 +71,26 @@ class BalanceChongViewController: UIViewController {
         }
     }
 
-    func wechatPay() {
+    func wechatPay(data: Chongzhi) {
+        let array : Array = data.data.plugin.components(separatedBy: ",")
         let req = PayReq()
-        req.nonceStr = ""
-        req.partnerId = ""
-        req.prepayId = ""
-        req.timeStamp =  200000
-        req.package = ""
-        req.sign = ""
+        req.nonceStr = array[1]
+        req.partnerId = array[3]
+        req.prepayId = array[4]
+        req.timeStamp = UInt32(array[6]) ?? 100000
+        req.package = array[2]
+        req.sign = array[5]
         WXApi.send(req) { (item) in
             print(item)
             if item {
-                CLProgressHUD.showSuccess(in: self.view, delegate: self, title: "充值成功", duration: 2)
+
             } else {
                 CLProgressHUD.showError(in: self.view, delegate: self, title: "充值失败，请重试", duration: 2)
             }
         }
     }
+
+    
 
     func aliPay(str: String) {
         AlipaySDK.defaultService()?.payOrder(str, fromScheme: "wojiayoupin", callback: { (reslt) in
