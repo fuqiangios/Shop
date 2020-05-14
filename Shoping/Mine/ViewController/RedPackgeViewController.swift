@@ -75,8 +75,8 @@ class RedPackgeViewController: UIViewController {
                 self.pay.text = data.data.pay
                 self.income.text = data.data.income
                 self.tableView.reloadData()
-            case .failure:
-                print("error")
+            case .failure(let er):
+                print(er)
             }
         }
     }

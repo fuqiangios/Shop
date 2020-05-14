@@ -348,6 +348,9 @@
 		36E15292240E1A720082477C /* OederDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36E15290240E1A720082477C /* OederDetailViewController.xib */; };
 		36E15295240E25A60082477C /* OrderDetailGoodsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E15293240E25A60082477C /* OrderDetailGoodsTableViewCell.swift */; };
 		36E15296240E25A60082477C /* OrderDetailGoodsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36E15294240E25A60082477C /* OrderDetailGoodsTableViewCell.xib */; };
+		36E22CD4246A771F00AE3F98 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 36E22CD2246A771F00AE3F98 /* AlipaySDK.bundle */; };
+		36E22CD5246A771F00AE3F98 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E22CD3246A771F00AE3F98 /* AlipaySDK.framework */; };
+		36E22CD7246A77EF00AE3F98 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E22CD6246A77EF00AE3F98 /* CoreMotion.framework */; };
 		36E863D8241A67C4005609FB /* AddBackGoodsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E863D6241A67C4005609FB /* AddBackGoodsViewController.swift */; };
 		36E863D9241A67C4005609FB /* AddBackGoodsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36E863D7241A67C4005609FB /* AddBackGoodsViewController.xib */; };
 		36E863DC241A6922005609FB /* AddBackGoodsPriceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E863DA241A6922005609FB /* AddBackGoodsPriceTableViewCell.swift */; };
@@ -761,6 +764,10 @@
 		36E15290240E1A720082477C /* OederDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OederDetailViewController.xib; sourceTree = "<group>"; };
 		36E15293240E25A60082477C /* OrderDetailGoodsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailGoodsTableViewCell.swift; sourceTree = "<group>"; };
 		36E15294240E25A60082477C /* OrderDetailGoodsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderDetailGoodsTableViewCell.xib; sourceTree = "<group>"; };
+		36E22CD2246A771F00AE3F98 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		36E22CD3246A771F00AE3F98 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		36E22CD6246A77EF00AE3F98 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		36E22CD8246A7ED000AE3F98 /* 我家用品.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "我家用品.entitlements"; sourceTree = "<group>"; };
 		36E863D6241A67C4005609FB /* AddBackGoodsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBackGoodsViewController.swift; sourceTree = "<group>"; };
 		36E863D7241A67C4005609FB /* AddBackGoodsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddBackGoodsViewController.xib; sourceTree = "<group>"; };
 		36E863DA241A6922005609FB /* AddBackGoodsPriceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBackGoodsPriceTableViewCell.swift; sourceTree = "<group>"; };
@@ -829,6 +836,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8721E6CF5FADF8C73E67028 /* Pods_Shoping.framework in Frameworks */,
+				36E22CD7246A77EF00AE3F98 /* CoreMotion.framework in Frameworks */,
+				36E22CD5246A771F00AE3F98 /* AlipaySDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1100,6 +1109,7 @@
 		3675744F23C750BD00B97A80 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				36E22CD1246A771F00AE3F98 /* iOS_SDK_No_UTDID */,
 				36BF647A2455A1ED00328AB0 /* WSDatePickerView */,
 				363902932455228F00651C1D /* Source */,
 				36030F9524380F2D0084759D /* UIFont.swift */,
@@ -1497,6 +1507,7 @@
 		36DDAD2E23B34B34002B9D39 /* Shoping */ = {
 			isa = PBXGroup;
 			children = (
+				36E22CD8246A7ED000AE3F98 /* 我家用品.entitlements */,
 				360E04442458FDB500A65F76 /* Vip */,
 				362C5E8023FB68AF007B3D2B /* User */,
 				360ADA9E23F7F8B700CA99B0 /* API */,
@@ -1519,6 +1530,15 @@
 			path = Shoping;
 			sourceTree = "<group>";
 		};
+		36E22CD1246A771F00AE3F98 /* iOS_SDK_No_UTDID */ = {
+			isa = PBXGroup;
+			children = (
+				36E22CD2246A771F00AE3F98 /* AlipaySDK.bundle */,
+				36E22CD3246A771F00AE3F98 /* AlipaySDK.framework */,
+			);
+			path = iOS_SDK_No_UTDID;
+			sourceTree = "<group>";
+		};
 		36FF35FF240030D5000708C6 /* EWAddressPicker */ = {
 			isa = PBXGroup;
 			children = (
@@ -1535,6 +1555,7 @@
 		A14450BF8309986B1C0FC1A4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				36E22CD6246A77EF00AE3F98 /* CoreMotion.framework */,
 				46D93AB581B5FF0E7BE0B0AC /* Pods_Shoping.framework */,
 			);
 			name = Frameworks;
@@ -1561,7 +1582,7 @@
 				36DDAD2923B34B34002B9D39 /* Frameworks */,
 				36DDAD2A23B34B34002B9D39 /* Resources */,
 				8D3A042BE0D2F4CFCE9F62C9 /* [CP] Embed Pods Frameworks */,
-				55D30AE8A8D1CC75F8A5BB33 /* [CP] Copy Pods Resources */,
+				E9B67D08689811919A431151 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1701,6 +1722,7 @@
 				3630DEAE23BEDB180048FD27 /* SelectedHeaderCollectionReusableView.xib in Resources */,
 				368F917A244AAB9D003751AE /* UserVipDetailTableViewCell.xib in Resources */,
 				368F91C9244D416F003751AE /* CommunityDetailReadNumTableViewCell.xib in Resources */,
+				36E22CD4246A771F00AE3F98 /* AlipaySDK.bundle in Resources */,
 				36EA35DD2459459C004C6308 /* VipProductDetailHeaderTableViewCell.xib in Resources */,
 				3608EFD223E3F92D00148C0F /* AddressAddInfoTableViewCell.xib in Resources */,
 				368F918A244AD2D1003751AE /* RetrospecTitleTableViewCell.xib in Resources */,
@@ -1796,23 +1818,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		55D30AE8A8D1CC75F8A5BB33 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Shoping/Pods-Shoping-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Shoping/Pods-Shoping-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Shoping/Pods-Shoping-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		8D3A042BE0D2F4CFCE9F62C9 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1850,6 +1855,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E9B67D08689811919A431151 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Shoping/Pods-Shoping-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Shoping/Pods-Shoping-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Shoping/Pods-Shoping-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2224,9 +2246,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage1;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Shoping/我家用品.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 97JD2M9AZT;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Shoping/Tool/iOS_SDK_No_UTDID",
+				);
 				INFOPLIST_FILE = Shoping/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2251,9 +2278,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage1;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Shoping/我家用品.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 97JD2M9AZT;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Shoping/Tool/iOS_SDK_No_UTDID",
+				);
 				INFOPLIST_FILE = Shoping/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -116,7 +116,10 @@ extension RecommendTypeViewController: UICollectionViewDelegate, UICollectionVie
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell:GoodsListCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifier, for: indexPath) as! GoodsListCollectionViewCell
-        cell.goodsImg.af_setImage(withURL: URL(string: (data?.data.products[indexPath.item].image)!)!)
+        if let im = data?.data.products[indexPath.item].image, im != "" {
+            cell.goodsImg.af_setImage(withURL: URL(string: im)!)
+        }
+
         cell.goodsName.text = data?.data.products[indexPath.item].name
         cell.info.text = data?.data.products[indexPath.item].title
         cell.price.text = "￥" + (data?.data.products[indexPath.item].price ?? "0")
@@ -126,7 +129,7 @@ extension RecommendTypeViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
             let width = 175*height
             let heightd = ga_heightForComment(fontSize: 17, width: width, text: data?.data.products[indexPath.item].name ?? "")
-            return CGSize(width: 195*height, height: heightd + 300)
+            return CGSize(width: 195*height, height: heightd + 250)
     }
     
     func ga_heightForComment(fontSize: CGFloat, width: CGFloat, text: String) -> CGFloat {
@@ -148,6 +151,9 @@ extension RecommendTypeViewController: UICollectionViewDelegate, UICollectionVie
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        if data?.data.category_banner.count ?? 0 < 1 {
+return CGSize(width: 0, height: 0)
+        }
         return CGSize(width: 0, height: 200)
     }
 

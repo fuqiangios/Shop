@@ -9,6 +9,9 @@
 import Foundation
 import Alamofire
 
+let urlheadr = "https://app.necesstore.com"
+let imgUri = "https://app.necesstore.com/front/image_up"
+//5eba3a36895ccab0640000b8
 enum APIMethod {
     case get
     case post

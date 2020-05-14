@@ -2,7 +2,6 @@ PODS:
   - Alamofire (4.7.3)
   - AlamofireImage (3.4.1):
     - Alamofire (~> 4.7)
-  - AlipaySDK-iOS (15.7.4)
   - FSPagerView (0.8.3)
   - IQKeyboardManager (6.4.2)
   - MJRefresh (3.4.1)
@@ -11,13 +10,22 @@ PODS:
   - SwiftyJSON (5.0.0)
   - TableKit (2.9.0)
   - TagListView (1.4.0)
+  - UMCCommon (2.1.4)
+  - UMCSecurityPlugins (1.0.6)
+  - UMCShare/Core (6.9.8):
+    - UMCCommon
+  - UMCShare/Social/ReducedWeChat (6.9.8):
+    - UMCCommon
+    - UMCShare/Core
+  - UMCShare/UI (6.9.8):
+    - UMCCommon
+    - UMCShare/Core
   - WechatOpenSDK (1.8.6.2)
   - ZLCollectionViewFlowLayout (1.1.6)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7.3)
   - AlamofireImage (~> 3.4.1)
-  - AlipaySDK-iOS
   - FSPagerView
   - IQKeyboardManager (~> 6.4.0)
   - MJRefresh
@@ -26,30 +34,34 @@ DEPENDENCIES:
   - SwiftyJSON (~> 5.0.0)
   - TableKit (~> 2.9.0)
   - TagListView (~> 1.0)
+  - UMCCommon
+  - UMCSecurityPlugins
+  - UMCShare/Social/ReducedWeChat
+  - UMCShare/UI
   - WechatOpenSDK
   - ZLCollectionViewFlowLayout
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - Alamofire
     - AlamofireImage
     - FSPagerView
     - IQKeyboardManager
+    - MJRefresh
     - netfox
     - SnapKit
     - SwiftyJSON
     - TableKit
     - TagListView
-    - ZLCollectionViewFlowLayout
-  trunk:
-    - AlipaySDK-iOS
-    - MJRefresh
+    - UMCCommon
+    - UMCSecurityPlugins
+    - UMCShare
     - WechatOpenSDK
+    - ZLCollectionViewFlowLayout
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   AlamofireImage: 78d67ccbb763d87ba44b21583d2153500a195630
-  AlipaySDK-iOS: 8659cdb4403de7e5f26ad8b699864a9cbe53384c
   FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
   IQKeyboardManager: b41e0a4943fbac4c11a239d31a688667675f962e
   MJRefresh: 3153c59a363159092c08b2177ec3a7d09f90bfaf
@@ -58,9 +70,12 @@ SPEC CHECKSUMS:
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
   TableKit: 2271557382915c5d8f25883044047a8568ab6400
   TagListView: 987b0bdbb16cd9d9e7c0e2ec32aff37ecba8b173
+  UMCCommon: b0703b0053323f598e01670ea702b8eb1e66e611
+  UMCSecurityPlugins: 0831a08f3988f3cea9f1d3a7626cd9bee4fef150
+  UMCShare: a250203b34a56cde25cc4c28335449b542f0255d
   WechatOpenSDK: 8b3ba4239193d1112205c139c94e21934e8f369a
   ZLCollectionViewFlowLayout: 105020fbab88e3dc66ceebc307b36f2c363a8c1f
 
-PODFILE CHECKSUM: 28b6b14e8bb31438f5e619bfee4d85faf55f73e6
+PODFILE CHECKSUM: 38d27c6dc85c06803810972e3033c10f4b191c9b
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.1

@@ -85,7 +85,11 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
                 self.getCache()
             }
         } else if indexPath.row == 2 {
-
+            let web = WebViewController()
+            web.uri = "https://app.necesstore.com/html/about.html"
+            web.title = "关于我们"
+            web.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(web, animated: true)
         } else if indexPath.row == 3 {
             UserSetting.default.activeUserToken = nil
             self.navigationController?.popToRootViewController(animated: true)

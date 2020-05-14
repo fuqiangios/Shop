@@ -152,12 +152,16 @@ class MineViewController: UIViewController {
             self.navigationController?.pushViewController(share, animated: true)
         } else if btn.tag == 602 {
             let web = WebViewController()
-            web.uri = "https://app.necesstore.com/web/help"
+            web.uri = "https://app.necesstore.com/html/help.html"
             web.title = "帮助中心"
             web.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(web, animated: true)
         } else if btn.tag == 603 {
-
+            let web = WebViewController()
+            web.uri = "https://app.necesstore.com/html/about.html"
+            web.title = "关于我们"
+            web.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(web, animated: true)
         } else if btn.tag == 604 {
             let setting = SettingViewController()
             setting.hidesBottomBarWhenPushed = true
@@ -206,6 +210,7 @@ extension MineViewController: UITableViewDataSource,UITableViewDelegate {
         } else if indexPath.section == 3 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MineImgTableViewCell") as! MineImgTableViewCell
             cell.selectionStyle = .none
+            cell.btn.addTarget(self, action: #selector(tocheck), for: .touchUpInside)
             return cell
         } else if indexPath.section == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MineRedTableViewCell") as! MineRedTableViewCell
@@ -341,5 +346,13 @@ extension MineViewController: UITableViewDataSource,UITableViewDelegate {
             return 102
         }
         return 147
+    }
+
+    @objc func tocheck() {
+        let web = WebViewController()
+        web.uri = "https://app.necesstore.com/html/luck.html?user_token=\(UserSetting.default.activeUserToken ?? "")"
+        web.title = "签到抽奖"
+        web.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(web, animated: true)
     }
 }

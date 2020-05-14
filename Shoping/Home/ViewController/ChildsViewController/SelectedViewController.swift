@@ -123,7 +123,7 @@ extension SelectedViewController: UICollectionViewDelegate, UICollectionViewData
         default:
             let width = 175*height
             let heightd = ga_heightForComment(fontSize: 17, width: width, text: data?.data.labels[lablesIndex].product[indexPath.item].name ?? "")
-            return CGSize(width: 195*height, height: heightd + 300)
+            return CGSize(width: 195*height, height: heightd + 250)
         }
     }
 

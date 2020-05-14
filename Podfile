@@ -1,6 +1,7 @@
 platform :ios, '9.0'
 
-target ‘Shoping’ do    
+target 'Shoping' do
+
     pod 'Alamofire', '~> 4.7.3'
     pod 'AlamofireImage', '~> 3.4.1'
     pod 'SwiftyJSON', '~> 5.0.0'
@@ -13,7 +14,10 @@ target ‘Shoping’ do
     pod 'FSPagerView'
     pod 'MJRefresh'
     pod 'WechatOpenSDK'
-    pod 'AlipaySDK-iOS'
-    use_frameworks!
+    pod 'UMCCommon'
+    pod 'UMCSecurityPlugins'
+    pod 'UMCShare/UI'
+    pod 'UMCShare/Social/ReducedWeChat'
+use_frameworks!
 end
 

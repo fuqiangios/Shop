@@ -7,3 +7,6 @@
 #import "WSDatePickerView.h"
 #import <WXApi.h>
 #import <AlipaySDK/AlipaySDK.h>
+#import <UMCommon/UMCommon.h>
+#import <UMShare/UMShare.h>
+#import <UShareUI/UShareUI.h>

@@ -32,7 +32,7 @@ extension API {
                 "telephone": telephone ?? "",
                 "code": code ?? "",
                 "email": email ?? "",
-                "invite code": yaoqing,
+                "invite_code": yaoqing,
              ]
         }
     }
@@ -275,6 +275,25 @@ extension API {
             return [
                 "alipay_name": alipay_name,
                 "alipay_identity": alipay_identity
+             ]
+        }
+    }
+
+    struct bindWechat: Post {
+        typealias Node = CartNumChange
+        var path: String = "customer/wxpay_info"
+
+        let name: String
+        let openid: String
+        init(name: String, openid: String) {
+            self.name = name
+            self.openid = openid
+        }
+
+        func parameters() -> [String: Any]? {
+            return [
+                "wx_name": name,
+                "wx_openid": openid
              ]
         }
     }
@@ -708,8 +727,9 @@ struct RedPackegDataClass: Codable {
 // MARK: - RedPackageList
 struct RedPackageList: Codable {
     let method: String
-    let incomeFlag: Bool
-    let value, endDate, created: String
+    let incomeFlag: Bool?
+    let endDate, created: String
+    let value: String?
 
     enum CodingKeys: String, CodingKey {
         case method

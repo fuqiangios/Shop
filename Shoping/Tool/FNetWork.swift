@@ -13,14 +13,12 @@ enum MethodType {
     case get
     case post
 }
-//正式接口
-//let urlheadr = "https://api.zgkjb.com/"
 
-//测试接口
-let urlheadr = "https://app.necesstore.com"
-let imgUri = "https://app.necesstore.com/front/image_up"
+//接口
 
 class FNetWork: NSObject {
+
+
     //MD5加密
    class func md5String(str:String) -> String{
         let cStr = str.cString(using: String.Encoding.utf8);
@@ -38,11 +36,8 @@ class FNetWork: NSObject {
     class func requestData(_ type : MethodType, action:String, parameters : [String : Any]? = nil, finishedCallback :  @escaping (_ result : Dictionary<String,Any>, _ error: Int) -> ()) {
         
         var dic = parameters
-//        let isLogin = UserDefaults.standard.bool(forKey: "myUserDataIsLog")
-//        if isLogin {
-//            dic!["session_token"] = UserDefaults.standard.object(forKey: "myUserDatasession_token")
-//        }
-    
+    let urlheadr = "https://app.necesstore.com"
+    let imgUri = "https://app.necesstore.com/front/image_up"
         // 1.获取类型
         let method = type == .get ? HTTPMethod.get : HTTPMethod.post
         // 2.发送网络请求
@@ -50,7 +45,7 @@ class FNetWork: NSObject {
         let headers = ["User-Agent":"iPhone"]
         manager.session.configuration.timeoutIntervalForRequest = 30
         manager.request(urlheadr+action, method: method, parameters: dic, encoding: URLEncoding.default, headers: headers).responseData { (response) in
-        
+//        finishedCallback(response)
         
         }
     }

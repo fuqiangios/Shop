@@ -16,6 +16,7 @@ class CreatOrderViewController: UIViewController {
     @IBOutlet weak var priceLable: UILabel!
     var store: Store? = nil
     var storeSelect: Bool = false
+    var orderId = ""
 
     var order_type: String = ""
     var selectIndex: Int = 0
@@ -43,6 +44,7 @@ class CreatOrderViewController: UIViewController {
         loadData()
         loadPayListData()
         getPrice()
+        NotificationCenter.default.addObserver(self, selector: #selector(notificationAction(noti:)), name: NSNotification.Name(rawValue: "weixinpaymethod"), object: nil)
     }
 
     func setUp() {
@@ -86,7 +88,8 @@ class CreatOrderViewController: UIViewController {
                         detail.backType = "cart"
                          self.navigationController?.pushViewController(detail, animated: true)
                     } else if self.payList[self.selectIndex].pfn == "WeChatPay" {
-
+                        self.orderId = data.data.order_id
+                        self.wechatPay(data: data)
                     } else {
                         if data.data.plugin == "" {
                             let detail = OederDetailViewController()
@@ -109,35 +112,46 @@ class CreatOrderViewController: UIViewController {
         }
     }
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    @objc private func notificationAction(noti: Notification) {
+        let isRet = noti.object as! String
+        let detail = OederDetailViewController()
+         detail.order_id = orderId
+         detail.backType = "cart"
+         self.navigationController?.pushViewController(detail, animated: true)
+    }
 
-    func wechatPay() {
+    func wechatPay(data: PayOrder) {
+        let array : Array = data.data.plugin.components(separatedBy: ",")
         let req = PayReq()
-        req.nonceStr = ""
-        req.partnerId = ""
-        req.prepayId = ""
-        req.timeStamp =  200000
-        req.package = ""
-        req.sign = ""
+        req.nonceStr = array[1]
+        req.partnerId = array[3]
+        req.prepayId = array[4]
+        req.timeStamp = UInt32(array[6]) ?? 100000
+        req.package = array[2]
+        req.sign = array[5]
         WXApi.send(req) { (item) in
             print(item)
             if item {
-                self.navigationController?.pushViewController(CreatOrderSuccessViewController(), animated: true)
+
             } else {
-                CLProgressHUD.showError(in: self.view, delegate: self, title: "充值失败，请重试", duration: 2)
+                CLProgressHUD.showError(in: self.view, delegate: self, title: "支付失败，请重试", duration: 2)
             }
         }
     }
 
     func aliPay(str: String, id: String) {
         AlipaySDK.defaultService()?.payOrder(str, fromScheme: "wojiayoupin", callback: { (reslt) in
-            if reslt!["resultStatus"]as! String == "9000" {
+//            if reslt!["resultStatus"]as! String == "9000" {
                let detail = OederDetailViewController()
                 detail.order_id = id
                 detail.backType = "cart"
                 self.navigationController?.pushViewController(detail, animated: true)
-            } else {
-                CLProgressHUD.showError(in: self.view, delegate: self, title: "支付失败，请重试", duration: 2)
-            }
+//            } else {
+//                CLProgressHUD.showError(in: self.view, delegate: self, title: "支付失败，请重试", duration: 2)
+//            }
         })
     }
 
@@ -225,7 +239,7 @@ class CreatOrderViewController: UIViewController {
             redPackegPrice = (numPrice + (ship ?? 0.00) - couponPrice)
         }
         numPrice = numPrice - redPackegPrice - couponPrice
-        numPrice = numPrice + Double(settlement?.data.shippingFee ?? "0.00")!
+        numPrice = numPrice + (Double(settlement?.data.shippingFee ?? "0.00") ?? 0.00)
 
         priceLable.text = "应付:￥" + String(format: "%.2f", numPrice)
     }

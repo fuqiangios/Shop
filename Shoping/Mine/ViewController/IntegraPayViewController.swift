@@ -111,7 +111,25 @@ extension IntegraPayViewController: UITableViewDelegate, UITableViewDataSource {
 
     @objc func bindAction(btn: UIButton) {
         if (data?.data.payment[btn.tag - 200].pfn ?? "false") == "WeChatPay" {
+            CLProgressHUD.show(in: self.view, delegate: self, tag: 55, title: "")
+                               UMSocialManager.default()?.getUserInfo(with: .wechatSession, currentViewController: nil, completion: { (result, er) in
+                                   print(result)
+                                   print(er)
 
+                                   if er == nil {
+                                        let e = result as! UMSocialUserInfoResponse
+                                       API.bindWechat(name: e.name, openid: e.openid).request { (e) in
+                                           CLProgressHUD.dismiss(byTag: 55, delegate: self, in: self.view)
+                                           switch e {
+                                           case .success:
+                                               self.loadData()
+                                               CLProgressHUD.showError(in: self.view, delegate: self, title: "绑定成功", duration: 1)
+                                           case .failure:
+                                               CLProgressHUD.showError(in: self.view, delegate: self, title: "绑定失败", duration: 1)
+                                           }
+                                       }
+                                   }
+                               })
         } else {
             let ali = BindAliPayViewController()
             self.navigationController?.pushViewController(ali, animated: true)

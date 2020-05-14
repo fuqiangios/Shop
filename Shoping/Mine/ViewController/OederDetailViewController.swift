@@ -251,7 +251,7 @@ extension OederDetailViewController:UITableViewDelegate,UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "OrderDetailGoodsTableViewCell") as! OrderDetailGoodsTableViewCell
                     cell.selectionStyle = .none
                 cell.goodPrice.text = "\(data?.data.paymentMethod ?? "")"
-                cell.discountPrice.text = "￥\(data?.data.price ?? "")"
+                cell.discountPrice.text = "￥\(data?.data.total ?? "")"
                 cell.youhuiPrice.text = "￥\(data?.data.shippingPrice ?? "")"
                 cell.shipingPrice.text = "-￥\(data?.data.redPacket ?? "")"
                 cell.price.text = "-￥\(data?.data.couponPrice ?? "")"
@@ -261,7 +261,7 @@ extension OederDetailViewController:UITableViewDelegate,UITableViewDataSource {
             }
             let cell = tableView.dequeueReusableCell(withIdentifier: "OrderDetailMonyTableViewCell") as! OrderDetailMonyTableViewCell
             cell.selectionStyle = .none
-            cell.price.text = "￥\(data?.data.amountPrice ?? "")"
+            cell.price.text = "￥\(data?.data.price ?? "")"
             return cell
         }
     }
