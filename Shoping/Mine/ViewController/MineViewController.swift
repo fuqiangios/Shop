@@ -39,6 +39,12 @@ class MineViewController: UIViewController {
     }
 
     @objc func toBarCode() {
+        if UserSetting.default.activeUserToken == nil {
+        let login = LoginViewController()
+            login.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(login, animated: true)
+            return
+        }
         let pay = BarCodeViewController()
         pay.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(pay, animated: true)
