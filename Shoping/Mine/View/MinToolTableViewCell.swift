@@ -16,6 +16,8 @@ class MinToolTableViewCell: UITableViewCell {
     @IBOutlet weak var btn3: UIButton!
     @IBOutlet weak var btn2: UIButton!
     @IBOutlet weak var backGroundView: UIView!
+    
+    @IBOutlet weak var btn5: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
 //        setShadow(view: backGroundView, sColor: UIColor.init(white: 0.8, alpha: 1), offset: CGSize(width: 0, height: 0), opacity: 1, radius: 5)

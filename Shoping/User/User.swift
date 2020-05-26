@@ -53,6 +53,36 @@ extension API {
     }
     }
 
+    struct getRed: Post {
+        typealias Node = CartNumChange
+        var path: String = "customer/take_redpackage"
+
+        init(type: String) {
+        }
+
+    func parameters() -> [String: Any]? {
+        return [
+            "": "",
+         ]
+    }
+    }
+
+    struct getLogis: Post {
+        typealias Node = Logis
+        var path: String = "customer/order_shipping"
+
+        let order_id: String
+        init(order_id: String) {
+            self.order_id = order_id
+        }
+
+    func parameters() -> [String: Any]? {
+        return [
+            "order_id": order_id,
+         ]
+    }
+    }
+
     struct getCode: Post {
         typealias Node = CartNumChange
         var path: String = "customer/getidentifying"
@@ -342,18 +372,21 @@ extension API {
         let amount: String
         let type: String
         let payment_pfn: String
+        let pay_password: String
 
-        init(amount: String, type: String, payment_pfn: String) {
+        init(amount: String, type: String, payment_pfn: String, pay_password: String) {
             self.amount = amount
             self.type = type
             self.payment_pfn = payment_pfn
+            self.pay_password = pay_password
         }
 
         func parameters() -> [String: Any]? {
             return [
                 "amount": amount,
                 "type": type,
-                "payment_pfn": payment_pfn
+                "payment_pfn": payment_pfn,
+                "pay_password": pay_password
              ]
         }
     }
@@ -479,6 +512,44 @@ extension API {
         }
     }
 
+    struct checkToken: Post {
+        typealias Node = CheckToken
+        var path: String = "customer/check_token"
+        let now_user_token: String
+
+        init(now_user_token: String) {
+            self.now_user_token = now_user_token
+        }
+
+        func parameters() -> [String: Any]? {
+            return [
+                "now_user_token": now_user_token,
+             ]
+        }
+    }
+
+    struct setPayPassword: Post {
+        typealias Node = CartNumChange
+        var path: String = "customer/pay_password"
+        let telephone: String
+        let code: String
+        let pay_password: String
+
+        init(telephone: String, code: String, pay_password: String) {
+            self.telephone = telephone
+            self.code = code
+            self.pay_password = pay_password
+        }
+
+        func parameters() -> [String: Any]? {
+            return [
+                "pay_password": pay_password,
+                "code": code,
+                "telephone": telephone
+             ]
+        }
+    }
+
     struct getOrderPay: Post {
         typealias Node = Chongzhi
         var path: String = "order/pay"
@@ -530,6 +601,30 @@ extension API {
         }
     }
 
+    struct ahioc: Post {
+        typealias Node = Ahioc
+        var path: String = "customer/performance_show"
+        let region_id: String
+        let city_id: String
+        let page: String
+        let store_id: String
+        init(store_id: String, region_id: String, city_id: String, page: String) {
+            self.store_id = store_id
+            self.region_id = region_id
+            self.city_id = city_id
+            self.page = page
+        }
+
+        func parameters() -> [String: Any]? {
+            return [
+                "store_id": store_id,
+                "page": page,
+                "region_id": region_id,
+                "city_id": city_id
+             ]
+        }
+    }
+
     struct redpackgData: Post {
         typealias Node = RedPackeg
         var path: String = "customer/my_redpackage"
@@ -573,6 +668,52 @@ extension API {
         func parameters() -> [String: Any]? {
             return [
                 "": ""
+             ]
+        }
+    }
+
+    struct unBindWechat: Post {
+        typealias Node = CartNumChange
+        var path: String = "customer/wxpay_unbind"
+
+        let telephone: String
+        let code: String
+        let type: String
+
+        init(telephone: String, code: String, type: String) {
+            self.telephone = telephone
+            self.code = code
+            self.type = type
+        }
+
+        func parameters() -> [String: Any]? {
+            return [
+                "telephone": telephone,
+                "code": code,
+                "type": type
+             ]
+        }
+    }
+
+    struct forgetPassword: Post {
+        typealias Node = CartNumChange
+        var path: String = "customer/forget_password"
+
+        let telephone: String
+        let code: String
+        let password: String
+        init(telephone: String, code: String, password: String) {
+            self.telephone = telephone
+            self.code = code
+            self.password = password
+        }
+
+        func parameters() -> [String: Any]? {
+            return [
+                "type": "1",
+                "telephone": telephone,
+                "code": code,
+                "password": password
              ]
         }
     }
@@ -638,7 +779,7 @@ struct registerStatus: Codable {
 
 struct Tk: Codable {
     let user_token: String
-
+    let id: String
 }
 
 struct UserToken: Codable {
@@ -648,9 +789,9 @@ struct UserToken: Codable {
 }
 
 struct TokenDataClass: Codable {
-    let user_token: String
+    let user_token, id: String?
     enum CodingKeys: String, CodingKey {
-        case user_token
+        case user_token, id
     }
 }
 
@@ -894,6 +1035,19 @@ struct ChongzhDataClass: Codable {
     let plugin: String
 }
 
+// MARK: - Chongzhi
+struct CheckToken: Codable {
+    let result: Bool
+    let message: String
+    let status: Int
+    let data: CheckTokenDataClass
+}
+
+// MARK: - DataClass
+struct CheckTokenDataClass: Codable {
+    let effect: String
+}
+
 // MARK: - DataClass
 struct PayOrderDataClass: Codable {
     let res: Bool
@@ -962,6 +1116,7 @@ struct MineInfoDataClass: Codable {
     let isBlack, inviteID, inviteCount, settleCode: String
     let totalCost, created, modified: String
     let couponCount: Int
+    let had_take_red: String
 
     enum CodingKeys: String, CodingKey {
         case id, name, image
@@ -980,6 +1135,7 @@ struct MineInfoDataClass: Codable {
         case totalCost = "total_cost"
         case created, modified
         case couponCount = "coupon_count"
+        case had_take_red
     }
 }
 
@@ -1112,7 +1268,7 @@ struct AchievementInfo: Codable {
     let result: Bool
     let message: String
     let status: Int
-    let data: AchievementInfoDataClass
+    let data: [AchievementInfoDataClass]
 }
 
 // MARK: - DataClass
@@ -1141,10 +1297,46 @@ struct Retrospect: Codable {
 struct RetrospectDataClass: Codable {
     let product: RetrospectProduct
     let storeProduct: [StoreProduct]
+    let orderProduct: OrderProduct1
 
     enum CodingKeys: String, CodingKey {
         case product
         case storeProduct = "store_product"
+        case orderProduct = "order_product"
+    }
+}
+
+// MARK: - OrderProduct
+struct OrderProduct1: Codable {
+    let id, customerID, orderID, productID: String
+    let name: String
+    let image: String
+    let price, quantity, productOptionUnionID, optionUnionName: String
+    let weight, total, points, redPackage: String
+    let evaluateFlag, aftersaleFlag, factory, productionDate: String
+    let producer, barCode, created, modified: String
+    let store_name: String
+    let staff_name: String
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case customerID = "customer_id"
+        case orderID = "order_id"
+        case productID = "product_id"
+        case name, image, price, quantity
+        case productOptionUnionID = "product_option_union_id"
+        case optionUnionName = "option_union_name"
+        case weight, total, points
+        case redPackage = "red_package"
+        case evaluateFlag = "evaluate_flag"
+        case aftersaleFlag = "aftersale_flag"
+        case factory
+        case staff_name
+        case productionDate = "production_date"
+        case producer
+        case store_name
+        case barCode = "bar_code"
+        case created, modified
     }
 }
 
@@ -1372,6 +1564,105 @@ struct AfterDetailOrderProduct: Codable {
         case redPackage = "red_package"
         case evaluateFlag = "evaluate_flag"
         case aftersaleFlag = "aftersale_flag"
+        case created, modified
+    }
+}
+
+struct Ahioc: Codable {
+    let result: Bool
+    let message: String
+    let status: Int
+    let data: AhiocDataClass
+}
+
+// MARK: - DataClass
+struct AhiocDataClass: Codable {
+    let number, total: String
+    let tree: [AhiocTree]
+    let store: [AhiocStore]
+}
+
+// MARK: - Store
+struct AhiocStore: Codable {
+    let id, name, code, type: String
+    let regionName, cityName: String
+    let sale: Sale
+
+    enum CodingKeys: String, CodingKey {
+        case id, name, code, type
+        case regionName = "region_name"
+        case cityName = "city_name"
+        case sale
+    }
+}
+
+// MARK: - Sale
+struct Sale: Codable {
+    let yesTotal, nowMonthTotal, lastMonthTotal, yearTotal: String
+
+    enum CodingKeys: String, CodingKey {
+        case yesTotal = "yes_total"
+        case nowMonthTotal = "now_month_total"
+        case lastMonthTotal = "last_month_total"
+        case yearTotal = "year_total"
+    }
+}
+
+// MARK: - Tree
+struct AhiocTree: Codable {
+    let region: AhiocRegion
+    let city: [AhiocCity]
+
+    enum CodingKeys: String, CodingKey {
+        case region = "Region"
+        case city = "City"
+    }
+}
+
+// MARK: - City
+struct AhiocCity: Codable {
+    let id, name, level, zoneCode: String
+    let parentID, created, modified: String
+    let store: [StoreElement]
+
+    enum CodingKeys: String, CodingKey {
+        case id, name, level
+        case zoneCode = "zone_code"
+        case parentID = "parent_id"
+        case created, modified
+        case store = "Store"
+    }
+}
+
+// MARK: - StoreElement
+struct StoreElement: Codable {
+    let id, name, code, type: String
+    let regionID, cityID, detail, telephone: String
+    let contact, openTime, longitude, latitude: String
+    let status, adminID, created, modified: String
+    let image: String
+
+    enum CodingKeys: String, CodingKey {
+        case id, name, code, type
+        case regionID = "region_id"
+        case cityID = "city_id"
+        case detail, telephone, contact
+        case openTime = "open_time"
+        case longitude, latitude, status
+        case adminID = "admin_id"
+        case created, modified, image
+    }
+}
+
+// MARK: - Region
+struct AhiocRegion: Codable {
+    let id, name, level, zoneCode: String
+    let parentID, created, modified: String
+
+    enum CodingKeys: String, CodingKey {
+        case id, name, level
+        case zoneCode = "zone_code"
+        case parentID = "parent_id"
         case created, modified
     }
 }

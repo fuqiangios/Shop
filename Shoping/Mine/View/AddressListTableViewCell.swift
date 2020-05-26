@@ -10,6 +10,7 @@ import UIKit
 
 class AddressListTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var ph: UILabel!
     @IBOutlet weak var lb: UILabel!
     @IBOutlet weak var defaultHeight: NSLayoutConstraint!
     @IBOutlet weak var delete: UIButton!

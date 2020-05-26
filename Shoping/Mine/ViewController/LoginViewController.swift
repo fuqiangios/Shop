@@ -119,9 +119,17 @@ class LoginViewController: UIViewController {
         API.login(telephone: phoneNumber.text, login_type: type, email: nil, password: password.text, wx_openid: password.text ?? "", name: nil, image: nil).request { (result) in
             switch result {
             case .success(let token):
+                if token.data.user_token?.isEmpty ?? true {
+                    CLProgressHUD.showError(in: self.view, delegate: self, title: token.message, duration: 1)
+                } else {
+                    JPUSHService.setAlias(token.data.id, completion: { (i, o, u) in
+
+                    }, seq: 1)
                 UserSetting.default.activeUserToken = token.data.user_token
                 self.navigationController?.popToRootViewController(animated: true)
+                }
             case .failure(let error):
+                CLProgressHUD.showError(in: self.view, delegate: self, title: "登录失败,请重试", duration: 1)
                 print(error)
                 print(error.self)
                 print(error.localizedDescription)

@@ -12,6 +12,7 @@ import AlamofireImage
 class SettingViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var size = 0.0
+    var phone = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,11 +39,11 @@ class SettingViewController: UIViewController {
 }
 extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 6
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 3 {
+        if indexPath.row == 5 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "LogOutTableViewCell") as! LogOutTableViewCell
             cell.selectionStyle = .none
             return cell
@@ -52,14 +53,20 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.row == 0 {
             cell.title.text = "消息推送"
             cell.info.text = "去设置"
-        } else if indexPath.row == 1 {
-            cell.title.text = "清楚缓存"
+        } else if indexPath.row == 3 {
+            cell.title.text = "清除缓存"
             cell.info.text =  String(format: "%.2fM", size)
-        } else {
+        } else if indexPath.row == 4{
             cell.title.text = "关于我家用品"
             cell.info.text = ""
+        } else if indexPath.row == 1 {
+            cell.title.text = "支付密码"
+            cell.info.text = ""
+        } else if indexPath.row == 2 {
+            cell.title.text = "密码修改"
+            cell.info.text = ""
         }
-        if indexPath.row == 1 {
+        if indexPath.row == 3 {
             cell.imgWidth.constant = 0
             cell.img.isHidden = true
             cell.infoRight.constant = 0
@@ -80,19 +87,26 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
             })} else {
                    UIApplication.shared.openURL(urlObj!)
              }
-        } else if indexPath.row == 1 {
+        } else if indexPath.row == 3 {
             clearCache {
                 self.getCache()
             }
-        } else if indexPath.row == 2 {
+        } else if indexPath.row == 4 {
             let web = WebViewController()
             web.uri = "https://app.necesstore.com/html/about.html"
             web.title = "关于我们"
             web.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(web, animated: true)
-        } else if indexPath.row == 3 {
+        } else if indexPath.row == 5 {
             UserSetting.default.activeUserToken = nil
             self.navigationController?.popToRootViewController(animated: true)
+        } else if indexPath.row == 1 {
+            let payPassword = PayPasswordViewController()
+            self.navigationController?.pushViewController(payPassword, animated: true)
+        } else if indexPath.row == 2 {
+            let pass = SMSVerificationViewController()
+            pass.phoneStr = phone
+            self.navigationController?.pushViewController(pass, animated: true)
         }
     }
     func  floderSizeAtPath(completion:@escaping (( _ fileSize:CGFloat)->Void)){

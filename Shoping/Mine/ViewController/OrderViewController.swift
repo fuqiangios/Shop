@@ -229,7 +229,9 @@ extension OrderViewController:UITableViewDelegate,UITableViewDataSource {
         } else if btn.titleLabel?.text == "删除" {
             updateOrderStatus(id: data?.data[tag].id ?? "", type: "delete")
         } else if btn.titleLabel?.text == "查看物流" {
-
+            let lg = LogisticsViewController()
+            lg.order_id = data?.data[tag].id ?? ""
+            self.navigationController?.pushViewController(lg, animated: true)
         } else if btn.titleLabel?.text == "评论" {
             let addeva = EvaluateManagerViewController()
             self.navigationController?.pushViewController(addeva, animated: true)

@@ -13,11 +13,15 @@ import FSPagerView
 class GoodsDeatilViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
+    @IBOutlet weak var share: UIButton!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var back: UIButton!
     @IBOutlet weak var favorite: UIButton!
     @IBOutlet weak var bottomTagListView: TagListView!
     @IBOutlet weak var topTagListView: TagListView!
+    var img1: UIImageView!
+    var img2: UIImageView!
+    var img3: UIImageView!
     
     @IBOutlet weak var commentView: UIView!
     @IBOutlet weak var floatView: UIView!
@@ -30,15 +34,24 @@ class GoodsDeatilViewController: UIViewController {
     var webViewHeight = 0.0
     var addressStr = ""
     var option = ""
+    var section1 = 3
+    var relationHeight = 0
 
     override func viewDidLoad() {
         topView.backgroundColor = .clear
         back.addTarget(self, action: #selector(backAction), for: .touchUpInside)
         back.layer.cornerRadius = 15
         back.layer.masksToBounds = true
+        share.layer.cornerRadius = 15
+        share.layer.masksToBounds = true
         setTableView()
         setUp()
         loadData()
+        NotificationCenter.default.addObserver(self, selector: #selector(shouldPopup), name: NSNotification.Name(rawValue: "popup"), object: nil)
+    }
+
+    @objc func shouldPopup() {
+        self.navigationController?.popToRootViewController(animated: true)
     }
 
     @objc func backAction() {
@@ -66,20 +79,31 @@ class GoodsDeatilViewController: UIViewController {
         tableView.register(UINib(nibName: "GoodsTranslateTableViewCell", bundle: nil), forCellReuseIdentifier: "GoodsTranslateTableViewCell")
         tableView.register(UINib(nibName: "GoodsTypeTableViewCell", bundle: nil), forCellReuseIdentifier: "GoodsTypeTableViewCell")
         tableView.register(UINib(nibName: "GoodsBrandTableViewCell", bundle: nil), forCellReuseIdentifier: "GoodsBrandTableViewCell")
+        tableView.register(UINib(nibName: "GoodsRelationTableViewCell", bundle: nil), forCellReuseIdentifier: "GoodsRelationTableViewCell")
+
         tableView.register(UINib(nibName: "GoodsEvaluateHeaderTableViewCell", bundle: nil), forCellReuseIdentifier: "GoodsEvaluateHeaderTableViewCell")
         tableView.register(UINib(nibName: "GoodsEvaluateTableViewCell", bundle: nil), forCellReuseIdentifier: "GoodsEvaluateTableViewCell")
         tableView.register(UINib(nibName: "GoodsDetailHeaderTableViewCell", bundle: nil), forCellReuseIdentifier: "GoodsDetailHeaderTableViewCell")
         tableView.register(UINib(nibName: "GoodsDetailTableViewCell", bundle: nil), forCellReuseIdentifier: "GoodsDetailTableViewCell")
         tableView.register(UINib(nibName: "GoodsTipsTableViewCell", bundle: nil), forCellReuseIdentifier: "GoodsTipsTableViewCell")
 
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 300))
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.width))
         tableView.tableHeaderView = headerView
 
-        fsPagerView = FSPagerView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 300))
+        fsPagerView = FSPagerView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.width))
         fsPagerView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: "bannerCell")
         fsPagerView.delegate = self
         fsPagerView.dataSource = self
         fsPagerView.isInfinite = true
+        img1 = UIImageView(frame: CGRect(x: 10, y: 40, width: 100, height: 100))
+        fsPagerView.addSubview(img1)
+
+        img2 = UIImageView(frame: CGRect(x: view.frame.size.width - 200, y: view.frame.size.width - 210, width: 150, height: 150))
+        fsPagerView.addSubview(img2)
+
+        img3 = UIImageView(frame: CGRect(x: 0, y: view.frame.size.width - 50, width: view.frame.size.width, height: 50))
+        fsPagerView.addSubview(img3)
+
         tableView.tableHeaderView = fsPagerView
         NotificationCenter.default.addObserver(self, selector: #selector(notificationUpdate(nofi:)), name: NSNotification.Name(rawValue:"updateGoodsInfo"), object: nil)
     }
@@ -93,14 +117,40 @@ class GoodsDeatilViewController: UIViewController {
             switch result {
             case .success(let data):
                 self.data = data
-                self.tableView.reloadData()
+
                 if data.data.product.hasCollection {
                     self.favorite.setImage(UIImage(named: "收藏"), for: .normal)
                 } else {
                     self.favorite.setImage(UIImage(named: "收藏-1"), for: .normal)
                 }
+                if data.data.coupon.count < 1 {
+                    self.section1 = 2
+                } else {
+                    self.section1 = 3
+                }
+                let yu = (data.data.product_relation.count%2)
+                var i = 0
+                if yu <= 0 {
+                    i = 0
+                } else {
+                    i = 1
+                }
+                self.relationHeight = (data.data.product_relation.count/2 + i)*310 + 20
+                self.tableView.reloadData()
                 self.addressStr = data.data.address.address ?? ""
                 self.fsPagerView.reloadData()
+
+                if data.data.product.activity_flag == "1" {
+                    if data.data.product.activity_image_1 != "" {
+                        self.img1.af_setImage(withURL: URL(string: data.data.product.activity_image_1)!)
+                    }
+                    if data.data.product.activity_image_2 != "" {
+                        self.img2.af_setImage(withURL: URL(string: data.data.product.activity_image_2)!)
+                    }
+                    if data.data.product.activity_image_3 != "" {
+                        self.img3.af_setImage(withURL: URL(string: data.data.product.activity_image_3)!)
+                    }
+                }
             case .failure(let error):
                 print(error)
                 print(error.self)
@@ -148,6 +198,24 @@ class GoodsDeatilViewController: UIViewController {
 //        floatView.layer.cornerRadius = 5
 //        floatView.layer.masksToBounds = true
     }
+
+    @IBAction func shareAction(_ sender: Any) {
+        UMSocialUIManager.setPreDefinePlatforms([NSNumber(integerLiteral:UMSocialPlatformType.wechatSession.rawValue),NSNumber(integerLiteral:UMSocialPlatformType.wechatTimeLine.rawValue)])
+        UMSocialShareUIConfig.shareInstance()?.sharePageGroupViewConfig.sharePageGroupViewPostionType = .bottom
+        UMSocialShareUIConfig.shareInstance()?.sharePageScrollViewConfig.shareScrollViewPageItemStyleType = .iconAndBGRoundAndSuperRadius
+        UMSocialUIManager.showShareMenuViewInWindow { (type, info) in
+            let t = type as! UMSocialPlatformType
+            let m = UMSocialMessageObject()
+                    let s = UMShareWebpageObject.shareObject(withTitle: "注册我家用品APP，免费红包送到手软~", descr: "", thumImage: UIImage(named: "iPhoneApp_60pt"))
+            s?.webpageUrl = "http://app.necesstore.com/html/share.html?id=100&code=\(self.data?.data.invite_code ?? "")"
+                    m.shareObject = s
+                    UMSocialManager.default()?.share(to: t, messageObject: m, currentViewController: self, completion: { (le, er) in
+                        print(er)
+                        print(le)
+                    })
+        }
+    }
+
 
     @objc func favoriteAction() {
         if UserSetting.default.activeUserToken == nil {
@@ -214,17 +282,23 @@ extension GoodsDeatilViewController: UITableViewDelegate,UITableViewDataSource {
         } else if section == 0 {
             return 2
         } else if section == 1 {
-            return 3
+            return section1
         }
 
         return 1
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return data == nil ? 0 : 4
+        return data == nil ? 0 : 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 4 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "GoodsRelationTableViewCell") as! GoodsRelationTableViewCell
+                cell.selectionStyle = .none
+            cell.setData(data: data?.data.product_relation ?? [])
+                return cell
+        }
         if indexPath.section == 0 {
             if indexPath.row == 1 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "GoodsTipsTableViewCell") as! GoodsTipsTableViewCell
@@ -242,7 +316,7 @@ extension GoodsDeatilViewController: UITableViewDelegate,UITableViewDataSource {
             cell.selectionStyle = .none
             return cell
         }else if indexPath.section == 1 {
-            if indexPath.row == 1 {
+            if indexPath.row == section1 - 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "GoodsTypeTableViewCell") as! GoodsTypeTableViewCell
             cell.accessoryType = .disclosureIndicator
             cell.selectionStyle = .none
@@ -256,7 +330,7 @@ extension GoodsDeatilViewController: UITableViewDelegate,UITableViewDataSource {
                     }
                 }
             return cell
-            } else if indexPath.row == 0 {
+            } else if indexPath.row == section1 - 3 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "GoodsActiveTableViewCell") as! GoodsActiveTableViewCell
                 cell.accessoryType = .disclosureIndicator
                 cell.selectionStyle = .none
@@ -340,6 +414,9 @@ extension GoodsDeatilViewController: UITableViewDelegate,UITableViewDataSource {
         if indexPath.section == 3, indexPath.row == 1 {
             return CGFloat(webViewHeight + 30)
         }
+        if indexPath.section == 4 {
+            return CGFloat(relationHeight)
+        }
         return UITableView.automaticDimension
     }
 
@@ -374,6 +451,7 @@ extension GoodsDeatilViewController: UITableViewDelegate,UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 1, indexPath.row == 2 {
+
             let addres = AddressListViewController()
             addres.didSelectAddress = {(ad) in
                 self.addressStr = ad?.address ?? ""
@@ -412,11 +490,38 @@ extension GoodsDeatilViewController: UITableViewDelegate,UITableViewDataSource {
             }
         self.present(type, animated: true, completion: nil)
         } else if indexPath.section == 1, indexPath.row == 0 {
+            if (data?.data.coupon.count ?? 0) < 1 {
+                let type = SelectTypeViewController()
+                type.modalPresentationStyle = .custom
+                type.data = data
+                type.didColse = { (option) in
+                    self.option = option
+                    self.tableView.reloadData()
+                }
+                type.didToBuy = { (num,optin) in
+                    let creat = CreatOrderViewController()
+                    creat.product_id = self.data?.data.product.id
+                    creat.quantity = num
+                    creat.product_option_union_id = optin
+                    self.navigationController?.pushViewController(creat, animated: true)
+                }
+                self.present(type, animated: true, completion: nil)
+                return
+            }
             if (data?.data.coupon.count ?? 0) < 1 { return }
             let popUp = GoodsPopUpViewController(popUpType: GoodsPopUpViewController.PopUpType.translate(data: (data?.data.coupon)!))
                 popUp.modalPresentationStyle = .custom
             self.present(popUp, animated: false, completion: nil)
         } else if indexPath.section == 1, indexPath.row == 1 {
+            if (data?.data.coupon.count ?? 0) < 1 {
+                let addres = AddressListViewController()
+                addres.didSelectAddress = {(ad) in
+                    self.addressStr = ad?.address ?? ""
+                    self.tableView.reloadData()
+                }
+                self.navigationController?.pushViewController(addres, animated: true)
+                return
+            }
             let type = SelectTypeViewController()
             type.modalPresentationStyle = .custom
             type.data = data

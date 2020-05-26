@@ -66,6 +66,65 @@ class CreatOrderViewController: UIViewController {
         tableView.register(UINib(nibName: "CreatOrderRedTableViewCell", bundle: nil), forCellReuseIdentifier: "CreatOrderRedTableViewCell")
     }
 
+    func amountPayPassword() {
+        let popUp = PayPasswordPopupViewController()
+        popUp.modalPresentationStyle = .custom
+        popUp.didCofirmPassword = { code in
+            self.apiAction(code: code)
+        }
+        popUp.didToSet = {
+            let payPassword = PayPasswordViewController()
+            self.navigationController?.pushViewController(payPassword, animated: true)
+        }
+        self.present(popUp, animated: false, completion: nil)
+    }
+
+    func apiAction(code: String) {
+        if selectIndex < 0 {
+            return
+        }
+        var all: [String] = []
+        for item in data {
+            all.append(item.id)
+        }
+        if addressInfo?.id?.isEmpty ?? true {
+            CLProgressHUD.showError(in: view, delegate: self, title: "请选择收货地址", duration: 1)
+            return
+        }
+        API.createOrder(order_type: order_type, shopping_cart_ids: all, product_id: product_id, quantity: quantity, product_option_union_id: product_option_union_id, red_packet: "\(redPackegPrice)", customer_coupon_id: discountIndex == -1 ? "" : settlement?.data.coupons[discountIndex].id, address_id: addressInfo?.id, self_store_id: store != nil ? store?.id : "", store_id: settlement?.data.store_id ?? "", payment_pfn: payList[selectIndex].pfn , payment_method: payList[selectIndex].name , invoice_id: usepiao ? invoice_id : "", pay_password: code).request { (result) in
+                switch result {
+                case .success(let data):
+                    print("success")
+                    if self.payList[self.selectIndex].pfn == "Amount" {
+                                       let detail = OederDetailViewController()
+                        detail.order_id = data.data.order_id
+                        detail.backType = "cart"
+                         self.navigationController?.pushViewController(detail, animated: true)
+                    } else if self.payList[self.selectIndex].pfn == "WeChatPay" {
+                        self.orderId = data.data.order_id
+                        self.wechatPay(data: data)
+                    } else {
+                        if data.data.plugin == "" {
+                            let detail = OederDetailViewController()
+                            detail.order_id = data.data.order_id
+                            detail.backType = "cart"
+                             self.navigationController?.pushViewController(detail, animated: true)
+                        } else {
+                            self.aliPay(str: data.data.plugin,id: data.data.order_id)
+                        }
+                    }
+                    if self.order_type == "1" {
+                        NotificationCenter.default.post(name: NSNotification.Name("notificationCreatOrder"), object: self, userInfo: [:])
+                    }
+
+                case .failure(let error):
+                    print(error)
+                    print(error.self)
+                    print(error.localizedDescription)
+            }
+        }
+    }
+
     @objc func submitA() {
         if selectIndex < 0 {
             return
@@ -78,7 +137,11 @@ class CreatOrderViewController: UIViewController {
             CLProgressHUD.showError(in: view, delegate: self, title: "请选择收货地址", duration: 1)
             return
         }
-        API.createOrder(order_type: order_type, shopping_cart_ids: all, product_id: product_id, quantity: quantity, product_option_union_id: product_option_union_id, red_packet: "\(redPackegPrice)", customer_coupon_id: discountIndex == -1 ? "" : settlement?.data.coupons[discountIndex].id, address_id: addressInfo?.id, self_store_id: store != nil ? store?.id : "", store_id: settlement?.data.store_id ?? "", payment_pfn: payList[selectIndex].pfn , payment_method: payList[selectIndex].name , invoice_id: usepiao ? invoice_id : "").request { (result) in
+        if self.payList[self.selectIndex].pfn == "Amount" {
+            amountPayPassword()
+            return
+        }
+        API.createOrder(order_type: order_type, shopping_cart_ids: all, product_id: product_id, quantity: quantity, product_option_union_id: product_option_union_id, red_packet: "\(redPackegPrice)", customer_coupon_id: discountIndex == -1 ? "" : settlement?.data.coupons[discountIndex].id, address_id: addressInfo?.id, self_store_id: store != nil ? store?.id : "", store_id: settlement?.data.store_id ?? "", payment_pfn: payList[selectIndex].pfn , payment_method: payList[selectIndex].name , invoice_id: usepiao ? invoice_id : "", pay_password: "").request { (result) in
                 switch result {
                 case .success(let data):
                     print("success")

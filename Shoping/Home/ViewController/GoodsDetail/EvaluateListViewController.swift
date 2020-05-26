@@ -158,7 +158,7 @@ extension EvaluateListViewController: UITableViewDelegate,UITableViewDataSource 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
                 let view = UIView()
         if #available(iOS 13.0, *) {
-            view.backgroundColor = .systemGroupedBackground
+            view.backgroundColor = .groupTableViewBackground
         } else {
             view.backgroundColor = .groupTableViewBackground
         }

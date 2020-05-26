@@ -7,11 +7,17 @@
 //
 
 import UIKit
+import netfox
+import UserNotifications
+import NotificationCenter
+import AdSupport
+import SecurityEnvSDK
 
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, WXApiDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, WXApiDelegate, UNUserNotificationCenterDelegate, JPUSHRegisterDelegate {
     var window: UIWindow?
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         UMConfigure.setLogEnabled(true)
@@ -20,11 +26,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WXApiDelegate {
 
         UMSocialManager.default()?.setPlaform(.wechatSession, appKey: "wx55d4b9901badc2be", appSecret: "57dcbde37fcc0163b4a46b0fe974c540", redirectURL: "")
 
-//        window = UIWindow(frame: UIScreen.main.bounds)
-//        let story =  UIStoryboard.init(name: "Main", bundle: nil)
-//        self.window?.rootViewController = story.instantiateInitialViewController()
-//        window?.makeKeyAndVisible()
-//
+        if #available(iOS 10.0, *) {
+            let center = UNUserNotificationCenter.current()
+            center.delegate = self
+            center.getNotificationSettings { (setting) in
+                if setting.authorizationStatus == .notDetermined {
+                    center.requestAuthorization(options: [.badge,.sound,.alert]) { (result, error) in
+                        if(result){
+                            if !(error != nil){
+                                // 注册成功
+                                DispatchQueue.main.async {
+                                    application.registerForRemoteNotifications()
+                                }
+                            }
+                        } else{
+                            //用户不允许推送
+                        }
+                    }
+                } else if (setting.authorizationStatus == .denied){
+                    // 申请用户权限被拒
+                } else if (setting.authorizationStatus == .authorized){
+                    // 用户已授权（再次获取dt）
+                    DispatchQueue.main.async {
+                        UIApplication.shared.registerForRemoteNotifications()
+                    }
+                } else {
+                    // 未知错误
+                }
+            }
+        }
+                let entity = JPUSHRegisterEntity()
+                entity.types = 1 << 0 | 1 << 1 | 1 << 2
+
+
+
+        JPUSHService.register(forRemoteNotificationConfig: entity, delegate: self)
+        //需要IDFA 功能，定向投放广告功能
+                let advertisingId = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+                JPUSHService.setup(withOption: launchOptions, appKey: "8268f0fe2d6af98639be5baf", channel: "App Store", apsForProduction: false, advertisingIdentifier: nil)
+        NFX.sharedInstance().start()
         return true
     }
 
@@ -55,14 +95,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WXApiDelegate {
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-//        LocationManager.sharedInstance.stopUpdatingLocation()
-        UIApplication.shared.applicationIconBadgeNumber = 10
-//        LocationManager.sharedInstance.startUpdatingLocation()
+        //销毁通知红点
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        JPUSHService.setBadge(0)
+        UIApplication.shared.cancelAllLocalNotifications()
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        UIApplication.shared.applicationIconBadgeNumber = 120
+        UIApplication.shared.applicationIconBadgeNumber = 0 
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+    }
+
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        JPUSHService.registerDeviceToken(deviceToken)
+        print(deviceToken)
+    }
+
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) { //可选
+        print("did Fail To Register For Remote Notifications With Error: \(error)")
     }
 
     func onReq(_ req: BaseReq) {
@@ -110,5 +160,52 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WXApiDelegate {
         }
         return r ?? false
     }
+    func jpushNotificationCenter(_ center: UNUserNotificationCenter!, openSettingsFor notification: UNNotification!) {
+
+             let userInfo = notification.request.content.userInfo
+             if notification.request.trigger is UNPushNotificationTrigger {
+                 JPUSHService.handleRemoteNotification(userInfo)
+             }
+            // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以选择设置
+    //        completionHandler(Int(UNNotificationPresentationOptions.alert.rawValue))
+        }
+
+        func jpushNotificationAuthorization(_ status: JPAuthorizationStatus, withInfo info: [AnyHashable : Any]!) {
+    //        JPUSHService.handleRemoteNotification(info)
+    //        completionHandler(UIBackgroundFetchResult.newData)
+        }
+
+        @available(iOS 10.0, *)
+        func jpushNotificationCenter(_ center: UNUserNotificationCenter!, willPresent notification: UNNotification!, withCompletionHandler completionHandler: ((Int) -> Void)!) {
+
+            let userInfo = notification.request.content.userInfo
+            if notification.request.trigger is UNPushNotificationTrigger {
+                JPUSHService.handleRemoteNotification(userInfo)
+            }
+           // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以选择设置
+           completionHandler(Int(UNNotificationPresentationOptions.alert.rawValue))
+        }
+
+        func jpushNotificationCenter(_ center: UNUserNotificationCenter!, didReceive response: UNNotificationResponse!, withCompletionHandler completionHandler: (() -> Void)!) {
+           let userInfo = response.notification.request.content.userInfo
+            if response.notification.request.trigger is UNPushNotificationTrigger {
+                JPUSHService.handleRemoteNotification(userInfo)
+            }
+            // 系统要求执行这个方法
+            completionHandler()
+        }
+
+        //点推送进来执行这个方法
+        func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+               JPUSHService.handleRemoteNotification(userInfo)
+               completionHandler(UIBackgroundFetchResult.newData)
+
+        }
+
+
+        //系统获取Token
+    //    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    //        JPUSHService.registerDeviceToken(deviceToken)
+    //    }
 }
 

@@ -18,6 +18,8 @@ target 'Shoping' do
     pod 'UMCSecurityPlugins'
     pod 'UMCShare/UI'
     pod 'UMCShare/Social/ReducedWeChat'
+    pod 'JCore'
+    pod 'JPush'
 use_frameworks!
 end
 

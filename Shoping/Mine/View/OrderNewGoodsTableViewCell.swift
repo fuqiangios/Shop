@@ -61,8 +61,7 @@ class OrderNewGoodsTableViewCell: UITableViewCell {
             leftBtn.layer.borderWidth = 1
             leftBtn.layer.cornerRadius = 5
             leftBtn.layer.masksToBounds = true
-            leftBtn.setTitleColor(.black, for: .normal)
-            leftBtn.setTitle("", for: .normal)
+            leftBtn.setTitle("查看物流", for: .normal)
 
             rightBtn.isHidden = false
             rightBtn.layer.borderColor = rightBtn.tintColor.cgColor
@@ -88,6 +87,7 @@ class OrderNewGoodsTableViewCell: UITableViewCell {
             rightBtn.setTitle("评论", for: .normal)
 //            rightBtn.setTitleColor(price.tintColor, for: .normal)
         default:
+            leftBtn.isHidden = true
             rightBtn.isHidden = false
             rightBtn.layer.borderColor = rightBtn.tintColor.cgColor
             rightBtn.layer.borderWidth = 1

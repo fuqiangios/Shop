@@ -4,6 +4,9 @@ PODS:
     - Alamofire (~> 4.7)
   - FSPagerView (0.8.3)
   - IQKeyboardManager (6.4.2)
+  - JCore (2.2.5)
+  - JPush (3.3.3):
+    - JCore (< 3.0.0, >= 2.0.0)
   - MJRefresh (3.4.1)
   - netfox (1.15.0)
   - SnapKit (4.2.0)
@@ -28,6 +31,8 @@ DEPENDENCIES:
   - AlamofireImage (~> 3.4.1)
   - FSPagerView
   - IQKeyboardManager (~> 6.4.0)
+  - JCore
+  - JPush
   - MJRefresh
   - netfox (= 1.15.0)
   - SnapKit (~> 4.2)
@@ -47,6 +52,8 @@ SPEC REPOS:
     - AlamofireImage
     - FSPagerView
     - IQKeyboardManager
+    - JCore
+    - JPush
     - MJRefresh
     - netfox
     - SnapKit
@@ -64,6 +71,8 @@ SPEC CHECKSUMS:
   AlamofireImage: 78d67ccbb763d87ba44b21583d2153500a195630
   FSPagerView: 670405b2f18e2a87fa37f20b00de783e562c25a8
   IQKeyboardManager: b41e0a4943fbac4c11a239d31a688667675f962e
+  JCore: d75c0306dc99875d323d23e5a063b3a3ef22335a
+  JPush: 61b3dc8c2bdefb7c48e7ca283f9fe42e71bfe063
   MJRefresh: 3153c59a363159092c08b2177ec3a7d09f90bfaf
   netfox: 6ddcca687ad0a58550054fea481cb487461b5e0c
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
@@ -76,6 +85,6 @@ SPEC CHECKSUMS:
   WechatOpenSDK: 8b3ba4239193d1112205c139c94e21934e8f369a
   ZLCollectionViewFlowLayout: 105020fbab88e3dc66ceebc307b36f2c363a8c1f
 
-PODFILE CHECKSUM: 38d27c6dc85c06803810972e3033c10f4b191c9b
+PODFILE CHECKSUM: b46ba4858bf6f535e8c331617091641ebf806d65
 
 COCOAPODS: 1.9.1

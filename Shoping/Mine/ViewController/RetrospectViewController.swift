@@ -39,7 +39,7 @@ class RetrospectViewController: UIViewController, UITextFieldDelegate {
 //        view.addSubview(titleView)
         tableView.register(UINib(nibName: "RetrospectGoodsTableViewCell", bundle: nil), forCellReuseIdentifier: "RetrospectGoodsTableViewCell")
         tableView.register(UINib(nibName: "RetrospecTitleTableViewCell", bundle: nil), forCellReuseIdentifier: "RetrospecTitleTableViewCell")
-        tableView.register(UINib(nibName: "RetrospecStoreTableViewCell", bundle: nil), forCellReuseIdentifier: "RetrospecStoreTableViewCell")
+        tableView.register(UINib(nibName: "RetrospecGoodsTableViewCell", bundle: nil), forCellReuseIdentifier: "RetrospecGoodsTableViewCell")
         tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = 150
@@ -108,7 +108,7 @@ extension RetrospectViewController: UITableViewDataSource, UITableViewDelegate, 
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data == nil ? 0 : 2 + (data?.data.storeProduct.count ?? 0)
+        return data == nil ? 0 : 2
        }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -121,18 +121,20 @@ extension RetrospectViewController: UITableViewDataSource, UITableViewDelegate, 
             cell.category.text = "\(data?.data.product.categoryName ?? "")>\(data?.data.product.pCategoryName ?? "")"
             cell.date.text = data?.data.product.created
             return cell
-        } else if indexPath.row == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "RetrospecTitleTableViewCell") as! RetrospecTitleTableViewCell
-            cell.selectionStyle = .none
-            return cell
         }
-           let cell = tableView.dequeueReusableCell(withIdentifier: "RetrospecStoreTableViewCell") as! RetrospecStoreTableViewCell
-        let item = data?.data.storeProduct[indexPath.row - 2]
-        cell.name.text = "\(item?.name ?? "")店 有库存"
-        cell.inName.text = "\(item?.name ?? "")店"
-        cell.inNum.text = "\(item?.stock ?? "0")"
-        cell.inPName.text = "\(item?.productName ?? "")"
-        cell.date.text = "上次更新时间: \(item?.updateTime ?? "")"
+//        else if indexPath.row == 1 {
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "RetrospecTitleTableViewCell") as! RetrospecTitleTableViewCell
+//            cell.selectionStyle = .none
+//            return cell
+//        }
+           let cell = tableView.dequeueReusableCell(withIdentifier: "RetrospecGoodsTableViewCell") as! RetrospecGoodsTableViewCell
+        let item = data?.data.orderProduct
+        cell.sccj.text = item?.factory
+        cell.scrq.text = item?.productionDate
+        cell.scfzr.text = item?.producer
+        cell.gmdd.text = item?.store_name
+        cell.gmsj.text = item?.created
+        cell.mgjsr.text = item?.staff_name
            cell.selectionStyle = .none
            return cell
        }

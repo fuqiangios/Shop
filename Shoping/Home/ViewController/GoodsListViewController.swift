@@ -93,7 +93,7 @@ class GoodsListViewController: UIViewController {
 
     func loadData() {
         page = 1
-        API.homeCategoryData(p_category_id: nil, category_id: category_id, order: order, key_word: keyWord,product_ids: product_ids,page: "\(page)",label_code:label_code, label_id: label_id)
+        API.homeCategoryData(p_category_id: label_code, category_id: category_id, order: order, key_word: keyWord,product_ids: product_ids,page: "\(page)",label_code:"", label_id: label_id)
             .request { (result) in
                 self.collectionView.mj_header?.endRefreshing()
                 switch result {
@@ -109,7 +109,7 @@ class GoodsListViewController: UIViewController {
     }
 
     func loadDataMore() {
-        API.homeCategoryData(p_category_id: nil, category_id: category_id, order: order, key_word: keyWord,product_ids: product_ids,page: "\(page)", label_code:label_code, label_id: label_id)
+        API.homeCategoryData(p_category_id: nil, category_id: category_id, order: order, key_word: keyWord,product_ids: product_ids,page: "\(page)", label_code:"", label_id: label_id)
             .request { (result) in
                 self.collectionView.mj_footer?.endRefreshing()
                 switch result {
@@ -167,17 +167,21 @@ extension GoodsListViewController: UICollectionViewDelegate, UICollectionViewDat
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell:GoodsListCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifier, for: indexPath) as! GoodsListCollectionViewCell
+        if !(data?.data.products[indexPath.item].image ?? "").isEmpty {
         cell.goodsImg.af_setImage(withURL: URL(string: (data?.data.products[indexPath.item].image)!)!)
+        }
         cell.goodsName.text = data?.data.products[indexPath.item].name
         cell.info.text = data?.data.products[indexPath.item].title
-        cell.price.text = "￥" + (data?.data.products[indexPath.item].price ?? "0")
+//        cell.price.text = "￥" + (data?.data.products[indexPath.item].price ?? "0")
+        cell.setPri(str: "￥" + (data?.data.products[indexPath.item].price ?? "0"))
+
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
             let width = 175*height
             let heightd = ga_heightForComment(fontSize: 17, width: width, text: data?.data.products[indexPath.item].name ?? "")
-            return CGSize(width: 195*height, height: heightd + 250)
+            return CGSize(width: 195*height, height: 305)
     }
 
     func ga_heightForComment(fontSize: CGFloat, width: CGFloat, text: String) -> CGFloat {

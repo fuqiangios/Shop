@@ -41,6 +41,15 @@ class TypeViewController: UIViewController, ZLCollectionViewBaseFlowLayoutDelega
         loadData()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        if let type = UserSetting.default.activeType {
+            selectIndex = type
+            tableView.reloadData()
+            collectionView.reloadData()
+            UserSetting.default.activeType = nil
+        }
+    }
+
     func setCollectionView()  {
         let layout = ZLCollectionViewVerticalLayout()
         layout.delegate = self

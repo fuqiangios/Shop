@@ -20,6 +20,11 @@ class MineViewController: UIViewController {
         navigationItem.backBarButtonItem = itme
         setUp()
         loadData()
+        NotificationCenter.default.addObserver(self, selector: #selector(shouldPopup), name: NSNotification.Name(rawValue: "popup"), object: nil)
+    }
+
+    @objc func shouldPopup() {
+        self.tabBarController?.selectedIndex = 0
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -44,9 +49,15 @@ class MineViewController: UIViewController {
             switch result {
             case .success(let data):
                 self.data = data
+                if data.data.had_take_red == "0" {
+                                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "popup"), object: "")
+                    self.tabBarController?.selectedIndex = 0
+                }
+                UserSetting.default.activeUserPhone = data.data.telephone
                 self.tableView.reloadData()
             case .failure(let er):
                 self.data = nil
+                UserSetting.default.activeUserPhone = nil
                 self.tableView.reloadData()
                 print(er)
             }
@@ -164,6 +175,7 @@ class MineViewController: UIViewController {
             self.navigationController?.pushViewController(web, animated: true)
         } else if btn.tag == 604 {
             let setting = SettingViewController()
+            setting.phone = self.data?.data.telephone ?? ""
             setting.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(setting, animated: true)
         }
@@ -193,7 +205,7 @@ extension MineViewController: UITableViewDataSource,UITableViewDelegate {
             cell.barCode.addTarget(self, action: #selector(toBarCode), for: .touchUpInside)
             cell.selectionStyle = .none
             return cell
-        } else if indexPath.section == 1 {
+        } else if indexPath.section == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MineOrderTableViewCell") as! MineOrderTableViewCell
             cell.payBtn.tag = 1
             cell.payBtn.addTarget(self, action: #selector(runOrderVc(btn:)), for: .touchUpInside)
@@ -212,7 +224,7 @@ extension MineViewController: UITableViewDataSource,UITableViewDelegate {
             cell.selectionStyle = .none
             cell.btn.addTarget(self, action: #selector(tocheck), for: .touchUpInside)
             return cell
-        } else if indexPath.section == 2 {
+        } else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MineRedTableViewCell") as! MineRedTableViewCell
             cell.selectionStyle = .none
             cell.point.setTitle(data?.data.shortPoints ?? "0", for: .normal)
@@ -245,24 +257,30 @@ extension MineViewController: UITableViewDataSource,UITableViewDelegate {
             cell.btn2.addTarget(self, action: #selector(toolAction(btn:)), for: .touchUpInside)
             cell.btn3.addTarget(self, action: #selector(toolAction(btn:)), for: .touchUpInside)
             cell.btn4.addTarget(self, action: #selector(toolAction(btn:)), for: .touchUpInside)
+            cell.btn5.isHidden = true
         } else if indexPath.section == 5 {
             cell.btn1.setTitle("VIP", for: .normal)
             cell.btn1.setImage(UIImage(named: "vip"), for: .normal)
             cell.btn2.setTitle("会员信息", for: .normal)
             cell.btn2.setImage(UIImage(named: "会员"), for: .normal)
-            cell.btn3.setTitle("业绩查询", for: .normal)
+            cell.btn3.setTitle("连锁店业绩", for: .normal)
             cell.btn3.setImage(UIImage(named: "业绩"), for: .normal)
             cell.btn4.setTitle("产品追溯", for: .normal)
             cell.btn4.setImage(UIImage(named: "产品追溯"), for: .normal)
+            cell.btn5.setTitle("项目业绩", for: .normal)
+            cell.btn5.setImage(UIImage(named: "项目业绩"), for: .normal)
             cell.name.text = "信息查询"
             cell.btn1.tag = indexPath.section*100 + 1
             cell.btn2.tag = indexPath.section*100 + 2
             cell.btn3.tag = indexPath.section*100 + 3
             cell.btn4.tag = indexPath.section*100 + 4
+            cell.btn5.tag = indexPath.section*100 + 5
+//            cell.btn5.isHidden = false
             cell.btn1.addTarget(self, action: #selector(toolAction(btn:)), for: .touchUpInside)
             cell.btn2.addTarget(self, action: #selector(toolAction(btn:)), for: .touchUpInside)
             cell.btn3.addTarget(self, action: #selector(toolAction(btn:)), for: .touchUpInside)
             cell.btn4.addTarget(self, action: #selector(toolAction(btn:)), for: .touchUpInside)
+            cell.btn5.addTarget(self, action: #selector(toolAction(btn:)), for: .touchUpInside)
         } else if indexPath.section == 6 {
             cell.btn1.setTitle("邀请推荐", for: .normal)
             cell.btn1.setImage(UIImage(named: "邀请推荐"), for: .normal)
@@ -281,6 +299,7 @@ extension MineViewController: UITableViewDataSource,UITableViewDelegate {
             cell.btn2.addTarget(self, action: #selector(toolAction(btn:)), for: .touchUpInside)
             cell.btn3.addTarget(self, action: #selector(toolAction(btn:)), for: .touchUpInside)
             cell.btn4.addTarget(self, action: #selector(toolAction(btn:)), for: .touchUpInside)
+            cell.btn5.isHidden = true
         }
         return cell
     }
@@ -338,12 +357,14 @@ extension MineViewController: UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
             return 150
-        } else if indexPath.section == 1 {
+        } else if indexPath.section == 2 {
             return 122
         } else if indexPath.section == 3 {
             return 90
-        } else if indexPath.section == 2 {
-            return 102
+        } else if indexPath.section == 1 {
+            return 120
+        } else if indexPath.section == 5 {
+            return 147
         }
         return 147
     }

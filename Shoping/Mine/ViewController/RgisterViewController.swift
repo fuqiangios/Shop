@@ -80,7 +80,10 @@ class RgisterViewController: UIViewController {
     }
 
     @IBAction func xieyiAction(_ sender: Any) {
-
+        let web = WebViewController()
+        web.uri = "https://app.necesstore.com/html/legal.html"
+        web.title = "用户协议"
+        self.navigationController?.pushViewController(web, animated: true)
     }
 
 
@@ -164,6 +167,9 @@ class RgisterViewController: UIViewController {
                 API.register(type: "1", password: password.text ?? "", telephone: phoneNumber.text, code: code.text, email: nil, yaoqing: yaoqing.text ?? "").request { (result) in
                     switch result {
                     case .success(let data):
+                        JPUSHService.setAlias(data.data.id, completion: { (i, o, u) in
+
+                        }, seq: 1)
                         UserSetting.default.activeUserToken = data.data.user_token
                         self.navigationController?.popToRootViewController(animated: true)
                     case .failure(let error):
@@ -183,6 +189,9 @@ class RgisterViewController: UIViewController {
                              code: "", email: phoneNumber.text ?? "", yaoqing: surePassword.text ?? "").request { (result) in
                     switch result {
                     case .success(let data):
+                        JPUSHService.setAlias(data.data.id, completion: { (i, o, u) in
+
+                                         }, seq: 1)
                         UserSetting.default.activeUserToken = data.data.user_token
                         self.navigationController?.popToRootViewController(animated: true)
                     case .failure(let error):

@@ -163,7 +163,8 @@ extension AddressListViewController: UITableViewDataSource, UITableViewDelegate,
             cell.edit.addTarget(self, action: #selector(editAddress(btn:)), for: .touchUpInside)
 //            cell.delete.addTarget(self, action: #selector(deleteAddress(btn:)), for: .touchUpInside)
             let addressInfo = data?.data[indexPath.row]
-            cell.name.text = (addressInfo?.name ?? "") + "  " + (addressInfo?.telephone ?? "")
+            cell.name.text = (addressInfo?.name ?? "")
+            cell.ph.text = (addressInfo?.telephone ?? "")
             cell.address.text = (addressInfo?.address ?? "") + (addressInfo?.detail ?? "")
             if addressInfo?.isDefault == "1" {
                 cell.isDefault.isHidden = false

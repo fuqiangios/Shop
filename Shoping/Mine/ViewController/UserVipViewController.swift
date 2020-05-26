@@ -12,7 +12,12 @@ class UserVipViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var fensi: UILabel!
     @IBOutlet weak var UserView: UIView!
     var data: FansData? = nil
+    @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var headerImg: UIImageView!
 
+    @IBOutlet weak var jName: UILabel!
+    @IBOutlet weak var fName: UILabel!
+    @IBOutlet weak var tableVIew: UITableView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var phoneView: UIView!
     @IBOutlet weak var nameView: UIView!
@@ -48,7 +53,23 @@ class UserVipViewController: UIViewController, UITextFieldDelegate {
         nameInput.tag = 100
         phoneInput.delegate = self
         phoneInput.tag = 200
+        tableVIew.register(UINib(nibName: "UserVipTableViewCell", bundle: nil), forCellReuseIdentifier: "UserVipTableViewCell")
+        tableVIew.delegate = self
+        tableVIew.dataSource = self
+        tableVIew.estimatedRowHeight = 150
+        tableVIew.rowHeight = UITableView.automaticDimension
+        tableVIew.backgroundColor = UIColor.tableviewBackgroundColor
+        tableVIew.separatorStyle = .none
+        let hd = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 527))
+        hd.addSubview(headerImg)
+        hd.addSubview(headerView)
+        hd.addSubview(fensi)
+        hd.addSubview(fName)
+        hd.addSubview(jName)
+        hd.addSubview(xinzeng)
+        tableVIew.tableHeaderView = hd
         loadData()
+
     }
 
     @IBAction func checkAction(_ sender: Any) {
@@ -65,6 +86,12 @@ class UserVipViewController: UIViewController, UITextFieldDelegate {
         self.navigationController?.pushViewController(detail, animated: true)
     }
 
+    @objc func toDetail(btn: UIButton) {
+        let detail = UserVipDetailViewController()
+        detail.token = data?.data.inviteList[btn.tag - 100].user_token ?? ""
+        self.navigationController?.pushViewController(detail, animated: true)
+    }
+
     func loadData() {
         API.fansInfo(name: nameInput.text ?? "", telephone: phoneInput.text ?? "").request { (result) in
             switch result {
@@ -72,6 +99,7 @@ class UserVipViewController: UIViewController, UITextFieldDelegate {
                 self.data = data
                 self.fensi.text = data.data.inviteCount
                 self.xinzeng.text = data.data.todayInviteCount
+                self.tableVIew.reloadData()
                 if data.data.inviteList.count == 0 {
                     self.UserView.isHidden = true
                 } else {
@@ -90,4 +118,29 @@ class UserVipViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
+}
+extension UserVipViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return data?.data.inviteList.count ?? 0
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "UserVipTableViewCell") as! UserVipTableViewCell
+        cell.selectionStyle = .none
+        let item = data?.data.inviteList[indexPath.row]
+        cell.name.text = item?.name
+        cell.fensi.text = item?.inviteCount
+        cell.date.text = item?.created
+        cell.hongbao.text = item?.redPackage
+        cell.jifen.text = item?.points
+        cell.yue.text = item?.amount
+        cell.btn.tag = indexPath.row + 100
+        cell.btn.addTarget(self, action: #selector(self.toDetail(btn:)), for: .touchUpInside)
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 210
+    }
+
 }

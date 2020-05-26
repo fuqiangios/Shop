@@ -67,17 +67,30 @@ class IntegraPayViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func payAction(_ sender: Any) {
-        API.pointPay(amount: input.text ?? "0", type: "1", payment_pfn: data?.data.payment[selectIndex].pfn ?? "").request { (result) in
-            switch result{
-            case .success(let data):
-               print(data)
-               CLProgressHUD.showError(in: self.view, delegate: self, title: data.message, duration: 1)
-               self.loadData()
-//               self.navigationController?.popViewController(animated: true)
-            case .failure(let er):
-                print(er)
-            }
+        let popUp = PayPasswordPopupViewController()
+        popUp.modalPresentationStyle = .custom
+        popUp.didCofirmPassword = { code in
+            self.apiAction(code: code)
         }
+        popUp.didToSet = {
+            let payPassword = PayPasswordViewController()
+            self.navigationController?.pushViewController(payPassword, animated: true)
+        }
+        self.present(popUp, animated: false, completion: nil)
+
+    }
+    func apiAction(code: String) {
+                API.pointPay(amount: input.text ?? "0", type: "1", payment_pfn: data?.data.payment[selectIndex].pfn ?? "", pay_password: code).request { (result) in
+                    switch result{
+                    case .success(let data):
+                       print(data)
+                       CLProgressHUD.showError(in: self.view, delegate: self, title: data.message, duration: 1)
+                       self.loadData()
+        //               self.navigationController?.popViewController(animated: true)
+                    case .failure(let er):
+                        print(er)
+                    }
+                }
     }
     @IBAction func bbackAction(_ sender: Any) {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
@@ -103,7 +116,7 @@ extension IntegraPayViewController: UITableViewDelegate, UITableViewDataSource {
         cell.bindBtn.tag = indexPath.row + 200
         cell.bindBtn.addTarget(self, action: #selector(bindAction(btn:)), for: .touchUpInside)
         if (data?.data.payment[indexPath.row].binding_flag ?? false) {
-            cell.bindBtn.setTitle("修改", for: .normal)
+            cell.bindBtn.setTitle("解绑", for: .normal)
         }
         cell.selectionStyle = .none
         return cell
@@ -111,7 +124,14 @@ extension IntegraPayViewController: UITableViewDelegate, UITableViewDataSource {
 
     @objc func bindAction(btn: UIButton) {
         if (data?.data.payment[btn.tag - 200].pfn ?? "false") == "WeChatPay" {
-            CLProgressHUD.show(in: self.view, delegate: self, tag: 55, title: "")
+            if (btn.titleLabel?.text ?? "") == "解绑"  {
+                let sms = SMSVerficaationViewController()
+                sms.modalPresentationStyle = .custom
+                sms.type = "1"
+                self.present(sms, animated: false, completion: nil)
+                return
+            }
+//            CLProgressHUD.show(in: self.view, delegate: self, tag: 55, title: "")
                                UMSocialManager.default()?.getUserInfo(with: .wechatSession, currentViewController: nil, completion: { (result, er) in
                                    print(result)
                                    print(er)
@@ -131,6 +151,13 @@ extension IntegraPayViewController: UITableViewDelegate, UITableViewDataSource {
                                    }
                                })
         } else {
+            if (btn.titleLabel?.text ?? "") == "解绑"  {
+                           let sms = SMSVerficaationViewController()
+                           sms.modalPresentationStyle = .custom
+                           sms.type = "2"
+                           self.present(sms, animated: false, completion: nil)
+                           return
+                }                                          
             let ali = BindAliPayViewController()
             self.navigationController?.pushViewController(ali, animated: true)
         }

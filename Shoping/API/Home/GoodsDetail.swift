@@ -95,6 +95,14 @@ struct GoodsEvaluateList: Codable {
     let data: [ProductEvaluate]
 }
 
+struct ProductRelation: Codable {
+    let name: String
+    let id: String
+    let image: String
+    let price: String
+    let title: String
+}
+
 // MARK: - DataClass
 struct GoodsDataClass: Codable {
     let product: GoodsProduct
@@ -105,7 +113,8 @@ struct GoodsDataClass: Codable {
     let productModel: [ProductModel]
     let coupon: [Coupon]
     let address: GoodsAddress
-
+    let invite_code: String
+    let product_relation: [ProductRelation]
 
     enum CodingKeys: String, CodingKey {
         case product
@@ -115,6 +124,8 @@ struct GoodsDataClass: Codable {
         case productEvaluate = "product_evaluate"
         case productModel = "product_model"
         case coupon = "coupon"
+        case invite_code
+        case product_relation
     }
 
     func getProductOptionGroup() -> [ProductOptionGroup] {
@@ -192,9 +203,14 @@ struct GoodsProduct: Codable {
     let recommendcontent: String
     let evaluate_good_per: String?
     let evaluate_count: Int?
+    let activity_flag: String
+    let video: String
+    let activity_image_1: String
+    let activity_image_2: String
+    let activity_image_3: String
 
     enum CodingKeys: String, CodingKey {
-        case id, name, code
+        case id, name, code, activity_flag, video, activity_image_1, activity_image_2, activity_image_3
         case pCategoryID = "p_category_id"
         case categoryID = "category_id"
         case price, evaluate_good_per, evaluate_count

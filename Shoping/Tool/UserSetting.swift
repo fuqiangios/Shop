@@ -13,8 +13,10 @@ private struct UserSettingKes {
     static fileprivate let activeToken: String = "ACTIVE_TOKEN"
     static fileprivate let Notifications: String = "ACTIVE_Notifi"
     static fileprivate let searHistory: String = "SEAR_HISTORY"
+    static fileprivate let activephone: String = "USER_PHONE"
+    static fileprivate let activeType: String = "GOODS_TYPE"
     static func allKeys() -> [String] {
-        return [activeUser,activeToken,searHistory]
+        return [activeUser,activeToken,searHistory, activephone,activeType]
     }
 }
 
@@ -86,6 +88,63 @@ class UserSetting {
             }
         }
     }
+
+    var activeType: Int? {
+        set {
+            do {
+                if let type = newValue {
+                    standard.setValue(type, forKey: UserSettingKes.activeType)
+                } else {
+                    standard.setValue(nil, forKey: UserSettingKes.activeType)
+                }
+                standard.synchronize()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+
+        get {
+            guard let type = standard.value(forKey: UserSettingKes.activeType) as? Int else {
+                return nil
+            }
+
+            do {
+                return type
+            } catch {
+                print(error.localizedDescription)
+                return nil
+            }
+        }
+    }
+
+    var activeUserPhone: String? {
+        set {
+            do {
+                if let token = newValue {
+                    standard.setValue(token, forKey: UserSettingKes.activephone)
+                } else {
+                    standard.setValue(nil, forKey: UserSettingKes.activephone)
+                }
+                standard.synchronize()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+
+        get {
+            guard let token = standard.value(forKey: UserSettingKes.activephone) as? String else {
+                return nil
+            }
+
+            do {
+                return token
+            } catch {
+                print(error.localizedDescription)
+                return nil
+            }
+        }
+    }
+
 
     var searchHistory: [String]? {
         set {

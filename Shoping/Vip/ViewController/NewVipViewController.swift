@@ -69,37 +69,30 @@ extension NewVipViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section < 2 {
-            let header = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 50))
-            header.backgroundColor = .clear
-            let ti = UILabel(frame: CGRect(x: 20, y: 10, width: view.frame.width, height: 40))
-            if section == 0 {
-                ti.text = "会员卡"
-            } else {
-                ti.text = "星级股东"
-            }
-            header.addSubview(ti)
-            return header
-        } else {
+
             let header = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 80))
             header.backgroundColor = .clear
             let ti = UIImageView(frame: CGRect(x: 50, y: 0, width: self.view.frame.width - 100, height: 80))
             if section == 2 {
-                ti.image = UIImage(named: "__众筹 _")
+                ti.image = UIImage(named: "__国泰与秘鲁 _")
             } else if section == 3 {
-                ti.image = UIImage(named: "__项目 _")
+                ti.image = UIImage(named: "__项目参与 _")
+            } else if section == 1 {
+                ti.image = UIImage(named: "__星级股东 _")
+            } else {
+                ti.image = UIImage(named: "__会员卡 _")
             }
             ti.contentMode = .scaleAspectFit
             header.addSubview(ti)
             return header
-        }
+
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section > 1 {
             return 80
         }
-        return 50
+        return 80
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -163,6 +156,12 @@ extension NewVipViewController: UITableViewDelegate, UITableViewDataSource {
             detail.hidesBottomBarWhenPushed = true
             detail.data = data?.data.project[indexPath.row]
             self.navigationController?.pushViewController(detail, animated: true)
+        } else if indexPath.section == 2 {
+            let web = WebViewController()
+            web.uri = "https://app.necesstore.com/html/peru/index.html"
+            web.title = "国泰与秘鲁"
+            web.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(web, animated: true)
         }
     }
 }

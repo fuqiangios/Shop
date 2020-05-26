@@ -65,7 +65,7 @@ class ShareViewController: UIViewController, UMSocialShareMenuViewDelegate {
         UMSocialUIManager.showShareMenuViewInWindow { (type, info) in
             let t = type as! UMSocialPlatformType
             let m = UMSocialMessageObject()
-                    let s = UMShareWebpageObject.shareObject(withTitle: "注册我家用品APP，免费红包送到手软~", descr: "", thumImage: nil)
+                    let s = UMShareWebpageObject.shareObject(withTitle: "注册我家用品APP，免费红包送到手软~", descr: "", thumImage: UIImage(named: "iPhoneApp_60pt"))
             s?.webpageUrl = "https://app.necesstore.com/html/invite.html?code=\(self.code.text ?? "")"
                     m.shareObject = s
                     UMSocialManager.default()?.share(to: t, messageObject: m, currentViewController: self, completion: { (le, er) in

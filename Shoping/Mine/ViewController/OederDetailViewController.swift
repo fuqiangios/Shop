@@ -86,12 +86,11 @@ class OederDetailViewController: UIViewController {
             rightBtn.isHidden = true
         case 3:
             leftBtn.isHidden = false
-            leftBtn.layer.borderColor = UIColor.black.cgColor
+            leftBtn.layer.borderColor = rightBtn.tintColor.cgColor
             leftBtn.layer.borderWidth = 1
             leftBtn.layer.cornerRadius = 5
             leftBtn.layer.masksToBounds = true
-            leftBtn.setTitleColor(.black, for: .normal)
-            leftBtn.setTitle("", for: .normal)
+            leftBtn.setTitle("查看物流", for: .normal)
 
             rightBtn.isHidden = false
             rightBtn.layer.borderColor = rightBtn.tintColor.cgColor
@@ -155,18 +154,21 @@ class OederDetailViewController: UIViewController {
             let pay = OrderPayViewController()
             pay.order_id = order_id
             self.navigationController?.pushViewController(pay, animated: true)
+//            let lg = LogisticsViewController()
+//            self.navigationController?.pushViewController(lg, animated: true)
         } else if btn.titleLabel?.text == "确认收货" {
             updateOrderStatus(id: order_id, type: "confirm")
         } else if btn.titleLabel?.text == "删除" {
             updateOrderStatus(id: order_id, type: "delete")
         } else if btn.titleLabel?.text == "查看物流" {
-
+            let lg = LogisticsViewController()
+            lg.order_id = order_id
+            self.navigationController?.pushViewController(lg, animated: true)
         } else if btn.titleLabel?.text == "评论" {
             let addeva = EvaluateManagerViewController()
             self.navigationController?.pushViewController(addeva, animated: true)
         }
     }
-
 }
 extension OederDetailViewController:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

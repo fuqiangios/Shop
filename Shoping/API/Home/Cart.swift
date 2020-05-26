@@ -205,7 +205,8 @@ extension API {
         let payment_pfn: String
         let payment_method: String
         let invoice_id: String
-        init(order_type: String, shopping_cart_ids: [String]?, product_id: String?, quantity: String?, product_option_union_id: String?, red_packet: String?, customer_coupon_id: String?, address_id: String?, self_store_id: String?, store_id: String, payment_pfn: String, payment_method: String, invoice_id: String) {
+        let pay_password: String
+        init(order_type: String, shopping_cart_ids: [String]?, product_id: String?, quantity: String?, product_option_union_id: String?, red_packet: String?, customer_coupon_id: String?, address_id: String?, self_store_id: String?, store_id: String, payment_pfn: String, payment_method: String, invoice_id: String, pay_password: String) {
             self.order_type = order_type
             self.shopping_cart_ids = shopping_cart_ids
             self.product_id = product_id
@@ -219,6 +220,7 @@ extension API {
             self.payment_pfn = payment_pfn
             self.payment_method = payment_method
             self.invoice_id = invoice_id
+            self.pay_password = pay_password
         }
 
         func parameters() -> [String : Any]? {
@@ -235,7 +237,8 @@ extension API {
                 "store_id": store_id,
                 "payment_pfn": payment_pfn,
                 "payment_method": payment_method,
-                "invoice_id": invoice_id
+                "invoice_id": invoice_id,
+                "pay_password": pay_password
             ]
         }
     }

@@ -200,8 +200,12 @@ extension AccountInfoViewController: UITableViewDelegate, UITableViewDataSource 
         }
 
     @objc func updateAc() {
+
         let ac = AccountUpdateViewController()
         ac.oldPhone = phone
+        if phone.isEmpty {
+            ac.uploadProgress = 2
+        }
         self.navigationController?.pushViewController(ac, animated: true)
     }
 

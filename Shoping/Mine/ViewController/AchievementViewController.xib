@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,10 +12,14 @@
             <connections>
                 <outlet property="bennnianyeji" destination="KZZ-Le-CfL" id="1mq-rO-aol"/>
                 <outlet property="benyueyeji" destination="z94-RW-FRc" id="2N7-iq-4CF"/>
-                <outlet property="checkBtn" destination="8gx-S5-Tlc" id="mrd-Sn-7Sy"/>
+                <outlet property="checkBtn" destination="8gx-S5-Tlc" id="MWm-JH-oqE"/>
                 <outlet property="cityLabel" destination="xsy-Zj-hgv" id="Ivm-nM-2tl"/>
                 <outlet property="detail" destination="fUH-CE-6Qv" id="fZe-Dy-IhH"/>
+                <outlet property="fName" destination="uGR-b6-WZK" id="dIR-vS-A1C"/>
                 <outlet property="friendNum" destination="2Aa-vv-AWl" id="squ-Vy-Yid"/>
+                <outlet property="headerImg" destination="adY-Ml-LXN" id="5lu-Ms-sic"/>
+                <outlet property="headerView" destination="2lK-95-h5o" id="fwL-iL-PfG"/>
+                <outlet property="jName" destination="6Ds-hU-q1D" id="Ux5-nX-d47"/>
                 <outlet property="myFriend" destination="5v0-lh-efj" id="0IZ-Jm-3ne"/>
                 <outlet property="name" destination="VNX-CW-74M" id="W7V-q9-tYB"/>
                 <outlet property="newFriedn" destination="uvG-gM-aVs" id="zki-VR-bAw"/>
@@ -24,6 +28,7 @@
                 <outlet property="shangjiyeji" destination="BUf-pO-rLZ" id="XTd-eg-qiE"/>
                 <outlet property="shangyueyeji" destination="Rk8-cn-yqQ" id="XwW-zH-OC8"/>
                 <outlet property="storeLabel" destination="xfX-ab-FrA" id="Q0v-AY-pXz"/>
+                <outlet property="tableView" destination="XSX-ur-CSx" id="GON-bJ-EaP"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="zuoriyeji" destination="3Nc-8A-muP" id="Fjg-Sp-uy7"/>
             </connections>
@@ -76,7 +81,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="0.92156862750000001" green="0.9215573668" blue="0.92156130079999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </view>
-                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入会员姓名" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xfX-ab-FrA">
+                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请选择店铺" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xfX-ab-FrA">
                                     <rect key="frame" x="41" y="102" width="350" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -96,7 +101,7 @@
                                     <color key="backgroundColor" red="0.82672619820000004" green="0.33012539149999998" blue="0.29008919" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <state key="normal" title="查询"/>
                                     <connections>
-                                        <action selector="checkAction:" destination="-1" eventType="touchUpInside" id="ftW-eS-lOq"/>
+                                        <action selector="akk:" destination="-1" eventType="touchUpInside" id="f7n-kJ-gEv"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pqF-aS-Zyn">
@@ -144,7 +149,7 @@
                             <color key="textColor" red="0.50694003809999999" green="0.50694003809999999" blue="0.50694003809999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fUH-CE-6Qv">
+                        <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fUH-CE-6Qv">
                             <rect key="frame" x="20" y="551" width="374" height="303"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -242,6 +247,11 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XSX-ur-CSx">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        </tableView>
                     </subviews>
                 </scrollView>
             </subviews>

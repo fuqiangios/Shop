@@ -381,4 +381,28 @@ struct Reason: Codable {
         case created
     }}
 
+// MARK: - Logis
+struct Logis: Codable {
+    let result: Bool
+    let message: String
+    let status: Int
+    let data: LogisDataClass
+}
+
+// MARK: - DataClass
+struct LogisDataClass: Codable {
+    let number, type: String
+    let list: [LogisList]
+    let deliverystatus, issign, expName, expSite: String
+    let expPhone: String
+    let logo: String
+    let courier, courierPhone, updateTime, takeTime: String
+}
+
+// MARK: - List
+struct LogisList: Codable {
+    let time, status: String
+}
+
+
 

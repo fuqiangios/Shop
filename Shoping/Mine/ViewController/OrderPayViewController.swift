@@ -45,7 +45,7 @@ class OrderPayViewController: UIViewController {
                 if self.payList?.data.payment[self.selectIndex].pfn ?? "" == "Amount" {
                     self.navigationController?.popViewController(animated: true)
                 } else if self.payList?.data.payment[self.selectIndex].pfn ?? "" == "WeChatPay" {
-
+                    self.wechatPay(data: data.data.plugin)
                 } else {
                     self.aliPay(str: data.data.plugin)
                 }
@@ -56,20 +56,21 @@ class OrderPayViewController: UIViewController {
         }
     }
 
-    func wechatPay() {
+    func wechatPay(data: String) {
+        let array : Array = data.components(separatedBy: ",")
         let req = PayReq()
-        req.nonceStr = ""
-        req.partnerId = ""
-        req.prepayId = ""
-        req.timeStamp =  200000
-        req.package = ""
-        req.sign = ""
+        req.nonceStr = array[1]
+        req.partnerId = array[3]
+        req.prepayId = array[4]
+        req.timeStamp = UInt32(array[6]) ?? 100000
+        req.package = array[2]
+        req.sign = array[5]
         WXApi.send(req) { (item) in
             print(item)
             if item {
-                CLProgressHUD.showSuccess(in: self.view, delegate: self, title: "充值成功", duration: 2)
+                self.navigationController?.popViewController(animated: true)
             } else {
-                CLProgressHUD.showError(in: self.view, delegate: self, title: "充值失败，请重试", duration: 2)
+                CLProgressHUD.showError(in: self.view, delegate: self, title: "支付失败，请重试", duration: 2)
             }
         }
     }

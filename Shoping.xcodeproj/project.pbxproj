@@ -156,6 +156,25 @@
 		3658FF8A2456992C003D0A93 /* BarCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3658FF882456992C003D0A93 /* BarCodeViewController.xib */; };
 		365CC4D6240210B200F46A86 /* CreatOrderSelectDiscountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365CC4D4240210B200F46A86 /* CreatOrderSelectDiscountTableViewCell.swift */; };
 		365CC4D7240210B200F46A86 /* CreatOrderSelectDiscountTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 365CC4D5240210B200F46A86 /* CreatOrderSelectDiscountTableViewCell.xib */; };
+		365F41DC2476AC8C0028DA71 /* HomwPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365F41DA2476AC8C0028DA71 /* HomwPopUpViewController.swift */; };
+		365F41DD2476AC8C0028DA71 /* HomwPopUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 365F41DB2476AC8C0028DA71 /* HomwPopUpViewController.xib */; };
+		365F41E6247757740028DA71 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 365F41E4247757740028DA71 /* AlipaySDK.bundle */; };
+		365F41E7247757740028DA71 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 365F41E5247757740028DA71 /* AlipaySDK.framework */; };
+		365F41EA24776EA10028DA71 /* LogisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365F41E824776EA10028DA71 /* LogisticsViewController.swift */; };
+		365F41EB24776EA10028DA71 /* LogisticsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 365F41E924776EA10028DA71 /* LogisticsViewController.xib */; };
+		365F420C2477832E0028DA71 /* LogisticsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365F420A2477832E0028DA71 /* LogisticsTableViewCell.swift */; };
+		365F420D2477832E0028DA71 /* LogisticsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 365F420B2477832E0028DA71 /* LogisticsTableViewCell.xib */; };
+		365F42672477CCBE0028DA71 /* PayPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365F42652477CCBE0028DA71 /* PayPasswordViewController.swift */; };
+		365F42682477CCBE0028DA71 /* PayPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 365F42662477CCBE0028DA71 /* PayPasswordViewController.xib */; };
+		365F426A2477D33C0028DA71 /* HBInputPayPassWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365F42692477D33B0028DA71 /* HBInputPayPassWordView.swift */; };
+		365F426D2477D3860028DA71 /* PayPasswordPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365F426B2477D3860028DA71 /* PayPasswordPopupViewController.swift */; };
+		365F426E2477D3860028DA71 /* PayPasswordPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 365F426C2477D3860028DA71 /* PayPasswordPopupViewController.xib */; };
+		365F4271247A2D260028DA71 /* GoodsRelationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365F426F247A2D260028DA71 /* GoodsRelationTableViewCell.swift */; };
+		365F4272247A2D260028DA71 /* GoodsRelationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 365F4270247A2D260028DA71 /* GoodsRelationTableViewCell.xib */; };
+		365F4275247A9AFC0028DA71 /* SMSVerficaationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365F4273247A9AFC0028DA71 /* SMSVerficaationViewController.swift */; };
+		365F4276247A9AFC0028DA71 /* SMSVerficaationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 365F4274247A9AFC0028DA71 /* SMSVerficaationViewController.xib */; };
+		365F4279247AA8760028DA71 /* RetrospecGoodsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 365F4277247AA8760028DA71 /* RetrospecGoodsTableViewCell.swift */; };
+		365F427A247AA8760028DA71 /* RetrospecGoodsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 365F4278247AA8760028DA71 /* RetrospecGoodsTableViewCell.xib */; };
 		3661469223C4B2D600D42825 /* GoodsHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3661469023C4B2D600D42825 /* GoodsHeaderTableViewCell.swift */; };
 		3661469323C4B2D600D42825 /* GoodsHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3661469123C4B2D600D42825 /* GoodsHeaderTableViewCell.xib */; };
 		3661469623C4BB5900D42825 /* GoodsAddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3661469423C4BB5900D42825 /* GoodsAddressTableViewCell.swift */; };
@@ -303,6 +322,12 @@
 		36D41D0E23F9567300143158 /* GoodsListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D41D0C23F9567300143158 /* GoodsListCollectionViewCell.swift */; };
 		36D41D0F23F9567300143158 /* GoodsListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36D41D0D23F9567300143158 /* GoodsListCollectionViewCell.xib */; };
 		36D41D1123F969BE00143158 /* GoodsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D41D1023F969BE00143158 /* GoodsDetail.swift */; };
+		36D9ABB92474111400286B5F /* UserVipTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D9ABB72474111400286B5F /* UserVipTableViewCell.swift */; };
+		36D9ABBA2474111400286B5F /* UserVipTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36D9ABB82474111400286B5F /* UserVipTableViewCell.xib */; };
+		36D9ABBD2474C78700286B5F /* AhioTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D9ABBB2474C78700286B5F /* AhioTableViewCell.swift */; };
+		36D9ABBE2474C78700286B5F /* AhioTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36D9ABBC2474C78700286B5F /* AhioTableViewCell.xib */; };
+		36D9ABC12474D0E500286B5F /* SMSVerificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D9ABBF2474D0E500286B5F /* SMSVerificationViewController.swift */; };
+		36D9ABC22474D0E500286B5F /* SMSVerificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36D9ABC02474D0E500286B5F /* SMSVerificationViewController.xib */; };
 		36D9B5AB244735C200E9246D /* OrderDetailIDTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D9B5A9244735C100E9246D /* OrderDetailIDTableViewCell.swift */; };
 		36D9B5AC244735C200E9246D /* OrderDetailIDTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36D9B5AA244735C100E9246D /* OrderDetailIDTableViewCell.xib */; };
 		36D9B5AF24473CDD00E9246D /* OrderDetailMonyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D9B5AD24473CDD00E9246D /* OrderDetailMonyTableViewCell.swift */; };
@@ -338,7 +363,6 @@
 		36D9B5EB2449ECC400E9246D /* UserVipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D9B5E92449ECC400E9246D /* UserVipViewController.swift */; };
 		36D9B5EC2449ECC400E9246D /* UserVipViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36D9B5EA2449ECC400E9246D /* UserVipViewController.xib */; };
 		36DDAD3023B34B34002B9D39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DDAD2F23B34B34002B9D39 /* AppDelegate.swift */; };
-		36DDAD3223B34B34002B9D39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DDAD3123B34B34002B9D39 /* SceneDelegate.swift */; };
 		36DDAD3423B34B34002B9D39 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DDAD3323B34B34002B9D39 /* FirstViewController.swift */; };
 		36DDAD3623B34B34002B9D39 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DDAD3523B34B34002B9D39 /* SecondViewController.swift */; };
 		36DDAD3923B34B34002B9D39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 36DDAD3723B34B34002B9D39 /* Main.storyboard */; };
@@ -348,8 +372,6 @@
 		36E15292240E1A720082477C /* OederDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36E15290240E1A720082477C /* OederDetailViewController.xib */; };
 		36E15295240E25A60082477C /* OrderDetailGoodsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E15293240E25A60082477C /* OrderDetailGoodsTableViewCell.swift */; };
 		36E15296240E25A60082477C /* OrderDetailGoodsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36E15294240E25A60082477C /* OrderDetailGoodsTableViewCell.xib */; };
-		36E22CD4246A771F00AE3F98 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 36E22CD2246A771F00AE3F98 /* AlipaySDK.bundle */; };
-		36E22CD5246A771F00AE3F98 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E22CD3246A771F00AE3F98 /* AlipaySDK.framework */; };
 		36E22CD7246A77EF00AE3F98 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E22CD6246A77EF00AE3F98 /* CoreMotion.framework */; };
 		36E863D8241A67C4005609FB /* AddBackGoodsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E863D6241A67C4005609FB /* AddBackGoodsViewController.swift */; };
 		36E863D9241A67C4005609FB /* AddBackGoodsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36E863D7241A67C4005609FB /* AddBackGoodsViewController.xib */; };
@@ -564,6 +586,25 @@
 		3658FF882456992C003D0A93 /* BarCodeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BarCodeViewController.xib; sourceTree = "<group>"; };
 		365CC4D4240210B200F46A86 /* CreatOrderSelectDiscountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatOrderSelectDiscountTableViewCell.swift; sourceTree = "<group>"; };
 		365CC4D5240210B200F46A86 /* CreatOrderSelectDiscountTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatOrderSelectDiscountTableViewCell.xib; sourceTree = "<group>"; };
+		365F41DA2476AC8C0028DA71 /* HomwPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomwPopUpViewController.swift; sourceTree = "<group>"; };
+		365F41DB2476AC8C0028DA71 /* HomwPopUpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomwPopUpViewController.xib; sourceTree = "<group>"; };
+		365F41E4247757740028DA71 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		365F41E5247757740028DA71 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		365F41E824776EA10028DA71 /* LogisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogisticsViewController.swift; sourceTree = "<group>"; };
+		365F41E924776EA10028DA71 /* LogisticsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogisticsViewController.xib; sourceTree = "<group>"; };
+		365F420A2477832E0028DA71 /* LogisticsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogisticsTableViewCell.swift; sourceTree = "<group>"; };
+		365F420B2477832E0028DA71 /* LogisticsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogisticsTableViewCell.xib; sourceTree = "<group>"; };
+		365F42652477CCBE0028DA71 /* PayPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayPasswordViewController.swift; sourceTree = "<group>"; };
+		365F42662477CCBE0028DA71 /* PayPasswordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PayPasswordViewController.xib; sourceTree = "<group>"; };
+		365F42692477D33B0028DA71 /* HBInputPayPassWordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HBInputPayPassWordView.swift; sourceTree = "<group>"; };
+		365F426B2477D3860028DA71 /* PayPasswordPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayPasswordPopupViewController.swift; sourceTree = "<group>"; };
+		365F426C2477D3860028DA71 /* PayPasswordPopupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PayPasswordPopupViewController.xib; sourceTree = "<group>"; };
+		365F426F247A2D260028DA71 /* GoodsRelationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodsRelationTableViewCell.swift; sourceTree = "<group>"; };
+		365F4270247A2D260028DA71 /* GoodsRelationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoodsRelationTableViewCell.xib; sourceTree = "<group>"; };
+		365F4273247A9AFC0028DA71 /* SMSVerficaationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSVerficaationViewController.swift; sourceTree = "<group>"; };
+		365F4274247A9AFC0028DA71 /* SMSVerficaationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SMSVerficaationViewController.xib; sourceTree = "<group>"; };
+		365F4277247AA8760028DA71 /* RetrospecGoodsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrospecGoodsTableViewCell.swift; sourceTree = "<group>"; };
+		365F4278247AA8760028DA71 /* RetrospecGoodsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RetrospecGoodsTableViewCell.xib; sourceTree = "<group>"; };
 		3661469023C4B2D600D42825 /* GoodsHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodsHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		3661469123C4B2D600D42825 /* GoodsHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoodsHeaderTableViewCell.xib; sourceTree = "<group>"; };
 		3661469423C4BB5900D42825 /* GoodsAddressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodsAddressTableViewCell.swift; sourceTree = "<group>"; };
@@ -717,6 +758,12 @@
 		36D41D0C23F9567300143158 /* GoodsListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodsListCollectionViewCell.swift; sourceTree = "<group>"; };
 		36D41D0D23F9567300143158 /* GoodsListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GoodsListCollectionViewCell.xib; sourceTree = "<group>"; };
 		36D41D1023F969BE00143158 /* GoodsDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodsDetail.swift; sourceTree = "<group>"; };
+		36D9ABB72474111400286B5F /* UserVipTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserVipTableViewCell.swift; sourceTree = "<group>"; };
+		36D9ABB82474111400286B5F /* UserVipTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserVipTableViewCell.xib; sourceTree = "<group>"; };
+		36D9ABBB2474C78700286B5F /* AhioTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AhioTableViewCell.swift; sourceTree = "<group>"; };
+		36D9ABBC2474C78700286B5F /* AhioTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AhioTableViewCell.xib; sourceTree = "<group>"; };
+		36D9ABBF2474D0E500286B5F /* SMSVerificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSVerificationViewController.swift; sourceTree = "<group>"; };
+		36D9ABC02474D0E500286B5F /* SMSVerificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SMSVerificationViewController.xib; sourceTree = "<group>"; };
 		36D9B5A9244735C100E9246D /* OrderDetailIDTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailIDTableViewCell.swift; sourceTree = "<group>"; };
 		36D9B5AA244735C100E9246D /* OrderDetailIDTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderDetailIDTableViewCell.xib; sourceTree = "<group>"; };
 		36D9B5AD24473CDD00E9246D /* OrderDetailMonyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailMonyTableViewCell.swift; sourceTree = "<group>"; };
@@ -753,7 +800,6 @@
 		36D9B5EA2449ECC400E9246D /* UserVipViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserVipViewController.xib; sourceTree = "<group>"; };
 		36DDAD2C23B34B34002B9D39 /* 我家用品.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "我家用品.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		36DDAD2F23B34B34002B9D39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		36DDAD3123B34B34002B9D39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		36DDAD3323B34B34002B9D39 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		36DDAD3523B34B34002B9D39 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		36DDAD3823B34B34002B9D39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -764,8 +810,6 @@
 		36E15290240E1A720082477C /* OederDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OederDetailViewController.xib; sourceTree = "<group>"; };
 		36E15293240E25A60082477C /* OrderDetailGoodsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailGoodsTableViewCell.swift; sourceTree = "<group>"; };
 		36E15294240E25A60082477C /* OrderDetailGoodsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderDetailGoodsTableViewCell.xib; sourceTree = "<group>"; };
-		36E22CD2246A771F00AE3F98 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
-		36E22CD3246A771F00AE3F98 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		36E22CD6246A77EF00AE3F98 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		36E22CD8246A7ED000AE3F98 /* 我家用品.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "我家用品.entitlements"; sourceTree = "<group>"; };
 		36E863D6241A67C4005609FB /* AddBackGoodsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBackGoodsViewController.swift; sourceTree = "<group>"; };
@@ -837,7 +881,7 @@
 			files = (
 				D8721E6CF5FADF8C73E67028 /* Pods_Shoping.framework in Frameworks */,
 				36E22CD7246A77EF00AE3F98 /* CoreMotion.framework in Frameworks */,
-				36E22CD5246A771F00AE3F98 /* AlipaySDK.framework in Frameworks */,
+				365F41E7247757740028DA71 /* AlipaySDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -943,6 +987,14 @@
 				3658FF8424569084003D0A93 /* BaclGoodsDetailDateTableViewCell.xib */,
 				36EA35D2245928D0004C6308 /* AddEvaluateStarsTableViewCell.swift */,
 				36EA35D3245928D0004C6308 /* AddEvaluateStarsTableViewCell.xib */,
+				36D9ABB72474111400286B5F /* UserVipTableViewCell.swift */,
+				36D9ABB82474111400286B5F /* UserVipTableViewCell.xib */,
+				36D9ABBB2474C78700286B5F /* AhioTableViewCell.swift */,
+				36D9ABBC2474C78700286B5F /* AhioTableViewCell.xib */,
+				365F420A2477832E0028DA71 /* LogisticsTableViewCell.swift */,
+				365F420B2477832E0028DA71 /* LogisticsTableViewCell.xib */,
+				365F4277247AA8760028DA71 /* RetrospecGoodsTableViewCell.swift */,
+				365F4278247AA8760028DA71 /* RetrospecGoodsTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1071,6 +1123,15 @@
 			path = Source;
 			sourceTree = "<group>";
 		};
+		365F41E3247757740028DA71 /* iOS_SDK_No_UTDID */ = {
+			isa = PBXGroup;
+			children = (
+				365F41E4247757740028DA71 /* AlipaySDK.bundle */,
+				365F41E5247757740028DA71 /* AlipaySDK.framework */,
+			);
+			path = iOS_SDK_No_UTDID;
+			sourceTree = "<group>";
+		};
 		3661468F23C4B2B900D42825 /* GoodsDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -1102,6 +1163,8 @@
 				3679BF3A23FFC46100689DB8 /* GoodsPopUpTransateTableViewCell.xib */,
 				36030F9724382E890084759D /* GoodsTipsTableViewCell.swift */,
 				36030F9824382E890084759D /* GoodsTipsTableViewCell.xib */,
+				365F426F247A2D260028DA71 /* GoodsRelationTableViewCell.swift */,
+				365F4270247A2D260028DA71 /* GoodsRelationTableViewCell.xib */,
 			);
 			path = GoodsDetail;
 			sourceTree = "<group>";
@@ -1109,7 +1172,7 @@
 		3675744F23C750BD00B97A80 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
-				36E22CD1246A771F00AE3F98 /* iOS_SDK_No_UTDID */,
+				365F41E3247757740028DA71 /* iOS_SDK_No_UTDID */,
 				36BF647A2455A1ED00328AB0 /* WSDatePickerView */,
 				363902932455228F00651C1D /* Source */,
 				36030F9524380F2D0084759D /* UIFont.swift */,
@@ -1126,6 +1189,7 @@
 				36715D8724094A1A003C8D09 /* OcTest.m */,
 				36715D8524094A19003C8D09 /* Shoping-Bridging-Header.h */,
 				3658FF6F2456661E003D0A93 /* delayUitl.swift */,
+				365F42692477D33B0028DA71 /* HBInputPayPassWordView.swift */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -1183,6 +1247,8 @@
 				3630DEC923C40F510048FD27 /* GoodsDetail */,
 				3679FA5A23B35CEC00FA5CB3 /* ChildsViewController */,
 				3679FA5023B34E3400FA5CB3 /* HomeViewController.swift */,
+				365F41DA2476AC8C0028DA71 /* HomwPopUpViewController.swift */,
+				365F41DB2476AC8C0028DA71 /* HomwPopUpViewController.xib */,
 				3612993F245409EF00DE7777 /* WebViewController.swift */,
 				36129940245409EF00DE7777 /* WebViewController.xib */,
 				36FF360C24010B99000708C6 /* StoreListViewController.swift */,
@@ -1351,6 +1417,16 @@
 				368F9194244B256A003751AE /* SettingViewController.xib */,
 				3658FF872456992C003D0A93 /* BarCodeViewController.swift */,
 				3658FF882456992C003D0A93 /* BarCodeViewController.xib */,
+				365F42652477CCBE0028DA71 /* PayPasswordViewController.swift */,
+				365F42662477CCBE0028DA71 /* PayPasswordViewController.xib */,
+				36D9ABBF2474D0E500286B5F /* SMSVerificationViewController.swift */,
+				36D9ABC02474D0E500286B5F /* SMSVerificationViewController.xib */,
+				365F41E824776EA10028DA71 /* LogisticsViewController.swift */,
+				365F41E924776EA10028DA71 /* LogisticsViewController.xib */,
+				365F426B2477D3860028DA71 /* PayPasswordPopupViewController.swift */,
+				365F426C2477D3860028DA71 /* PayPasswordPopupViewController.xib */,
+				365F4273247A9AFC0028DA71 /* SMSVerficaationViewController.swift */,
+				365F4274247A9AFC0028DA71 /* SMSVerficaationViewController.xib */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1519,7 +1595,6 @@
 				3679FA3E23B34D2B00FA5CB3 /* Type */,
 				3679FA3D23B34D1C00FA5CB3 /* Home */,
 				36DDAD2F23B34B34002B9D39 /* AppDelegate.swift */,
-				36DDAD3123B34B34002B9D39 /* SceneDelegate.swift */,
 				36DDAD3323B34B34002B9D39 /* FirstViewController.swift */,
 				36DDAD3523B34B34002B9D39 /* SecondViewController.swift */,
 				36DDAD3723B34B34002B9D39 /* Main.storyboard */,
@@ -1528,15 +1603,6 @@
 				36DDAD3F23B34B35002B9D39 /* Info.plist */,
 			);
 			path = Shoping;
-			sourceTree = "<group>";
-		};
-		36E22CD1246A771F00AE3F98 /* iOS_SDK_No_UTDID */ = {
-			isa = PBXGroup;
-			children = (
-				36E22CD2246A771F00AE3F98 /* AlipaySDK.bundle */,
-				36E22CD3246A771F00AE3F98 /* AlipaySDK.framework */,
-			);
-			path = iOS_SDK_No_UTDID;
 			sourceTree = "<group>";
 		};
 		36FF35FF240030D5000708C6 /* EWAddressPicker */ = {
@@ -1582,7 +1648,7 @@
 				36DDAD2923B34B34002B9D39 /* Frameworks */,
 				36DDAD2A23B34B34002B9D39 /* Resources */,
 				8D3A042BE0D2F4CFCE9F62C9 /* [CP] Embed Pods Frameworks */,
-				E9B67D08689811919A431151 /* [CP] Copy Pods Resources */,
+				D31AC568E4EFA140A01DD479 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1639,6 +1705,7 @@
 				36FF3606240030D6000708C6 /* area.plist in Resources */,
 				3658FF7E24568A27003D0A93 /* BaclGoodsDetailGoodsTableViewCell.xib in Resources */,
 				368F9182244ABE29003751AE /* RetrospectViewController.xib in Resources */,
+				36D9ABBA2474111400286B5F /* UserVipTableViewCell.xib in Resources */,
 				36EA35E12459462D004C6308 /* VipProductDetailTitleTableViewCell.xib in Resources */,
 				368D879123CB0E5900934FE9 /* CardListTableViewCell.xib in Resources */,
 				36229FEB24170DDF001A9181 /* OrderFInshTableViewCell.xib in Resources */,
@@ -1648,6 +1715,7 @@
 				36F6BFEC23E2A2190017791C /* CreatOrderAddressTableViewCell.xib in Resources */,
 				368F91A7244C332B003751AE /* AddNewCommunityViewController.xib in Resources */,
 				36229FF92417B601001A9181 /* AddEvaluateComenntTableViewCell.xib in Resources */,
+				365F420D2477832E0028DA71 /* LogisticsTableViewCell.xib in Resources */,
 				3679BF2C23FF7E0500689DB8 /* MineHeaderTableViewCell.xib in Resources */,
 				368F9176244AA8B7003751AE /* UserVipDetailViewController.xib in Resources */,
 				36D9B5E02449C36100E9246D /* FavoriteViewController.xib in Resources */,
@@ -1655,6 +1723,7 @@
 				3658FF8224568E91003D0A93 /* BaclGoodsDetailinfoTableViewCell.xib in Resources */,
 				3630DEC823C368EC0048FD27 /* TypeTableViewCell.xib in Resources */,
 				36E863E1241A71C4005609FB /* AddBackGoodsTypeTableViewCell.xib in Resources */,
+				36D9ABBE2474C78700286B5F /* AhioTableViewCell.xib in Resources */,
 				368F91BD244D3CA2003751AE /* CommunityDetailHeaderTableViewCell.xib in Resources */,
 				361F65902442C6A2001667E6 /* AddAddressViewController.xib in Resources */,
 				36030F9A24382E890084759D /* GoodsTipsTableViewCell.xib in Resources */,
@@ -1672,6 +1741,7 @@
 				368F918E244AD30F003751AE /* RetrospecStoreTableViewCell.xib in Resources */,
 				3661469323C4B2D600D42825 /* GoodsHeaderTableViewCell.xib in Resources */,
 				36715D7E2408CEF7003C8D09 /* OrderTableViewCell.xib in Resources */,
+				365F426E2477D3860028DA71 /* PayPasswordPopupViewController.xib in Resources */,
 				361F65942442D215001667E6 /* OrderNewGoodsTableViewCell.xib in Resources */,
 				3658FF8624569084003D0A93 /* BaclGoodsDetailDateTableViewCell.xib in Resources */,
 				36BF60F62410DB6400B15FED /* CreatOrderSelectStoreViewController.xib in Resources */,
@@ -1706,6 +1776,7 @@
 				36BF6102241222BB00B15FED /* OrderPayViewController.xib in Resources */,
 				3679FA5E23B35D1800FA5CB3 /* SelectedViewController.xib in Resources */,
 				368F919A244B2664003751AE /* SettingTableViewCell.xib in Resources */,
+				365F427A247AA8760028DA71 /* RetrospecGoodsTableViewCell.xib in Resources */,
 				3608EFC823E3EEDB00148C0F /* CreatOrderPayTypeTableViewCell.xib in Resources */,
 				361F65982447309C001667E6 /* OrderDetailStatusTableViewCell.xib in Resources */,
 				36E863E9241A7659005609FB /* AddBackGoodsSelectTableViewCell.xib in Resources */,
@@ -1722,7 +1793,6 @@
 				3630DEAE23BEDB180048FD27 /* SelectedHeaderCollectionReusableView.xib in Resources */,
 				368F917A244AAB9D003751AE /* UserVipDetailTableViewCell.xib in Resources */,
 				368F91C9244D416F003751AE /* CommunityDetailReadNumTableViewCell.xib in Resources */,
-				36E22CD4246A771F00AE3F98 /* AlipaySDK.bundle in Resources */,
 				36EA35DD2459459C004C6308 /* VipProductDetailHeaderTableViewCell.xib in Resources */,
 				3608EFD223E3F92D00148C0F /* AddressAddInfoTableViewCell.xib in Resources */,
 				368F918A244AD2D1003751AE /* RetrospecTitleTableViewCell.xib in Resources */,
@@ -1736,6 +1806,7 @@
 				36F6BFF423E2AA340017791C /* CreatOrderGoodsTableViewCell.xib in Resources */,
 				3608EFDA23E3FC8800148C0F /* AddressListTableViewCell.xib in Resources */,
 				36E15296240E25A60082477C /* OrderDetailGoodsTableViewCell.xib in Resources */,
+				365F41DD2476AC8C0028DA71 /* HomwPopUpViewController.xib in Resources */,
 				36229FF3241757B0001A9181 /* AddEvaluateGoodsTableViewCell.xib in Resources */,
 				3679FA4F23B34DEF00FA5CB3 /* BaseViewController.xib in Resources */,
 				3622A01924191543001A9181 /* BaclGoodsViewController.xib in Resources */,
@@ -1747,6 +1818,7 @@
 				366565F8241E0BDD008CB81A /* RedPackgeViewController.xib in Resources */,
 				36D41D0F23F9567300143158 /* GoodsListCollectionViewCell.xib in Resources */,
 				3667A24A23FEB619004C6D8E /* GoodsPopUpViewController.xib in Resources */,
+				36D9ABC22474D0E500286B5F /* SMSVerificationViewController.xib in Resources */,
 				3679FA6723BD73E200FA5CB3 /* SelectedImageCollectionViewCell.xib in Resources */,
 				3622A00C2418A741001A9181 /* error@2x.png in Resources */,
 				36BF646D24552F8E00328AB0 /* MessageTableViewCell.xib in Resources */,
@@ -1759,6 +1831,7 @@
 				366146B723C5FD8900D42825 /* GoodsDetailTableViewCell.xib in Resources */,
 				36F6BFF023E2A4B00017791C /* CreatOrderShopSelfMentionTableViewCell.xib in Resources */,
 				36E863D9241A67C4005609FB /* AddBackGoodsViewController.xib in Resources */,
+				365F41E6247757740028DA71 /* AlipaySDK.bundle in Resources */,
 				368F91AF244C3DFB003751AE /* AddNewCommunityImgTableViewCell.xib in Resources */,
 				361F6580244289D2001667E6 /* AccountInfoImageTableViewCell.xib in Resources */,
 				36EA35D924594373004C6308 /* VipProductDetailViewController.xib in Resources */,
@@ -1766,6 +1839,7 @@
 				364E99F524418A26007DD24F /* MineRedTableViewCell.xib in Resources */,
 				36D9B5CC2448A1A300E9246D /* IntegraPayViewController.xib in Resources */,
 				368F9186244AC426003751AE /* RetrospectGoodsTableViewCell.xib in Resources */,
+				365F41EB24776EA10028DA71 /* LogisticsViewController.xib in Resources */,
 				36BF60FA2410DC9F00B15FED /* CreaOrderStoreTableViewCell.xib in Resources */,
 				366146B323C5FC8600D42825 /* GoodsDetailHeaderTableViewCell.xib in Resources */,
 				3622A015241905F2001A9181 /* OrderEvaluateFinshTableViewCell.xib in Resources */,
@@ -1784,10 +1858,13 @@
 				364E99E9244157DF007DD24F /* InoviceInfoTableViewCell.xib in Resources */,
 				3630DEC223BF24790048FD27 /* GoodsListTableViewCell.xib in Resources */,
 				36FF360F24010B99000708C6 /* StoreListViewController.xib in Resources */,
+				365F4276247A9AFC0028DA71 /* SMSVerficaationViewController.xib in Resources */,
 				36656604241E4CD6008CB81A /* DiscountViewController.xib in Resources */,
 				3679BF3C23FFC46100689DB8 /* GoodsPopUpTransateTableViewCell.xib in Resources */,
 				3667A24623FE9DAD004C6D8E /* TypeCollectionViewCell.xib in Resources */,
+				365F42682477CCBE0028DA71 /* PayPasswordViewController.xib in Resources */,
 				364E99E1244046B1007DD24F /* InvoiceViewController.xib in Resources */,
+				365F4272247A2D260028DA71 /* GoodsRelationTableViewCell.xib in Resources */,
 				3630DECD23C40F7B0048FD27 /* GoodsDeatilViewController.xib in Resources */,
 				36F6BFE823E29AAB0017791C /* CreatOrderViewController.xib in Resources */,
 				36E863E5241A733F005609FB /* AddBackGoodsNumTableViewCell.xib in Resources */,
@@ -1857,7 +1934,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E9B67D08689811919A431151 /* [CP] Copy Pods Resources */ = {
+		D31AC568E4EFA140A01DD479 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1902,6 +1979,7 @@
 				360ADAA723F7F8B800CA99B0 /* APIType.swift in Sources */,
 				36229FF2241757B0001A9181 /* AddEvaluateGoodsTableViewCell.swift in Sources */,
 				363902A12455229000651C1D /* LBXScanWrapper.swift in Sources */,
+				365F426A2477D33C0028DA71 /* HBInputPayPassWordView.swift in Sources */,
 				3608EFC323E3EBEF00148C0F /* CreatOrderSelectPayTypeViewController.swift in Sources */,
 				368F91BC244D3CA2003751AE /* CommunityDetailHeaderTableViewCell.swift in Sources */,
 				3661469A23C4C3A900D42825 /* GoodsActiveTableViewCell.swift in Sources */,
@@ -1935,6 +2013,7 @@
 				36D9B5D324493B4400E9246D /* BalanceListViewController.swift in Sources */,
 				36FF360E24010B99000708C6 /* StoreListViewController.swift in Sources */,
 				3679FA5523B34E4F00FA5CB3 /* CommunityViewController.swift in Sources */,
+				365F41DC2476AC8C0028DA71 /* HomwPopUpViewController.swift in Sources */,
 				365CC4D6240210B200F46A86 /* CreatOrderSelectDiscountTableViewCell.swift in Sources */,
 				36DDAD3023B34B34002B9D39 /* AppDelegate.swift in Sources */,
 				366565FF241E496D008CB81A /* BalanceViewController.swift in Sources */,
@@ -1943,7 +2022,6 @@
 				36656603241E4CD6008CB81A /* DiscountViewController.swift in Sources */,
 				36D9B5DB2449591E00E9246D /* BalanceChongViewController.swift in Sources */,
 				368F91C4244D40D3003751AE /* CommunityDetailTextTableViewCell.swift in Sources */,
-				36DDAD3223B34B34002B9D39 /* SceneDelegate.swift in Sources */,
 				3679BF3B23FFC46100689DB8 /* GoodsPopUpTransateTableViewCell.swift in Sources */,
 				368F91CC244D42C6003751AE /* CommunityTitleTableViewCell.swift in Sources */,
 				36E863DC241A6922005609FB /* AddBackGoodsPriceTableViewCell.swift in Sources */,
@@ -1952,6 +2030,7 @@
 				3679BF3723FF9F6600689DB8 /* MinToolTableViewCell.swift in Sources */,
 				36715D802408DCB8003C8D09 /* Order.swift in Sources */,
 				36715D8B24094A35003C8D09 /* UIView+shadowPath.m in Sources */,
+				365F4271247A2D260028DA71 /* GoodsRelationTableViewCell.swift in Sources */,
 				36229FEA24170DDF001A9181 /* OrderFInshTableViewCell.swift in Sources */,
 				36D9B5CB2448A1A300E9246D /* IntegraPayViewController.swift in Sources */,
 				3608EFD523E3FB7F00148C0F /* AddressSaveTableViewCell.swift in Sources */,
@@ -1963,6 +2042,7 @@
 				36FF3609240030D6000708C6 /* EWAddressPickView.swift in Sources */,
 				368F9199244B2664003751AE /* SettingTableViewCell.swift in Sources */,
 				366146A223C5E64E00D42825 /* GoodsTypeTableViewCell.swift in Sources */,
+				36D9ABB92474111400286B5F /* UserVipTableViewCell.swift in Sources */,
 				3622A01824191543001A9181 /* BaclGoodsViewController.swift in Sources */,
 				36BF646C24552F8E00328AB0 /* MessageTableViewCell.swift in Sources */,
 				36D9B5B72447F8B000E9246D /* BaclFinshTableViewCell.swift in Sources */,
@@ -1987,6 +2067,7 @@
 				363902A02455229000651C1D /* LBXPermissions.swift in Sources */,
 				360ADAB123F7FA3000CA99B0 /* Home.swift in Sources */,
 				366146B623C5FD8900D42825 /* GoodsDetailTableViewCell.swift in Sources */,
+				365F420C2477832E0028DA71 /* LogisticsTableViewCell.swift in Sources */,
 				368F918D244AD30F003751AE /* RetrospecStoreTableViewCell.swift in Sources */,
 				368F917D244AB18C003751AE /* AchievementViewController.swift in Sources */,
 				36D9B5C724489B1600E9246D /* IntegraDetailTableViewCell.swift in Sources */,
@@ -2005,12 +2086,14 @@
 				36E15295240E25A60082477C /* OrderDetailGoodsTableViewCell.swift in Sources */,
 				36BF64852455A1EE00328AB0 /* UIView+Extension.m in Sources */,
 				3679BF3323FF9D7D00689DB8 /* MineImgTableViewCell.swift in Sources */,
+				365F4279247AA8760028DA71 /* RetrospecGoodsTableViewCell.swift in Sources */,
 				3658FF7324566F1F003D0A93 /* EmailUpdateViewController.swift in Sources */,
 				36229FF82417B601001A9181 /* AddEvaluateComenntTableViewCell.swift in Sources */,
 				361F658724429307001667E6 /* AccountSexTableViewCell.swift in Sources */,
 				3679FA6123B35D4500FA5CB3 /* RecommendTypeViewController.swift in Sources */,
 				366565F7241E0BDD008CB81A /* RedPackgeViewController.swift in Sources */,
 				368F9189244AD2D1003751AE /* RetrospecTitleTableViewCell.swift in Sources */,
+				36D9ABC12474D0E500286B5F /* SMSVerificationViewController.swift in Sources */,
 				366565F3241E0514008CB81A /* IntegralViewController.swift in Sources */,
 				36030F9D243B4D700084759D /* CartHeaderTableViewCell.swift in Sources */,
 				36D41D1123F969BE00143158 /* GoodsDetail.swift in Sources */,
@@ -2018,7 +2101,9 @@
 				36F6BFE723E29AAB0017791C /* CreatOrderViewController.swift in Sources */,
 				3661469223C4B2D600D42825 /* GoodsHeaderTableViewCell.swift in Sources */,
 				3630DEA523BED49E0048FD27 /* SelectedTypeCollectionReusableView.swift in Sources */,
+				365F42672477CCBE0028DA71 /* PayPasswordViewController.swift in Sources */,
 				36D9B5D724493D7C00E9246D /* BalancePayViewController.swift in Sources */,
+				365F426D2477D3860028DA71 /* PayPasswordPopupViewController.swift in Sources */,
 				3667A24923FEB619004C6D8E /* GoodsPopUpViewController.swift in Sources */,
 				36EA35DC2459459C004C6308 /* VipProductDetailHeaderTableViewCell.swift in Sources */,
 				36EA35E4245946DF004C6308 /* VipProductDetailImageTableViewCell.swift in Sources */,
@@ -2036,6 +2121,7 @@
 				3667A24523FE9DAD004C6D8E /* TypeCollectionViewCell.swift in Sources */,
 				360ADAA823F7F8B800CA99B0 /* APIConstant.swift in Sources */,
 				366146AE23C5F86F00D42825 /* GoodsEvaluateTableViewCell.swift in Sources */,
+				36D9ABBD2474C78700286B5F /* AhioTableViewCell.swift in Sources */,
 				36FF35FD240028F9000708C6 /* AddressDefaultTableViewCell.swift in Sources */,
 				36A8376B240FEFFF00E90D45 /* OrderDetailNumTableViewCell.swift in Sources */,
 				36030FA5243CA7D50084759D /* CreateOrderYuiTableViewCell.swift in Sources */,
@@ -2064,6 +2150,7 @@
 				368D878723CAF9E900934FE9 /* EvaluateListViewController.swift in Sources */,
 				368F9179244AAB9D003751AE /* UserVipDetailTableViewCell.swift in Sources */,
 				3679FA5923B34E6300FA5CB3 /* MineViewController.swift in Sources */,
+				365F41EA24776EA10028DA71 /* LogisticsViewController.swift in Sources */,
 				3608EFC723E3EEDB00148C0F /* CreatOrderPayTypeTableViewCell.swift in Sources */,
 				364E99E0244046B1007DD24F /* InvoiceViewController.swift in Sources */,
 				362C5E7E23FADC5D007B3D2B /* RgisterViewController.swift in Sources */,
@@ -2078,6 +2165,7 @@
 				368F9191244AE95C003751AE /* ShareViewController.swift in Sources */,
 				3630DEB823BF0DA80048FD27 /* SectionData.swift in Sources */,
 				36FF36172401140A000708C6 /* Uitl.swift in Sources */,
+				365F4275247A9AFC0028DA71 /* SMSVerficaationViewController.swift in Sources */,
 				36EA35E02459462D004C6308 /* VipProductDetailTitleTableViewCell.swift in Sources */,
 				368F91B8244D3AF3003751AE /* CommunityDetailViewController.swift in Sources */,
 				36229FEE241727C6001A9181 /* AddEvaluateViewController.swift in Sources */,
@@ -2247,12 +2335,13 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage1;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Shoping/我家用品.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 97JD2M9AZT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Shoping/Tool/iOS_SDK_No_UTDID",
+					"$(PROJECT_DIR)/Shoping/Tool/iOS_SDK",
 				);
 				INFOPLIST_FILE = Shoping/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -2262,7 +2351,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.guotai.necesstore;
 				PRODUCT_NAME = "我家用品";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = ad3;
 				SWIFT_OBJC_BRIDGING_HEADER = "Shoping/Tool/Shoping-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = Shoping.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2279,12 +2368,13 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage1;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Shoping/我家用品.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 97JD2M9AZT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Shoping/Tool/iOS_SDK_No_UTDID",
+					"$(PROJECT_DIR)/Shoping/Tool/iOS_SDK",
 				);
 				INFOPLIST_FILE = Shoping/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -2294,7 +2384,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.guotai.necesstore;
 				PRODUCT_NAME = "我家用品";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = ad3;
 				SWIFT_OBJC_BRIDGING_HEADER = "Shoping/Tool/Shoping-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = Shoping.h;
 				SWIFT_VERSION = 5.0;

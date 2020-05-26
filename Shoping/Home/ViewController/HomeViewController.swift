@@ -19,9 +19,13 @@ class HomeViewController: UIViewController,UITextFieldDelegate, CLLocationManage
     var longitudeStr = 0.00
     var isload = false
     var locationManager:CLLocationManager = CLLocationManager()
+    var timer : Timer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(updataSecond), userInfo: nil, repeats: true)
+           timer!.fire()
+        NotificationCenter.default.addObserver(self, selector: #selector(shouldPopup), name: NSNotification.Name(rawValue: "popup"), object: nil)
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.tintColor = .black
 //        title = ""
@@ -34,9 +38,35 @@ class HomeViewController: UIViewController,UITextFieldDelegate, CLLocationManage
 //        setLeftItem()
     }
 
+    @objc func shouldPopup() {
+        let popup = HomwPopUpViewController()
+        popup.modalPresentationStyle = .custom
+        self.present(popup, animated: false, completion: nil)
+    }
+
+    @objc func updataSecond() {
+        if UserSetting.default.activeUserToken == nil {
+            return
+        }
+        API.checkToken(now_user_token: UserSetting.default.activeUserToken ?? "").request { (result) in
+            switch result {
+            case .success(let data):
+                if data.data.effect == "0" {
+                    let al = UIAlertView(title: "系统提示", message: "账号已在其它设备登录，如不是您本人操作，请立即修改密码", delegate: self, cancelButtonTitle: "好的")
+                    al.show()
+                    UserSetting.default.activeUserToken = nil
+                    UserSetting.default.activeUserPhone = nil
+                }
+            case .failure(let er):
+                                    let al = UIAlertView(title: "系统提示", message: "账号已在其它设备登录，如不是您本人操作，请立即修改密码", delegate: self, cancelButtonTitle: "好的")
+                al.show()
+                UserSetting.default.activeUserToken = nil
+                UserSetting.default.activeUserPhone = nil
+            }
+        }
+    }
+
     func textFieldDidBeginEditing(_ textField: UITextField) {
-
-
     }
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         let sera = GoodsSearViewController()
@@ -206,11 +236,15 @@ class HomeViewController: UIViewController,UITextFieldDelegate, CLLocationManage
                         self?.navigationController?.pushViewController(detail, animated: true)
                         return
                     }
-                    let goodsList = GoodsListViewController()
-                    goodsList.hidesBottomBarWhenPushed = true
-                    goodsList.title = self?.data?.data.imageLabels[indexPath.item].name ?? ""
-                    goodsList.label_code = self?.data?.data.imageLabels[indexPath.item].code ?? ""
-                    self?.navigationController?.pushViewController(goodsList, animated: true)
+                    UserSetting.default.activeType = indexPath.item
+                    self?.tabBarController?.selectedIndex = 1
+
+//
+//                    let goodsList = GoodsListViewController()
+//                    goodsList.hidesBottomBarWhenPushed = true
+//                    goodsList.title = self?.data?.data.category[indexPath.item].name ?? ""
+//                    goodsList.label_code = self?.data?.data.category[indexPath.item].id ?? ""
+//                    self?.navigationController?.pushViewController(goodsList, animated: true)
                 }
                 self.addChild(selected)
                 let child = UIView(frame: CGRect(x: width * CGFloat(index), y: 0, width: width, height: 710*height))

@@ -122,14 +122,15 @@ extension RecommendTypeViewController: UICollectionViewDelegate, UICollectionVie
 
         cell.goodsName.text = data?.data.products[indexPath.item].name
         cell.info.text = data?.data.products[indexPath.item].title
-        cell.price.text = "￥" + (data?.data.products[indexPath.item].price ?? "0")
+        cell.setPri(str: "￥" + (data?.data.products[indexPath.item].price ?? "0"))
+//        cell.price.text = "￥" + (data?.data.products[indexPath.item].price ?? "0")
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
             let width = 175*height
             let heightd = ga_heightForComment(fontSize: 17, width: width, text: data?.data.products[indexPath.item].name ?? "")
-            return CGSize(width: 195*height, height: heightd + 250)
+            return CGSize(width: 195*height, height: 305)
     }
     
     func ga_heightForComment(fontSize: CGFloat, width: CGFloat, text: String) -> CGFloat {

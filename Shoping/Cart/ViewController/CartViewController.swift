@@ -396,9 +396,19 @@ extension CartViewController: UITableViewDataSource,UITableViewDelegate {
                 let p = (price ?? 0.00)*(numCnt ?? 0.00)
                 numPrice = numPrice + p
             }
-        num.text = "合计:￥\(status?.total ?? "0")"
+//        num.text = "合计:￥\(status?.total ?? "0")"
+            setPri(str: "合计 ￥\(status?.total ?? "0")")
         }
     }
+
+    func setPri(str: String) {
+        let fontAttr = NSMutableAttributedString(string: str)
+        fontAttr.addAttribute(.font, value: UIFont.systemFont(ofSize: 10), range: NSRange(location: 3, length: 1))
+        fontAttr.addAttribute(.font, value: UIFont.systemFont(ofSize: 16), range: NSRange(location: 0, length: 2))
+        fontAttr.addAttribute(.baselineOffset, value: 5, range: NSRange(location: 3, length: 1))
+        num.attributedText = fontAttr
+    }
+
 
     @objc func toCollectBills() {
         let collect = CartCollectBillsViewController()

@@ -62,7 +62,7 @@ class SelectedViewController: UIViewController {
 extension SelectedViewController: UICollectionViewDelegate, UICollectionViewDataSource, ZLCollectionViewBaseFlowLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
-            return data?.data.imageLabels.count ?? 0
+            return data?.data.category.count ?? 0
         }
         return data?.data.labels[lablesIndex].product.count ?? 0
     }
@@ -75,16 +75,18 @@ extension SelectedViewController: UICollectionViewDelegate, UICollectionViewData
         if indexPath.section == 1 {
             let cell:GoodsListCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: goods, for: indexPath) as! GoodsListCollectionViewCell
             cell.goodsImg.af_setImage(withURL: URL(string: (data?.data.labels[lablesIndex].product[indexPath.item].image)!)!)
-            cell.goodsName.text = data?.data.labels[lablesIndex].product[indexPath.item].name
+            cell.goodsName.text = (data?.data.labels[lablesIndex].product[indexPath.item].name ?? "")
             cell.info.text = data?.data.labels[lablesIndex].product[indexPath.item].title
-            cell.price.text = "￥" + (data?.data.labels[lablesIndex].product[indexPath.item].price ?? "0")
+            cell.setPri(str: "￥" + (data?.data.labels[lablesIndex].product[indexPath.item].price ?? "0"))
+//            cell.price.text = "￥" + (data?.data.labels[lablesIndex].product[indexPath.item].price ?? "0")
+
             return cell
         }
         let cell:SelectedImageCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifier, for: indexPath) as! SelectedImageCollectionViewCell
         if indexPath.section == 0 {
-            cell.name.text = data?.data.imageLabels[indexPath.item].name ?? ""
-            if data?.data.imageLabels[indexPath.item].image ?? "" != "" {
-            cell.img.af_setImage(withURL: URL(string: data?.data.imageLabels[indexPath.item].image ?? "")!)
+            cell.name.text = data?.data.category[indexPath.item].name ?? ""
+            if data?.data.category[indexPath.item].image ?? "" != "" {
+            cell.img.af_setImage(withURL: URL(string: data?.data.category[indexPath.item].image ?? "")!)
             }
 //            if indexPath.item == 0 {
 //                cell.img.image = UIImage(named: "新品上新")
@@ -123,7 +125,7 @@ extension SelectedViewController: UICollectionViewDelegate, UICollectionViewData
         default:
             let width = 175*height
             let heightd = ga_heightForComment(fontSize: 17, width: width, text: data?.data.labels[lablesIndex].product[indexPath.item].name ?? "")
-            return CGSize(width: 195*height, height: heightd + 250)
+            return CGSize(width: 195*height, height: 305)
         }
     }
 

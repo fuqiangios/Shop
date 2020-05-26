@@ -26,12 +26,12 @@ class CardListTableViewCell: UITableViewCell {
 
         addBtn.layer.borderColor = UIColor.init(red: 181.0/255.0, green: 182.0/255.0, blue: 183.0/255.0, alpha: 1).cgColor
         addBtn.layer.borderWidth = 1
-        addBtn.layer.cornerRadius = 3
+//        addBtn.layer.cornerRadius = 3
         addBtn.layer.masksToBounds = true
 
         reduceBtn.layer.borderColor = UIColor.init(red: 181.0/255.0, green: 182.0/255.0, blue: 183.0/255.0, alpha: 1).cgColor
         reduceBtn.layer.borderWidth = 1
-        reduceBtn.layer.cornerRadius = 3
+//        reduceBtn.layer.cornerRadius = 3
         reduceBtn.layer.masksToBounds = true
 
         textField.layer.borderColor = UIColor.init(red: 181.0/255.0, green: 182.0/255.0, blue: 183.0/255.0, alpha: 1).cgColor
