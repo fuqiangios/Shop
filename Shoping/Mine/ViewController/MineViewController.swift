@@ -11,8 +11,18 @@ import UIKit
 class MineViewController: UIViewController {
     var data: MineInfo? = nil
     @IBOutlet weak var tableView: UITableView!
+    var code = "0"
     override func viewDidLoad() {
         super.viewDidLoad()
+        API.getUStatus().request { (result) in
+            switch result {
+            case .success(let data):
+                self.code = data.data.code
+                self.tableView.reloadData()
+            case .failure(let er):
+                print(er)
+            }
+        }
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationController?.navigationBar.isTranslucent = false
@@ -143,18 +153,28 @@ class MineViewController: UIViewController {
             eva.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(eva, animated: true)
         } else if btn.tag == 501 {
-            let sb=UIStoryboard.init(name: "Main", bundle: nil)
+            if code == "0" {
+                            let account = AccountInfoViewController()
+                account.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(account, animated: true)
+            } else {
+                           let sb=UIStoryboard.init(name: "Main", bundle: nil)
 
-//            let infovc = sb.instantiateViewController(identifier: "NewVipViewController")as! NewVipViewController
-            let infovc = sb.instantiateViewController(withIdentifier: "NewVipViewController") as! NewVipViewController
-            infovc.hidesBottomBarWhenPushed = true
+                let infovc = sb.instantiateViewController(withIdentifier: "NewVipViewController") as! NewVipViewController
+                infovc.hidesBottomBarWhenPushed = true
 
-            self.navigationController?.pushViewController(infovc, animated: true)
+                self.navigationController?.pushViewController(infovc, animated: true)
+            }
+
         }
         else if btn.tag == 502 {
+            if code == "0" {
+             toBarCode()
+            } else {
             let user = UserVipViewController()
             user.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(user, animated: true)
+            }
         } else if btn.tag == 503 {
             let ach = AchievementViewController()
             ach.hidesBottomBarWhenPushed = true
@@ -205,7 +225,7 @@ extension MineViewController: UITableViewDataSource,UITableViewDelegate {
             if !(data?.data.image.isEmpty ?? true) {
             cell.img.af_setImage(withURL: URL(string: data?.data.image ?? "")!)
             } else {
-                cell.img.image = UIImage(named: "logo")
+                cell.img.image = UIImage(named: "27211590459319_.pic_hd")
             }
             cell.message.addTarget(self, action: #selector(toMessage), for: .touchUpInside)
             cell.barCode.addTarget(self, action: #selector(toBarCode), for: .touchUpInside)
@@ -265,10 +285,18 @@ extension MineViewController: UITableViewDataSource,UITableViewDelegate {
             cell.btn4.addTarget(self, action: #selector(toolAction(btn:)), for: .touchUpInside)
             cell.btn5.isHidden = true
         } else if indexPath.section == 5 {
-            cell.btn1.setTitle("VIP", for: .normal)
-            cell.btn1.setImage(UIImage(named: "vip"), for: .normal)
-            cell.btn2.setTitle("会员信息", for: .normal)
-            cell.btn2.setImage(UIImage(named: "会员"), for: .normal)
+            if code == "0" {
+                cell.btn1.setTitle("个人信息", for: .normal)
+                cell.btn1.setImage(UIImage(named: "会员"), for: .normal)
+                cell.btn2.setTitle("结算码", for: .normal)
+                cell.btn2.setImage(UIImage(named: "vip"), for: .normal)
+            } else {
+                cell.btn1.setTitle("VIP", for: .normal)
+                cell.btn1.setImage(UIImage(named: "vip"), for: .normal)
+                cell.btn2.setTitle("会员信息", for: .normal)
+                cell.btn2.setImage(UIImage(named: "会员"), for: .normal)
+            }
+
             cell.btn3.setTitle("连锁店业绩", for: .normal)
             cell.btn3.setImage(UIImage(named: "业绩"), for: .normal)
             cell.btn4.setTitle("产品追溯", for: .normal)

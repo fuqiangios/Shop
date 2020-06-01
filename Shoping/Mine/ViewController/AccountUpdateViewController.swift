@@ -38,12 +38,14 @@ class AccountUpdateViewController: UIViewController {
             title = "验证身份"
             img.image = UIImage(named: "绑定手机1")
             phone.text = ""
+            phoneInput.isEnabled = false
             phoneInput.text = oldPhone
             getCode.addTarget(self, action: #selector(getCodeAction), for: .touchUpInside)
         } else {
             title = "绑定新手机"
             phone.text = "手机号"
             phoneInput.text = ""
+            phoneInput.isEnabled = true
             phoneInput.placeholder = "请输入手机号码"
             CodeInput.text = ""
             img.image = UIImage(named: "绑定手机2")

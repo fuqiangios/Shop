@@ -585,6 +585,20 @@ extension API {
         }
     }
 
+    struct getUStatus: Get {
+        typealias Node = getStatus
+        var path: String = "front/getStatus"
+
+        init() {
+        }
+
+        func parameters() -> [String: Any]? {
+            return [
+                "": ""
+             ]
+        }
+    }
+
     struct achievementInfo: Post {
         typealias Node = AchievementInfo
         var path: String = "customer/performance_query"
@@ -1566,6 +1580,17 @@ struct AfterDetailOrderProduct: Codable {
         case aftersaleFlag = "aftersale_flag"
         case created, modified
     }
+}
+
+struct getStatus: Codable {
+    let result: Bool
+    let message: String
+    let status: Int
+    let data: getStatusDataClass
+}
+
+struct getStatusDataClass: Codable {
+    let code: String
 }
 
 struct Ahioc: Codable {

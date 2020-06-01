@@ -21,6 +21,19 @@ class BalanceViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        API.getUStatus().request { (result) in
+            switch result {
+            case .success(let data):
+                if data.data.code == "1" {
+                    self.tixian.isHidden = false
+                } else {
+                    self.tixian.isHidden = true
+                }
+            case .failure(let er):
+                self.tixian.isHidden = true
+                print(er)
+            }
+        }
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         title = "余额"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "查看明细", style: .done, target: self, action: #selector(toDetail))

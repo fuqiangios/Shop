@@ -17,6 +17,19 @@ class IntegralViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        API.getUStatus().request { (result) in
+            switch result {
+            case .success(let data):
+                if data.data.code == "1" {
+                    self.toBtn.isHidden = false
+                } else {
+                    self.toBtn.isHidden = true
+                }
+            case .failure(let er):
+                self.toBtn.isHidden = true
+                print(er)
+            }
+        }
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         title = "积分"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "查看明细", style: .done, target: self, action: #selector(toDetail))

@@ -18,7 +18,6 @@ import SecurityEnvSDK
 class AppDelegate: UIResponder, UIApplicationDelegate, WXApiDelegate, UNUserNotificationCenterDelegate, JPUSHRegisterDelegate {
     var window: UIWindow?
     
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         UMConfigure.setLogEnabled(true)
         WXApi.registerApp("wx55d4b9901badc2be", universalLink: "https://")

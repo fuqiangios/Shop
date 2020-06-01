@@ -35,6 +35,18 @@ class HomeViewController: UIViewController,UITextFieldDelegate, CLLocationManage
         reLocationAction()
         setSearBar()
         setRightItem()
+         if(CLLocationManager.authorizationStatus() != .denied) {
+
+         } else {
+            let alt = UIAlertController(title: "我家有品", message: "为了帮您获取最近的店铺信息，建议您打开位置权限", preferredStyle: .alert)
+            let cal = UIAlertAction(title: "关闭", style: .cancel) { (_) in
+                self.loadData()
+            }
+            
+            alt.addAction(cal)
+            self.present(alt, animated: true, completion: nil)
+        }
+        loadData()
 //        setLeftItem()
     }
 
@@ -45,6 +57,9 @@ class HomeViewController: UIViewController,UITextFieldDelegate, CLLocationManage
     }
 
     @objc func updataSecond() {
+        if data == nil {
+            loadData()
+        }
         if UserSetting.default.activeUserToken == nil {
             return
         }
@@ -282,7 +297,15 @@ class HomeViewController: UIViewController,UITextFieldDelegate, CLLocationManage
                 self.setLeftItem(str: self.shop)
                 self.setTypeSelectView()
             case .failure(let error):
-                self.setTypeSelectView()
+                let alt = UIAlertController(title: "我家有品", message: "为了帮您获取最近的店铺信息，建议您打开位置以及无线数据权限", preferredStyle: .alert)
+                let sht = UIAlertAction(title: "打开了", style: .destructive) { (_) in
+                    self.loadData()
+                }
+                let cal = UIAlertAction(title: "关闭", style: .cancel) { (_) in
+                }
+                alt.addAction(sht)
+                alt.addAction(cal)
+                self.present(alt, animated: true, completion: nil)
                 print(error)
                 print(error.self)
                 print(error.localizedDescription)
