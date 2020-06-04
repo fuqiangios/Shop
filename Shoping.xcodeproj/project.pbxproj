@@ -299,6 +299,8 @@
 		368F91D1244D4327003751AE /* CommunityEvaluateTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 368F91CF244D4327003751AE /* CommunityEvaluateTableViewCell.xib */; };
 		368F91D4244FF1D5003751AE /* CartCollectBillsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368F91D2244FF1D5003751AE /* CartCollectBillsViewController.swift */; };
 		368F91D5244FF1D5003751AE /* CartCollectBillsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 368F91D3244FF1D5003751AE /* CartCollectBillsViewController.xib */; };
+		36A2AFE824890677005827A1 /* VipVideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A2AFE624890677005827A1 /* VipVideoTableViewCell.swift */; };
+		36A2AFE924890677005827A1 /* VipVideoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36A2AFE724890677005827A1 /* VipVideoTableViewCell.xib */; };
 		36A649602413721F0040C587 /* OrderPayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A6495E2413721F0040C587 /* OrderPayTableViewCell.swift */; };
 		36A649612413721F0040C587 /* OrderPayTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36A6495F2413721F0040C587 /* OrderPayTableViewCell.xib */; };
 		36A8376B240FEFFF00E90D45 /* OrderDetailNumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A83769240FEFFF00E90D45 /* OrderDetailNumTableViewCell.swift */; };
@@ -732,6 +734,8 @@
 		368F91CF244D4327003751AE /* CommunityEvaluateTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommunityEvaluateTableViewCell.xib; sourceTree = "<group>"; };
 		368F91D2244FF1D5003751AE /* CartCollectBillsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCollectBillsViewController.swift; sourceTree = "<group>"; };
 		368F91D3244FF1D5003751AE /* CartCollectBillsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartCollectBillsViewController.xib; sourceTree = "<group>"; };
+		36A2AFE624890677005827A1 /* VipVideoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VipVideoTableViewCell.swift; sourceTree = "<group>"; };
+		36A2AFE724890677005827A1 /* VipVideoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VipVideoTableViewCell.xib; sourceTree = "<group>"; };
 		36A6495E2413721F0040C587 /* OrderPayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderPayTableViewCell.swift; sourceTree = "<group>"; };
 		36A6495F2413721F0040C587 /* OrderPayTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderPayTableViewCell.xib; sourceTree = "<group>"; };
 		36A83769240FEFFF00E90D45 /* OrderDetailNumTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailNumTableViewCell.swift; sourceTree = "<group>"; };
@@ -1057,6 +1061,8 @@
 				36EA35E3245946DF004C6308 /* VipProductDetailImageTableViewCell.xib */,
 				36EA35E624594714004C6308 /* VipProductDetailInfoTableViewCell.swift */,
 				36EA35E724594714004C6308 /* VipProductDetailInfoTableViewCell.xib */,
+				36A2AFE624890677005827A1 /* VipVideoTableViewCell.swift */,
+				36A2AFE724890677005827A1 /* VipVideoTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1877,6 +1883,7 @@
 				36030F9E243B4D700084759D /* CartHeaderTableViewCell.xib in Resources */,
 				3630DEBE23BF21990048FD27 /* GoodsListViewController.xib in Resources */,
 				368F91D5244FF1D5003751AE /* CartCollectBillsViewController.xib in Resources */,
+				36A2AFE924890677005827A1 /* VipVideoTableViewCell.xib in Resources */,
 				364E99F124415E53007DD24F /* InvoiceTypeTableViewCell.xib in Resources */,
 				365CC4D7240210B200F46A86 /* CreatOrderSelectDiscountTableViewCell.xib in Resources */,
 				36D9B5B024473CDD00E9246D /* OrderDetailMonyTableViewCell.xib in Resources */,
@@ -2104,6 +2111,7 @@
 				365F42672477CCBE0028DA71 /* PayPasswordViewController.swift in Sources */,
 				36D9B5D724493D7C00E9246D /* BalancePayViewController.swift in Sources */,
 				365F426D2477D3860028DA71 /* PayPasswordPopupViewController.swift in Sources */,
+				36A2AFE824890677005827A1 /* VipVideoTableViewCell.swift in Sources */,
 				3667A24923FEB619004C6D8E /* GoodsPopUpViewController.swift in Sources */,
 				36EA35DC2459459C004C6308 /* VipProductDetailHeaderTableViewCell.swift in Sources */,
 				36EA35E4245946DF004C6308 /* VipProductDetailImageTableViewCell.swift in Sources */,

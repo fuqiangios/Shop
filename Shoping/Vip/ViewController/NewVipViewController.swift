@@ -23,6 +23,9 @@ class NewVipViewController: UIViewController {
         tableView.register(UINib(nibName: "VipLeavelTableViewCell", bundle: nil), forCellReuseIdentifier: "VipLeavelTableViewCell")
         tableView.register(UINib(nibName: "CrowdfundingTableViewCell", bundle: nil), forCellReuseIdentifier: "CrowdfundingTableViewCell")
         tableView.register(UINib(nibName: "VipProductTableViewCell", bundle: nil), forCellReuseIdentifier: "VipProductTableViewCell")
+        tableView.register(UINib(nibName: "VipVideoTableViewCell", bundle: nil), forCellReuseIdentifier: "VipVideoTableViewCell")
+
+
         tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = 150
@@ -59,13 +62,16 @@ extension NewVipViewController: UITableViewDelegate, UITableViewDataSource {
             return data?.data.shareholder.count ?? 0
         } else if section == 2 {
             return data?.data.crowdfunding.count ?? 0
-        } else {
+        } else if section == 3 {
+            return 1
+        }
+        else {
             return data?.data.project.count ?? 0
         }
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return data == nil ? 0 : 4
+        return data == nil ? 0 : 5
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -75,11 +81,14 @@ extension NewVipViewController: UITableViewDelegate, UITableViewDataSource {
             let ti = UIImageView(frame: CGRect(x: 50, y: 0, width: self.view.frame.width - 100, height: 80))
             if section == 2 {
                 ti.image = UIImage(named: "__国泰与秘鲁 _")
-            } else if section == 3 {
+            } else if section == 4 {
                 ti.image = UIImage(named: "__项目参与 _")
             } else if section == 1 {
                 ti.image = UIImage(named: "__星级股东 _")
-            } else {
+            } else if section == 3 {
+                ti.image = UIImage(named: "__视频专栏 _备份")
+            }
+            else {
                 ti.image = UIImage(named: "__会员卡 _")
             }
             ti.contentMode = .scaleAspectFit
@@ -134,7 +143,12 @@ extension NewVipViewController: UITableViewDelegate, UITableViewDataSource {
             let lv: CGFloat = CGFloat(CGFloat(Int(item?.value ?? "0") ?? 0)/100.00)
             cell.img.frame = CGRect(x: 0, y: 0, width: cell.bg.frame.width*lv, height: 8)
             return cell
-        } else {
+        } else if indexPath.section == 3 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "VipVideoTableViewCell") as! VipVideoTableViewCell
+            cell.selectionStyle = .none
+            return cell
+        }
+        else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "VipProductTableViewCell") as! VipProductTableViewCell
             cell.selectionStyle = .none
             let item = data?.data.project[indexPath.row]
@@ -151,7 +165,7 @@ extension NewVipViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 3 {
+        if indexPath.section == 4 {
             let detail = VipProductDetailViewController()
             detail.hidesBottomBarWhenPushed = true
             detail.data = data?.data.project[indexPath.row]
@@ -160,6 +174,12 @@ extension NewVipViewController: UITableViewDelegate, UITableViewDataSource {
             let web = WebViewController()
             web.uri = "https://app.necesstore.com/html/peru/index.html"
             web.title = "国泰与秘鲁"
+            web.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(web, animated: true)
+        } else if indexPath.section == 3 {
+            let web = WebViewController()
+            web.uri = "https://app.necesstore.com/html/video.html"
+            web.title = "视频专栏"
             web.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(web, animated: true)
         }
