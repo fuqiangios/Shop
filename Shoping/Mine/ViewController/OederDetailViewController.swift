@@ -159,7 +159,15 @@ class OederDetailViewController: UIViewController {
         } else if btn.titleLabel?.text == "确认收货" {
             updateOrderStatus(id: order_id, type: "confirm")
         } else if btn.titleLabel?.text == "删除" {
-            updateOrderStatus(id: order_id, type: "delete")
+            let alt = UIAlertController(title: "系统提示", message: "是否确认删除订单", preferredStyle: .alert)
+            let y = UIAlertAction(title: "确定", style: .default) { (_) in
+                self.updateOrderStatus(id: self.order_id, type: "delete")
+            }
+            let n = UIAlertAction(title: "取消", style: .default, handler: nil)
+            alt.addAction(y)
+            alt.addAction(n)
+            self.present(alt, animated: true, completion: nil)
+
         } else if btn.titleLabel?.text == "查看物流" {
             let lg = LogisticsViewController()
             lg.order_id = order_id

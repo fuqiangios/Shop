@@ -77,7 +77,7 @@ struct ShopInfo: Codable {
     let cityID, detail, telephone, openTime: String
     let longitude, latitude, status, adminID: String
     let created, modified, image: String
-    let distance: Int
+    let distance: String
 
     enum CodingKeys: String, CodingKey {
         case id, name, code

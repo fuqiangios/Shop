@@ -22,6 +22,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         loginBtn.layer.cornerRadius = 54/2
         loginBtn.layer.masksToBounds = true
+        password.isSecureTextEntry = true
         if type == "2" {
         setUpUI()
         }
@@ -30,6 +31,7 @@ class LoginViewController: UIViewController {
     func setUpUI() {
         getCodeBtn.isHidden = false
         password.placeholder = "请输入验证码"
+        password.isSecureTextEntry = false
         typeBtn.setTitle("密码登录", for: .normal)
     }
 

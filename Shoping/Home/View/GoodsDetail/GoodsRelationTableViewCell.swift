@@ -16,6 +16,8 @@ class GoodsRelationTableViewCell: UITableViewCell {
     let headerBannerIdentifier = "CollectionBannerHeaderView"
     let headerTypeIdentifier = "CollectionTypeHeaderView"
     let height = ScreenWidth/414.0
+
+    var didSelect: ((String) -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -123,6 +125,6 @@ return CGSize(width: 0, height: 0)
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        didSelect?(data[indexPath.item].id)
     }
 }

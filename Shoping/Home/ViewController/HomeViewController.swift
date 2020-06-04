@@ -150,6 +150,8 @@ class HomeViewController: UIViewController,UITextFieldDelegate, CLLocationManage
         let shoqp = StoreListViewController()
         shoqp.hidesBottomBarWhenPushed = true
         shoqp.shiop = shop
+        shoqp.latitude = latitudeStr
+        shoqp.longitude = longitudeStr
         shoqp.didSelectAddress = { (shop) in
             self.shop = shop
             self.setLeftItem(str: shop)
@@ -250,9 +252,23 @@ class HomeViewController: UIViewController,UITextFieldDelegate, CLLocationManage
                         detail.product_id = self?.data?.data.labels[lablesIndex].product[indexPath.item].id ?? ""
                         self?.navigationController?.pushViewController(detail, animated: true)
                         return
+                    } else {
+                        if self?.data?.data.imageLabels[indexPath.item].type != "1" {
+                            let goodsList = GoodsListViewController()
+                                               goodsList.hidesBottomBarWhenPushed = true
+                                               goodsList.title = self?.data?.data.imageLabels[indexPath.item].name ?? ""
+                                             goodsList.label_code = self?.data?.data.imageLabels[indexPath.item].code ?? ""
+                                               self?.navigationController?.pushViewController(goodsList, animated: true)
+                        } else {
+//                    UserSetting.default.activeType = indexPath.item
+//                    self?.tabBarController?.selectedIndex = 1
+                            let goodsList = GoodsListViewController()
+                              goodsList.hidesBottomBarWhenPushed = true
+                              goodsList.title = self?.data?.data.imageLabels[indexPath.item].name ?? ""
+                            goodsList.p_category_id = self?.data?.data.imageLabels[indexPath.item].id ?? ""
+                              self?.navigationController?.pushViewController(goodsList, animated: true)
+                        }
                     }
-                    UserSetting.default.activeType = indexPath.item
-                    self?.tabBarController?.selectedIndex = 1
 
 //
 //                    let goodsList = GoodsListViewController()

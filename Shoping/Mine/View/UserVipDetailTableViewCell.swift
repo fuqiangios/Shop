@@ -11,6 +11,9 @@ import UIKit
 class UserVipDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var date: UILabel!
     
+    @IBOutlet weak var nm: UILabel!
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var img: UIImageView!
     @IBOutlet weak var yongjin: UILabel!
     @IBOutlet weak var redPackge: UILabel!
     @IBOutlet weak var point: UILabel!

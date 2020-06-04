@@ -25,6 +25,7 @@ class UserVipDetailViewController: UIViewController {
         bbtn.layer.cornerRadius = 19
         bbtn.layer.masksToBounds = true
         start = dateConvertString(date: startOfCurrentMonth())
+        date = start
         end = dateConvertString(date: endOfCurrentMonth())
         tableView.register(UINib(nibName: "UserVipDetailTableViewCell", bundle: nil), forCellReuseIdentifier: "UserVipDetailTableViewCell")
         tableView.delegate = self
@@ -45,7 +46,7 @@ class UserVipDetailViewController: UIViewController {
     }
 
     func loadData() {
-        API.fansListData(user_token: token, month: date, page: "\(page)").request { (result) in
+        API.fansListData(user_token: token, month: date, page: "\(page)", my_user_token: UserSetting.default.activeUserToken ?? "").request { (result) in
             self.tableView.mj_header?.endRefreshing()
             switch result {
             case .success(let data):
@@ -58,7 +59,7 @@ class UserVipDetailViewController: UIViewController {
     }
 
     func loadDataMore() {
-        API.fansListData(user_token: token, month: date, page: "\(page)").request { (result) in
+        API.fansListData(user_token: token, month: date, page: "\(page)", my_user_token: UserSetting.default.activeUserToken ?? "").request { (result) in
             self.tableView.mj_footer?.endRefreshing()
             switch result {
             case .success(let data):
@@ -167,14 +168,16 @@ extension UserVipDetailViewController: UITableViewDelegate, UITableViewDataSourc
         cell.selectionStyle = .none
         let item = data?.data.orderList[indexPath.row]
         cell.date.text = item?.created
-        cell.price.text = "￥\(item?.price ?? "")"
-        cell.point.text = item?.pointSave
-        cell.redPackge.text = item?.redpackageSave
-        cell.yongjin.text = item?.commissionSave
+        cell.price.text = "￥\(item?.order_products.price ?? "")"
+        if let img = item?.order_products.image {
+            cell.img.af_setImage(withURL: URL(string: img)!)
+        }
+        cell.nm.text = item?.order_code
+        cell.name.text = item?.order_products.name
         return cell
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 81
+        return 147
     }
 }

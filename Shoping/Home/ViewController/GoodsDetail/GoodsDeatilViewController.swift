@@ -296,6 +296,12 @@ extension GoodsDeatilViewController: UITableViewDelegate,UITableViewDataSource {
         if indexPath.section == 4 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "GoodsRelationTableViewCell") as! GoodsRelationTableViewCell
                 cell.selectionStyle = .none
+            cell.didSelect = { id in
+                                    let detail = GoodsDeatilViewController()
+
+                detail.product_id = id
+                self.navigationController?.pushViewController(detail, animated: true)
+            }
             cell.setData(data: data?.data.product_relation ?? [])
                 return cell
         }

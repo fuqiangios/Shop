@@ -37,7 +37,7 @@ class UserVipViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         title = "会员信息"
         self.navigationController?.setNavigationBarHidden(false, animated: false)
-        scrollView.contentSize = CGSize(width: 0, height: 720)
+        scrollView.contentSize = CGSize(width: 0, height: 0)
         nameView.layer.cornerRadius = 25
         nameView.layer.masksToBounds = true
         phoneView.layer.cornerRadius = 25
@@ -140,7 +140,7 @@ extension UserVipViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 210
+        return 138
     }
 
 }

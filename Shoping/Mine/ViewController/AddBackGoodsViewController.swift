@@ -74,9 +74,13 @@ class AddBackGoodsViewController: UIViewController {
 //        if resonIndex < 0 {return}
         API.aftersaleSubmit(order_product_id: order_id, aftersale_type_id: "\(typeTag)", aftersale_reason_id: resonIndex, quantity: "\(num)", description: coment?.getComent() ?? "", images: coment?.getImgs() ?? []).request { (result) in
             switch result {
-            case .success:
-                print("success")
+            case .success(let datqa):
+                print(datqa)
+                if datqa.status == 200 {
                 self.navigationController?.popViewController(animated: true)
+                } else {
+                    CLProgressHUD.showError(in: self.view, delegate: self, title: "请完善信息", duration: 1)
+                }
             case .failure(let error):
                 print(error)
             }
@@ -202,7 +206,7 @@ extension AddBackGoodsViewController: UITableViewDelegate, UITableViewDataSource
             alertController.addAction(UIAlertAction(title: "取消", style: UIAlertAction.Style.cancel, handler: nil))
 
             self.present(alertController, animated: true, completion: nil)
-        } else if indexPath.section == 5 {
+        } else if indexPath.section == 4 {
             subtmit()
         } else if indexPath.section == 1 {
             let alertController = UIAlertController(title: "申请类型", message: "", preferredStyle: UIAlertController.Style.actionSheet)

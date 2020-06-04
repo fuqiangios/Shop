@@ -62,7 +62,7 @@ UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StoreTableViewCell") as! StoreTableViewCell
         cell.name.text = data?.data[indexPath.section].shops[indexPath.row].name
-        cell.info.text = "距您\(data?.data[indexPath.section].shops[indexPath.row].distance ?? 0)m"
+        cell.info.text = "距您\(data?.data[indexPath.section].shops[indexPath.row].distance ?? "0")"
         return cell
     }
 

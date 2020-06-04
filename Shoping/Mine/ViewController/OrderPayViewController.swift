@@ -38,20 +38,63 @@ class OrderPayViewController: UIViewController {
         submitBtn.addTarget(self, action: #selector(amountPay), for: .touchUpInside)
     }
 
+    func amountPayPassword() {
+            let popUp = PayPasswordPopupViewController()
+            popUp.modalPresentationStyle = .custom
+            popUp.didCofirmPassword = { code in
+                self.apiAction(code: code)
+            }
+            popUp.didToSet = {
+                let payPassword = PayPasswordViewController()
+                self.navigationController?.pushViewController(payPassword, animated: true)
+            }
+            self.present(popUp, animated: false, completion: nil)
+        }
+
+    func apiAction(code: String) {
+         API.getOrderPay(order_id: order_id, payment_pfn: payList?.data.payment[selectIndex].pfn ?? "", pay_password: code).request { (result) in
+             switch result {
+             case .success(let data):
+                 if data.status != 200 {
+                     CLProgressHUD.showError(in: self.view, delegate: self, title: data.message, duration: 1)
+                 } else {
+                 if self.payList?.data.payment[self.selectIndex].pfn ?? "" == "Amount" {
+                     self.navigationController?.popViewController(animated: true)
+                 } else if self.payList?.data.payment[self.selectIndex].pfn ?? "" == "WeChatPay" {
+                     self.wechatPay(data: data.data.plugin ?? "")
+                 } else {
+                     self.aliPay(str: data.data.plugin ?? "")
+                 }
+                 }
+                 print(data)
+             case .failure(let er):
+                 CLProgressHUD.showError(in: self.view, delegate: self, title: "支付失败，请重试", duration: 1)
+             }
+         }
+    }
+
     @objc func amountPay() {
-        API.getOrderPay(order_id: order_id, payment_pfn: payList?.data.payment[selectIndex].pfn ?? "").request { (result) in
+        if (payList?.data.payment[selectIndex].pfn ?? "") == "Amount" {
+            amountPayPassword()
+            return
+        }
+        API.getOrderPay(order_id: order_id, payment_pfn: payList?.data.payment[selectIndex].pfn ?? "", pay_password: "").request { (result) in
             switch result {
             case .success(let data):
+                if data.status != 200 {
+                    CLProgressHUD.showError(in: self.view, delegate: self, title: data.message, duration: 1)
+                } else {
                 if self.payList?.data.payment[self.selectIndex].pfn ?? "" == "Amount" {
                     self.navigationController?.popViewController(animated: true)
                 } else if self.payList?.data.payment[self.selectIndex].pfn ?? "" == "WeChatPay" {
-                    self.wechatPay(data: data.data.plugin)
+                    self.wechatPay(data: data.data.plugin ?? "")
                 } else {
-                    self.aliPay(str: data.data.plugin)
+                    self.aliPay(str: data.data.plugin ?? "")
+                }
                 }
                 print(data)
             case .failure(let er):
-                print(er)
+                CLProgressHUD.showError(in: self.view, delegate: self, title: "支付失败，请重试", duration: 1)
             }
         }
     }

@@ -17,6 +17,7 @@ class OrderViewController: UIViewController {
     var tab_status: String = "1"
     var page = 1
     var data: Order? = nil
+    var backType = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +31,13 @@ class OrderViewController: UIViewController {
             self.page = 1
             self.loadData()
         })
+        if backType == "cart" {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "back"), style: .done, target: self, action: #selector(back))
+        }
+    }
 
+    @objc func back() {
+        self.navigationController?.popToRootViewController(animated: true)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -171,7 +178,9 @@ extension OrderViewController:UITableViewDelegate,UITableViewDataSource {
             cell.status.textColor = .black
         }
         if item?.products.count ?? 0 >= 1 {
+            if item?.products[0].image != "" {
             cell.img0.af_setImage(withURL: URL(string: item?.products[0].image ?? "")!)
+            }
             cell.img0.layer.borderWidth = 1
             cell.img0.layer.borderColor = co.cgColor
             cell.img3.image = UIImage(named: "")
@@ -227,7 +236,14 @@ extension OrderViewController:UITableViewDelegate,UITableViewDataSource {
         } else if btn.titleLabel?.text == "确认收货" {
             updateOrderStatus(id: data?.data[tag].id ?? "", type: "confirm")
         } else if btn.titleLabel?.text == "删除" {
-            updateOrderStatus(id: data?.data[tag].id ?? "", type: "delete")
+            let alt = UIAlertController(title: "系统提示", message: "是否确认删除订单", preferredStyle: .alert)
+            let y = UIAlertAction(title: "确定", style: .default) { (_) in
+                self.updateOrderStatus(id: self.data?.data[tag].id ?? "", type: "delete")
+            }
+            let n = UIAlertAction(title: "取消", style: .default, handler: nil)
+            alt.addAction(y)
+            alt.addAction(n)
+            self.present(alt, animated: true, completion: nil)
         } else if btn.titleLabel?.text == "查看物流" {
             let lg = LogisticsViewController()
             lg.order_id = data?.data[tag].id ?? ""

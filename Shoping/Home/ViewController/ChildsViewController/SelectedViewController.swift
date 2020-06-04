@@ -62,7 +62,7 @@ class SelectedViewController: UIViewController {
 extension SelectedViewController: UICollectionViewDelegate, UICollectionViewDataSource, ZLCollectionViewBaseFlowLayoutDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
-            return data?.data.category.count ?? 0
+            return data?.data.imageLabels.count ?? 0
         }
         return data?.data.labels[lablesIndex].product.count ?? 0
     }
@@ -84,9 +84,9 @@ extension SelectedViewController: UICollectionViewDelegate, UICollectionViewData
         }
         let cell:SelectedImageCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: Identifier, for: indexPath) as! SelectedImageCollectionViewCell
         if indexPath.section == 0 {
-            cell.name.text = data?.data.category[indexPath.item].name ?? ""
-            if data?.data.category[indexPath.item].image ?? "" != "" {
-            cell.img.af_setImage(withURL: URL(string: data?.data.category[indexPath.item].image ?? "")!)
+            cell.name.text = data?.data.imageLabels[indexPath.item].name ?? ""
+            if data?.data.imageLabels[indexPath.item].image ?? "" != "" {
+            cell.img.af_setImage(withURL: URL(string: data?.data.imageLabels[indexPath.item].image ?? "")!)
             }
 //            if indexPath.item == 0 {
 //                cell.img.image = UIImage(named: "新品上新")
@@ -212,6 +212,8 @@ extension SelectedViewController: UICollectionViewDelegate, UICollectionViewData
                   fsPagerView.dataSource = self
                   fsPagerView.isInfinite = true
                   fsPagerView.backgroundColor = .white
+                fsPagerView.isScrollEnabled = false
+
 //                  fsPagerView.layer.cornerRadius = 10
 //                  fsPagerView.layer.masksToBounds = true
                 fsPagerView.tag = 999

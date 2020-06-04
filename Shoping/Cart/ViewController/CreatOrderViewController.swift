@@ -96,19 +96,28 @@ class CreatOrderViewController: UIViewController {
                 case .success(let data):
                     print("success")
                     if self.payList[self.selectIndex].pfn == "Amount" {
-                                       let detail = OederDetailViewController()
-                        detail.order_id = data.data.order_id
-                        detail.backType = "cart"
-                         self.navigationController?.pushViewController(detail, animated: true)
+//                                       let detail = OederDetailViewController()
+//                        detail.order_id = data.data.order_id
+//                        detail.backType = "cart"
+//                         self.navigationController?.pushViewController(detail, animated: true)
+                        let or = OrderViewController()
+                        or.tab_status = "0"
+                        or.backType = "cart"
+                        self.navigationController?.pushViewController(or, animated: true)
+
                     } else if self.payList[self.selectIndex].pfn == "WeChatPay" {
                         self.orderId = data.data.order_id
                         self.wechatPay(data: data)
                     } else {
                         if data.data.plugin == "" {
-                            let detail = OederDetailViewController()
-                            detail.order_id = data.data.order_id
-                            detail.backType = "cart"
-                             self.navigationController?.pushViewController(detail, animated: true)
+                            let or = OrderViewController()
+                            or.backType = "cart"
+                            or.tab_status = "0"
+                            self.navigationController?.pushViewController(or, animated: true)
+//                            let detail = OederDetailViewController()
+//                            detail.order_id = data.data.order_id
+//                            detail.backType = "cart"
+//                             self.navigationController?.pushViewController(detail, animated: true)
                         } else {
                             self.aliPay(str: data.data.plugin,id: data.data.order_id)
                         }
@@ -141,24 +150,36 @@ class CreatOrderViewController: UIViewController {
             amountPayPassword()
             return
         }
+        if redPackegPrice > 0 {
+            amountPayPassword()
+            return
+        }
         API.createOrder(order_type: order_type, shopping_cart_ids: all, product_id: product_id, quantity: quantity, product_option_union_id: product_option_union_id, red_packet: "\(redPackegPrice)", customer_coupon_id: discountIndex == -1 ? "" : settlement?.data.coupons[discountIndex].id, address_id: addressInfo?.id, self_store_id: store != nil ? store?.id : "", store_id: settlement?.data.store_id ?? "", payment_pfn: payList[selectIndex].pfn , payment_method: payList[selectIndex].name , invoice_id: usepiao ? invoice_id : "", pay_password: "").request { (result) in
                 switch result {
                 case .success(let data):
                     print("success")
                     if self.payList[self.selectIndex].pfn == "Amount" {
-                                       let detail = OederDetailViewController()
-                        detail.order_id = data.data.order_id
-                        detail.backType = "cart"
-                         self.navigationController?.pushViewController(detail, animated: true)
+                        let or = OrderViewController()
+                        or.backType = "cart"
+                        or.tab_status = "0"
+                        self.navigationController?.pushViewController(or, animated: true)
+//                                       let detail = OederDetailViewController()
+//                        detail.order_id = data.data.order_id
+//                        detail.backType = "cart"
+//                         self.navigationController?.pushViewController(detail, animated: true)
                     } else if self.payList[self.selectIndex].pfn == "WeChatPay" {
                         self.orderId = data.data.order_id
                         self.wechatPay(data: data)
                     } else {
                         if data.data.plugin == "" {
-                            let detail = OederDetailViewController()
-                            detail.order_id = data.data.order_id
-                            detail.backType = "cart"
-                             self.navigationController?.pushViewController(detail, animated: true)
+                            let or = OrderViewController()
+                            or.backType = "cart"
+                            or.tab_status = "0"
+                            self.navigationController?.pushViewController(or, animated: true)
+//                            let detail = OederDetailViewController()
+//                            detail.order_id = data.data.order_id
+//                            detail.backType = "cart"
+//                             self.navigationController?.pushViewController(detail, animated: true)
                         } else {
                             self.aliPay(str: data.data.plugin,id: data.data.order_id)
                         }
@@ -179,11 +200,15 @@ class CreatOrderViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     @objc private func notificationAction(noti: Notification) {
-        let isRet = noti.object as! String
-        let detail = OederDetailViewController()
-         detail.order_id = orderId
-         detail.backType = "cart"
-         self.navigationController?.pushViewController(detail, animated: true)
+//        let isRet = noti.object as! String
+//        let detail = OederDetailViewController()
+//         detail.order_id = orderId
+//         detail.backType = "cart"
+//         self.navigationController?.pushViewController(detail, animated: true)
+        let or = OrderViewController()
+        or.backType = "cart"
+        or.tab_status = "0"
+        self.navigationController?.pushViewController(or, animated: true)
     }
 
     func wechatPay(data: PayOrder) {
@@ -208,10 +233,15 @@ class CreatOrderViewController: UIViewController {
     func aliPay(str: String, id: String) {
         AlipaySDK.defaultService()?.payOrder(str, fromScheme: "wojiayoupin", callback: { (reslt) in
 //            if reslt!["resultStatus"]as! String == "9000" {
-               let detail = OederDetailViewController()
-                detail.order_id = id
-                detail.backType = "cart"
-                self.navigationController?.pushViewController(detail, animated: true)
+//               let detail = OederDetailViewController()
+//                detail.order_id = id
+//                detail.backType = "cart"
+//                self.navigationController?.pushViewController(detail, animated: true)
+            let or = OrderViewController()
+            or.backType = "cart"
+            or.tab_status = "0"
+            self.navigationController?.pushViewController(or, animated: true)
+
 //            } else {
 //                CLProgressHUD.showError(in: self.view, delegate: self, title: "支付失败，请重试", duration: 2)
 //            }
@@ -312,7 +342,7 @@ class CreatOrderViewController: UIViewController {
         for item in data {
             all.append(item.id)
         }
-        API.orderSettlement(shopping_cart_ids: all, product_id: product_id, quantity: quantity, product_option_union_id: product_option_union_id).request { (result) in
+        API.orderSettlement(shopping_cart_ids: all, product_id: product_id, quantity: quantity, product_option_union_id: product_option_union_id, address_id: addressInfo?.id ?? "").request { (result) in
             switch result {
             case .success(let data):
                 self.settlement = data
@@ -529,6 +559,7 @@ extension CreatOrderViewController: UITableViewDelegate, UITableViewDataSource {
             let address = AddressListViewController()
             address.didSelectAddress = { info in
                 self.addressInfo = info
+                self.loadData()
                 tableView.reloadData()
             }
             self.navigationController?.pushViewController(address, animated: true)

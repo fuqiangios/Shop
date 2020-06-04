@@ -171,11 +171,13 @@ extension API {
         let product_id: String?
         let quantity: String?
         let product_option_union_id: String?
-        init(shopping_cart_ids: [String]?, product_id: String?, quantity: String?, product_option_union_id: String?) {
+        let address_id: String
+        init(shopping_cart_ids: [String]?, product_id: String?, quantity: String?, product_option_union_id: String?, address_id: String) {
             self.shopping_cart_ids = shopping_cart_ids
             self.product_id = product_id
             self.quantity = quantity
             self.product_option_union_id = product_option_union_id
+            self.address_id = address_id
         }
 
         func parameters() -> [String : Any]? {
@@ -183,6 +185,7 @@ extension API {
                 "shopping_cart_ids": shopping_cart_ids ?? [],
                 "product_id": product_id ?? "",
                 "quantity": quantity ?? "",
+                "address_id": address_id,
                 "product_option_union_id": product_option_union_id ?? ""
             ]
         }

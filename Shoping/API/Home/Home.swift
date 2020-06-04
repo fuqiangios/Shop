@@ -191,13 +191,13 @@ struct CategoryCategory: Codable {
 struct ImageLabel: Codable {
     let id, name, code, sort: String
     let showFlag, firstKnow, created, modified: String
-    let image: String
+    let image, type: String
 
     enum CodingKeys: String, CodingKey {
         case id, name, code, sort
         case showFlag = "show_flag"
         case firstKnow = "first_know"
-        case created, modified, image
+        case created, modified, image, type
     }
 
     func getImageUri() -> String {

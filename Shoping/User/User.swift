@@ -397,18 +397,21 @@ extension API {
         let user_token: String
         let month: String
         let page: String
+        let my_user_token: String
 
-        init(user_token: String, month: String, page: String) {
+        init(user_token: String, month: String, page: String, my_user_token: String) {
             self.user_token = user_token
             self.month = month
             self.page = page
+            self.my_user_token = my_user_token
         }
 
         func parameters() -> [String: Any]? {
             return [
                 "user_token": user_token,
                 "month": month,
-                "page": page
+                "page": page,
+                "my_user_token": my_user_token
              ]
         }
     }
@@ -555,16 +558,19 @@ extension API {
         var path: String = "order/pay"
         let order_id: String
         let payment_pfn: String
+        let pay_password: String
 
-        init(order_id: String, payment_pfn: String) {
+        init(order_id: String, payment_pfn: String, pay_password: String) {
             self.order_id = order_id
             self.payment_pfn = payment_pfn
+            self.pay_password = pay_password
         }
 
         func parameters() -> [String: Any]? {
             return [
                 "order_id": order_id,
-                "payment_pfn": payment_pfn
+                "payment_pfn": payment_pfn,
+                "pay_password": pay_password
              ]
         }
     }
@@ -1045,8 +1051,8 @@ struct Chongzhi: Codable {
 
 // MARK: - DataClass
 struct ChongzhDataClass: Codable {
-    let res: Bool
-    let plugin: String
+    let res: Bool?
+    let plugin: String?
 }
 
 // MARK: - Chongzhi
@@ -1441,16 +1447,14 @@ struct FansListDataClass: Codable {
 
 // MARK: - OrderList
 struct OrderList: Codable {
-    let price, orderCode, created, pointSave: String
-    let redpackageSave, commissionSave: String
+    let created, commission_save, order_code: String
+    let order_products: OrderProduct
 
     enum CodingKeys: String, CodingKey {
-        case price
-        case orderCode = "order_code"
         case created
-        case pointSave = "point_save"
-        case redpackageSave = "redpackage_save"
-        case commissionSave = "commission_save"
+        case commission_save
+        case order_code
+        case order_products
     }
 }
 

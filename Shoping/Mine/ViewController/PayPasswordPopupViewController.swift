@@ -42,7 +42,7 @@ class PayPasswordPopupViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         textView.addSubview(payPwdView)
-        payPwdView.inputPwdIsClipherText = false
+        payPwdView.inputPwdIsClipherText = true
         payPwdView.frame = CGRect(x: 0, y: 0, width: textView.frame.width, height: textView.frame.height)
         payPwdView.inputPwdNumber = 6
         payPwdView.payPassWordHandler = { [weak self] passwd in

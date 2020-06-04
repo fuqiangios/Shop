@@ -90,7 +90,12 @@ class RgisterViewController: UIViewController {
     @IBAction func typeAction(_ sender: UIButton) {
         line.center = CGPoint(x: sender.center.x, y: sender.center.y + 18)
         type = "\(sender.tag)"
+        password.isSecureTextEntry = false
+        surePassword.isSecureTextEntry = false
+        code.isSecureTextEntry = false
+        password.isSecureTextEntry = false
         if type == "1" {
+
             phone.text = "手机号"
             phoneNumber.placeholder = "请输入手机号码"
             codeName.text = "验证码"
@@ -98,6 +103,8 @@ class RgisterViewController: UIViewController {
             getCodeBtn.isHidden = false
             passwordName.text = "密码"
             password.placeholder = "请输入密码"
+            password.isSecureTextEntry = true
+            surePassword.isSecureTextEntry = true
             surepassrordName.text = "确认密码"
             yaoqing.isHidden = false
             yaoqingName.isHidden = false
@@ -115,6 +122,8 @@ class RgisterViewController: UIViewController {
             phoneNumber.text = ""
             codeName.text = "密码"
             code.placeholder = "请输入密码"
+            code.isSecureTextEntry = true
+            password.isSecureTextEntry = true
             code.text = ""
             password.text = ""
             surePassword.text = ""

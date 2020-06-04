@@ -25,6 +25,7 @@ class GoodsListViewController: UIViewController {
     var label_id = ""
     var label_code = ""
     var page = 1
+    var p_category_id = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,7 +94,7 @@ class GoodsListViewController: UIViewController {
 
     func loadData() {
         page = 1
-        API.homeCategoryData(p_category_id: label_code, category_id: category_id, order: order, key_word: keyWord,product_ids: product_ids,page: "\(page)",label_code:"", label_id: label_id)
+        API.homeCategoryData(p_category_id: p_category_id, category_id: category_id, order: order, key_word: keyWord,product_ids: product_ids,page: "\(page)",label_code: label_code, label_id: label_id)
             .request { (result) in
                 self.collectionView.mj_header?.endRefreshing()
                 switch result {
@@ -109,7 +110,7 @@ class GoodsListViewController: UIViewController {
     }
 
     func loadDataMore() {
-        API.homeCategoryData(p_category_id: nil, category_id: category_id, order: order, key_word: keyWord,product_ids: product_ids,page: "\(page)", label_code:"", label_id: label_id)
+        API.homeCategoryData(p_category_id: p_category_id, category_id: category_id, order: order, key_word: keyWord,product_ids: product_ids,page: "\(page)", label_code: label_code, label_id: label_id)
             .request { (result) in
                 self.collectionView.mj_footer?.endRefreshing()
                 switch result {

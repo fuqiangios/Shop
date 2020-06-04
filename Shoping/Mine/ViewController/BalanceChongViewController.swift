@@ -63,7 +63,7 @@ class BalanceChongViewController: UIViewController {
                 if self.data?.data.payment[self.selectIndex].pfn == "WeChatPay" {
                     self.wechatPay(data: data)
                 } else {
-                    self.aliPay(str: data.data.plugin)
+                    self.aliPay(str: data.data.plugin ?? "")
                 }
             case .failure(let er):
                 print(er)
@@ -72,7 +72,7 @@ class BalanceChongViewController: UIViewController {
     }
 
     func wechatPay(data: Chongzhi) {
-        let array : Array = data.data.plugin.components(separatedBy: ",")
+        let array : Array = (data.data.plugin ?? "").components(separatedBy: ",")
         let req = PayReq()
         req.nonceStr = array[1]
         req.partnerId = array[3]
