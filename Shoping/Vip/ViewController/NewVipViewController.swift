@@ -82,7 +82,7 @@ extension NewVipViewController: UITableViewDelegate, UITableViewDataSource {
             if section == 2 {
                 ti.image = UIImage(named: "__国泰与秘鲁 _")
             } else if section == 4 {
-                ti.image = UIImage(named: "__项目参与 _")
+                ti.image = UIImage(named: "__项目邀约 _")
             } else if section == 1 {
                 ti.image = UIImage(named: "__星级股东 _")
             } else if section == 3 {
@@ -94,7 +94,6 @@ extension NewVipViewController: UITableViewDelegate, UITableViewDataSource {
             ti.contentMode = .scaleAspectFit
             header.addSubview(ti)
             return header
-
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -168,7 +167,7 @@ extension NewVipViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 4 {
             let detail = VipProductDetailViewController()
             detail.hidesBottomBarWhenPushed = true
-            detail.data = data?.data.project[indexPath.row]
+            detail.id = data?.data.project[indexPath.row].id ?? ""
             self.navigationController?.pushViewController(detail, animated: true)
         } else if indexPath.section == 2 {
             let web = WebViewController()
@@ -177,11 +176,15 @@ extension NewVipViewController: UITableViewDelegate, UITableViewDataSource {
             web.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(web, animated: true)
         } else if indexPath.section == 3 {
-            let web = WebViewController()
-            web.uri = "https://app.necesstore.com/html/video.html"
-            web.title = "视频专栏"
-            web.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(web, animated: true)
+            let video = VideoListViewController()
+            video.title = "视频专栏"
+            self.navigationController?.pushViewController(video, animated: true)
+            
+//            let web = WebViewController()
+//            web.uri = "https://app.necesstore.com/html/video.html"
+//            web.title = "视频专栏"
+//            web.hidesBottomBarWhenPushed = true
+//            self.navigationController?.pushViewController(web, animated: true)
         }
     }
 }

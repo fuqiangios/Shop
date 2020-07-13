@@ -25,6 +25,15 @@ class GoodsHeaderTableViewCell: UITableViewCell {
         shippingContent.textAlignment = .center
     }
 
+    func setPri(str: String) {
+        let fontAttr = NSMutableAttributedString(string: str)
+        fontAttr.addAttribute(.font, value: UIFont.systemFont(ofSize: 15), range: NSRange(location: 0, length: 1))
+        fontAttr.addAttribute(.font, value: UIFont.systemFont(ofSize: 15), range: NSRange(location: str.count - 3, length: 3))
+        fontAttr.addAttribute(.baselineOffset, value: 5, range: NSRange(location: 0, length: 1))
+        fontAttr.addAttribute(.baselineOffset, value: 5, range: NSRange(location: str.count - 3, length: 3))
+        price_sort.attributedText = fontAttr
+    }
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

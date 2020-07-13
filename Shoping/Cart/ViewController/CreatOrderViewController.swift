@@ -94,6 +94,10 @@ class CreatOrderViewController: UIViewController {
         API.createOrder(order_type: order_type, shopping_cart_ids: all, product_id: product_id, quantity: quantity, product_option_union_id: product_option_union_id, red_packet: "\(redPackegPrice)", customer_coupon_id: discountIndex == -1 ? "" : settlement?.data.coupons[discountIndex].id, address_id: addressInfo?.id, self_store_id: store != nil ? store?.id : "", store_id: settlement?.data.store_id ?? "", payment_pfn: payList[selectIndex].pfn , payment_method: payList[selectIndex].name , invoice_id: usepiao ? invoice_id : "", pay_password: code).request { (result) in
                 switch result {
                 case .success(let data):
+                    if data.status != 200 {
+                        CLProgressHUD.showError(in: self.view, delegate: self, title: data.message, duration: 1)
+                        return
+                    }
                     print("success")
                     if self.payList[self.selectIndex].pfn == "Amount" {
 //                                       let detail = OederDetailViewController()
@@ -130,6 +134,7 @@ class CreatOrderViewController: UIViewController {
                     print(error)
                     print(error.self)
                     print(error.localizedDescription)
+                    CLProgressHUD.showError(in: self.view, delegate: self, title: "支付失败，请重试", duration: 1)
             }
         }
     }
@@ -157,6 +162,10 @@ class CreatOrderViewController: UIViewController {
         API.createOrder(order_type: order_type, shopping_cart_ids: all, product_id: product_id, quantity: quantity, product_option_union_id: product_option_union_id, red_packet: "\(redPackegPrice)", customer_coupon_id: discountIndex == -1 ? "" : settlement?.data.coupons[discountIndex].id, address_id: addressInfo?.id, self_store_id: store != nil ? store?.id : "", store_id: settlement?.data.store_id ?? "", payment_pfn: payList[selectIndex].pfn , payment_method: payList[selectIndex].name , invoice_id: usepiao ? invoice_id : "", pay_password: "").request { (result) in
                 switch result {
                 case .success(let data):
+                    if data.status != 200 {
+                        CLProgressHUD.showError(in: self.view, delegate: self, title: data.message, duration: 1)
+                        return
+                    }
                     print("success")
                     if self.payList[self.selectIndex].pfn == "Amount" {
                         let or = OrderViewController()
@@ -192,6 +201,7 @@ class CreatOrderViewController: UIViewController {
                     print(error)
                     print(error.self)
                     print(error.localizedDescription)
+                    CLProgressHUD.showError(in: self.view, delegate: self, title: "支付失败，请重试", duration: 1)
             }
         }
     }
@@ -457,7 +467,7 @@ extension CreatOrderViewController: UITableViewDelegate, UITableViewDataSource {
                 let item1 = settlement?.data.products[3]
                 cell.img4.af_setImage(withURL: URL(string: item1!.image)!)
             }
-            cell.num.setTitle("共\(settlement?.data.products.count ?? 0)件", for: .normal)
+            cell.num.setTitle("共\(settlement?.data.products.count ?? 0)种", for: .normal)
             cell.selectionStyle = .none
             return cell
         } else if indexPath.section == 20 {
@@ -523,7 +533,7 @@ extension CreatOrderViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CreatOrderAccountTableViewCell") as! CreatOrderAccountTableViewCell
-            cell.goodsPrice.text = "\(goodsNum)"
+            cell.goodsPrice.text = String(format: "%.2f", goodsNum)
             cell.shipingPrice.text = "+\(settlement?.data.shippingFee ?? "")"
             cell.redpackegPrice.text = "-\(redPackegPrice)"
             cell.discount.text = "-\(couponPrice)"

@@ -120,6 +120,13 @@ extension EvaluateManagerViewController: UITableViewDataSource,UITableViewDelega
         return data?.data.count ?? 0
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = data?.data[indexPath.row]
+        let goods = GoodsDeatilViewController()
+        goods.product_id = item?.productID ?? ""
+        self.navigationController?.pushViewController(goods, animated: true)
+    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if type == "1" {
             let cell = tableView.dequeueReusableCell(withIdentifier: "OrderEvaluateFinshTableViewCell") as! OrderEvaluateFinshTableViewCell

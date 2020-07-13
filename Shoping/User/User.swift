@@ -201,15 +201,18 @@ extension API {
 
         let name: String
         let telephone: String
-        init(name: String, telephone: String) {
+        let page: String
+        init(name: String, telephone: String, page: String) {
             self.name = name
             self.telephone = telephone
+            self.page = page
         }
 
         func parameters() -> [String: Any]? {
             return [
                 "telephone": telephone,
-                "name": name
+                "name": name,
+                "page": page
              ]
         }
     }
@@ -692,6 +695,20 @@ extension API {
         }
     }
 
+    struct getVideoList: Get {
+        typealias Node = VideoList
+        var path: String = "web/video"
+
+        init() {
+        }
+
+        func parameters() -> [String: Any]? {
+            return [
+                "": ""
+             ]
+        }
+    }
+
     struct unBindWechat: Post {
         typealias Node = CartNumChange
         var path: String = "customer/wxpay_unbind"
@@ -750,6 +767,19 @@ extension API {
         func parameters() -> [String: Any]? {
             return [
                 "product_code": product_code
+             ]
+        }
+    }
+
+    struct getMyProducts: Post {
+        typealias Node = MyProducts
+        var path: String = "customer/my_project"
+        init() {
+        }
+
+        func parameters() -> [String: Any]? {
+            return [
+                "": ""
              ]
         }
     }
@@ -1318,12 +1348,27 @@ struct RetrospectDataClass: Codable {
     let product: RetrospectProduct
     let storeProduct: [StoreProduct]
     let orderProduct: OrderProduct1
+    let orderShipping: OrderShipping
 
     enum CodingKeys: String, CodingKey {
         case product
         case storeProduct = "store_product"
         case orderProduct = "order_product"
+        case orderShipping = "order_shipping"
     }
+}
+// MARK: - OrderShipping
+struct OrderShipping: Codable {
+    let expName, expSite, expPhone: String
+    let logo: String
+    let courier, courierPhone, takeTime, number: String
+    let type: String
+    let list: [List]
+}
+
+// MARK: - List
+struct List: Codable {
+    let time, status: String
 }
 
 // MARK: - OrderProduct
@@ -1440,21 +1485,25 @@ struct FansList: Codable {
 struct FansListDataClass: Codable {
     let orderList: [OrderList]
 
+
     enum CodingKeys: String, CodingKey {
         case orderList = "order_list"
+
     }
 }
 
 // MARK: - OrderList
 struct OrderList: Codable {
     let created, commission_save, order_code: String
-    let order_products: OrderProduct
+    let order_products: [OrderProduct]
+        let price: String
 
     enum CodingKeys: String, CodingKey {
         case created
         case commission_save
         case order_code
         case order_products
+        case price
     }
 }
 
@@ -1693,5 +1742,76 @@ struct AhiocRegion: Codable {
         case zoneCode = "zone_code"
         case parentID = "parent_id"
         case created, modified
+    }
+}
+
+// MARK: - VideoList
+struct VideoList: Codable {
+    let result: Bool
+    let message: String
+    let status: Int
+    let data: [VideoListDatum]
+}
+
+// MARK: - Datum
+struct VideoListDatum: Codable {
+    let id, title: String
+    let url: String
+    let showFlag, releaseTime, created, modified: String
+    let cover: String
+
+    enum CodingKeys: String, CodingKey {
+        case id, title, url
+        case showFlag = "show_flag"
+        case releaseTime = "release_time"
+        case created, modified, cover
+    }
+}
+
+// MARK: - MyProducts
+struct MyProducts: Codable {
+    let result: Bool
+    let message: String
+    let status: Int
+    let data: MyProductsDataClass
+}
+
+// MARK: - DataClass
+struct MyProductsDataClass: Codable {
+    let myProject: [MyProject]
+    let otherProject: [Project]
+
+    enum CodingKeys: String, CodingKey {
+        case myProject = "my_project"
+        case otherProject = "other_project"
+    }
+}
+
+// MARK: - MyProject
+struct MyProject: Codable {
+    let id, name, intro, content: String
+    let video, amount, startTime, endTime: String
+    let completedAmount, totalPerformance, quarterlyPerformance, monthPerformance: String
+    let initiatorID, initiatorName, target, support: String
+    let raise, reach, showFlag, created: String
+    let modified: String
+    let image, initiatorImage: String
+    let infoImage: String
+
+    enum CodingKeys: String, CodingKey {
+        case id, name, intro, content, video, amount
+        case startTime = "start_time"
+        case endTime = "end_time"
+        case completedAmount = "completed_amount"
+        case totalPerformance = "total_performance"
+        case quarterlyPerformance = "quarterly_performance"
+        case monthPerformance = "month_performance"
+        case initiatorID = "initiator_id"
+        case initiatorName = "initiator_name"
+        case target, support, raise, reach
+        case showFlag = "show_flag"
+        case created, modified, image
+        case initiatorImage = "initiator_image"
+        case infoImage = "info_image"
     }
 }

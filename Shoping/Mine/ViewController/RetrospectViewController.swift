@@ -13,6 +13,8 @@ class RetrospectViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     var data: Retrospect? = nil
+    var footerView: UIView!
+    var hisTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,12 +42,27 @@ class RetrospectViewController: UIViewController, UITextFieldDelegate {
         tableView.register(UINib(nibName: "RetrospectGoodsTableViewCell", bundle: nil), forCellReuseIdentifier: "RetrospectGoodsTableViewCell")
         tableView.register(UINib(nibName: "RetrospecTitleTableViewCell", bundle: nil), forCellReuseIdentifier: "RetrospecTitleTableViewCell")
         tableView.register(UINib(nibName: "RetrospecGoodsTableViewCell", bundle: nil), forCellReuseIdentifier: "RetrospecGoodsTableViewCell")
+        tableView.register(UINib(nibName: "ChanpinZhuisuTableViewCell", bundle: nil), forCellReuseIdentifier: "ChanpinZhuisuTableViewCell")
+        tableView.register(UINib(nibName: "LogisticsTableViewCell", bundle: nil), forCellReuseIdentifier: "LogisticsTableViewCell")
         tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableView.automaticDimension
         tableView.backgroundColor = UIColor.tableviewBackgroundColor
         tableView.separatorStyle = .none
+
+        footerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 0))
+        hisTableView = UITableView(frame: CGRect(x: 16, y: 0, width: view.frame.width - 32, height: 0), style: .plain)
+        hisTableView.delegate = self
+        hisTableView.dataSource = self
+        hisTableView.rowHeight = UITableView.automaticDimension
+        hisTableView.backgroundColor = UIColor.tableviewBackgroundColor
+        hisTableView.separatorStyle = .none
+        hisTableView.tag = 603
+        hisTableView.isScrollEnabled = false
+        hisTableView.register(UINib(nibName: "LogisticsTableViewCell", bundle: nil), forCellReuseIdentifier: "LogisticsTableViewCell")
+        footerView.addSubview(hisTableView)
+        tableView.tableFooterView = footerView
         loadData()
     }
 
@@ -55,6 +72,13 @@ class RetrospectViewController: UIViewController, UITextFieldDelegate {
             case .success(let data):
                 self.data = data
                 self.tableView.reloadData()
+                self.hisTableView.reloadData()
+                let h = (data.data.orderShipping.list.count * 90) + 200
+
+                self.hisTableView.frame = CGRect(x: 16, y: 0, width: self.view.frame.width - 32, height: CGFloat(h))
+
+                self.footerView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: CGFloat(h))
+                self.tableView.tableFooterView = self.footerView
             case .failure(let er):
                 print(er)
             }
@@ -98,6 +122,12 @@ class RetrospectViewController: UIViewController, UITextFieldDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
 
     }
+
+    @objc func copyNum() {
+        let pastboard = UIPasteboard.general
+        pastboard.string = self.data?.data.orderShipping.number
+        CLProgressHUD.showSuccess(in: self.view, delegate: self, title: "复制成功", duration: 1)
+    }
 }
 extension RetrospectViewController: UITableViewDataSource, UITableViewDelegate, LBXScanViewControllerDelegate {
     func scanFinished(scanResult: LBXScanResult, error: String?) {
@@ -108,10 +138,33 @@ extension RetrospectViewController: UITableViewDataSource, UITableViewDelegate, 
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data == nil ? 0 : 2
+        if tableView.tag == 603 {
+            return data?.data.orderShipping.list.count ?? 0
+        }
+        return data == nil ? 0 : 3
        }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if tableView.tag == 603 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "LogisticsTableViewCell") as! LogisticsTableViewCell
+                        cell.selectionStyle = .none
+            let item = data?.data.orderShipping.list[indexPath.row]
+                        cell.name.text = item?.status
+                        cell.date.text = item?.time
+                        if indexPath.row == 0 {
+                            cell.top.isHidden = true
+                            cell.dian.image = UIImage(named: "实时位置")
+                        } else {
+                            cell.top.isHidden = false
+                            cell.dian.image = UIImage(named: "已到达")
+                        }
+            if indexPath.row == (data?.data.orderShipping.list.count ?? 0) - 1 {
+                            cell.bottom.isHidden = true
+                        } else {
+                            cell.bottom.isHidden = false
+                        }
+                        return cell
+        }
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "RetrospectGoodsTableViewCell") as! RetrospectGoodsTableViewCell
             cell.selectionStyle = .none
@@ -121,12 +174,7 @@ extension RetrospectViewController: UITableViewDataSource, UITableViewDelegate, 
             cell.category.text = "\(data?.data.product.categoryName ?? "")>\(data?.data.product.pCategoryName ?? "")"
             cell.date.text = data?.data.product.created
             return cell
-        }
-//        else if indexPath.row == 1 {
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "RetrospecTitleTableViewCell") as! RetrospecTitleTableViewCell
-//            cell.selectionStyle = .none
-//            return cell
-//        }
+        } else if indexPath.row == 1 {
            let cell = tableView.dequeueReusableCell(withIdentifier: "RetrospecGoodsTableViewCell") as! RetrospecGoodsTableViewCell
         let item = data?.data.orderProduct
         cell.sccj.text = item?.factory
@@ -137,5 +185,32 @@ extension RetrospectViewController: UITableViewDataSource, UITableViewDelegate, 
         cell.mgjsr.text = item?.staff_name
            cell.selectionStyle = .none
            return cell
-       }
+        } else if indexPath.row == 2 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ChanpinZhuisuTableViewCell") as! ChanpinZhuisuTableViewCell
+            cell.name.text = data?.data.orderShipping.expName
+            cell.num.text = data?.data.orderShipping.number
+            cell.btn.addTarget(self, action: #selector(copyNum), for: .touchUpInside)
+            cell.selectionStyle = .none
+               return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "LogisticsTableViewCell") as! LogisticsTableViewCell
+            cell.selectionStyle = .none
+//            let item = data?.data.list[indexPath.row]
+//            cell.name.text = item?.status
+//            cell.date.text = item?.time
+//            if indexPath.row == 0 {
+//                cell.top.isHidden = true
+//                cell.dian.image = UIImage(named: "实时位置")
+//            } else {
+//                cell.top.isHidden = false
+//                cell.dian.image = UIImage(named: "已到达")
+//            }
+//            if indexPath.row == (self.data?.data.list.count ?? 0) - 1 {
+//                cell.bottom.isHidden = true
+//            } else {
+//                cell.bottom.isHidden = false
+//            }
+            return cell
+        }
+   }
 }

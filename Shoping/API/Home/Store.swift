@@ -47,6 +47,20 @@ extension API {
             ]
         }
     }
+
+    struct getProductDetail: Post {
+        typealias Node = VIPDataDetail
+        var path: String = "vip/project_info"
+        let id: String
+        init(id: String) {
+            self.id = id
+        }
+        func parameters() -> [String: Any]? {
+            return [
+                "id": id
+            ]
+        }
+    }
 }
 
 // MARK: - StoreList
@@ -106,6 +120,44 @@ struct VIPDataDataClass: Codable {
     let project: [Project]
 }
 
+struct VIPDataDetail: Codable {
+    let result: Bool
+    let message: String
+    let status: Int
+    let data: VIPDataDetailDataClass
+}
+
+// MARK: - DataClass
+struct VIPDataDetailDataClass: Codable {
+    let id, name, intro, content: String
+    let video, amount, startTime, endTime: String
+    let completedAmount, totalPerformance, quarterlyPerformance, monthPerformance: String
+    let initiatorID, initiatorName, target, support: String
+    let raise, reach, showFlag, created: String
+    let modified: String
+    let image, initiatorImage: String
+    let infoImage, showPerformance: String
+
+    enum CodingKeys: String, CodingKey {
+        case id, name, intro, content, video, amount
+        case startTime = "start_time"
+        case endTime = "end_time"
+        case completedAmount = "completed_amount"
+        case totalPerformance = "total_performance"
+        case quarterlyPerformance = "quarterly_performance"
+        case monthPerformance = "month_performance"
+        case initiatorID = "initiator_id"
+        case initiatorName = "initiator_name"
+        case target, support, raise, reach
+        case showFlag = "show_flag"
+        case created, modified, image
+        case initiatorImage = "initiator_image"
+        case infoImage = "info_image"
+        case showPerformance = "show_performance"
+    }
+}
+
+
 // MARK: - Crowdfunding
 struct Crowdfunding: Codable {
     let id, name, value, title: String
@@ -119,19 +171,32 @@ struct Member: Codable {
 
 // MARK: - Project
 struct Project: Codable {
-    let id, name, content, image: String
-    let initiatorID, initiatorName, initiatorImage, target: String
-    let support, raise, reach, showFlag, intro: String
-    let created, modified: String
+    let id, name, intro, content: String
+    let video, amount, startTime, endTime: String
+    let completedAmount, totalPerformance, quarterlyPerformance, monthPerformance: String
+    let initiatorID, initiatorName, target, support: String
+    let raise, reach, showFlag, created: String
+    let modified: String
+    let image, initiatorImage: String
+    let infoImage: String
+    let showPerformance: String?
 
     enum CodingKeys: String, CodingKey {
-        case id, name, content, image
+        case id, name, intro, content, video, amount
+        case startTime = "start_time"
+        case endTime = "end_time"
+        case completedAmount = "completed_amount"
+        case totalPerformance = "total_performance"
+        case quarterlyPerformance = "quarterly_performance"
+        case monthPerformance = "month_performance"
         case initiatorID = "initiator_id"
         case initiatorName = "initiator_name"
-        case initiatorImage = "initiator_image"
         case target, support, raise, reach
         case showFlag = "show_flag"
-        case created, modified, intro
+        case created, modified, image
+        case initiatorImage = "initiator_image"
+        case infoImage = "info_image"
+        case showPerformance = "show_performance"
     }
 }
 

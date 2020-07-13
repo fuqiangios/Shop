@@ -20,6 +20,7 @@ class HomeViewController: UIViewController,UITextFieldDelegate, CLLocationManage
     var isload = false
     var locationManager:CLLocationManager = CLLocationManager()
     var timer : Timer?
+    var typeSelectView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -175,9 +176,14 @@ class HomeViewController: UIViewController,UITextFieldDelegate, CLLocationManage
     }
 
     func setTypeSelectView() {
-        if isload {return}
+//        if isload {return}
+        if isload {
+        typeSelectView.removeFromSuperview()
+        }
         isload = true
-        let typeSelectView = UIScrollView(frame: CGRect(x: 0, y: 60, width: self.view.frame.width, height: 40))
+
+
+        typeSelectView = UIScrollView(frame: CGRect(x: 0, y: 60, width: self.view.frame.width, height: 40))
         let types = data?.data.category ?? []
         for index in 0...types.count{
             if index == 0 {
@@ -250,6 +256,9 @@ class HomeViewController: UIViewController,UITextFieldDelegate, CLLocationManage
                         let detail = GoodsDeatilViewController()
                         detail.hidesBottomBarWhenPushed = true
                         detail.product_id = self?.data?.data.labels[lablesIndex].product[indexPath.item].id ?? ""
+                        print(lablesIndex)
+                        print(indexPath.item)
+                        print(self?.data?.data.labels[lablesIndex])
                         self?.navigationController?.pushViewController(detail, animated: true)
                         return
                     } else {

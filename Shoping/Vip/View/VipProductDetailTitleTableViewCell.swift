@@ -9,11 +9,13 @@
 import UIKit
 
 class VipProductDetailTitleTableViewCell: UITableViewCell {
-    @IBOutlet weak var name: UILabel!
-    
+
+    @IBOutlet weak var btn: UIButton!
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        btn.layer.cornerRadius = 20.5
+        btn.layer.masksToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

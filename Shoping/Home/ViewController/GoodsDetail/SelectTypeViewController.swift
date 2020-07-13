@@ -11,6 +11,7 @@ import TagListView
 
 class SelectTypeViewController: UIViewController {
 
+    @IBOutlet weak var inpu: UITextField!
     @IBOutlet weak var bottoName: UILabel!
     @IBOutlet weak var topName: UILabel!
     @IBOutlet weak var floatView: UIView!
@@ -49,7 +50,7 @@ class SelectTypeViewController: UIViewController {
     func setUp() {
 //        bugBtn.layer.cornerRadius = 5
 //        bugBtn.layer.masksToBounds = true
-
+        numText.delegate = self
         numText.layer.borderWidth = 1
         numText.layer.borderColor = UIColor.lightColor.cgColor
 
@@ -138,6 +139,7 @@ class SelectTypeViewController: UIViewController {
     
 
     @IBAction func addCart(_ sender: Any) {
+        numText.resignFirstResponder()
         if UserSetting.default.activeUserToken == nil {
         let login = LoginViewController()
         self.navigationController?.pushViewController(login, animated: true)
@@ -207,6 +209,7 @@ class SelectTypeViewController: UIViewController {
 
     
     @IBAction func goToBuy(_ sender: Any) {
+        numText.resignFirstResponder()
         if UserSetting.default.activeUserToken == nil {
         let login = LoginViewController()
         self.navigationController?.pushViewController(login, animated: true)
@@ -304,12 +307,12 @@ extension SelectTypeViewController: TagListViewDelegate{
     func getGoodsInfo() {
         if data?.data.union.count == 0 {
             price.text = "￥\(data?.data.product.price ?? "")"
-            detail.text = data?.data.product.name
+            detail.text = "重量:\(data?.data.product.weight ?? "0") 商品编号:\(data?.data.product.code ?? "")"
         }
         for item in data?.data.union ?? []{
-            if item.productUnion == "\(topTagSelectIndex ?? ""):\(bottomTagSelectIndex ?? "")" {
+            if item.productUnion == "\(topTagSelectIndex ?? ""):\(bottomTagSelectIndex ?? "")" || item.productUnion == "\(topTagSelectIndex ?? "")" {
                 price.text = "￥\(item.price)"
-                detail.text = item.productUnionName
+                detail.text = "重量:\(item.weight) 商品编号:\(item.barCode)"
             }
         }
     }
@@ -317,6 +320,15 @@ extension SelectTypeViewController: TagListViewDelegate{
     func tagRemoveButtonPressed(_ title: String, tagView: TagView, sender: TagListView) {
         print("Tag Remove pressed: \(title), \(sender)")
         sender.removeTagView(tagView)
+    }
+}
+
+extension SelectTypeViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let cnt = Int(textField.text ?? "") {
+            numCnt = cnt
+        }
+        setNumText()
     }
 }
 

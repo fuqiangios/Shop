@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,41 +17,26 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2fZ-dt-jmy">
-                        <rect key="frame" x="16" y="14" width="288" height="21"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="db8-og-Jkl">
+                        <rect key="frame" x="16" y="17" width="288" height="41"/>
+                        <color key="backgroundColor" red="0.9561077952" green="0.29462641480000001" blue="0.27377358080000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="21" id="y71-0Y-qfN"/>
+                            <constraint firstAttribute="height" constant="41" id="e3m-TK-fBT"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="smd-kO-rSd">
-                        <rect key="frame" x="16" y="51" width="62" height="3"/>
-                        <color key="backgroundColor" red="0.9486268162727356" green="0.65582853555679321" blue="0.20350593328475952" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="62" id="Slh-Co-KJI"/>
-                            <constraint firstAttribute="height" constant="3" id="ffQ-5U-41B"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                        <state key="normal" title="财务查询"/>
+                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="smd-kO-rSd" firstAttribute="top" secondItem="2fZ-dt-jmy" secondAttribute="bottom" constant="16" id="2o8-ou-xJH"/>
-                    <constraint firstItem="smd-kO-rSd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="4gC-tQ-Bui"/>
-                    <constraint firstItem="smd-kO-rSd" firstAttribute="top" secondItem="2fZ-dt-jmy" secondAttribute="bottom" constant="16" id="6o0-mC-G1g"/>
-                    <constraint firstAttribute="bottom" secondItem="smd-kO-rSd" secondAttribute="bottom" constant="20" id="Kev-Wy-tAl"/>
-                    <constraint firstItem="2fZ-dt-jmy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="Vsy-fL-ea1"/>
-                    <constraint firstAttribute="trailing" secondItem="2fZ-dt-jmy" secondAttribute="trailing" constant="16" id="bmc-IN-uXh"/>
-                    <constraint firstItem="2fZ-dt-jmy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="xk2-eM-QHh"/>
+                    <constraint firstItem="db8-og-Jkl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="17" id="BHP-7Z-J0F"/>
+                    <constraint firstAttribute="trailing" secondItem="db8-og-Jkl" secondAttribute="trailing" constant="16" id="LgJ-ne-2Am"/>
+                    <constraint firstItem="db8-og-Jkl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="fbv-iF-vD2"/>
+                    <constraint firstAttribute="bottom" secondItem="db8-og-Jkl" secondAttribute="bottom" constant="16" id="iuO-1V-MgV"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="name" destination="2fZ-dt-jmy" id="ocr-bb-4DP"/>
+                <outlet property="btn" destination="db8-og-Jkl" id="ECD-oj-LdZ"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="145.98214285714286"/>
         </tableViewCell>

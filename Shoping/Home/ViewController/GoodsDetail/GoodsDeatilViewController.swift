@@ -9,6 +9,8 @@
 import UIKit
 import TagListView
 import FSPagerView
+import AVKit
+import AVFoundation
 
 class GoodsDeatilViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
@@ -22,6 +24,7 @@ class GoodsDeatilViewController: UIViewController {
     var img1: UIImageView!
     var img2: UIImageView!
     var img3: UIImageView!
+    var pageLabel: UILabel!
     
     @IBOutlet weak var commentView: UIView!
     @IBOutlet weak var floatView: UIView!
@@ -91,18 +94,32 @@ class GoodsDeatilViewController: UIViewController {
         tableView.tableHeaderView = headerView
 
         fsPagerView = FSPagerView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.width))
-        fsPagerView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: "bannerCell")
+//        fsPagerView.register(DetailPageCollectionViewCell.self, forCellWithReuseIdentifier: "bannerCell")
+        fsPagerView.register(UINib(nibName: "DetailPageCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "bannerCell")
         fsPagerView.delegate = self
         fsPagerView.dataSource = self
         fsPagerView.isInfinite = true
-        img1 = UIImageView(frame: CGRect(x: 10, y: 40, width: 100, height: 100))
+        let hi = UIScreen.main.bounds.width
+        pageLabel = UILabel(frame: CGRect(x: hi - 70, y: view.frame.size.width - 40, width: 50, height: 20))
+        pageLabel.backgroundColor = .black
+        pageLabel.layer.cornerRadius = 10
+        pageLabel.layer.masksToBounds = true
+        pageLabel.textColor = .white
+        pageLabel.textAlignment = .center
+        pageLabel.text = "0/0"
+        pageLabel.font = UIFont.systemFont(ofSize: 13)
+
+
+
+        img1 = UIImageView(frame: CGRect(x: 10, y: 10, width: 80, height: 80))
         fsPagerView.addSubview(img1)
 
-        img2 = UIImageView(frame: CGRect(x: view.frame.size.width - 200, y: view.frame.size.width - 210, width: 150, height: 150))
+        img2 = UIImageView(frame: CGRect(x: hi - 100, y: hi - 150, width: 90, height: 90))
         fsPagerView.addSubview(img2)
 
-        img3 = UIImageView(frame: CGRect(x: 0, y: view.frame.size.width - 50, width: view.frame.size.width, height: 50))
+        img3 = UIImageView(frame: CGRect(x: 0, y: view.frame.size.width - 70, width: hi, height: 70))
         fsPagerView.addSubview(img3)
+        fsPagerView.addSubview(pageLabel)
 
         tableView.tableHeaderView = fsPagerView
         NotificationCenter.default.addObserver(self, selector: #selector(notificationUpdate(nofi:)), name: NSNotification.Name(rawValue:"updateGoodsInfo"), object: nil)
@@ -139,7 +156,7 @@ class GoodsDeatilViewController: UIViewController {
                 self.tableView.reloadData()
                 self.addressStr = data.data.address.address ?? ""
                 self.fsPagerView.reloadData()
-
+                self.setPageLabel(str: "1/\(data.data.productImage.count ?? 0)")
                 if data.data.product.activity_flag == "1" {
                     if data.data.product.activity_image_1 != "" {
                         self.img1.af_setImage(withURL: URL(string: data.data.product.activity_image_1)!)
@@ -155,8 +172,13 @@ class GoodsDeatilViewController: UIViewController {
                 print(error)
                 print(error.self)
                 print(error.localizedDescription)
+                CLProgressHUD.showError(in: self.view, delegate: self, title: "网络错误或商品已删除", duration: 1)
             }
         }
+    }
+
+    func setPageLabel(str: String) {
+        pageLabel.text = str
     }
 
     func setRightItem() {
@@ -270,7 +292,7 @@ class GoodsDeatilViewController: UIViewController {
 
     @IBAction func cart(_ sender: Any) {
 //        self.navigationController?.popViewController(animated: true)
-        self.tabBarController?.selectedIndex = 3
+        self.tabBarController?.selectedIndex = 2
     }
 }
 extension GoodsDeatilViewController: UITableViewDelegate,UITableViewDataSource {
@@ -314,7 +336,8 @@ extension GoodsDeatilViewController: UITableViewDelegate,UITableViewDataSource {
                 return cell
             }
             let cell = tableView.dequeueReusableCell(withIdentifier: "GoodsHeaderTableViewCell") as! GoodsHeaderTableViewCell
-            cell.price_sort.text = "￥\(data?.data.product.maxPrice ?? "0")"
+//            cell.price_sort.text = "￥\(data?.data.product.maxPrice ?? "0")"
+            cell.setPri(str: "￥\(data?.data.product.maxPrice ?? "0")")
             cell.name.text = data?.data.product.name
             cell.shippingContent.text = "  \(data?.data.product.shippingcontent ?? "") "
             cell.xiao.text = data?.data.product.saleCnt ?? ""
@@ -550,7 +573,7 @@ extension GoodsDeatilViewController: UITableViewDelegate,UITableViewDataSource {
         if scrollView.contentOffset.y > 64 {
             topView.backgroundColor = .white
         } else {
-            topView.backgroundColor = .clear
+            topView.backgroundColor = .white
         }
     }
     
@@ -574,10 +597,38 @@ extension GoodsDeatilViewController: FSPagerViewDelegate,FSPagerViewDataSource {
         return data?.data.productImage.count ?? 0
     }
 
+    @objc func playVideo() {
+        if let url = URL(string: urlEncode(str: data?.data.product.video ?? "https://app.necesstore.com/upload/video/091138340.png")) {
+        let player = AVPlayer(url: url)
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        self.present(playerViewController, animated:true, completion: nil)
+        }
+    }
+
+    func urlEncode(str: String) -> String {
+        return str.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "https://app.necesstore.com/upload/video/091138340.png"
+
+    }
+
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
-        let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "bannerCell", at: index)
-        cell.imageView?.af_setImage(withURL: URL(string: (data?.data.productImage[index].image)!)!)
+        let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "bannerCell", at: index) as! DetailPageCollectionViewCell
+        cell.img.af_setImage(withURL: URL(string: (data?.data.productImage[index].image)!)!)
+
+        if !(data?.data.product.video.isEmpty ?? true) {
+            if index == 0 {
+                cell.btn.isHidden = false
+                cell.btn.addTarget(self, action: #selector(playVideo), for: .touchUpInside)
+            } else {
+                cell.btn.isHidden = true
+            }
+        } else {
+            cell.btn.isHidden = true
+        }
         return cell
+    }
+    func pagerViewDidScroll(_ pagerView: FSPagerView) {
+        self.setPageLabel(str: "\(pagerView.currentIndex + 1)/\(data?.data.productImage.count ?? 0)")
     }
 }
 extension GoodsDeatilViewController: UIWebViewDelegate {

@@ -26,7 +26,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="ZSU-Rj-cwM">
-                    <rect key="frame" x="0.0" y="44" width="414" height="752"/>
+                    <rect key="frame" x="0.0" y="84" width="414" height="712"/>
                     <color key="backgroundColor" red="0.9766271710395813" green="0.98030871152877808" blue="0.98430734872817993" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <color key="sectionIndexBackgroundColor" red="0.97662717099999996" green="0.98030871149999999" blue="0.98430734870000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                 </tableView>
@@ -94,6 +94,13 @@
                                 <action selector="shareAction:" destination="-1" eventType="touchUpInside" id="iTM-JC-kHS"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="商品详情" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u8Z-ox-w1R">
+                            <rect key="frame" x="46" y="0.0" width="316" height="40"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
@@ -112,7 +119,7 @@
                 <constraint firstItem="rL6-D2-Lnl" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="cx8-Wr-fRB"/>
                 <constraint firstItem="rL6-D2-Lnl" firstAttribute="top" secondItem="ZSU-Rj-cwM" secondAttribute="bottom" constant="1" id="eNe-bJ-IfM"/>
                 <constraint firstItem="yBK-1i-w0k" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="hnV-PV-14s"/>
-                <constraint firstItem="ZSU-Rj-cwM" firstAttribute="top" secondItem="yBK-1i-w0k" secondAttribute="top" id="lhl-vi-S96"/>
+                <constraint firstItem="ZSU-Rj-cwM" firstAttribute="top" secondItem="yBK-1i-w0k" secondAttribute="top" constant="40" id="lhl-vi-S96"/>
                 <constraint firstItem="ZSU-Rj-cwM" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="uxu-Hr-1aZ"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

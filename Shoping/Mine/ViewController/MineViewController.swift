@@ -179,6 +179,10 @@ class MineViewController: UIViewController {
             let ach = AchievementViewController()
             ach.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(ach, animated: true)
+        } else if btn.tag == 505 {
+                   let retrospec = MyProductViewController()
+                   retrospec.hidesBottomBarWhenPushed = true
+                   self.navigationController?.pushViewController(retrospec, animated: true)
         } else if btn.tag == 504 {
             let retrospec = RetrospectViewController()
             retrospec.hidesBottomBarWhenPushed = true
@@ -279,6 +283,7 @@ extension MineViewController: UITableViewDataSource,UITableViewDelegate {
             cell.btn2.tag = indexPath.section*100 + 2
             cell.btn3.tag = indexPath.section*100 + 3
             cell.btn4.tag = indexPath.section*100 + 4
+            cell.btn5.isHidden = true
             cell.btn1.addTarget(self, action: #selector(toolAction(btn:)), for: .touchUpInside)
             cell.btn2.addTarget(self, action: #selector(toolAction(btn:)), for: .touchUpInside)
             cell.btn3.addTarget(self, action: #selector(toolAction(btn:)), for: .touchUpInside)
@@ -301,15 +306,19 @@ extension MineViewController: UITableViewDataSource,UITableViewDelegate {
             cell.btn3.setImage(UIImage(named: "业绩"), for: .normal)
             cell.btn4.setTitle("产品追溯", for: .normal)
             cell.btn4.setImage(UIImage(named: "产品追溯"), for: .normal)
-            cell.btn5.setTitle("项目业绩", for: .normal)
-            cell.btn5.setImage(UIImage(named: "项目业绩"), for: .normal)
+            cell.btn5.setTitle("我的项目", for: .normal)
+            cell.btn5.setImage(UIImage(named: "我的项目"), for: .normal)
             cell.name.text = "信息查询"
             cell.btn1.tag = indexPath.section*100 + 1
             cell.btn2.tag = indexPath.section*100 + 2
             cell.btn3.tag = indexPath.section*100 + 3
             cell.btn4.tag = indexPath.section*100 + 4
             cell.btn5.tag = indexPath.section*100 + 5
-//            cell.btn5.isHidden = false
+            if code == "0" {
+                 cell.btn5.isHidden = true
+             } else {
+                 cell.btn5.isHidden = false
+             }
             cell.btn1.addTarget(self, action: #selector(toolAction(btn:)), for: .touchUpInside)
             cell.btn2.addTarget(self, action: #selector(toolAction(btn:)), for: .touchUpInside)
             cell.btn3.addTarget(self, action: #selector(toolAction(btn:)), for: .touchUpInside)
@@ -329,6 +338,7 @@ extension MineViewController: UITableViewDataSource,UITableViewDelegate {
             cell.btn2.tag = indexPath.section*100 + 2
             cell.btn3.tag = indexPath.section*100 + 3
             cell.btn4.tag = indexPath.section*100 + 4
+            cell.btn5.isHidden = true
             cell.btn1.addTarget(self, action: #selector(toolAction(btn:)), for: .touchUpInside)
             cell.btn2.addTarget(self, action: #selector(toolAction(btn:)), for: .touchUpInside)
             cell.btn3.addTarget(self, action: #selector(toolAction(btn:)), for: .touchUpInside)
@@ -398,7 +408,10 @@ extension MineViewController: UITableViewDataSource,UITableViewDelegate {
         } else if indexPath.section == 1 {
             return 120
         } else if indexPath.section == 5 {
-            return 147
+            if code == "0" {
+                return 147
+            }
+            return 226
         }
         return 147
     }

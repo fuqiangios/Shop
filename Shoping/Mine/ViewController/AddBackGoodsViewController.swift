@@ -72,7 +72,8 @@ class AddBackGoodsViewController: UIViewController {
 
     func subtmit() {
 //        if resonIndex < 0 {return}
-        API.aftersaleSubmit(order_product_id: order_id, aftersale_type_id: "\(typeTag)", aftersale_reason_id: resonIndex, quantity: "\(num)", description: coment?.getComent() ?? "", images: coment?.getImgs() ?? []).request { (result) in
+        print(addressInfo)
+        API.aftersaleSubmit(order_product_id: order_id, aftersale_type_id: "\(typeTag)", aftersale_reason_id: resonIndex, quantity: "\(num)", description: coment?.getComent() ?? "", images: coment?.getImgs() ?? [], address_id: addressInfo?.id ?? "").request { (result) in
             switch result {
             case .success(let datqa):
                 print(datqa)

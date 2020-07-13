@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MJRefresh
 
 class UserVipViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var fensi: UILabel!
@@ -32,6 +33,7 @@ class UserVipViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var phoneInput: UITextField!
     @IBOutlet weak var nameInput: UITextField!
     @IBOutlet weak var xinzeng: UILabel!
+    var page = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +62,11 @@ class UserVipViewController: UIViewController, UITextFieldDelegate {
         tableVIew.rowHeight = UITableView.automaticDimension
         tableVIew.backgroundColor = UIColor.tableviewBackgroundColor
         tableVIew.separatorStyle = .none
-        let hd = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 527))
+        tableVIew.mj_footer = MJRefreshAutoNormalFooter.init(refreshingBlock: {
+            self.page = self.page + 1
+            self.loadDataMore()
+        })
+        let hd = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 500))
         hd.addSubview(headerImg)
         hd.addSubview(headerView)
         hd.addSubview(fensi)
@@ -93,7 +99,7 @@ class UserVipViewController: UIViewController, UITextFieldDelegate {
     }
 
     func loadData() {
-        API.fansInfo(name: nameInput.text ?? "", telephone: phoneInput.text ?? "").request { (result) in
+        API.fansInfo(name: nameInput.text ?? "", telephone: phoneInput.text ?? "", page: "\(page)").request { (result) in
             switch result {
             case .success(let data):
                 self.data = data
@@ -113,6 +119,23 @@ class UserVipViewController: UIViewController, UITextFieldDelegate {
                     self.jifen.text = item?.points ?? ""
                     self.yue.text = item?.amount ?? ""
                 }
+            case .failure(let er):
+                print(er)
+            }
+        }
+    }
+
+    func loadDataMore() {
+        API.fansInfo(name: nameInput.text ?? "", telephone: phoneInput.text ?? "", page: "\(page)").request { (result) in
+            self.tableVIew.mj_footer?.endRefreshing()
+            switch result {
+            case .success(let data):
+                var ar = self.data?.data.inviteList
+                ar = (ar ?? []) + data.data.inviteList
+                self.data = FansData(result: true, message: "", status: 200, data: FansDataDataClass(inviteCount: data.data.inviteCount, todayInviteCount: data.data.todayInviteCount, inviteList: data.data.inviteList))
+                self.fensi.text = data.data.inviteCount
+                self.xinzeng.text = data.data.todayInviteCount
+                self.tableVIew.reloadData()
             case .failure(let er):
                 print(er)
             }

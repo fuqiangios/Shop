@@ -13,7 +13,7 @@ class GoodsDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var web: UIWebView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        web.scrollView.isScrollEnabled = false
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

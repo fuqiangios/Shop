@@ -25,8 +25,8 @@ class UserVipDetailViewController: UIViewController {
         bbtn.layer.cornerRadius = 19
         bbtn.layer.masksToBounds = true
         start = dateConvertString(date: startOfCurrentMonth())
-        date = start
-        end = dateConvertString(date: endOfCurrentMonth())
+        date = ""
+        end = ""
         tableView.register(UINib(nibName: "UserVipDetailTableViewCell", bundle: nil), forCellReuseIdentifier: "UserVipDetailTableViewCell")
         tableView.delegate = self
         tableView.dataSource = self
@@ -168,12 +168,27 @@ extension UserVipDetailViewController: UITableViewDelegate, UITableViewDataSourc
         cell.selectionStyle = .none
         let item = data?.data.orderList[indexPath.row]
         cell.date.text = item?.created
-        cell.price.text = "￥\(item?.order_products.price ?? "")"
-        if let img = item?.order_products.image {
-            cell.img.af_setImage(withURL: URL(string: img)!)
+        cell.price.text = "￥\(item?.price ?? "")"
+        cell.img.isHidden = true
+        cell.img2.isHidden = true
+
+        if (item?.order_products.count ?? 0) >= 1 {
+            if let img = item?.order_products.first?.image {
+                cell.img.af_setImage(withURL: URL(string: img)!)
+            }
+            cell.img2.isHidden = true
+            cell.img.isHidden = false
         }
+
+        if (item?.order_products.count ?? 0) >= 2 {
+            if let img = item?.order_products[1].image {
+                cell.img2.af_setImage(withURL: URL(string: img)!)
+            }
+            cell.img2.isHidden = false
+        }
+
         cell.nm.text = item?.order_code
-        cell.name.text = item?.order_products.name
+        cell.name.text = "共\(item?.order_products.count ?? 0)种"
         return cell
     }
 

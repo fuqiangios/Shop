@@ -149,13 +149,15 @@ extension API {
         let quantity: String
         let description: String
         let images: [String]
-        init(order_product_id: String, aftersale_type_id: String, aftersale_reason_id: String, quantity: String, description: String, images: [String]) {
+        let address_id: String
+        init(order_product_id: String, aftersale_type_id: String, aftersale_reason_id: String, quantity: String, description: String, images: [String], address_id: String) {
             self.order_product_id = order_product_id
             self.aftersale_type_id = aftersale_type_id
             self.aftersale_reason_id = aftersale_reason_id
             self.quantity = quantity
             self.description = description
             self.images = images
+            self.address_id = address_id
         }
 
         func parameters() -> [String: Any]? {
@@ -165,7 +167,8 @@ extension API {
                 "aftersale_reason_id": aftersale_reason_id,
                 "quantity": quantity,
                 "description": description,
-                "images": images
+                "images": images,
+                "address_id": address_id
             ]
         }
     }

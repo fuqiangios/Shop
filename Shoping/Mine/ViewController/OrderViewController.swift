@@ -169,7 +169,7 @@ extension OrderViewController:UITableViewDelegate,UITableViewDataSource {
         cell.selectionStyle = .none
         let item = data?.data[indexPath.row]
         cell.orderId.text = "订单号: \(item?.orderCode ?? "")"
-        cell.num.text = "共\(item?.products.count ?? 0)件"
+        cell.num.text = "共\(item?.products.count ?? 0)种"
         cell.status.text = item?.statusName
         let co = UIColor(red: 241.0/255.0, green: 241.0/255.0, blue: 241.0/255.0, alpha: 1)
         if item?.statusName == "交易成功" {
@@ -223,8 +223,16 @@ extension OrderViewController:UITableViewDelegate,UITableViewDataSource {
     }
 
     @objc func deletea(btn: UIButton) {
-        let tag = btn.tag - 999999
-        updateOrderStatus(id: data?.data[tag].id ?? "", type: "delete")
+        let alt = UIAlertController(title: "系统提示", message: "是否确认删除订单", preferredStyle: .alert)
+        let y = UIAlertAction(title: "确定", style: .default) { (_) in
+            let tag = btn.tag - 999999
+            self.updateOrderStatus(id: self.data?.data[tag].id ?? "", type: "delete")
+        }
+        let n = UIAlertAction(title: "取消", style: .default, handler: nil)
+        alt.addAction(y)
+        alt.addAction(n)
+        self.present(alt, animated: true, completion: nil)
+
     }
 
     @objc func updateOrder(btn: UIButton) {

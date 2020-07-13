@@ -67,11 +67,10 @@ extension LogisticsViewController: UITableViewDelegate, UITableViewDataSource {
         cell.date.text = item?.time
         if indexPath.row == 0 {
             cell.top.isHidden = true
-cell.dian.image = UIImage(named: "实时位置")
+            cell.dian.image = UIImage(named: "实时位置")
         } else {
             cell.top.isHidden = false
             cell.dian.image = UIImage(named: "已到达")
-
         }
         if indexPath.row == (self.data?.data.list.count ?? 0) - 1 {
             cell.bottom.isHidden = true
