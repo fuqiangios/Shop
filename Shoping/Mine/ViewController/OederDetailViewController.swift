@@ -65,6 +65,7 @@ class OederDetailViewController: UIViewController {
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
+        tableView.backgroundColor = .white
     }
 
     func setBtn(tag: Int) {
@@ -83,7 +84,13 @@ class OederDetailViewController: UIViewController {
             rightBtn.setTitleColor(rightBtn.tintColor, for: .normal)
         case 2:
             leftBtn.isHidden = true
-            rightBtn.isHidden = true
+            rightBtn.isHidden = false
+            rightBtn.isHidden = false
+            rightBtn.layer.borderColor = rightBtn.tintColor.cgColor
+            rightBtn.layer.borderWidth = 1
+            rightBtn.layer.cornerRadius = 5
+            rightBtn.layer.masksToBounds = true
+            rightBtn.setTitle("取消订单", for: .normal)
         case 3:
             leftBtn.isHidden = false
             leftBtn.layer.borderColor = rightBtn.tintColor.cgColor
@@ -108,7 +115,13 @@ class OederDetailViewController: UIViewController {
             rightBtn.setTitleColor(.black, for: .normal)
             rightBtn.setTitle("删除", for: .normal)
 
-            leftBtn.isHidden = true
+            leftBtn.isHidden = false
+            leftBtn.layer.borderColor = rightBtn.tintColor.cgColor
+            leftBtn.layer.borderWidth = 1
+            leftBtn.layer.cornerRadius = 5
+            leftBtn.layer.masksToBounds = true
+            leftBtn.setTitleColor(.black, for: .normal)
+            leftBtn.setTitle("查看物流", for: .normal)
 //            leftBtn.layer.borderColor = rightBtn.tintColor.cgColor
 //            leftBtn.layer.borderWidth = 1
 //            leftBtn.layer.cornerRadius = 5
@@ -122,7 +135,7 @@ class OederDetailViewController: UIViewController {
             rightBtn.layer.cornerRadius = 5
             rightBtn.layer.masksToBounds = true
             rightBtn.setTitleColor(.black, for: .normal)
-            rightBtn.setTitle("删除", for: .normal)
+            rightBtn.setTitle("查看物流", for: .normal)
                         leftBtn.isHidden = false
             leftBtn.layer.borderColor = UIColor.black.cgColor
                         leftBtn.layer.borderWidth = 1
@@ -130,7 +143,23 @@ class OederDetailViewController: UIViewController {
                         leftBtn.layer.masksToBounds = true
                         leftBtn.setTitle("评论", for: .normal)
             leftBtn.setTitleColor(.black, for: .normal)
+            case 6,7,8:
+                 rightBtn.isHidden = false
+                 rightBtn.layer.borderColor = UIColor.black.cgColor
+                 rightBtn.layer.borderWidth = 1
+                 rightBtn.layer.cornerRadius = 5
+                 rightBtn.layer.masksToBounds = true
+                 rightBtn.setTitleColor(.black, for: .normal)
+                 rightBtn.setTitle("查看物流", for: .normal)
+                             leftBtn.isHidden = false
+                 leftBtn.layer.borderColor = UIColor.black.cgColor
+                             leftBtn.layer.borderWidth = 1
+                             leftBtn.layer.cornerRadius = 5
+                             leftBtn.layer.masksToBounds = true
+                             leftBtn.setTitle("删除", for: .normal)
+                 leftBtn.setTitleColor(.black, for: .normal)
         default:
+            
             rightBtn.isHidden = false
             rightBtn.layer.borderColor = UIColor.black.cgColor
             rightBtn.layer.borderWidth = 1
@@ -175,6 +204,8 @@ class OederDetailViewController: UIViewController {
         } else if btn.titleLabel?.text == "评论" {
             let addeva = EvaluateManagerViewController()
             self.navigationController?.pushViewController(addeva, animated: true)
+        } else if btn.titleLabel?.text == "取消订单" {
+            updateOrderStatus(id: order_id, type: "cancel")
         }
     }
 }
@@ -198,6 +229,26 @@ extension OederDetailViewController:UITableViewDelegate,UITableViewDataSource {
         let item = data?.data.products[tag]
         addeva.eva = EvaluateDatum(productID: item?.productID ?? "", orderID: order_id, name: item?.name ?? "", image: item?.image ?? "", price: item?.price ?? "", quantity: item?.quantity ?? "", optionUnionName: item?.optionUnionName ?? "", user_name: "", user_image: "", created: "", content: "", product_evaluate_id: "", star: "", evaluate_image:[])
         self.navigationController?.pushViewController(addeva, animated: true)
+    }
+
+    @objc func copyNumber() {
+        let pastboard = UIPasteboard.general
+        pastboard.string = data?.data.orderCode ?? ""
+        CLProgressHUD.showSuccess(in: self.view, delegate: self, title: "复制成功", duration: 1)
+    }
+
+    @objc func toafterSale(_ btn:UIButton) {
+        let tag = btn.tag - 1000 - 1
+        let item = data?.data.products[tag]
+        if item?.aftersale_flag == "0" {
+        let add = AddBackGoodsViewController()
+        add.order_id = item?.order_product_id ?? ""
+        self.navigationController?.pushViewController(add, animated: true)
+        } else {
+            let detail = BaclGoodsDetailViewController()
+            detail.id = item?.aftersale_id ?? ""
+            self.navigationController?.pushViewController(detail, animated: true)
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -234,10 +285,27 @@ extension OederDetailViewController:UITableViewDelegate,UITableViewDataSource {
            cell.price.text = "￥\(item?.price ?? "0")"
            cell.info.text = item?.optionUnionName ?? ""
            cell.num.text = "X\(item?.quantity ?? "0")"
-            if (Int(data?.data.orderStatus ?? "0") ?? 0) == 4 {
+            if (Int(data?.data.orderStatus ?? "0") ?? 0) == 5 {
                 cell.evaluateBtn.isHidden = false
             } else {
                 cell.evaluateBtn.isHidden = true
+            }
+            if data?.data.orderStatus == "4" || data?.data.orderStatus == "7" {
+                cell.aftersales.isHidden = false
+                if item?.aftersale_flag == "0" {
+                    cell.aftersales.setTitle("申请售后", for: .normal)
+                } else if item?.aftersale_flag == "1"{
+                    cell.aftersales.setTitle("申请中", for: .normal)
+                } else if item?.aftersale_flag == "2"{
+                    cell.aftersales.setTitle("审核通过", for: .normal)
+                } else if item?.aftersale_flag == "3"{
+                    cell.aftersales.setTitle("驳回", for: .normal)
+                } else if item?.aftersale_flag == "4"{
+                    cell.aftersales.setTitle("售后完成", for: .normal)
+                }
+
+            } else {
+                cell.aftersales.isHidden = true
             }
            cell.selectionStyle = .none
             if indexPath.row == 0 {
@@ -246,7 +314,9 @@ extension OederDetailViewController:UITableViewDelegate,UITableViewDataSource {
 //                cell.shadowsLeftRight()
             }
             cell.evaluateBtn.tag = indexPath.row + 9999
+            cell.aftersales.tag = indexPath.row + 1000
             cell.evaluateBtn.addTarget(self, action: #selector(toeva(btn:)), for: .touchUpInside)
+            cell.aftersales.addTarget(self, action: #selector(toafterSale), for: .touchUpInside)
            return cell
         } else {
             if indexPath.row == 0 {
@@ -255,6 +325,17 @@ extension OederDetailViewController:UITableViewDelegate,UITableViewDataSource {
                 cell.selectionStyle = .none
                 cell.num.text = data?.data.orderCode ?? ""
                 cell.date.text = data?.data.created_time ?? ""
+                cell.shiiping.text = data?.data.shipping_time ?? ""
+                cell.confim.text = data?.data.confirm_time ?? ""
+                cell.copyB.addTarget(self, action: #selector(copyNumber), for: .touchUpInside)
+                if (data?.data.shipping_time ?? "" == "") {
+                    cell.heigh.constant = 80
+                    cell.fname.text = ""
+                    cell.sname.text = ""
+                }else if (data?.data.confirm_time ?? "" == "") {
+                    cell.heigh.constant = 120
+                    cell.sname.text = ""
+                }
                 return cell
 
             } else if indexPath.row == 1 {
@@ -285,6 +366,15 @@ extension OederDetailViewController:UITableViewDelegate,UITableViewDataSource {
         let view = UIView()
         view.backgroundColor = UIColor.tableviewBackgroundColor
         return view
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            let item = data?.data.products[indexPath.row - 1]
+            let goods = GoodsDeatilViewController()
+            goods.product_id = item?.productID ?? ""
+            self.navigationController?.pushViewController(goods, animated: true)
+        }
     }
 
     func getPayName(str: String) -> String {

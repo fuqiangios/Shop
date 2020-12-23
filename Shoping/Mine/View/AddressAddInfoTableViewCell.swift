@@ -16,7 +16,8 @@ class AddressAddInfoTableViewCell: UITableViewCell {
     @IBOutlet weak var inputField: UITextField!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        inputField.setValue(UIColor.black, forKeyPath: "placeholderLabel.textColor")
+        inputField.textColor = .black
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

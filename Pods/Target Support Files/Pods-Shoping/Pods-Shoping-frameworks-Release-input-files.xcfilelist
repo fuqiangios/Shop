@@ -8,5 +8,6 @@ ${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework
 ${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework
 ${BUILT_PRODUCTS_DIR}/TableKit/TableKit.framework
 ${BUILT_PRODUCTS_DIR}/TagListView/TagListView.framework
+${BUILT_PRODUCTS_DIR}/WebViewJavascriptBridge/WebViewJavascriptBridge.framework
 ${BUILT_PRODUCTS_DIR}/ZLCollectionViewFlowLayout/ZLCollectionViewFlowLayout.framework
 ${BUILT_PRODUCTS_DIR}/netfox/netfox.framework

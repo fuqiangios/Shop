@@ -12,6 +12,7 @@ class CreatOrderGoodsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var backView: UIView!
     
+    @IBOutlet weak var aftersales: UIButton!
     @IBOutlet weak var evaluateBtn: UIButton!
     @IBOutlet weak var bottomc: NSLayoutConstraint!
     @IBOutlet weak var topc: NSLayoutConstraint!
@@ -26,6 +27,10 @@ class CreatOrderGoodsTableViewCell: UITableViewCell {
         evaluateBtn.layer.borderColor = evaluateBtn.tintColor.cgColor
         evaluateBtn.layer.borderWidth = 1
         evaluateBtn.layer.cornerRadius = 3
+
+        aftersales.layer.borderColor = evaluateBtn.tintColor.cgColor
+        aftersales.layer.borderWidth = 1
+        aftersales.layer.cornerRadius = 3
     }
 
     func shadow() {

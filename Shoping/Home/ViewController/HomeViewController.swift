@@ -11,6 +11,7 @@ import SnapKit
 import SwiftyJSON
 import CoreLocation
 
+
 class HomeViewController: UIViewController,UITextFieldDelegate, CLLocationManagerDelegate {
     @IBOutlet weak var scrowView: UIScrollView!
     var data: Home? = nil
@@ -21,9 +22,13 @@ class HomeViewController: UIViewController,UITextFieldDelegate, CLLocationManage
     var locationManager:CLLocationManager = CLLocationManager()
     var timer : Timer?
     var typeSelectView: UIScrollView!
+    var showRedPackRain: Bool = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black]
         timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(updataSecond), userInfo: nil, repeats: true)
            timer!.fire()
         NotificationCenter.default.addObserver(self, selector: #selector(shouldPopup), name: NSNotification.Name(rawValue: "popup"), object: nil)
@@ -34,8 +39,10 @@ class HomeViewController: UIViewController,UITextFieldDelegate, CLLocationManage
         let itme = UIBarButtonItem.init(title: "", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = itme
         reLocationAction()
+        loadUserData()
         setSearBar()
         setRightItem()
+//        checkPlanLuck()
          if(CLLocationManager.authorizationStatus() != .denied) {
 
          } else {
@@ -50,11 +57,48 @@ class HomeViewController: UIViewController,UITextFieldDelegate, CLLocationManage
         loadData()
 //        setLeftItem()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
 
     @objc func shouldPopup() {
         let popup = HomwPopUpViewController()
         popup.modalPresentationStyle = .custom
         self.present(popup, animated: false, completion: nil)
+    }
+
+    func checkPlanLuck() {
+        if showRedPackRain {
+            return
+        }
+        if UserSetting.default.activeUserToken == nil {
+            return
+        }
+        API.checkPlanLuck(user_token: UserSetting.default.activeUserToken ?? "").request { (result) in
+            switch result {
+            case .success(let data):
+                print("d-s-s-s-\(data.data.plan_luck_id)")
+                if data.data.plan_luck_id != "0" {
+                    self.showRedPackRain = true
+                    let redPackRain = RedPackageRainViewController()
+                    redPackRain.plan_luck_id = data.data.plan_luck_id
+                    redPackRain.modalPresentationStyle = .custom
+                    redPackRain.closeRedPackRainAndJumpHistory = { op in
+                        self.showRedPackRain = false
+                        if op == 1 {
+                            let history = RedPackRainHistoryViewController()
+                            let nav = UINavigationController.init(rootViewController: history)
+                            nav.modalPresentationStyle = .custom
+                            self.present(nav, animated: false, completion: nil)
+                        }
+                    }
+                    self.present(redPackRain, animated: false, completion: nil)
+                }
+            case .failure(let er):
+                print(er)
+
+            }
+        }
     }
 
     @objc func updataSecond() {
@@ -64,21 +108,53 @@ class HomeViewController: UIViewController,UITextFieldDelegate, CLLocationManage
         if UserSetting.default.activeUserToken == nil {
             return
         }
+//        checkPlanLuck()
         API.checkToken(now_user_token: UserSetting.default.activeUserToken ?? "").request { (result) in
             switch result {
             case .success(let data):
+                print(data)
                 if data.data.effect == "0" {
                     let al = UIAlertView(title: "系统提示", message: "账号已在其它设备登录，如不是您本人操作，请立即修改密码", delegate: self, cancelButtonTitle: "好的")
                     al.show()
                     UserSetting.default.activeUserToken = nil
-                    UserSetting.default.activeUserPhone = nil
                 }
             case .failure(let er):
-                                    let al = UIAlertView(title: "系统提示", message: "账号已在其它设备登录，如不是您本人操作，请立即修改密码", delegate: self, cancelButtonTitle: "好的")
+                let al = UIAlertView(title: "系统提示", message: "账号已在其它设备登录，如不是您本人操作，请立即修改密码", delegate: self, cancelButtonTitle: "好的")
                 al.show()
                 UserSetting.default.activeUserToken = nil
-                UserSetting.default.activeUserPhone = nil
             }
+        }
+    }
+
+
+    func getCurrentVC()->UIViewController{
+        var window = UIApplication.shared.keyWindow
+        if window?.windowLevel != UIWindow.Level.normal{
+            let windows = UIApplication.shared.windows
+            for  tempwin in windows{
+                if tempwin.windowLevel == UIWindow.Level.normal{
+                    window = tempwin
+                    break
+                }
+            }
+        }
+        let frontView = (window?.subviews)![0]
+        let nextResponder = frontView.next
+        if nextResponder?.isKind(of: UIViewController.classForCoder()) == true{
+
+            return nextResponder as! UIViewController
+        }else if nextResponder?.isKind(of: UINavigationController.classForCoder()) == true{
+
+            return (nextResponder as! UINavigationController).visibleViewController!
+        }
+        else {
+
+            if (window?.rootViewController) is UINavigationController{
+              return ((window?.rootViewController) as! UINavigationController).visibleViewController!//只有这个是显示的controller 是可以的必须有nav才行
+            }else if (window?.rootViewController) is UIViewController{
+                return ((window?.rootViewController) as! UITabBarController).selectedViewController! //不行只是最三个开始的页面
+            }
+           return (window?.rootViewController)!
         }
     }
 
@@ -90,7 +166,21 @@ class HomeViewController: UIViewController,UITextFieldDelegate, CLLocationManage
         self.navigationController?.pushViewController(sera, animated: true)
         return textField.resignFirstResponder()
     }
+    func loadUserData()  {
+        API.mineData().request { (result) in
+            switch result {
+            case .success(let data):
 
+                UserSetting.default.activeUserPhone = data.data.telephone
+                UserSetting.default.activeUserMail = data.data.email
+            case .failure(let er):
+                self.data = nil
+                UserSetting.default.activeUserPhone = nil
+                UserSetting.default.activeUserMail = nil
+                print(er)
+            }
+        }
+    }
     func reLocationAction(){
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
@@ -166,9 +256,10 @@ class HomeViewController: UIViewController,UITextFieldDelegate, CLLocationManage
         titleView.backgroundColor = UIColor.lightColor
 
         let seachText = UITextField(frame: CGRect(x: 10, y: 0, width: titleView.frame.size.width, height: 40))
-        seachText.placeholder = "搜索产品名称"
+        seachText.text = "搜索产品名称"
         seachText.font = UIFont.PingFangSCLightFont16
         seachText.delegate = self
+        seachText.textColor = .black
         titleView.addSubview(seachText)
 
         view.addSubview(titleView)
@@ -184,11 +275,15 @@ class HomeViewController: UIViewController,UITextFieldDelegate, CLLocationManage
 
 
         typeSelectView = UIScrollView(frame: CGRect(x: 0, y: 60, width: self.view.frame.width, height: 40))
+        typeSelectView.backgroundColor = .white
         let types = data?.data.category ?? []
+        var right = 0
         for index in 0...types.count{
+
             if index == 0 {
                 let btn = UIButton(type: .custom)
                 btn.frame = CGRect(x: index*60, y: 0, width: 60, height: 40)
+                right = right + 60
                 btn.setTitle("精选", for: .normal)
                 btn.setTitleColor(.black, for: .normal)
                 btn.setTitleColor(.red, for: .selected)
@@ -202,11 +297,17 @@ class HomeViewController: UIViewController,UITextFieldDelegate, CLLocationManage
                 typeSelectView.addSubview(btn)
             } else {
             let btn = UIButton(type: .custom)
-            btn.frame = CGRect(x: index*60, y: 0, width: 60, height: 40)
+            var widt = 60
+                if types[index - 1].name.count > 2 {
+                    widt = 100
+                }
+
+            btn.frame = CGRect(x: right, y: 0, width: widt, height: 40)
             btn.setTitle(types[index - 1].name, for: .normal)
             btn.setTitleColor(.black, for: .normal)
             btn.setTitleColor(.red, for: .selected)
             btn.titleLabel?.font = UIFont.PingFangSCLightFont18
+                right = right+widt
             btn.tag = index + 100
             btn.addTarget(self, action: #selector(selectType(btn:)), for: .touchUpInside)
             if index == 0 {
@@ -216,7 +317,7 @@ class HomeViewController: UIViewController,UITextFieldDelegate, CLLocationManage
             typeSelectView.addSubview(btn)
             }
         }
-        typeSelectView.contentSize = CGSize(width: 60 * (types.count + 1), height: 40)
+        typeSelectView.contentSize = CGSize(width: right, height: 40)
         typeSelectView.showsHorizontalScrollIndicator = false
         setChildView()
 
@@ -323,6 +424,7 @@ class HomeViewController: UIViewController,UITextFieldDelegate, CLLocationManage
                 self.setTypeSelectView()
             case .failure(let error):
                 let alt = UIAlertController(title: "我家有品", message: "为了帮您获取最近的店铺信息，建议您打开位置以及无线数据权限", preferredStyle: .alert)
+                UserSetting.default.activeUserToken = nil
                 let sht = UIAlertAction(title: "打开了", style: .destructive) { (_) in
                     self.loadData()
                 }

@@ -45,8 +45,14 @@ class OrderPayViewController: UIViewController {
                 self.apiAction(code: code)
             }
             popUp.didToSet = {
-                let payPassword = PayPasswordViewController()
-                self.navigationController?.pushViewController(payPassword, animated: true)
+                if UserSetting.default.activeUserPhone != nil {
+                                    let payPassword = PayPasswordViewController()
+                    self.navigationController?.pushViewController(payPassword, animated: true)
+                } else {
+                    let payPassword = MailPayPasswordViewController()
+                    self.navigationController?.pushViewController(payPassword, animated: true)
+                }
+
             }
             self.present(popUp, animated: false, completion: nil)
         }

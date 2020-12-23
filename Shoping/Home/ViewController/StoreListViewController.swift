@@ -33,6 +33,8 @@ class StoreListViewController: UIViewController {
         let vi = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 60))
         let l = UILabel(frame: CGRect(x: 16, y: 0, width: view.frame.width - 32, height: 60))
         l.text = "当前位置: \(shiop)"
+        l.textColor = .black
+        l.backgroundColor = .white
         vi.addSubview(l)
         tableView.tableHeaderView = vi
     }
@@ -68,6 +70,22 @@ UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return data?.data[section].name
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 30
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let bg = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 30))
+        bg.backgroundColor = .white
+        let lb = UILabel(frame: CGRect(x: 16, y: 0, width: 200, height: 30))
+        lb.text = data?.data[section].name
+        lb.textColor = .black
+        lb.backgroundColor = .clear
+        bg.backgroundColor = UIColor.lineColor
+        bg.addSubview(lb)
+        return bg
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

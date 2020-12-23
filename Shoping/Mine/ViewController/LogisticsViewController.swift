@@ -29,6 +29,7 @@ class LogisticsViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.layer.cornerRadius = 10
         tableView.layer.masksToBounds = true
+        tableView.backgroundColor = .white
         vo.layer.cornerRadius = 10
         vo.layer.masksToBounds = true
         loadData()

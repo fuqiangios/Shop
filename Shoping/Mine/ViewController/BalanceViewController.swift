@@ -13,6 +13,7 @@ class BalanceViewController: UIViewController {
     @IBOutlet weak var zhanngdan: UIButton!
     @IBOutlet weak var chonngzhi: UIButton!
 
+    @IBOutlet weak var sendAmount: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tixian: UIButton!
     @IBOutlet weak var price: UILabel!
@@ -39,10 +40,13 @@ class BalanceViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "查看明细", style: .done, target: self, action: #selector(toDetail))
         tixian.layer.borderColor = UIColor.white.cgColor
          tixian.layer.borderWidth = 1
-         tixian.layer.cornerRadius = 25
+         tixian.layer.cornerRadius = 20
+        sendAmount.layer.borderColor = UIColor.white.cgColor
+         sendAmount.layer.borderWidth = 1
+         sendAmount.layer.cornerRadius = 20
         chonngzhi.layer.borderColor = UIColor.white.cgColor
          chonngzhi.layer.borderWidth = 1
-         chonngzhi.layer.cornerRadius = 25
+         chonngzhi.layer.cornerRadius = 20
         tableView.register(UINib(nibName: "IntegraDetailTableViewCell", bundle: nil), forCellReuseIdentifier: "IntegraDetailTableViewCell")
 
 
@@ -78,6 +82,11 @@ class BalanceViewController: UIViewController {
         }
     }
 
+    @IBAction func sendAmointAction(_ sender: Any) {
+        let sendAmount = SendAmountViewController()
+        sendAmount.amountI = data?.data.amount ?? "0.00"
+        self.navigationController?.pushViewController(sendAmount, animated: true)
+    }
     @IBAction func chongzhiAction(_ sender: Any) {
         let chong = BalanceChongViewController()
         self.navigationController?.pushViewController(chong, animated: true)

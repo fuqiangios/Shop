@@ -17,6 +17,7 @@ class VipProductDetailViewController: UIViewController {
     var id: String = ""
     var data: VIPDataDetailDataClass? = nil
     var showpre = false
+    var old = false
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "我的项目"
@@ -89,9 +90,14 @@ class VipProductDetailViewController: UIViewController {
     }
 
     @objc func joinAction () {
-        if data?.showPerformance == "0" {
-            loadData()
-
+        if data?.showPerformance == "0" && !old{
+//            loadData()
+            let popup = ProductPopUpViewController()
+            popup.modalPresentationStyle = .custom
+            popup.sureBlock = { str in
+                self.loadData()
+            }
+            self.present(popup, animated: true, completion: nil)
         } else {
             showpre = true
             self.tableView.reloadData()
@@ -137,6 +143,12 @@ extension VipProductDetailViewController: UITableViewDelegate,UITableViewDataSou
             } else {
                 cell.btn.setTitle("参与项目", for: .normal)
             }
+                if old {
+                    if data?.showPerformance != "1" {
+                        cell.btn.isHidden = true
+                    }
+                    cell.btn.setTitle("财务查询", for: .normal)
+                }
             cell.selectionStyle = .none
             return cell
             }

@@ -151,19 +151,20 @@ extension UserVipViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UserVipTableViewCell") as! UserVipTableViewCell
         cell.selectionStyle = .none
         let item = data?.data.inviteList[indexPath.row]
-        cell.name.text = item?.name
+        cell.name.text = item?.name ?? ""
+        cell.num.text = "\(indexPath.row + 1)"
         cell.fensi.text = item?.inviteCount
-        cell.date.text = item?.created
-        cell.hongbao.text = item?.redPackage
+        cell.date.text = "注册时间:\(item?.created ?? "")"
+//        cell.hongbao.text = item?.redPackage
         cell.jifen.text = item?.points
-        cell.yue.text = item?.amount
+//        cell.yue.text = item?.amount
         cell.btn.tag = indexPath.row + 100
         cell.btn.addTarget(self, action: #selector(self.toDetail(btn:)), for: .touchUpInside)
         return cell
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 138
+        return UITableView.automaticDimension
     }
 
 }

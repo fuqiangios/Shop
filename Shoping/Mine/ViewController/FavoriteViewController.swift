@@ -95,6 +95,8 @@ class FavoriteViewController: UIViewController {
             switch result {
             case .success(_):
                 CLProgressHUD.showSuccess(in: self.view, delegate: self, title: "删除成功", duration: 1)
+                self.page = 1
+                self.loadData()
             case .failure(let er):
                 CLProgressHUD.showError(in: self.view, delegate: self, title: "删除失败", duration: 1)
                 print(er)
@@ -172,6 +174,12 @@ extension FavoriteViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if !edid {
+            let goods = GoodsDeatilViewController()
+            goods.product_id = data?.data[indexPath.row].productID ?? ""
+            self.navigationController?.pushViewController(goods, animated: true)
+            return
+        }
         var select = -1
         for index in 0..<selectIndex.count {
             if indexPath.row == selectIndex[index] {

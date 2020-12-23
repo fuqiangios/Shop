@@ -74,7 +74,9 @@ extension SelectedViewController: UICollectionViewDelegate, UICollectionViewData
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == 1 {
             let cell:GoodsListCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: goods, for: indexPath) as! GoodsListCollectionViewCell
-            cell.goodsImg.af_setImage(withURL: URL(string: (data?.data.labels[lablesIndex].product[indexPath.item].image)!)!)
+            if !(data?.data.labels[lablesIndex].product[indexPath.item].image.isEmpty ?? true) {
+                cell.goodsImg.af_setImage(withURL: URL(string: (data?.data.labels[lablesIndex].product[indexPath.item].image)!)!)
+            }
             cell.goodsName.text = (data?.data.labels[lablesIndex].product[indexPath.item].name ?? "")
             cell.info.text = data?.data.labels[lablesIndex].product[indexPath.item].title
             cell.setPri(str: "￥" + (data?.data.labels[lablesIndex].product[indexPath.item].price ?? "0"))
@@ -208,6 +210,8 @@ extension SelectedViewController: UICollectionViewDelegate, UICollectionViewData
                 }
                 let fsPagerView = FSPagerView(frame: CGRect(x: 16, y: 0, width: view.frame.size.width - 32, height: 110))
                   fsPagerView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: "bannerCell")
+                fsPagerView.register(FSPagerBannerViewCell.self, forCellWithReuseIdentifier: "gifBannerCell")
+//                fsPagerView.register(UINib.init(nibName: "FSPagerBannerViewCell", bundle: nil), forCellWithReuseIdentifier: "gifBannerCell")
                   fsPagerView.delegate = self
                   fsPagerView.dataSource = self
                   fsPagerView.isInfinite = true
@@ -315,12 +319,21 @@ extension SelectedViewController: FSPagerViewDataSource,FSPagerViewDelegate {
                 web.title = data?.data.advertMiddle[index].name ?? ""
                 web.uri = data?.data.advertMiddle[index].content ?? "https://www.necesstore.com"
                 self.navigationController?.viewControllers.last?.navigationController?.pushViewController(web, animated: true)
-            } else {
+            } else if data?.data.advertMiddle[index].type == "2" {
                     let list = GoodsListViewController()
                     list.hidesBottomBarWhenPushed = true
                 list.title = data?.data.advertMiddle[index].name ?? ""
                 list.product_ids = data?.data.advertMiddle[index].productIDS ?? ""
                 self.navigationController?.viewControllers.last?.navigationController?.pushViewController(list, animated: true)
+            } else if data?.data.advertMiddle[index].type == "3" {
+                if UserSetting.default.activeUserToken == nil {
+                let login = LoginViewController()
+                self.navigationController?.pushViewController(login, animated: true)
+                    return
+                }
+                let shop = RenRenFightingWViewController()
+                shop.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(shop, animated: true)
             }
         } else {
         if data?.data.advertTop[index].type == "1" {
@@ -329,28 +342,56 @@ extension SelectedViewController: FSPagerViewDataSource,FSPagerViewDelegate {
             web.title = data?.data.advertTop[index].name ?? ""
             web.uri = data?.data.advertTop[index].content ?? "https://www.necesstore.com"
             self.navigationController?.viewControllers.last?.navigationController?.pushViewController(web, animated: true)
-        } else {
+
+        } else if data?.data.advertTop[index].type == "2"{
                 let list = GoodsListViewController()
                 list.hidesBottomBarWhenPushed = true
             list.title = data?.data.advertTop[index].name ?? ""
             list.product_ids = data?.data.advertTop[index].productIDS ?? ""
             self.navigationController?.viewControllers.last?.navigationController?.pushViewController(list, animated: true)
-        }
+        } else if data?.data.advertTop[index].type == "3" {
+            if UserSetting.default.activeUserToken == nil {
+            let login = LoginViewController()
+            self.navigationController?.pushViewController(login, animated: true)
+                return
+            }
+            let shop = RenRenFightingWViewController()
+            shop.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(shop, animated: true)
+          }
         }
     }
 
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
-        let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "bannerCell", at: index)
-        cell.backgroundColor = .white
+
 //        cell.imageView?.backgroundColor = UIColor.green
 //        cell.imageView?.layer.cornerRadius = 10
 //        cell.imageView?.layer.masksToBounds = true
         if pagerView.tag == 999 {
-            cell.imageView?.af_setImage(withURL: URL(string: (data?.data.advertMiddle[index].image)!)!)
+            let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "gifBannerCell", at: index) as!FSPagerBannerViewCell
+            
+            cell.backgroundColor = .white
+            let url = URL.init(string: (data?.data.advertMiddle[index].image)!)!
+            let request = URLRequest(url: url)
+               //异步加载图片
+            NSURLConnection.sendAsynchronousRequest(request, queue: OperationQueue.main, completionHandler:{ (response, data, error) -> Void in
+                if (error != nil) {
+                    print(error)
+                    return
+                }
+                cell.gif?.gifData = data
+                cell.gif?.startGif()
+
+            })
+//            cell.imageView?.af_setImage(withURL: URL(string: (data?.data.advertMiddle[index].image)!)!)
+            return cell
         } else {
-        cell.imageView?.af_setImage(withURL: URL(string: (data?.data.advertTop[index].image)!)!)
+            let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "bannerCell", at: index)
+            cell.backgroundColor = .white
+            cell.imageView?.af_setImage(withURL: URL(string: (data?.data.advertTop[index].image)!)!)
+            return cell
         }
-        return cell
+
     }
 }
 

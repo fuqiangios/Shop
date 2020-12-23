@@ -14,9 +14,10 @@ private struct UserSettingKes {
     static fileprivate let Notifications: String = "ACTIVE_Notifi"
     static fileprivate let searHistory: String = "SEAR_HISTORY"
     static fileprivate let activephone: String = "USER_PHONE"
+    static fileprivate let activemail: String = "USER_MAIL"
     static fileprivate let activeType: String = "GOODS_TYPE"
     static func allKeys() -> [String] {
-        return [activeUser,activeToken,searHistory, activephone,activeType]
+        return [activeUser,activeToken,searHistory, activephone,activeType,activemail]
     }
 }
 
@@ -133,6 +134,34 @@ class UserSetting {
 
         get {
             guard let token = standard.value(forKey: UserSettingKes.activephone) as? String else {
+                return nil
+            }
+
+            do {
+                return token
+            } catch {
+                print(error.localizedDescription)
+                return nil
+            }
+        }
+    }
+
+    var activeUserMail: String? {
+        set {
+            do {
+                if let token = newValue {
+                    standard.setValue(token, forKey: UserSettingKes.activemail)
+                } else {
+                    standard.setValue(nil, forKey: UserSettingKes.activemail)
+                }
+                standard.synchronize()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+
+        get {
+            guard let token = standard.value(forKey: UserSettingKes.activemail) as? String else {
                 return nil
             }
 

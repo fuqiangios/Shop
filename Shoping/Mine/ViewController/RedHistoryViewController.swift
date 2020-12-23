@@ -22,6 +22,7 @@ class RedHistoryViewController: UIViewController {
         tableView.dataSource = self
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.backgroundColor = .white
         loadData()
     }
 
@@ -67,10 +68,5 @@ extension RedHistoryViewController: UITableViewDataSource, UITableViewDelegate {
         cell.youxian.text = "\(item?.endDate ?? "")"
         cell.selectionStyle = .none
         return cell
-    }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 89
-
     }
 }

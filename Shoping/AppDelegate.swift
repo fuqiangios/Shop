@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WXApiDelegate, UNUserNoti
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         UMConfigure.setLogEnabled(true)
-        WXApi.registerApp("wx55d4b9901badc2be", universalLink: "https://")
+        WXApi.registerApp("wx55d4b9901badc2be", universalLink: "https://app.necesstore.com")
         UMConfigure.initWithAppkey("5eba3a36895ccab0640000b8", channel: "AppStore")
 
         UMSocialManager.default()?.setPlaform(.wechatSession, appKey: "wx55d4b9901badc2be", appSecret: "57dcbde37fcc0163b4a46b0fe974c540", redirectURL: "")
@@ -63,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WXApiDelegate, UNUserNoti
         //需要IDFA 功能，定向投放广告功能
                 let advertisingId = ASIdentifierManager.shared().advertisingIdentifier.uuidString
                 JPUSHService.setup(withOption: launchOptions, appKey: "8268f0fe2d6af98639be5baf", channel: "App Store", apsForProduction: false, advertisingIdentifier: nil)
-        NFX.sharedInstance().start()
+//        NFX.sharedInstance().start()
         return true
     }
 
@@ -112,6 +112,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WXApiDelegate, UNUserNoti
 
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) { //可选
         print("did Fail To Register For Remote Notifications With Error: \(error)")
+    }
+
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        if let paste = UIPasteboard.general.string {
+            checkPasteStatus(paste: paste)
+            return
+
+            }
+    }
+
+    func checkPasteStatus(paste: String) {
+        print("-=_=-=-=-+_+-=\(paste)")
+        if UserSetting.default.activeUserToken == nil {
+            return
+        }
+        let pastboard = UIPasteboard.general
+        pastboard.string = ""
+        API.checkInviteGoods(user_token: UserSetting.default.activeUserToken ?? "", buyer_password: paste).request { (result) in
+            switch result{
+            case .success(let data):
+                let invite = InviteGoodsViewController()
+                invite.modalPresentationStyle = .custom
+                invite.data = data
+                invite.toGoodsDetail = { op in
+                 let tabbar =   UIApplication.shared.keyWindow?.rootViewController as! UITabBarController
+                    tabbar.selectedIndex = 0
+                    let detail = GoodsDeatilViewController()
+                    detail.hidesBottomBarWhenPushed = true
+                    detail.product_id = data.data?.id ?? ""
+                    if tabbar.viewControllers?.count ?? 0 >= 1 {
+                        (tabbar.viewControllers![0]as! UINavigationController).viewControllers.last?.navigationController?.pushViewController(detail, animated: true)
+                    }
+                }
+                UIApplication.shared.keyWindow?.rootViewController?.present(invite, animated: false, completion: nil)
+            case .failure(let er):
+                print("0+++++++++\(er)")
+            }
+        }
     }
 
     func onReq(_ req: BaseReq) {
@@ -200,6 +238,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WXApiDelegate, UNUserNoti
                completionHandler(UIBackgroundFetchResult.newData)
 
         }
+
+
 
 
         //系统获取Token

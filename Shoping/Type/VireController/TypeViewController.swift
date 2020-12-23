@@ -18,6 +18,8 @@ class TypeViewController: UIViewController, ZLCollectionViewBaseFlowLayoutDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor.lineColor
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black]
         self.navigationController?.navigationBar.isTranslucent = false
         let itme = UIBarButtonItem.init(title: "", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = itme
@@ -37,6 +39,7 @@ class TypeViewController: UIViewController, ZLCollectionViewBaseFlowLayoutDelega
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.register(UINib(nibName: "TypeTableViewCell", bundle: nil), forCellReuseIdentifier: "type")
+        tableView.backgroundColor = .white
         setCollectionView()
         loadData()
     }
@@ -76,6 +79,8 @@ class TypeViewController: UIViewController, ZLCollectionViewBaseFlowLayoutDelega
         let seachText = UITextField(frame: CGRect(x: 20, y: 10, width: titleView.frame.size.width - 40, height: 40))
         seachText.placeholder = "  搜索产品名称"
         seachText.delegate = self
+        seachText.setValue(UIColor.black, forKeyPath: "placeholderLabel.textColor")
+        seachText.textColor = .black
         seachText.layer.cornerRadius = 20
         seachText.backgroundColor = UIColor.lightColor
         seachText.font = UIFont.PingFangSCLightFont16

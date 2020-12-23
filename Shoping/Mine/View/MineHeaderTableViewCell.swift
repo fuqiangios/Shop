@@ -11,6 +11,7 @@ import UIKit
 class MineHeaderTableViewCell: UITableViewCell {
     @IBOutlet weak var lineBackView: UIView!
 
+    @IBOutlet weak var levelName: UILabel!
     @IBOutlet weak var barCode: UIButton!
     
     @IBOutlet weak var message: UIButton!

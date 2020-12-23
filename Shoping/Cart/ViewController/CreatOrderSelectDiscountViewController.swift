@@ -28,6 +28,7 @@ class CreatOrderSelectDiscountViewController: UIViewController {
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(UINib(nibName: "CreatOrderSelectDiscountTableViewCell", bundle: nil), forCellReuseIdentifier: "CreatOrderSelectDiscountTableViewCell")
+        tableView.backgroundColor = .white
     }
 
     @IBAction func finshSelectAction(_ sender: Any) {

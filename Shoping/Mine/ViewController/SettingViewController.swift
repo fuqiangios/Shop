@@ -13,6 +13,8 @@ class SettingViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var size = 0.0
     var phone = ""
+    var userInfo: MineInfo? = nil
+    var isBind: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,9 +27,10 @@ class SettingViewController: UIViewController {
         tableView.dataSource = self
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableView.automaticDimension
-//        tableView.backgroundColor = UIColor.tableviewBackgroundColor
+        tableView.backgroundColor = .white
         tableView.separatorStyle = .none
         getCache()
+        isBind = (userInfo?.data.wx_unionid?.isEmpty ?? true) ? false:true
     }
 
     func getCache() {
@@ -39,34 +42,37 @@ class SettingViewController: UIViewController {
 }
 extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return 7
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 5 {
+        if indexPath.row == 6 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "LogOutTableViewCell") as! LogOutTableViewCell
             cell.selectionStyle = .none
             return cell
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "SettingTableViewCell") as! SettingTableViewCell
         cell.selectionStyle = .none
-        if indexPath.row == 0 {
+        if indexPath.row == 1 {
             cell.title.text = "消息推送"
             cell.info.text = "去设置"
-        } else if indexPath.row == 3 {
+        } else if indexPath.row == 4 {
             cell.title.text = "清除缓存"
             cell.info.text =  String(format: "%.2fM", size)
-        } else if indexPath.row == 4{
+        } else if indexPath.row == 5{
             cell.title.text = "关于我家用品"
             cell.info.text = ""
-        } else if indexPath.row == 1 {
+        } else if indexPath.row == 2 {
             cell.title.text = "支付密码"
             cell.info.text = ""
-        } else if indexPath.row == 2 {
+        } else if indexPath.row == 3 {
             cell.title.text = "密码修改"
             cell.info.text = ""
+        } else if indexPath.row == 0 {
+            cell.title.text = "绑定微信"
+            cell.info.text = ""
         }
-        if indexPath.row == 3 {
+        if indexPath.row == 4 {
             cell.imgWidth.constant = 0
             cell.img.isHidden = true
             cell.infoRight.constant = 0
@@ -79,7 +85,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
+        if indexPath.row == 1 {
             let urlObj = URL(string:UIApplication.openSettingsURLString)
              if #available(iOS 10.0, *) {
                    UIApplication.shared.open(urlObj! as URL, options: [ : ], completionHandler: { Success in
@@ -87,26 +93,51 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
             })} else {
                    UIApplication.shared.openURL(urlObj!)
              }
-        } else if indexPath.row == 3 {
+        } else if indexPath.row == 4 {
             clearCache {
                 self.getCache()
             }
-        } else if indexPath.row == 4 {
+        } else if indexPath.row == 5 {
             let web = WebViewController()
             web.uri = "https://app.necesstore.com/html/about.html"
             web.title = "关于我们"
             web.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(web, animated: true)
-        } else if indexPath.row == 5 {
+        } else if indexPath.row == 6 {
             UserSetting.default.activeUserToken = nil
             self.navigationController?.popToRootViewController(animated: true)
-        } else if indexPath.row == 1 {
-            let payPassword = PayPasswordViewController()
-            self.navigationController?.pushViewController(payPassword, animated: true)
         } else if indexPath.row == 2 {
+            if UserSetting.default.activeUserPhone != nil {
+                                let payPassword = PayPasswordViewController()
+                self.navigationController?.pushViewController(payPassword, animated: true)
+            } else {
+                let payPassword = MailPayPasswordViewController()
+                self.navigationController?.pushViewController(payPassword, animated: true)
+            }
+        } else if indexPath.row == 3 {
             let pass = SMSVerificationViewController()
             pass.phoneStr = phone
             self.navigationController?.pushViewController(pass, animated: true)
+        } else if indexPath.row == 0 {
+            if (userInfo?.data.wx_unionid?.isEmpty ?? true) && !isBind {
+                UMSocialManager.default()?.getUserInfo(with: .wechatSession, currentViewController: nil, completion: { (result, er) in
+                    if er == nil {
+                         let e = result as! UMSocialUserInfoResponse
+                        API.bindwechat(user_token: UserSetting.default.activeUserToken ?? "", wx_unionid: e.unionId, wx_openid: e.openid, wx_image: e.iconurl, wx_name: e.name, wx_sex: e.gender == "男" ? "2":"1").request { (result) in
+                            switch result{
+                            case .success(let data):
+                                print(data)
+                                self.isBind = true
+                                CLProgressHUD.showSuccess(in: self.view, delegate: self, title: "微信绑定成功", duration: 2)
+                                self.navigationController?.popViewController(animated: true)
+                            case .failure(let er):
+                                print(er)
+                                CLProgressHUD.showError(in: self.view, delegate: self, title: "绑定失败,请重试", duration: 1)
+                            }
+                        }
+                    }
+                })
+            }
         }
     }
     func  floderSizeAtPath(completion:@escaping (( _ fileSize:CGFloat)->Void)){

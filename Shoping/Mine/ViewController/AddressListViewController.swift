@@ -33,6 +33,12 @@ class AddressListViewController: UIViewController {
 
     @objc func addAddress() {
         let add = AddAddressViewController()
+        if up != "10" {
+            add.saveAddressCallBack = { data in
+                self.didSelectAddress?(data.data)
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
         self.navigationController?.pushViewController(add, animated: true)
     }
 

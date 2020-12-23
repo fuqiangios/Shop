@@ -11,3 +11,5 @@
 #import <UMShare/UMShare.h>
 #import <UShareUI/UShareUI.h>
 #import "JPUSHService.h"
+#import "LLGifImageView.h"
+#import "UIView+Animation.h"

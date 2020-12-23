@@ -64,7 +64,70 @@ extension API {
         return [
             "": "",
          ]
+        }
     }
+
+    struct setShping: Post {
+        typealias Node = CartNumChange
+        var path: String = "order/aftersale_send"
+
+        let order_aftersale_id: String
+        let shipping_company: String
+        let shipping_no: String
+        init(order_aftersale_id: String,shipping_company: String,shipping_no: String) {
+            self.order_aftersale_id = order_aftersale_id
+            self.shipping_company = shipping_company
+            self.shipping_no = shipping_no
+        }
+
+    func parameters() -> [String: Any]? {
+        return [
+            "shipping_no": shipping_no,
+            "shipping_company": shipping_company,
+            "order_aftersale_id": order_aftersale_id
+         ]
+        }
+    }
+
+    struct sendAmount: Post {
+        typealias Node = CartNumChange
+        var path: String = "customer/transfer_amount"
+
+        let amount: String
+        let to_user: String
+        let pay_password: String
+        init(amount: String,to_user: String,pay_password: String) {
+            self.amount = amount
+            self.to_user = to_user
+            self.pay_password = pay_password
+        }
+
+    func parameters() -> [String: Any]? {
+        return [
+            "amount": amount,
+            "to_user": to_user,
+            "pay_password": pay_password
+         ]
+        }
+    }
+
+    struct mailPayPassword: Post {
+        typealias Node = CartNumChange
+        var path: String = "customer/email_pay_password"
+
+        let email: String
+        let pay_password: String
+        init(email: String,pay_password: String) {
+            self.email = email
+            self.pay_password = pay_password
+        }
+
+    func parameters() -> [String: Any]? {
+        return [
+            "email": email,
+            "pay_password": pay_password
+         ]
+        }
     }
 
     struct getLogis: Post {
@@ -117,6 +180,38 @@ extension API {
         }
     }
 
+    struct bindwechat: Post {
+        typealias Node = CartNumChange
+        var path: String = "customer/binding_wx"
+
+
+        let user_token: String
+        let wx_unionid: String
+        let wx_openid: String
+        let wx_image: String
+        let wx_name: String
+        let wx_sex: String
+        init(user_token: String,wx_unionid: String,wx_openid: String,wx_image: String,wx_name: String,wx_sex: String) {
+            self.user_token = user_token
+            self.wx_unionid = wx_unionid
+            self.wx_openid = wx_openid
+            self.wx_image = wx_image
+            self.wx_name = wx_name
+            self.wx_sex = wx_sex
+        }
+
+        func parameters() -> [String: Any]? {
+            return [
+                "user_token": user_token,
+                "wx_unionid": wx_unionid,
+                "wx_openid": wx_openid,
+                "wx_image": wx_image,
+                "wx_name": wx_name,
+                "wx_sex": wx_sex
+             ]
+        }
+    }
+
     struct verfiPhoneCode: Post {
         typealias Node = CartNumChange
         var path: String = "customer/verify_telephone"
@@ -142,15 +237,18 @@ extension API {
 
         let code: String
         let telephone: String
-        init(telephone: String, code: String) {
+        let user_token: String?
+        init(telephone: String, code: String, user_token: String? = "") {
             self.telephone = telephone
             self.code = code
+            self.user_token = user_token
         }
 
         func parameters() -> [String: Any]? {
             return [
                 "telephone": telephone,
-                "code": code
+                "code": code,
+                "user_token": user_token ?? ""
              ]
         }
     }
@@ -795,7 +893,11 @@ extension API {
         let wx_openid: String?
         let name: String?
         let image: String?
-        init(telephone: String?, login_type: String, email: String?, password: String?, wx_openid: String?, name: String?, image: String?) {
+        let wx_unionid: String?
+        let wx_image: String?
+        let wx_name: String?
+        let wx_sex: String?
+        init(telephone: String?, login_type: String, email: String?, password: String?, wx_openid: String?, name: String?, image: String?,wx_unionid: String?,wx_image: String?,wx_name: String?,wx_sex: String?) {
             self.telephone = telephone
             self.login_type = login_type
             self.email = email
@@ -803,6 +905,10 @@ extension API {
             self.wx_openid = wx_openid
             self.name = name
             self.image = image
+            self.wx_unionid = wx_unionid
+            self.wx_image = wx_image
+            self.wx_name = wx_name
+            self.wx_sex = wx_sex
         }
 
         func parameters() -> [String: Any]? {
@@ -813,7 +919,12 @@ extension API {
                 "password": password ?? "",
                 "code": wx_openid ?? "",
                 "name": name ?? "",
-                "image": image ?? ""
+                "image": image ?? "",
+                "wx_unionid": wx_unionid ?? "",
+                "wx_image": wx_image ?? "",
+                "wx_name": wx_name ?? "",
+                "wx_sex": wx_sex ?? "",
+                "wx_openid": wx_openid ?? ""
              ]
         }
     }
@@ -839,9 +950,9 @@ struct UserToken: Codable {
 }
 
 struct TokenDataClass: Codable {
-    let user_token, id: String?
+    let user_token, id, telephone: String?
     enum CodingKeys: String, CodingKey {
-        case user_token, id
+        case user_token, id,telephone
     }
 }
 
@@ -1167,9 +1278,11 @@ struct MineInfoDataClass: Codable {
     let totalCost, created, modified: String
     let couponCount: Int
     let had_take_red: String
+    let level_name: String
+    let wx_unionid : String?
 
     enum CodingKeys: String, CodingKey {
-        case id, name, image
+        case id, name, image,wx_unionid
         case trueName = "true_name"
         case telephone, email
         case wxOpenid = "wx_openid"
@@ -1186,6 +1299,7 @@ struct MineInfoDataClass: Codable {
         case created, modified
         case couponCount = "coupon_count"
         case had_take_red
+        case level_name
     }
 }
 

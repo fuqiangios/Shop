@@ -81,6 +81,7 @@ class OrderViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
+        tableView.backgroundColor = .white
 //        setShadow(view: topBgView, sColor: UIColor.init(white: 0.8, alpha: 1), offset: CGSize(width: 0, height: 0), opacity: 1, radius: 5)
     }
 
@@ -171,6 +172,7 @@ extension OrderViewController:UITableViewDelegate,UITableViewDataSource {
         cell.orderId.text = "订单号: \(item?.orderCode ?? "")"
         cell.num.text = "共\(item?.products.count ?? 0)种"
         cell.status.text = item?.statusName
+        cell.totalPrice.text = "合计:￥\(item?.price ?? "0.00")"
         let co = UIColor(red: 241.0/255.0, green: 241.0/255.0, blue: 241.0/255.0, alpha: 1)
         if item?.statusName == "交易成功" {
             cell.status.textColor = UIColor(red: 164.0/255.0, green: 214.0/255.0, blue: 78.0/255.0, alpha: 1)
@@ -259,6 +261,8 @@ extension OrderViewController:UITableViewDelegate,UITableViewDataSource {
         } else if btn.titleLabel?.text == "评论" {
             let addeva = EvaluateManagerViewController()
             self.navigationController?.pushViewController(addeva, animated: true)
+        } else if btn.titleLabel?.text == "取消订单" {
+            updateOrderStatus(id: data?.data[tag].id ?? "", type: "cancel")
         }
     }
 

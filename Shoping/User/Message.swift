@@ -43,6 +43,36 @@ extension API {
         }
     }
 
+    struct getExpiainn: Post {
+        typealias Node = Expiain
+        var path: String = "front/disclaimer"
+        let code: String
+        init(code: String) {
+            self.code = code
+        }
+
+        func parameters() -> [String: Any]? {
+            return [
+                "code": code,
+             ]
+        }
+    }
+
+    struct getContact: Post {
+        typealias Node = Contact
+        var path: String = "customer/contact"
+
+        init() {
+            
+        }
+
+        func parameters() -> [String: Any]? {
+            return [
+                "":""
+             ]
+        }
+    }
+
     struct messageList: Post {
         typealias Node = Message
         var path: String = "customer/message"
@@ -113,5 +143,30 @@ struct ShareDataClass: Codable {
         case signUpGift = "sign_up_gift"
         case inviteCode = "invite_code"
     }
+}
+
+// MARK: - Share
+struct Expiain: Codable {
+    let result: Bool
+    let message: String
+    let status: Int
+    let data: ExpiainData
+}
+struct ExpiainData: Codable {
+    let content: String
+}
+
+struct Contact: Codable {
+    let result: Bool
+    let message: String
+    let status: Int
+    let data: ContactData
+}
+struct ContactData: Codable {
+    let contact: ContactInfo
+}
+struct ContactInfo: Codable {
+    let telephone: String
+    let wx: String
 }
 

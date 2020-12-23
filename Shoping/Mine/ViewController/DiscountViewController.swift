@@ -28,6 +28,7 @@ class DiscountViewController: UIViewController {
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
+        tableView.backgroundColor = .white
         loadData()
     }
 

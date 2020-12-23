@@ -206,6 +206,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/TableKit/TableKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/TagListView/TagListView.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/WebViewJavascriptBridge/WebViewJavascriptBridge.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ZLCollectionViewFlowLayout/ZLCollectionViewFlowLayout.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/netfox/netfox.framework"
 fi
@@ -219,6 +220,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/TableKit/TableKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/TagListView/TagListView.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/WebViewJavascriptBridge/WebViewJavascriptBridge.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ZLCollectionViewFlowLayout/ZLCollectionViewFlowLayout.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/netfox/netfox.framework"
 fi

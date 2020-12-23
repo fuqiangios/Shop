@@ -12,6 +12,7 @@ class AddAddressViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var addressInfo: AddressDatum? = AddressDatum(id: nil, customerID: nil, name: nil, telephone: nil, address: nil, detail: nil, isDefault: "0", modified: nil, created: nil)
     var edit = 0
+    var saveAddressCallBack:((AddressSave)->Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,8 +38,9 @@ class AddAddressViewController: UIViewController {
         if let info = addressInfo {
             API.addressSave(info: info).request { (result) in
                 switch result {
-                case .success:
+                case .success(let data):
                     self.navigationController?.popViewController(animated: true)
+                    self.saveAddressCallBack?(data)
                 case .failure:
                     print("fail")
                 }
@@ -96,6 +98,8 @@ extension AddAddressViewController: UITableViewDelegate, UITableViewDataSource, 
         cell.selectionStyle = .none
             cell.inputField.tag = indexPath.row
             cell.inputField.delegate = self
+        cell.inputField.setValue(UIColor.black, forKeyPath: "placeholderLabel.textColor")
+        cell.inputField.textColor = .black
             if indexPath.row == 0 {
                 cell.name.text = "姓名"
                 cell.inputField.placeholder = "请填写收货人姓名"
@@ -124,6 +128,8 @@ extension AddAddressViewController: UITableViewDelegate, UITableViewDataSource, 
                 cell.inputField.isEnabled = true
                 cell.inputField.text = addressInfo?.detail ?? ""
             }
+        cell.inputField.setValue(UIColor.black, forKeyPath: "placeholderLabel.textColor")
+        cell.inputField.textColor = .black
         return cell
     }
 

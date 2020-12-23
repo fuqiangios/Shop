@@ -17,6 +17,7 @@ class MinToolTableViewCell: UITableViewCell {
     @IBOutlet weak var btn2: UIButton!
     @IBOutlet weak var backGroundView: UIView!
     
+    @IBOutlet weak var btn6: UIButton!
     @IBOutlet weak var btn5: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()

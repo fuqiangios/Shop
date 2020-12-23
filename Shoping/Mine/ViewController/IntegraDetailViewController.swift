@@ -27,8 +27,8 @@ class IntegraDetailViewController: UIViewController {
     @IBOutlet weak var linne: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        start = dateConvertString(date: startOfCurrentMonth())
-        end = dateConvertString(date: endOfCurrentMonth())
+        start = ""
+        end = ""
         bbtn.layer.cornerRadius = 19
         bbtn.layer.masksToBounds = true
         title = "积分明细"

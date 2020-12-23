@@ -109,7 +109,7 @@ extension BaclGoodsViewController: UITableViewDataSource,UITableViewDelegate {
 //            cell.price.text = "￥\(item?.price ?? "0")"
             cell.info.text = "申请数量：1"
             cell.orderId.text = "服务单号：\(item?.orderCode ?? "")"
-            cell.type.text = "维修"
+            cell.type.text = item?.aftersale_type_name ?? ""
 
             cell.status.text = item?.statusName ?? ""
 //            cell.num.text = "X\(item?.quantity ?? "0")"
@@ -124,6 +124,7 @@ extension BaclGoodsViewController: UITableViewDataSource,UITableViewDelegate {
         cell.name.text = item?.name ?? ""
         cell.price.text = "￥\(item?.price ?? "0")"
         cell.option.text = item?.optionUnionName ?? ""
+        cell.orderNumer.text = "订单号: \(item?.orderCode ?? "")"
         cell.bbtn.tag = indexPath.row + 100
         cell.bbtn.addTarget(self, action: #selector(toAddEva(btn:)), for: .touchUpInside)
 //        cell.num.text = "X\(item?.quantity ?? "0")"

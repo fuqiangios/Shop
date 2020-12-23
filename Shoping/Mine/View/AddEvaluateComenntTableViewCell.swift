@@ -39,6 +39,7 @@ class AddEvaluateComenntTableViewCell: UITableViewCell {
         let plac = UILabel(frame: CGRect(x: 10, y: 10, width: 200, height: 30))
         plac.text = text
         plac.textColor = .lightGray
+        plac.textColor = .black
         textInput.addSubview(plac)
         textInput.setValue(plac, forKey: "_placeholderLabel")
         let layout = ZLCollectionViewVerticalLayout()

@@ -32,6 +32,7 @@ class AddBackGoodsViewController: UIViewController {
             switch result {
             case .success(let data):
                 self.data = data
+                self.addressInfo = AddressDatum(id: data.data.order.address_id, customerID: data.data.order.customerID, name: data.data.order.shippingName, telephone: data.data.order.shippingTelephone, address: data.data.order.shippingAddress, detail: nil, isDefault: nil, modified: nil, created: nil)
                 self.tableView.reloadData()
             case .failure:
                 print("error")
@@ -118,7 +119,9 @@ extension AddBackGoodsViewController: UITableViewDelegate, UITableViewDataSource
             let cell = tableView.dequeueReusableCell(withIdentifier: "BaclAddGoodsTableViewCell") as! BaclAddGoodsTableViewCell
                 cell.selectionStyle = .none
                 let item = data?.data.orderProduct
-                cell.img.af_setImage(withURL: URL(string: item!.image)!)
+                if !(item?.image.isEmpty ?? true) {
+                    cell.img.af_setImage(withURL: URL(string: item!.image)!)
+                }
                 cell.name.text = item?.name ?? ""
                 cell.price.text = "￥\(item?.price ?? "0")"
 //                cell.info.text = item?.optionUnionName ?? ""

@@ -11,6 +11,7 @@ import UIKit
 class UserVipTableViewCell: UITableViewCell {
     @IBOutlet weak var name: UILabel!
 
+    @IBOutlet weak var num: UILabel!
     @IBOutlet weak var UserView: UIView!
     @IBOutlet weak var btn: UIButton!
     @IBOutlet weak var yue: UILabel!
@@ -20,9 +21,11 @@ class UserVipTableViewCell: UITableViewCell {
     @IBOutlet weak var fensi: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
+        num.layer.cornerRadius = 10
+        num.layer.masksToBounds = true
         UserView.layer.cornerRadius = 5
         UserView.layer.borderWidth = 1
-        UserView.layer.borderColor = UIColor.groupTableViewBackground.cgColor
+        UserView.layer.borderColor = UIColor.lineColor.cgColor
         UserView.layer.masksToBounds = true
     }
 

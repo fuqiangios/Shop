@@ -172,11 +172,20 @@ class SelectTypeViewController: UIViewController {
             return
         }
         for item in data?.data.union ?? [] {
+            if (data?.data.productOptionGroup ?? []).count == 1 {
+                if item.productUnion == "\(topTagSelectIndex ?? "")" {
+                    if Int(item.stock) ?? 0 <= 0 {
+                        CLProgressHUD.showError(in: view, delegate: self, title: "库存不足", duration: 1)
+                        return
+                    }
+                }
+            }else{
             if item.productUnion == "\(topTagSelectIndex ?? ""):\(bottomTagSelectIndex ?? "")" {
                 if Int(item.stock) ?? 0 <= 0 {
                     CLProgressHUD.showError(in: view, delegate: self, title: "库存不足", duration: 1)
                     return
                 }
+            }
             }
         }
         var tr = ""
@@ -242,11 +251,20 @@ class SelectTypeViewController: UIViewController {
             return
         }
         for item in data?.data.union ?? [] {
+            if (data?.data.productOptionGroup ?? []).count == 1 {
+                if item.productUnion == "\(topTagSelectIndex ?? "")" {
+                    if Int(item.stock) ?? 0 <= 0 {
+                        CLProgressHUD.showError(in: view, delegate: self, title: "库存不足", duration: 1)
+                        return
+                    }
+                }
+            }else{
             if item.productUnion == "\(topTagSelectIndex ?? ""):\(bottomTagSelectIndex ?? "")" {
                 if Int(item.stock) ?? 0 <= 0 {
                     CLProgressHUD.showError(in: view, delegate: self, title: "库存不足", duration: 1)
                     return
                 }
+            }
             }
         }
         var tr = ""
@@ -274,6 +292,7 @@ extension SelectTypeViewController: TagListViewDelegate{
                 for item in data?.data.getProductOptionGroup()[0].productOption ?? [] {
                     if item.name == title {
                         topTagSelectIndex = item.id
+                        print("=-=-\(data?.data)")
                     }
                 }
             }
@@ -283,6 +302,7 @@ extension SelectTypeViewController: TagListViewDelegate{
                 for item in data?.data.getProductOptionGroup()[1].productOption ?? [] {
                     if item.name == title {
                         bottomTagSelectIndex = item.id
+                        print("=-=-=====\(item)")
                     }
                 }
             }
@@ -308,11 +328,28 @@ extension SelectTypeViewController: TagListViewDelegate{
         if data?.data.union.count == 0 {
             price.text = "￥\(data?.data.product.price ?? "")"
             detail.text = "重量:\(data?.data.product.weight ?? "0") 商品编号:\(data?.data.product.code ?? "")"
+            if Int(data?.data.product.stock ?? "0") ?? 0 <= 0 {
+                addCardBtn.backgroundColor = UIColor.gray
+                bugBtn.backgroundColor = UIColor.gray
+            }else{
+                addCardBtn.backgroundColor = addCardBtn.tintColor
+                bugBtn.backgroundColor = bugBtn.tintColor
+            }
+            return
         }
         for item in data?.data.union ?? []{
+            print("--+++++++\(topTagSelectIndex),\(item.productUnion)")
             if item.productUnion == "\(topTagSelectIndex ?? ""):\(bottomTagSelectIndex ?? "")" || item.productUnion == "\(topTagSelectIndex ?? "")" {
+                print("]]]]]]]]]\(item.stock)")
                 price.text = "￥\(item.price)"
                 detail.text = "重量:\(item.weight) 商品编号:\(item.barCode)"
+                if Int(item.stock ) ?? 0 <= 0 {
+                    addCardBtn.backgroundColor = UIColor.gray
+                    bugBtn.backgroundColor = UIColor.gray
+                }else{
+                    addCardBtn.backgroundColor = addCardBtn.tintColor
+                    bugBtn.backgroundColor = bugBtn.tintColor
+                }
             }
         }
     }

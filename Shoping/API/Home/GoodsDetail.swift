@@ -136,7 +136,6 @@ struct GoodsDataClass: Codable {
         } else {
             return productOptionGroup
         }
-
     }
 }
 

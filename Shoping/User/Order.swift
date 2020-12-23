@@ -205,12 +205,13 @@ struct OrderProduct: Codable {
     let productID, name: String
     let image: String
     let price, quantity, optionUnionName, total: String
-
+    let aftersale_flag,aftersale_id,order_product_id: String?
     enum CodingKeys: String, CodingKey {
         case productID = "product_id"
-        case name, image, price, quantity
+        case name, image, price, quantity, aftersale_flag
         case optionUnionName = "option_union_name"
-        case total
+        case total,order_product_id
+        case aftersale_id = "order_aftersale_id"
     }
 }
 
@@ -237,6 +238,7 @@ struct OrderDetailDataClass: Codable {
     let created_time: String
     let pay_time: String
     let shipping_time: String
+    let confirm_time: String
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -265,7 +267,7 @@ struct OrderDetailDataClass: Codable {
         case pluginPrice = "plugin_price"
         case created, modified
         case statusName = "status_name"
-        case products, created_time, pay_time, shipping_time
+        case products, created_time, pay_time, shipping_time,confirm_time
     }
 }
 
@@ -308,12 +310,13 @@ struct AftersaleDatum: Codable {
     let price, quantity, optionUnionName, total: String
     let orderCode, orderStatus, statusName, created: String
     let aftersale_id: String?
+    let aftersale_type_name: String?
     
     enum CodingKeys: String, CodingKey {
         case orderProductID = "order_product_id"
         case name, image, price, quantity
         case optionUnionName = "option_union_name"
-        case total
+        case total,aftersale_type_name
         case aftersale_id
         case orderCode = "order_code"
         case orderStatus = "order_status"
@@ -335,13 +338,74 @@ struct AftersaleShowDataClass: Codable {
     let reason: [Reason]?
     let orderProduct: AftersaleShowOrderProduct?
     let orderAftersale: OrderAftersale?
+    let order: AfterSaleOrder
 //    let orderAftersaleImage: [String]?
 
     enum CodingKeys: String, CodingKey {
-        case reason
+        case reason,order
         case orderProduct = "order_product"
         case orderAftersale = "order_aftersale"
 //        case orderAftersaleImage = "order_aftersale_image"
+    }
+}
+
+struct AfterSaleOrder: Codable {
+    let id, orderCode, orderStatus, customerID: String
+    let paymentMethod, paymentPfn, price, total: String
+    let weight, redPacket, orderType, selfStoreID: String
+    let storeID, shippingName, shippingTelephone, shippingAddress: String
+    let shippingPrice, shippingCompany, shippingID, shippingNo: String
+    let shippingCode, customerCouponID, couponContent, couponPrice: String
+    let deleteFlag, amountPrice, pluginPrice, refundPrice: String
+    let refundRedPacket, rrpAmountPrice, rrpFundPrice, invoiceID: String
+    let invoiceType, invoiceHeadType, invoiceName, invoiceTelephone: String
+    let invoiceEmail, invoiceTaxNum, outTradeNo, remarks: String
+    let rrpOrderID, rrpOrderType, inviteID, created: String
+    let modified,address_id: String
+
+    enum CodingKeys: String, CodingKey {
+        case id,address_id
+        case orderCode = "order_code"
+        case orderStatus = "order_status"
+        case customerID = "customer_id"
+        case paymentMethod = "payment_method"
+        case paymentPfn = "payment_pfn"
+        case price, total, weight
+        case redPacket = "red_packet"
+        case orderType = "order_type"
+        case selfStoreID = "self_store_id"
+        case storeID = "store_id"
+        case shippingName = "shipping_name"
+        case shippingTelephone = "shipping_telephone"
+        case shippingAddress = "shipping_address"
+        case shippingPrice = "shipping_price"
+        case shippingCompany = "shipping_company"
+        case shippingID = "shipping_id"
+        case shippingNo = "shipping_no"
+        case shippingCode = "shipping_code"
+        case customerCouponID = "customer_coupon_id"
+        case couponContent = "coupon_content"
+        case couponPrice = "coupon_price"
+        case deleteFlag = "delete_flag"
+        case amountPrice = "amount_price"
+        case pluginPrice = "plugin_price"
+        case refundPrice = "refund_price"
+        case refundRedPacket = "refund_red_packet"
+        case rrpAmountPrice = "rrp_amount_price"
+        case rrpFundPrice = "rrp_fund_price"
+        case invoiceID = "invoice_id"
+        case invoiceType = "invoice_type"
+        case invoiceHeadType = "invoice_head_type"
+        case invoiceName = "invoice_name"
+        case invoiceTelephone = "invoice_telephone"
+        case invoiceEmail = "invoice_email"
+        case invoiceTaxNum = "invoice_tax_num"
+        case outTradeNo = "out_trade_no"
+        case remarks
+        case rrpOrderID = "rrp_order_id"
+        case rrpOrderType = "rrp_order_type"
+        case inviteID = "invite_id"
+        case created, modified
     }
 }
 

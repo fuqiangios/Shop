@@ -118,6 +118,7 @@ struct VIPDataDataClass: Codable {
     let member, shareholder: [Member]
     let crowdfunding: [Crowdfunding]
     let project: [Project]
+    let old_project: [Project]
 }
 
 struct VIPDataDetail: Codable {

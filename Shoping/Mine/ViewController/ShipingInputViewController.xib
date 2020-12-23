@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShipingInputViewController" customModule="我家用品" customModuleProvider="target">
+            <connections>
+                <outlet property="name" destination="jJT-FG-ONQ" id="AB6-27-ROA"/>
+                <outlet property="number" destination="hRR-UA-fRs" id="JXA-Hm-Xhd"/>
+                <outlet property="submitBtn" destination="0rr-8i-eEE" id="IYd-Wu-05X"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="taY-Va-5Kb">
+                    <rect key="frame" x="43" y="242" width="327" height="295"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="填写快递信息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dpI-C5-9ZZ">
+                            <rect key="frame" x="112" y="56" width="104" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="3kV-ez-nch"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EVS-xw-wfi">
+                            <rect key="frame" x="272" y="21" width="28" height="28"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="28" id="rd1-x8-Lks"/>
+                                <constraint firstAttribute="height" constant="28" id="zfX-FT-IrJ"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="guanbi1"/>
+                            <connections>
+                                <action selector="close:" destination="-1" eventType="touchUpInside" id="9LS-yK-pZR"/>
+                            </connections>
+                        </button>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="选择快递" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jJT-FG-ONQ">
+                            <rect key="frame" x="28" y="101" width="272" height="34"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="34" id="81F-aS-XZt"/>
+                            </constraints>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="填写快递单号" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hRR-UA-fRs">
+                            <rect key="frame" x="28" y="162" width="272" height="34"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="34" id="RCB-7Y-wPR"/>
+                            </constraints>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0rr-8i-eEE">
+                            <rect key="frame" x="28" y="221" width="272" height="48"/>
+                            <color key="backgroundColor" red="0.88491803410000003" green="0.3458198905" blue="0.305765599" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="48" id="zEw-2d-AiV"/>
+                            </constraints>
+                            <state key="normal" title="确定"/>
+                            <connections>
+                                <action selector="submit:" destination="-1" eventType="touchUpInside" id="lSg-eB-bOq"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="0rr-8i-eEE" secondAttribute="bottom" constant="26" id="1oQ-h5-y6W"/>
+                        <constraint firstItem="hRR-UA-fRs" firstAttribute="top" secondItem="jJT-FG-ONQ" secondAttribute="bottom" constant="27" id="6OW-sZ-lUC"/>
+                        <constraint firstItem="EVS-xw-wfi" firstAttribute="top" secondItem="taY-Va-5Kb" secondAttribute="top" constant="21" id="9pz-YW-Ett"/>
+                        <constraint firstAttribute="trailing" secondItem="EVS-xw-wfi" secondAttribute="trailing" constant="27" id="C3x-qq-QHs"/>
+                        <constraint firstItem="0rr-8i-eEE" firstAttribute="leading" secondItem="taY-Va-5Kb" secondAttribute="leading" constant="28" id="FTj-eb-5V3"/>
+                        <constraint firstItem="hRR-UA-fRs" firstAttribute="top" secondItem="jJT-FG-ONQ" secondAttribute="bottom" constant="27" id="M8K-vu-F7D"/>
+                        <constraint firstAttribute="trailing" secondItem="0rr-8i-eEE" secondAttribute="trailing" constant="27" id="O4X-yh-uCA"/>
+                        <constraint firstItem="jJT-FG-ONQ" firstAttribute="top" secondItem="dpI-C5-9ZZ" secondAttribute="bottom" constant="24" id="Rbv-ZT-WrY"/>
+                        <constraint firstItem="dpI-C5-9ZZ" firstAttribute="centerX" secondItem="jJT-FG-ONQ" secondAttribute="centerX" id="UQq-nt-hyN"/>
+                        <constraint firstItem="0rr-8i-eEE" firstAttribute="top" secondItem="hRR-UA-fRs" secondAttribute="bottom" constant="25" id="ZcD-Pg-XCy"/>
+                        <constraint firstAttribute="trailing" secondItem="jJT-FG-ONQ" secondAttribute="trailing" constant="27" id="jqR-be-6qc"/>
+                        <constraint firstAttribute="trailing" secondItem="hRR-UA-fRs" secondAttribute="trailing" constant="27" id="lsH-Qe-sSb"/>
+                        <constraint firstItem="dpI-C5-9ZZ" firstAttribute="top" secondItem="taY-Va-5Kb" secondAttribute="top" constant="56" id="ocB-sC-0RH"/>
+                        <constraint firstItem="jJT-FG-ONQ" firstAttribute="leading" secondItem="taY-Va-5Kb" secondAttribute="leading" constant="28" id="ohc-Ip-Nwv"/>
+                        <constraint firstItem="hRR-UA-fRs" firstAttribute="leading" secondItem="taY-Va-5Kb" secondAttribute="leading" constant="28" id="wLD-2M-Vma"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.69499143835616439" colorSpace="custom" customColorSpace="displayP3"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="taY-Va-5Kb" secondAttribute="trailing" constant="44" id="6f2-8U-cNR"/>
+                <constraint firstItem="taY-Va-5Kb" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="198" id="J59-v4-2dJ"/>
+                <constraint firstItem="taY-Va-5Kb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="43" id="wz3-a2-kM6"/>
+            </constraints>
+            <point key="canvasLocation" x="131.8840579710145" y="107.8125"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="guanbi1" width="14.5" height="14.5"/>
+    </resources>
+</document>

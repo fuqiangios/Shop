@@ -22,6 +22,9 @@ class WebViewController: UIViewController {
 //        wk.loadRequest(URLRequest(url: URL(string: uri)!))
     }
     override func viewDidAppear(_ animated: Bool) {
+        if uri.isEmpty {
+            return
+        }
         let urlRequest = URLRequest(url: URL(string: uri)!)
                //加载请求
         wk = WKWebView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))

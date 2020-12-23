@@ -11,6 +11,7 @@ import UIKit
 class MineOrderTableViewCell: UITableViewCell {
     @IBOutlet weak var payBtn: UIButton!
 
+    @IBOutlet weak var allBtn: UIButton!
     @IBOutlet weak var returnBtn: UIButton!
     @IBOutlet weak var evaluateBtn: UIButton!
     @IBOutlet weak var receivingBtn: UIButton!

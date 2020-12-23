@@ -16,6 +16,9 @@ class PayPasswordViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var surePassword: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
+        password.setValue(UIColor.black, forKeyPath: "placeholderLabel.textColor")
+        surePassword.setValue(UIColor.black, forKeyPath: "placeholderLabel.textColor")
+        code.setValue(UIColor.black, forKeyPath: "placeholderLabel.textColor")
         title = "设置支付密码"
         submit.layer.cornerRadius = 10
         submit.layer.masksToBounds = true
@@ -23,6 +26,10 @@ class PayPasswordViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func getCode(_ sender: UIButton) {
+        if password.text?.count != 6 {
+            CLProgressHUD.showSuccess(in: self.view, delegate: self, title: "请输入6位数字密码", duration: 1)
+            return
+        }
         let phoneStr = UserSetting.default.activeUserPhone ?? ""
         if phoneStr.count == 11 {
                   API.getCode(telephone: phoneStr).request { (result) in

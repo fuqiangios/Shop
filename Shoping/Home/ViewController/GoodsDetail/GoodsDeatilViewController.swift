@@ -41,6 +41,7 @@ class GoodsDeatilViewController: UIViewController {
     var relationHeight = 0
 
     override func viewDidLoad() {
+        view.backgroundColor = .white
         topView.backgroundColor = .clear
         back.addTarget(self, action: #selector(backAction), for: .touchUpInside)
         back.layer.cornerRadius = 15
@@ -114,13 +115,13 @@ class GoodsDeatilViewController: UIViewController {
         img1 = UIImageView(frame: CGRect(x: 10, y: 10, width: 80, height: 80))
         fsPagerView.addSubview(img1)
 
-        img2 = UIImageView(frame: CGRect(x: hi - 100, y: hi - 150, width: 90, height: 90))
+        img2 = UIImageView(frame: CGRect(x: hi - 100, y: hi - 180, width: 90, height: 90))
         fsPagerView.addSubview(img2)
 
         img3 = UIImageView(frame: CGRect(x: 0, y: view.frame.size.width - 70, width: hi, height: 70))
         fsPagerView.addSubview(img3)
         fsPagerView.addSubview(pageLabel)
-
+        tableView.backgroundColor = .white
         tableView.tableHeaderView = fsPagerView
         NotificationCenter.default.addObserver(self, selector: #selector(notificationUpdate(nofi:)), name: NSNotification.Name(rawValue:"updateGoodsInfo"), object: nil)
     }
@@ -223,13 +224,31 @@ class GoodsDeatilViewController: UIViewController {
 
     @IBAction func shareAction(_ sender: Any) {
         UMSocialUIManager.setPreDefinePlatforms([NSNumber(integerLiteral:UMSocialPlatformType.wechatSession.rawValue),NSNumber(integerLiteral:UMSocialPlatformType.wechatTimeLine.rawValue)])
+        UMSocialUIManager.addCustomPlatformWithoutFilted(UMSocialPlatformType(rawValue: UMSocialPlatformType.userDefine_Begin.rawValue+2)!, withPlatformIcon: UIImage(named: "qrcode"), withPlatformName: "图片分享")
         UMSocialShareUIConfig.shareInstance()?.sharePageGroupViewConfig.sharePageGroupViewPostionType = .bottom
         UMSocialShareUIConfig.shareInstance()?.sharePageScrollViewConfig.shareScrollViewPageItemStyleType = .iconAndBGRoundAndSuperRadius
         UMSocialUIManager.showShareMenuViewInWindow { (type, info) in
+            if (type == UMSocialPlatformType(rawValue: UMSocialPlatformType.userDefine_Begin.rawValue+2)) {
+                API.shareGoods(product_id: self.product_id, invite_code: self.data?.data.invite_code ?? "").request { (result) in
+                    switch result{
+                    case .success(let data):
+                        print(data)
+                        let shareVc = ShareGoodsViewController()
+                        shareVc.data = data
+                        shareVc.modalPresentationStyle = .custom
+                        shareVc.qrcodeUri = "\(urlheadr)/html/share.html?id=\(self.product_id )&invite_code=\(self.data?.data.invite_code ?? "")"
+                        self.present(shareVc, animated: false, completion: nil)
+                    case .failure(let er):
+                        print(er)
+                    }
+                }
+                return
+            }
             let t = type as! UMSocialPlatformType
+
             let m = UMSocialMessageObject()
-                    let s = UMShareWebpageObject.shareObject(withTitle: "注册我家用品APP，免费红包送到手软~", descr: "", thumImage: UIImage(named: "iPhoneApp_60pt"))
-            s?.webpageUrl = "http://app.necesstore.com/html/share.html?id=100&code=\(self.data?.data.invite_code ?? "")"
+                    let s = UMShareWebpageObject.shareObject(withTitle: "时时分享有收益，天天购物有大奖，月月消费送医保，晚年免费来养老~", descr: "注册我家用品APP，免费红包送到手软~", thumImage: UIImage(named: "27211590459319_.pic_hd"))
+            s?.webpageUrl = "\(urlheadr)/html/share.html?id=\(self.product_id )&invite_code=\(self.data?.data.invite_code ?? "")"
                     m.shareObject = s
                     UMSocialManager.default()?.share(to: t, messageObject: m, currentViewController: self, completion: { (le, er) in
                         print(er)
@@ -453,7 +472,7 @@ extension GoodsDeatilViewController: UITableViewDelegate,UITableViewDataSource {
         if section == 0 {
             return 0
         } else if section == 2 {
-            return 40
+            return 15
         } else if section == 3 {
             return 1
         }
@@ -464,8 +483,8 @@ extension GoodsDeatilViewController: UITableViewDelegate,UITableViewDataSource {
         let view = UIView()
         view.backgroundColor = UIColor.tableviewBackgroundColor
         if section == 2 {
-            let lab = UILabel(frame: CGRect(x: 16, y: 0, width: 300, height: 40))
-            lab.text = "假一罚十·极速退款·退货运费险"
+            let lab = UILabel(frame: CGRect(x: 16, y: 0, width: 300, height: 15))
+            lab.text = ""
             lab.font = UIFont.PingFangSCLightFont15
             lab.textColor = UIColor.lightGray
             view.addSubview(lab)

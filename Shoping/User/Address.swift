@@ -23,6 +23,7 @@ extension API {
     }
 
     struct addressSave: Post {
+
         typealias Node = AddressSave
         var path: String = "customer/address_edit"
 
@@ -71,6 +72,7 @@ struct AddressSave: Codable {
     let result: Bool
     let message: String
     let status: Int
+    let data: AddressDatum
 }
 
 // MARK: - Datum

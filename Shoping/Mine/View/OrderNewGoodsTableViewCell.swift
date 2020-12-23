@@ -11,6 +11,7 @@ import UIKit
 class OrderNewGoodsTableViewCell: UITableViewCell {
     @IBOutlet weak var orderId: UILabel!
     
+    @IBOutlet weak var totalPrice: UILabel!
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var img0: UIImageView!
     @IBOutlet weak var img1: UIImageView!
@@ -54,7 +55,13 @@ class OrderNewGoodsTableViewCell: UITableViewCell {
 //            rightBtn.setTitleColor(price.tintColor, for: .normal)
         case 2,3:
             leftBtn.isHidden = true
-            rightBtn.isHidden = true
+            rightBtn.isHidden = false
+            rightBtn.isHidden = false
+            rightBtn.layer.borderColor = rightBtn.tintColor.cgColor
+            rightBtn.layer.borderWidth = 1
+            rightBtn.layer.cornerRadius = 5
+            rightBtn.layer.masksToBounds = true
+            rightBtn.setTitle("取消订单", for: .normal)
         case 4:
             leftBtn.isHidden = false
             leftBtn.layer.borderColor = rightBtn.tintColor.cgColor
@@ -77,7 +84,7 @@ class OrderNewGoodsTableViewCell: UITableViewCell {
             leftBtn.layer.cornerRadius = 5
             leftBtn.layer.masksToBounds = true
             leftBtn.setTitleColor(.black, for: .normal)
-            leftBtn.setTitle("删除", for: .normal)
+            leftBtn.setTitle("查看物流", for: .normal)
 
             rightBtn.isHidden = false
             rightBtn.layer.borderColor = rightBtn.tintColor.cgColor
@@ -86,9 +93,22 @@ class OrderNewGoodsTableViewCell: UITableViewCell {
             rightBtn.layer.masksToBounds = true
             rightBtn.setTitle("评论", for: .normal)
 //            rightBtn.setTitleColor(price.tintColor, for: .normal)
+        case 6,7,8:
+            rightBtn.isHidden = false
+            rightBtn.layer.borderColor = rightBtn.tintColor.cgColor
+            rightBtn.layer.borderWidth = 1
+            rightBtn.layer.cornerRadius = 5
+            rightBtn.layer.masksToBounds = true
+            rightBtn.setTitleColor(.black, for: .normal)
+            rightBtn.setTitle("查看物流", for: .normal)
+
+                        leftBtn.isHidden = true
+            //            rightBtn.setTitleColor(price.tintColor, for: .normal)
+
         default:
             leftBtn.isHidden = true
-            rightBtn.isHidden = false
+
+            rightBtn.isHidden = true
             rightBtn.layer.borderColor = rightBtn.tintColor.cgColor
             rightBtn.layer.borderWidth = 1
             rightBtn.layer.cornerRadius = 5

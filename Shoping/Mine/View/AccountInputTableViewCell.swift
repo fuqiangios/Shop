@@ -15,7 +15,7 @@ class AccountInputTableViewCell: UITableViewCell {
     @IBOutlet weak var btn: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        input.setValue(UIColor.black, forKeyPath: "placeholderLabel.textColor")
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

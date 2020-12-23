@@ -19,6 +19,9 @@ class SMSVerificationViewController: UIViewController {
     var phoneStr = ""
     override func viewDidLoad() {
         super.viewDidLoad()
+        phone.setValue(UIColor.black, forKeyPath: "placeholderLabel.textColor")
+        zPassword.setValue(UIColor.black, forKeyPath: "placeholderLabel.textColor")
+        code.setValue(UIColor.black, forKeyPath: "placeholderLabel.textColor")
         title = "密码修改"
         submit.addTarget(self, action: #selector(submitAction), for: .touchUpInside)
         getCode.addTarget(self, action: #selector(getCodeAction(sender:)), for: .touchUpInside)

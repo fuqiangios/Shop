@@ -27,6 +27,7 @@ class CartViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.black]
         let itme = UIBarButtonItem.init(title: "", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem = itme
         self.navigationController?.navigationBar.isTranslucent = false

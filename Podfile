@@ -20,6 +20,7 @@ target 'Shoping' do
     pod 'UMCShare/Social/ReducedWeChat'
     pod 'JCore'
     pod 'JPush'
+    pod 'WebViewJavascriptBridge', '~> 5.0'
 use_frameworks!
 end
 

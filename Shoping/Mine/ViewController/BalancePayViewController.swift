@@ -30,6 +30,7 @@ class BalancePayViewController: UIViewController, UITextFieldDelegate {
             tableView.separatorStyle = .none
             tableView.estimatedRowHeight = 150
             tableView.rowHeight = UITableView.automaticDimension
+            tableView.backgroundColor = .white
 
             tableView.register(UINib(nibName: "CreatOrderPayTypeTableViewCell", bundle: nil), forCellReuseIdentifier: "CreatOrderPayTypeTableViewCell")
             hei.constant = 120
@@ -72,8 +73,13 @@ class BalancePayViewController: UIViewController, UITextFieldDelegate {
                 self.apiAction(code: code)
             }
             popUp.didToSet = {
-                let payPassword = PayPasswordViewController()
-                self.navigationController?.pushViewController(payPassword, animated: true)
+                if UserSetting.default.activeUserPhone != nil {
+                                    let payPassword = PayPasswordViewController()
+                    self.navigationController?.pushViewController(payPassword, animated: true)
+                } else {
+                    let payPassword = MailPayPasswordViewController()
+                    self.navigationController?.pushViewController(payPassword, animated: true)
+                }
             }
             self.present(popUp, animated: false, completion: nil)
         }
@@ -115,6 +121,11 @@ extension BalancePayViewController: UITableViewDelegate, UITableViewDataSource {
             cell.bindBtn.addTarget(self, action: #selector(bindAction(btn:)), for: .touchUpInside)
             if (data?.data.payment[indexPath.row].binding_flag ?? false) {
                 cell.bindBtn.setTitle("解绑", for: .normal)
+            }
+            if ((data?.data.payment[indexPath.row].pfn == "Amount") ?? false){
+                cell.bindBtn.isHidden = true
+            } else {
+                cell.bindBtn.isHidden = false
             }
             cell.selectionStyle = .none
             return cell

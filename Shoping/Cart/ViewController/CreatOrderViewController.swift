@@ -73,8 +73,13 @@ class CreatOrderViewController: UIViewController {
             self.apiAction(code: code)
         }
         popUp.didToSet = {
-            let payPassword = PayPasswordViewController()
-            self.navigationController?.pushViewController(payPassword, animated: true)
+            if UserSetting.default.activeUserPhone != nil {
+                                let payPassword = PayPasswordViewController()
+                self.navigationController?.pushViewController(payPassword, animated: true)
+            } else {
+                let payPassword = MailPayPasswordViewController()
+                self.navigationController?.pushViewController(payPassword, animated: true)
+            }
         }
         self.present(popUp, animated: false, completion: nil)
     }
@@ -129,7 +134,7 @@ class CreatOrderViewController: UIViewController {
                     if self.order_type == "1" {
                         NotificationCenter.default.post(name: NSNotification.Name("notificationCreatOrder"), object: self, userInfo: [:])
                     }
-
+                    self.checkPlanLuck()
                 case .failure(let error):
                     print(error)
                     print(error.self)
@@ -196,7 +201,7 @@ class CreatOrderViewController: UIViewController {
                     if self.order_type == "1" {
                         NotificationCenter.default.post(name: NSNotification.Name("notificationCreatOrder"), object: self, userInfo: [:])
                     }
-
+                    self.checkPlanLuck()
                 case .failure(let error):
                     print(error)
                     print(error.self)
@@ -542,6 +547,35 @@ extension CreatOrderViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 
+    func checkPlanLuck() {
+        if UserSetting.default.activeUserToken == nil {
+            return
+        }
+        API.checkPlanLuck(user_token: UserSetting.default.activeUserToken ?? "").request { (result) in
+            switch result {
+            case .success(let data):
+                print("d-s-s-s-\(data.data.plan_luck_id)")
+                if data.data.plan_luck_id != "0" {
+                    let redPackRain = RedPackageRainViewController()
+                    redPackRain.plan_luck_id = data.data.plan_luck_id
+                    redPackRain.modalPresentationStyle = .custom
+                    redPackRain.closeRedPackRainAndJumpHistory = { op in
+                        if op == 1 {
+                            let history = RedPackRainHistoryViewController()
+                            let nav = UINavigationController.init(rootViewController: history)
+                            nav.modalPresentationStyle = .custom
+                            self.present(nav, animated: false, completion: nil)
+                        }
+                    }
+                    self.present(redPackRain, animated: false, completion: nil)
+                }
+            case .failure(let er):
+                print(er)
+
+            }
+        }
+    }
+
     @objc func switchChange(switcah: UISwitch) {
         isUseRedpackeg = switcah.isOn
         getPrice()
@@ -568,6 +602,7 @@ extension CreatOrderViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 {
             let address = AddressListViewController()
             address.didSelectAddress = { info in
+                print("-=-=-=-=-=-=-=-=-\(info)")
                 self.addressInfo = info
                 self.loadData()
                 tableView.reloadData()

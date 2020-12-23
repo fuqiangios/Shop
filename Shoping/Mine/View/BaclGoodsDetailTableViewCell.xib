@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="110" id="KGk-i7-Jjw" customClass="BaclGoodsDetailTableViewCell" customModule="我家用品" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="快递名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M2C-fj-z3g">
+                        <rect key="frame" x="16" y="22" width="70" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="70" id="3E5-DH-L5a"/>
+                            <constraint firstAttribute="height" constant="21" id="igv-Lz-WMG"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                        <color key="textColor" red="0.50588235294117645" green="0.50694003809999999" blue="0.50694003809999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="点击添加快递名称" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Ba-kb-WEE">
+                        <rect key="frame" x="111" y="17" width="193" height="27"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="27" id="XIn-nj-haI"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="快递单号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CjW-pg-vaV">
+                        <rect key="frame" x="16" y="58" width="70" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="70" id="kOG-4m-D5i"/>
+                            <constraint firstAttribute="height" constant="21" id="vxw-zM-Tsi"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                        <color key="textColor" red="0.50694003809999999" green="0.50694003809999999" blue="0.50694003809999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="点击添加快递单号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ebV-lb-dNs">
+                        <rect key="frame" x="111" y="54" width="193" height="28"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="28" id="ZHW-ff-TBi"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="8Ba-kb-WEE" firstAttribute="leading" secondItem="M2C-fj-z3g" secondAttribute="trailing" constant="25" id="0Ie-vU-3by"/>
+                    <constraint firstItem="CjW-pg-vaV" firstAttribute="leading" secondItem="M2C-fj-z3g" secondAttribute="leading" id="42R-8d-EZB"/>
+                    <constraint firstItem="ebV-lb-dNs" firstAttribute="top" secondItem="8Ba-kb-WEE" secondAttribute="bottom" constant="10" id="AZS-RE-R3o"/>
+                    <constraint firstItem="CjW-pg-vaV" firstAttribute="top" secondItem="M2C-fj-z3g" secondAttribute="bottom" constant="15" id="Bu3-xh-1sZ"/>
+                    <constraint firstItem="M2C-fj-z3g" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="22" id="GGn-ev-rlX"/>
+                    <constraint firstItem="M2C-fj-z3g" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Kb9-VL-iBE"/>
+                    <constraint firstItem="ebV-lb-dNs" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="O8V-0p-QCz"/>
+                    <constraint firstItem="8Ba-kb-WEE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="17" id="QL6-8Z-lBy"/>
+                    <constraint firstItem="CjW-pg-vaV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="QgN-rK-TeJ"/>
+                    <constraint firstAttribute="trailing" secondItem="8Ba-kb-WEE" secondAttribute="trailing" constant="16" id="a22-RT-ppO"/>
+                    <constraint firstItem="ebV-lb-dNs" firstAttribute="leading" secondItem="CjW-pg-vaV" secondAttribute="trailing" constant="25" id="fiZ-be-3t0"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="CjW-pg-vaV" secondAttribute="bottom" constant="20" id="qhz-hy-Yrz"/>
+                    <constraint firstItem="8Ba-kb-WEE" firstAttribute="leading" secondItem="M2C-fj-z3g" secondAttribute="trailing" constant="25" id="ssv-bE-Ujh"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="name" destination="8Ba-kb-WEE" id="XLx-HC-9ne"/>
+                <outlet property="no" destination="ebV-lb-dNs" id="eZb-I1-rxO"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="126.5625"/>
+        </tableViewCell>
+    </objects>
+</document>

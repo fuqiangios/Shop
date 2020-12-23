@@ -60,7 +60,7 @@ extension AccountInfoViewController: UITableViewDelegate, UITableViewDataSource 
         if section == 0 || section == 2 {
             return 1
         }
-        return 5
+        return 4
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {

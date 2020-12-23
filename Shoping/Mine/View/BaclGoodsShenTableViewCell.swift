@@ -11,6 +11,7 @@ import UIKit
 class BaclGoodsShenTableViewCell: UITableViewCell {
     @IBOutlet weak var img: UIImageView!
     
+    @IBOutlet weak var orderNumer: UILabel!
     @IBOutlet weak var bbtn: UIButton!
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var option: UILabel!

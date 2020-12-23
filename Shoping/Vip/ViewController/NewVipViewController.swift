@@ -71,7 +71,7 @@ extension NewVipViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return data == nil ? 0 : 5
+        return data == nil ? 0 : 6
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -87,6 +87,8 @@ extension NewVipViewController: UITableViewDelegate, UITableViewDataSource {
                 ti.image = UIImage(named: "__星级股东 _")
             } else if section == 3 {
                 ti.image = UIImage(named: "__视频专栏 _备份")
+            } else if section == 5 {
+                ti.image = UIImage(named: "__往期项目 _")
             }
             else {
                 ti.image = UIImage(named: "__会员卡 _")
@@ -146,7 +148,20 @@ extension NewVipViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "VipVideoTableViewCell") as! VipVideoTableViewCell
             cell.selectionStyle = .none
             return cell
-        }
+        } else if indexPath.section == 5{
+                let cell = tableView.dequeueReusableCell(withIdentifier: "VipProductTableViewCell") as! VipProductTableViewCell
+                cell.selectionStyle = .none
+                let item = data?.data.old_project[indexPath.row]
+                cell.img.af_setImage(withURL: URL(string: item!.image)!)
+                cell.name.text = item?.name
+                cell.info.text = item?.intro
+                cell.zhichi.text = "支持 \(item?.support ?? "0")"
+                cell.yichou.text = "已筹 \(item?.raise ?? "0")"
+                cell.dacheng.text = "达成 \(item?.reach ?? "0")"
+                let lv: CGFloat = CGFloat(CGFloat(Int(item?.reach ?? "0") ?? 0)/100.0)
+                cell.line.frame = CGRect(x: 1, y: 1, width: cell.bg.frame.width*lv, height: 6)
+                return cell
+            }
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "VipProductTableViewCell") as! VipProductTableViewCell
             cell.selectionStyle = .none
@@ -169,7 +184,14 @@ extension NewVipViewController: UITableViewDelegate, UITableViewDataSource {
             detail.hidesBottomBarWhenPushed = true
             detail.id = data?.data.project[indexPath.row].id ?? ""
             self.navigationController?.pushViewController(detail, animated: true)
-        } else if indexPath.section == 2 {
+        }else if indexPath.section == 5 {
+            let detail = VipProductDetailViewController()
+            detail.hidesBottomBarWhenPushed = true
+            detail.old = true
+            detail.id = data?.data.old_project[indexPath.row].id ?? ""
+            self.navigationController?.pushViewController(detail, animated: true)
+        }
+        else if indexPath.section == 2 {
             let web = WebViewController()
             web.uri = "https://app.necesstore.com/html/peru/index.html"
             web.title = "国泰与秘鲁"

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BalanceChongViewController: UIViewController {
+class BalanceChongViewController: UIViewController,UITextFieldDelegate {
 
     @IBOutlet weak var btn: UIButton!
     @IBOutlet weak var tableView: UITableView!
@@ -26,7 +26,8 @@ class BalanceChongViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableView.automaticDimension
-
+        tableView.backgroundColor = .white
+        input.delegate = self
         btn.layer.cornerRadius = 10
         btn.layer.masksToBounds = true
 
@@ -44,11 +45,62 @@ class BalanceChongViewController: UIViewController {
            if isRet == "1" {
                //支付成功
               CLProgressHUD.showSuccess(in: self.view, delegate: self, title: "充值成功", duration: 2)
+            self.navigationController?.popViewController(animated: true)
            } else {
                //支付失败
                CLProgressHUD.showError(in: self.view, delegate: self, title: "充值失败，请重试", duration: 2)
            }
        }
+
+    func textField(_ textField:UITextField, shouldChangeCharactersIn range:NSRange, replacementString string:String) ->Bool{
+
+
+
+               let futureString:NSMutableString=NSMutableString(string: textField.text!)
+
+
+
+               futureString.insert(string, at: range.location)
+
+               var flag = 0;
+
+
+
+               let limited = 2;//小数点后需要限制的个数
+
+
+
+               if !futureString.isEqual(to:"") {
+
+                   for i in stride(from: futureString.length-1,through:0, by:-1) {
+
+
+
+                       let char = Character(UnicodeScalar(futureString.character(at: i))!)
+
+                       if char=="." {
+
+                           if flag>limited {
+
+                               return false
+
+                           }
+
+                           break
+
+                       }
+
+                       flag+=1
+
+                   }
+
+               }
+
+
+
+               return true
+
+           }
 
     @IBAction func back(_ sender: Any) {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
@@ -56,10 +108,18 @@ class BalanceChongViewController: UIViewController {
     }
 
     @IBAction func submit(_ sender: Any) {
+        let oneChar = (input.text ?? "")[(input.text ?? "").startIndex]
+        if oneChar == "." {
+            CLProgressHUD.showError(in: self.view, delegate: self, title: "请输入正确充值金额", duration: 2)
+            return
+        }
         API.chongzhi(price: input.text ?? "1", payment_pfn: data?.data.payment[selectIndex].pfn ?? "").request { (result) in
             switch result {
             case .success(let data):
                 print(data)
+                if data.data.plugin?.isEmpty ?? true {
+                    return
+                }
                 if self.data?.data.payment[self.selectIndex].pfn == "WeChatPay" {
                     self.wechatPay(data: data)
                 } else {
@@ -96,6 +156,7 @@ class BalanceChongViewController: UIViewController {
         AlipaySDK.defaultService()?.payOrder(str, fromScheme: "wojiayoupin", callback: { (reslt) in
             if reslt!["resultStatus"]as! String == "9000" {
                 CLProgressHUD.showSuccess(in: self.view, delegate: self, title: "充值成功", duration: 2)
+                self.navigationController?.popViewController(animated: true)
             } else {
                 CLProgressHUD.showError(in: self.view, delegate: self, title: "充值失败，请重试", duration: 2)
             }

@@ -22,6 +22,8 @@ class GoodsSearViewController: UIViewController, UITextFieldDelegate {
         title = "搜索"
         searchView.layer.cornerRadius = 20
         searchView.layer.masksToBounds = true
+        search.setValue(UIColor.black, forKeyPath: "placeholderLabel.textColor")
+        search.textColor = .black
         search.delegate = self
         let left = UIImageView(frame: CGRect(x: 10, y: 10, width: 20, height: 20))
         left.image = UIImage(named: "search")
@@ -65,6 +67,7 @@ class GoodsSearViewController: UIViewController, UITextFieldDelegate {
             topTagListView.tagSelectedBackgroundColor = UIColor.lightColor
             topTagListView.selectedBorderColor = UIColor.lightColor
             topTagListView.tag = 909
+        topTagListView.backgroundColor = .white
 
         for index in data?.data ?? [] {
                 topTagListView.addTag("\(index)")
@@ -81,6 +84,7 @@ class GoodsSearViewController: UIViewController, UITextFieldDelegate {
             bottomTagListView.tagSelectedBackgroundColor = UIColor.lightColor
             bottomTagListView.selectedBorderColor = UIColor.lightColor
             bottomTagListView.tag = 808
+        bottomTagListView.backgroundColor = .white
         for item in UserSetting.default.searchHistory ?? []{
             bottomTagListView.addTag(item)
         }

@@ -518,7 +518,7 @@ struct CollectProduct: Codable {
 struct CollectStats: Codable {
     let quantity: Int
     let feeMsg, feeMsgContent, total: String
-    let diffPrice: Int
+    let diffPrice: Float
 
     enum CodingKeys: String, CodingKey {
         case total, quantity

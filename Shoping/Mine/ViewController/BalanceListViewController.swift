@@ -24,6 +24,7 @@ class BalanceListViewController: UIViewController {
         tableView.dataSource = self
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.backgroundColor = .white
         tableView.mj_footer = MJRefreshAutoNormalFooter.init(refreshingBlock: {
             self.page = self.page + 1
             self.loadDataMore()

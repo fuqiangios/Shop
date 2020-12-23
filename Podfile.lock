@@ -23,6 +23,7 @@ PODS:
   - UMCShare/UI (6.9.8):
     - UMCCommon
     - UMCShare/Core
+  - WebViewJavascriptBridge (5.2.0)
   - WechatOpenSDK (1.8.6.2)
   - ZLCollectionViewFlowLayout (1.1.6)
 
@@ -43,6 +44,7 @@ DEPENDENCIES:
   - UMCSecurityPlugins
   - UMCShare/Social/ReducedWeChat
   - UMCShare/UI
+  - WebViewJavascriptBridge (~> 5.0)
   - WechatOpenSDK
   - ZLCollectionViewFlowLayout
 
@@ -63,6 +65,7 @@ SPEC REPOS:
     - UMCCommon
     - UMCSecurityPlugins
     - UMCShare
+    - WebViewJavascriptBridge
     - WechatOpenSDK
     - ZLCollectionViewFlowLayout
 
@@ -82,9 +85,10 @@ SPEC CHECKSUMS:
   UMCCommon: b0703b0053323f598e01670ea702b8eb1e66e611
   UMCSecurityPlugins: 0831a08f3988f3cea9f1d3a7626cd9bee4fef150
   UMCShare: a250203b34a56cde25cc4c28335449b542f0255d
+  WebViewJavascriptBridge: a00b2d61252aec5207e3263d46fd0fd3cfaf7895
   WechatOpenSDK: 8b3ba4239193d1112205c139c94e21934e8f369a
   ZLCollectionViewFlowLayout: 105020fbab88e3dc66ceebc307b36f2c363a8c1f
 
-PODFILE CHECKSUM: b46ba4858bf6f535e8c331617091641ebf806d65
+PODFILE CHECKSUM: 9ced9fdfa19a20018e1dceb9b3bfd28567a280d0
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.9.3

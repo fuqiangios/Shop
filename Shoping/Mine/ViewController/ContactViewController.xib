@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContactViewController" customModule="我家用品" customModuleProvider="target">
+            <connections>
+                <outlet property="btn" destination="8Wn-n2-6MU" id="ps5-0d-hA5"/>
+                <outlet property="img" destination="ws6-0a-pDf" id="MtX-iR-w5f"/>
+                <outlet property="info" destination="nUi-39-bV0" id="4x6-OA-oWU"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ws6-0a-pDf">
+                    <rect key="frame" x="20" y="64" width="374" height="455"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="ws6-0a-pDf" secondAttribute="height" multiplier="1:1" constant="-81" id="pLI-6g-JIE"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Wn-n2-6MU">
+                    <rect key="frame" x="20" y="803" width="374" height="54"/>
+                    <color key="backgroundColor" red="0.84996742010000004" green="0.33006817100000002" blue="0.29400658610000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="54" id="ftF-Fm-Dnt"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="拨打电话"/>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="添加微信，与我们联系" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nUi-39-bV0">
+                    <rect key="frame" x="130.5" y="527" width="153" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ws6-0a-pDf" secondAttribute="trailing" constant="20" id="5Nc-ZZ-JiM"/>
+                <constraint firstItem="8Wn-n2-6MU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="BKA-lP-XRi"/>
+                <constraint firstItem="nUi-39-bV0" firstAttribute="centerX" secondItem="ws6-0a-pDf" secondAttribute="centerX" id="DAv-gs-CE9"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8Wn-n2-6MU" secondAttribute="trailing" constant="20" id="DaI-0L-bMO"/>
+                <constraint firstItem="ws6-0a-pDf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="NME-L5-Lpx"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="8Wn-n2-6MU" secondAttribute="bottom" constant="5" id="diA-bG-3BY"/>
+                <constraint firstItem="ws6-0a-pDf" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="h7g-B8-msm"/>
+                <constraint firstItem="nUi-39-bV0" firstAttribute="top" secondItem="ws6-0a-pDf" secondAttribute="bottom" constant="8" id="ibq-zx-oqK"/>
+            </constraints>
+            <point key="canvasLocation" x="137.68115942028987" y="129.91071428571428"/>
+        </view>
+    </objects>
+</document>

@@ -25,7 +25,7 @@ class RetrospectViewController: UIViewController, UITextFieldDelegate {
 //        titleView.backgroundColor = UIColor.lightColor
 
 //        let seachText = UITextField(frame: CGRect(x: 10, y: 0, width: titleView.frame.size.width, height: 40))
-        search.placeholder = "输入产品编号"
+        search.placeholder = "输入产品编号/产品名称"
         search.delegate = self
         search.font = UIFont.PingFangSCLightFont16
         search.backgroundColor = UIColor.lightColor
